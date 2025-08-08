@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Clima y Fecha</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #f0f8ff;
+      padding-top: 50px;
+    }
+    .fecha, .clima {
+      font-size: 24px;
+      margin: 10px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="fecha" id="fecha"></div>
+  <div class="clima" id="clima">Cargando clima...</div>
+
+  <script>
+    // Mostrar fecha
+    function mostrarFecha() {
+      const fecha = new Date();
+      const opciones = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      document.getElementById('fecha').textContent = `Hoy es ${fecha.toLocaleDateString('es-AR', opciones)}`;
+    }
+
+    // Mostrar clima
+    async function mostrarClima() {
+      const ciudad = "Buenos Aires";
+      const apiKey = "TU_API_KEY_ACÁ"; // Reemplazá esto con tu API KEY
+      const url = `https://api.openweathermap.org/data/2.5/weather?q=${ciudad}&units=metric&lang=es&appid=${apiKey}`;
+
+      try {
+        const respuesta = await fetch(url);
+        const datos = await respuesta.json();
+
+        const temperatura = datos.main.temp;
+        const descripcion = datos.weather[0].description;
+        const ciudadNombre = datos.name;
+
+        document.getElementById("clima").textContent = 
+          `Clima en ${ciudadNombre}: ${descripcion}, ${temperatura}°C`;
+
+      } catch (error) {
+        document.getElementById("clima").textContent = "No se pudo obtener el clima.";
+      }
+    }
+<iframe 
+  src="https://www.meteored.com.ar/mapas-del-tiempo/argentina/buenos-aires/" 
+  width="100%" 
+  height="600" 
+  frameborder="0"
+  style="border:0;">
+</iframe>
+
+    mostrarFecha();
+    mostrarClima();
+  </script>
+
+</body>
+</html>

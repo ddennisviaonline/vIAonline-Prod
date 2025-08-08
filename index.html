@@ -1,0 +1,1860 @@
+﻿
+<!DOCTYPE html>
+<html lang='es'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>vIA online</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #FEFBF4;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .encabezado-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .fecha, .clima {
+            font-size: 1rem;
+            color: #555;
+        }
+        .noticia {
+            background-color: #FEFBF4;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .noticia h2 {
+            color: #333;
+            font-size: 1.3em;
+        }
+        .publicidad {
+            text-align: center;
+            margin: 30px 0;
+            padding: 10px;
+            background-color: #FEFBF4;
+            border: 1px dashed #aaa;
+            border-radius: 5px;
+        }
+        .publicidad img {
+            max-width: 100%;
+            height: auto;
+        }
+        .desplegable {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .flecha {
+            font-size: 18px;
+            transition: transform 0.3s ease;
+            display: inline-block;
+        }
+
+        .noticia.abierto .flecha {
+            transform: rotate(180deg);
+        }
+        .noticia .contenido {
+            display: none;
+            margin-top: 10px;
+        }
+
+        .noticia.abierto .contenido {
+            display: block;
+        }
+        .desplegable {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+        .flecha {
+            font-size: 18px;
+            transition: transform 0.3s ease;
+            display: inline-block;
+        }
+        .noticia.abierto .flecha {
+            transform: rotate(180deg);
+        }
+
+
+    </style>
+</head>
+<body>
+    <div style='text-align: center;'>
+    <img src='file:///C:\inetpub\wwwroot\Imagenes\Logocorto.png' alt='Imagen centrada' style='width: 300px;''>
+    </div>
+
+    <div class='encabezado-info'>
+        <div class='fecha'>07 de agosto de 2025</div>
+        <div class='clima'>Clima: CABA, 10.8º Cubierto</div>
+    </div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWffXv6lVDCPxdYC2bSAuyZSAdcyQ4P5FhNuvs1ijn8DJcj97N5kXanxeghA&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Intro a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Intro a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRD3gkp-AJo3MA7n-TOOVydNhcja_jbd5pvoDsXGDXEnBCG-4zVucVis1vkJA&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Intro a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+        <div class='publicidad' style='background-color: white; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://www.samsung.com/ar/business/smartphones/galaxy-s/galaxy-s25-ultra-titanium-silverblue-256gb-sm-s938bzblaro/' target='_blank'>
+                <img src='https://images.samsung.com/is/image/samsung/p6pim/ar/2501/gallery/ar-galaxy-s25-s938-534627-sm-s938bzblaro-544746926?$684_547_JPG$ ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://www.samsung.com/ar/business/smartphones/galaxy-s/galaxy-s25-ultra-titanium-silverblue-256gb-sm-s938bzblaro/' target='_blank'>
+                Ver más sobre el Galaxy S25 Ultra ?Galaxy S25 Ultra (256 GB)
+                </a>
+             </p>
+          </div>
+        
+         
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUn1n8dtS-hjY-F4BAl15dY91tNcW2anWZiB9eytExrjC6nBNu_XSSKwyI2Bc&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Intro a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjtI-UFlLkqv-PmBOEOpQko2iu9l4YWdgWOw3UZpDdBDKSA2B8zrjW5EKz1A&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Intro a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVrUENPHOpO7EmV-XZruFM98OO1S95Q5a_GQwkwb-JvA9Jt-Eh0kqwT7QG0A&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Intro a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+        <div class='publicidad' style='background-color: white; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://www.samsung.com/ar/business/smartphones/galaxy-s/galaxy-s25-ultra-titanium-silverblue-256gb-sm-s938bzblaro/' target='_blank'>
+                <img src='https://images.samsung.com/is/image/samsung/p6pim/ar/2501/gallery/ar-galaxy-s25-s938-534627-sm-s938bzblaro-544746926?$684_547_JPG$ ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://www.samsung.com/ar/business/smartphones/galaxy-s/galaxy-s25-ultra-titanium-silverblue-256gb-sm-s938bzblaro/' target='_blank'>
+                Ver más sobre el Galaxy S25 Ultra ?Galaxy S25 Ultra (256 GB)
+                </a>
+             </p>
+          </div>
+        
+         
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRz3Dy_CAX1EIMpOSy7Zu8sTEH3OvLetGkDGWkDrWjefOQSF1ZIUMltzD7b258&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Intro a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRl7HxYU8jRfEShviVWV_vc3FFiRmwJdlLJ5S1s8jX_SIGuRhs0iAr9hl0U5-Y&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Intro a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbL5Aq6SRqfvpr_-W5gvxSzqEOh_E0QVyCSdjpXR6gEcxdKuodfJdJvNzSKA&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Intro a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+        <div class='publicidad' style='background-color: white; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://www.samsung.com/ar/business/smartphones/galaxy-s/galaxy-s25-ultra-titanium-silverblue-256gb-sm-s938bzblaro/' target='_blank'>
+                <img src='https://images.samsung.com/is/image/samsung/p6pim/ar/2501/gallery/ar-galaxy-s25-s938-534627-sm-s938bzblaro-544746926?$684_547_JPG$ ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://www.samsung.com/ar/business/smartphones/galaxy-s/galaxy-s25-ultra-titanium-silverblue-256gb-sm-s938bzblaro/' target='_blank'>
+                Ver más sobre el Galaxy S25 Ultra ?Galaxy S25 Ultra (256 GB)
+                </a>
+             </p>
+          </div>
+        
+         
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYNAL1zg5QOJvl5lCgAfhbJ1DLIPzT968jnMHOEX-JCTRpAwUn2PaoU-A07Q&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Intro a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQc_JgVfTn_99O84RuYhDOhqT31wkiyA5EluaEqn3Gb5y6yiTz5ela2JNBHHg&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Intro a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2Ag4F1kQxoG1nGoZ8rPkl_TykcnmE2okMN2aaGh_ToxqUK4PEo2SNf2wAIpU&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Intro a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSILaDbT2vWgSpvSyQH-xwEuTszZE88mUuvkvonJTdgzsM6fjfv5hGvpYZte64&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Intro a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvVntSz_FNEnmS_psK79NXH6yfdEb3Lfbzt2ckVOwCUFggtKoLE14pbUSoqw&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Intro a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQn2sspRH6nLQZgCqs8IP9yNiiwAr6tgupfI3oA4jbG8PDfV8a0xKydmJZM4d0&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Intro a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcQ0Pjo9BDaA1kDxsFijm1a9N1P68lwWvIBYpd4sSJcChWeTjjHQ4uGlnkFLc&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Intro a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5nl1A1LJZJWvxMdLZzvI40i9Xtu5gruuK8U_SWJP6ye0IaqcezCWBothqDAI&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Intro a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpE4nUhdxQYfF9uKQEh7xFd3H-kqPR2-tjt5i3dySoCEz4hUr-dw8pIpkf3Qg&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Intro a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-FOg19l_YOcLQwWM5nxnMvFtFeMwuqq8wbCobdafOkkqLOsDRl8YAmLpXvzQ&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Intro a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSn52xd_HlYcNA9glcoaOJQTSd8Xoj5ue4J2u_Awzytgrm6lrjSo56lHaCqkg&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Intro a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLjf2rwSCiIk5hku4UN3LMQ9TEp4JU4MhshxnPoJn3UZVcRRzli2ttbMH6sQk&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Intro a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxTWZqojaRSFMxAAS6CoNDNaS6p_W5njTHTfXNL9CgerFsrMNN6znTQ-c0fw&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Intro a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoSuOE3TAOdNVxe83241cjReucelKZSQpiGtgKV7G7MQR_VDrmCps3iW7uCcw&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Intro a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtg4gXOm3ulCveShVs57VQCH2QoLXlabayebsRzQI09y1KDzloNAOxibQ7MK4&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Intro a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwpim8TyjKUIFYv0MubymYHmrRBwZTrdE1-vv_dw-yy0jB-ENXJmM64IDY7N8&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdyDQzhv7MNBuA4UgLZenk6wNopWzDX93ZwahaUzf7-cPBWdOCK4GnWlcO0w&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAZ-C1aE7_35ttanP4mfGcYCssNrpN-OO_UCy-kAXoLWfwZcFGNSFEtvfTBgk&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQOU-NAdGxKSBMHgkevhFXKqU6twQoUHlHMDrKaH_RXdlEFWGamh8APtamano&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVotoKBmuiga6mO2GzVhdwQCy_NWywVCrirfhgtJp-y7FXXMHCrQvYzaIVDsQ&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRD0uNfiZQEQrRx9Xkt5Cx9ppVIC5nL7Jo5pzO47ptr8xeAalYi7PZr_VipH4&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5qcyVehb_lqqB_z9ZNoNs5tGD17yX8JYCcnqPV0OfKFAdSpT-FbClUZF6-A&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwdz2X4KMtVU-FkJo_cFmrvMgE9H4grRAdP1YsXMNxQlXWXJrhWYojW1ud5Wc&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQodPHKTKfdZ9e_mYaQsHeq-JQ5RlIY0_AEyB0M8SruUNz2Xp_HtQC9cDxQ2Bo&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTg33L7T9oMiXaRUadSpZxdHlkb-MxMKAFzAmtvhIJ59nF-dHlkTU4Wq3Ptg3I&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9b0oDDuJQsT6YiAR1AzwrhZBN9DWvNGYzribq2_opz98LzrTnbpWbbtajwA&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUDf4sjm1Fjn8kOS_bM4bw3zc0rf4j3zdQ1zuCSHvUpxGbkwCyRGIiOhuQ1A&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0Dd-fjiXz2Zjy-00GqkqgyTED0tadKmNvIC7v6sTBo5jFbh4zWGjjYPoHxoY&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9PMU1-hVKwrWvkbYg0OhgAbGemIDpI5zfCq1qIj2UK2ZomcwSEsRPWwEgEg&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvPbe9x4KcbM3CqSoIgQki2eY4o8srOewl4yJ8oLH2GMbDozcpRDhSoFYBEQ&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRL_Awn3_mAW8wzZ3YgVV6f_nLXCVRGjGEIotAp-dEPOimw15_t9o5mWUTQXQ&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnDPNaeyJfeO94OnxLnExBsLp44DKUMQPACSHyC66mJfy9C4At4_LG128Yofs&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTA9BaObZwbdw9biV8Ad8uKfHKmB0V956vdRikcOun4l23bc0b-oUXr9AhbSQ&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQARwo699afKXOx-PPAHYtqfNtoorTrTdIuKIe9i_dcJG2HNq5sWy9s-77e4wE&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEzKKDmCpwPmmg4NsX-xmY0j8rsBVkJaJi8AMD1hQqMwXymP1gJZLlykhu0LQ&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6UfZOznNwjkdM2Ze7glw6zSYKXcGC9_JctX9rxTAZ6RjFJMGkkz6cHp-tNQM&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAPNIZDPf8joi1a9NQfMNAx5uARbnNdfX7mDxL5qiJw1UVzQSTYC0486mQWuo&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQelNRZ6WuVYOx9a-qB4JkmcU_6SmaIGyfuBz4Lf2FWhHg2a85T6f6dTtCcqg&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR94MgGGywWkfyO7T-Yj5-YylJkAu7W7rHs_EJGxJkWOlGsuzt1qP0zSyjqrdI&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6bwMWd157L5vLwYZRLS1R6Ju13qE7yxwnmwBPGF24L3ViaaRee8vD7znAtkk&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZVL67oscR0csN6drOcCP6Hp0aRgYpl8RNZdmDgoDmdD0coq7M_Q7WfVjWy_c&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxl8baFRibmsmoCQchrrtxXPNwwZSrxNdEC4tYaRX4zcGeZby7ujGG5Ad-bQ&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNvbj1OnVzx6IPpnluDLZdFZ2IrTkQrQs2cNtTqulIuGGVwHbyjaf0B4h84vg&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlppXmWiP46Q3nxDBiwjY9D-B49iXwG-WIMGpZAWjobC01Ya1ozo9P4TDu5Kw&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxwRbK-LgBs-TinmKxX-36Pf8sazg1_p9Wdav8PNOLbNTRL_jbcR8q8YS-WEo&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIHRoxfTNppRz-f11CTdIv4k-lNYYA8m1DakqIktdhYHoYJay_50YD5S0612I&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmkgR6zNMzKKtOrNyCPUbLJPjpYPrqce4HEJcLx2NTh7y7GlJZeYCF1Mxhu60&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6uvua9bMhRCGq4_0-aURRNURGi60TxFsSc5W_SpbHYre6V7ydjSTcjRfhh98&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRT0XUF1btawM9xamkQg0bvvLfpNf0OTOH-SiSTSgwz-C7QvePuzQgesljwlg&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS98xYSx1BXhMe2R_ssayL_ggfb3lTqyATYFMupeNZtc-OtVsBpwowEZWcyNQs&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQChiwdoP1JQj0jPdxFWLVhDPqI-lwuPCwh7rnIJkWe9LYHZum-inyi7UI_iHI&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxjetJ-iwyxrdJCIPbL6Hs4TbY-OPDcJ4uTPJyzggK00GQUkcAJ1A8UfzhrA&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZjkSI0yO0m6BlhNI5NjaqnC8mctm2TCEyc-ebzPPQJXugw6mBdvFZ4_bqk-U&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5_vxNC_k1tqFvCnkOPMGv6JAVBoqAImaG5PZzLaasU7lAc-UzUoucuZtTyQ&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYoYEdoCw2YqEE6msa-B0-zs_3fpFGmQBCoD5sKV5sc2l1SzIa1VStSF6J2Q&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhetSSv9XxhNj-_3B2659makhHP-6wiO7A8H_DhvbLcJPfM9hpzutd_p16Bw&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAoyjoVSfpH8apeudfF9t7VSUY2CHLWsJvG6kSR2dyJ2qoEiPruQhvnTQoz_0&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLcqZW2lEJkf3NqyTC85N3JpIga_6rDcoAzZ9X3_aWrXl8C6z_S-5_7oFUhDc&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNChOV1W3SEB51tQEUWW0GkBP2XtV6IU9OfL8Gs1sskPXFw4lKmUvq14pom_g&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRU3pIrKbZ61ZVetKaXhuOEMUfqFBLHLKsugSsYs6N-d22vOk6b4Y4MYvRIeQ&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHQ8KF9W6VMctN27LXSyhnSUfPre7dQYlxzq8umdbzfZC8px-nUQ-7SPCxyg&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMvnf5ekfh4rdGSoN-fF5MDdQsULMZd8NL9aPdQ2EKCUb78tJIjHXXYrwThg&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScGCLogpBunD7HqcFjYufHyEuOkgBdCzjrIok-Ei8cqEqDhQSjAfkFyukyKzY&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqgS-QQdcriRVNYroh0FGYbCL13lM0zgs_z3E9kKIwA3DT4FndT0xUlbkhog&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3S6aD9ezgBnzwIwYvw83_OS-ss0eVr-xmm3RsN2jj6vjHvM5UDLGthmAcgA&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSK8FSCVBkM_6DaXq2erBbbfRpCPhAEfERSfaSXkJy_mv5fdFCgP9V52suPQ&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqAwDW6IdGF7Nib_Uoos75S9b8xFWnNigNMNRXUeMo2wIWRtBhaAYcxFQZOWU&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5fGcHljrjF6UlV6yO-crOO5n8PahZed8ozXCMeSE-9s91Otxd4mMdp_i9Iw&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDKDV9Kt5xVtETY64_d9_9_jbBDPDmgHlKKl1XkgNgVI9c7wHXq0t-Bgh4wVg&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZm9zlvaz7f3j4l7jt_XlCs7O_1ITaOJ6UNfD5FLugGQgmWRyqxUHz1eQQqQ&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVYuvpmtAtkDmbEiVrozkA0ibkh6F-MKqzHU7vKN-W9BZANFqyigsLFEpb-Ls&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwTVzwBXuQQSWaaLHn90weO7k911ELa1GosHTH8wtJK8KQaVAD_Khs3S7t9Q&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRku1sHGGKkDijfMPlObMJTvRgOtgnY1GgvovIHRcM_JlmBi99hM_as79TE9j4&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwdQtNoKU45XuVoOmcamTcY_9pLiicuqx-dq4He-tnFS7fU8Rkignv6LkfwA&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxUOIWDY4xV4cahiOlh6GWZviQa2EjK_ea7r8_nroAwozkm13tukWqs2hS4Q&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlvkPMBcDOQqsIxIrfSlKN2M0ZZHpGBa5NgEucxsvg-DD0rIgrFb_9SKBoBAY&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8IRaTL7BjlHuKDAeo2t_WgUxAg6RMD6wLxau24Zdw_BLgEiSFRV_RpvMizjU&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrt8GcKgGLvHtNHCToxwdvh2gQ8rr04s4AAR0Njau0q4r2gkGWKpChRHHwpA&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrtZr74qn2OvdZG0IgMZLuoOjk8-sgE11GZ-YmnlXoaRMHxYtQPwkpt9wb_uU&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNvAZvrsKE5Km9Q3EMvuVk1gg2AyTzPQQLlKF99wAzOIvguSdA_Ixnhpzi-A&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSK8Nx7Ei0Nf-4lH_6i563qxO9onOC5Vc9kFRNzuUBzpKrA_lmuc1E02XeTbAo&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrqvxSAzkt_leVfsNZ8tC4SJoWr16Y90p9PzJYohVgZpDBkzzf2EpiNElQ3g&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRU-aIcRI29NbRJDUt7Jnmcjl_iXQmF_5kS_E3xirGl77lImZptVfiIdqPI0EE&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKIcJr645x639eWYCzbhCJSjNO-wwOvjsgDB9j9RGmZySMToqskI9f_gmt9_g&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXxHOURfiYbjcVaSjpHbmTjnqT2a7hiP5ZlymKpm8nYCa90dYQtDaWtJiS-w&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR55_o7AHPPiiXYJRhGIvzv_TmfldcMrnNFgLd2d8PL3bBRlnEu3MADYRVjsDM&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRw9_iPfpNMBZwLjQdrUx_2IbD0N9hLI7oXJtGBHVbBgkPZwbCoVAhV5eW7C2g&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQN5YtdKke_hN_Ljql89ktUDymvmr4NfBB9tQGdsIt35u4DvoPMadMyCG123g&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiZA7QNIPIwBgZVgJ1USWgTloZNU24viO__lFxyvpf-Mp9tvlOZxzql_DXaYo&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkYukxR1K2_PXYeK0xup7Ud-u1WAcitfkTX98on4_D7EXFzq6zPwLT0U-Tww&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<p style='font-size: 12px; color: #666; text-align: center;'>
+    © 2025 VIA ONLINE. Todos los derechos reservados.  
+    Queda prohibida la reproducción total o parcial de los contenidos de este sitio sin autorización previa y por escrito.  
+    Las marcas, logotipos y contenidos pertenecen a sus respectivos propietarios.  
+    Este sitio web puede contener enlaces a sitios externos sobre los cuales VIA ONLINE no tiene responsabilidad alguna.  
+    El uso de este sitio implica la aceptación de nuestros <a href='/terminos'>Términos y Condiciones</a> y nuestra <a href='/privacidad'>Política de Privacidad</a>.
+</p>
+
+</body>
+</html>
+
