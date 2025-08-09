@@ -4,9 +4,9 @@
 $fileContent = "Este es un archivo generado desde Azure Function el $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')"
 
 # Parámetros del repo GitHub
-$owner = "tu_usuario_o_org"
-$repo = "tu_repositorio"
-$path = "ruta/del/archivo/archivo.txt"  # Ejemplo: "archivos/archivo.txt"
+$owner = "ddennisviaonline"
+$repo = "vIAonline-Prod"
+$path = "archivo.txt"  # Ejemplo: "archivos/archivo.txt"
 $branch = "main"
 
 # Token almacenado en Application Settings
