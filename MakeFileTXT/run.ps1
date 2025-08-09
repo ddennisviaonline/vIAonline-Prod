@@ -7,7 +7,7 @@ $fileContent = "Este es un archivo generado desde Azure Function el $(Get-Date -
 $owner = "ddennisviaonline"
 $repo = "vIAonline-Prod"
 $path = "archivo.txt"  # Ejemplo: "archivos/archivo.txt"
-$branch = "main"
+$branch = "master"
 
 # Token almacenado en Application Settings
 $token = $env:GitHubToken
