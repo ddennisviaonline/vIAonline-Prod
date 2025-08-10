@@ -6,7 +6,7 @@ $owner = "ddennisviaonline"
 $repo = "vIAonline-Prod"
 $csvPath = "lista.csv"  # Ejemplo: "datos/archivo.csv"
 $txtPath = "archivo.txt"
-$branch = "master"
+$branch = "main"
 $token = $env:GitHubToken
 
 # ==== 1. DESCARGAR CSV DESDE GITHUB ====
