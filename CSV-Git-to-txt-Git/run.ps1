@@ -6,11 +6,12 @@ $owner = "ddennisviaonline"
 $repo = "vIAonline-Prod"
 $csvPath = "lista.csv"  # Ejemplo: "datos/archivo.csv"
 $txtPath = "archivo.txt"
-$branch = "main"
+$branchsource = "main" # powershell
+$branch = "master" # webpage
 $token = $env:GitHubToken
 
 # ==== 1. DESCARGAR CSV DESDE GITHUB ====
-$csvUri = "https://raw.githubusercontent.com/$owner/$repo/$branch/$csvPath"
+$csvUri = "https://raw.githubusercontent.com/$owner/$repo/$branchsource/$csvPath"
 try {
     $csvContent = Invoke-RestMethod -Uri $csvUri -Headers @{ "User-Agent" = "PowerShell" }
     # Si quieres procesar el CSV como tabla:
