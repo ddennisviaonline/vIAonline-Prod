@@ -4,7 +4,7 @@ param($Request, $TriggerMetadata)
 # ==== CONFIGURACIÓN GITHUB ====
 $owner = "ddennisviaonline"
 $repo = "vIAonline-Prod"
-$csvPath = "resultados.csv"  # Ejemplo: "datos/archivo.csv"
+$csvPath = "lista.csv"  # Ejemplo: "datos/archivo.csv"
 $txtPath = "archivo.txt"
 $branch = "master"
 $token = $env:GitHubToken
