@@ -11,3 +11,12 @@ $txtPath = "archivo.txt"
 $branchsource = "main" # powershell
 $branch = "master" # webpage
 $token = $env:GitHubToken
+
+$uriGet = "https://api.github.com/repos/$owner/$repo/contents/$path?ref=$branchsource"
+try {
+    $response = Invoke-RestMethod -Uri $uriGet -Headers @{ Authorization = "token $token"; "User-Agent" = "PowerShell" } -Method GET
+    $sha = $response.sha
+} catch {
+    # El archivo no existe, no se necesita sha
+    $sha = $null
+}
