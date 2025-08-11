@@ -9,11 +9,13 @@ $token = $env:GitHubToken
 
 # ==== 1. DESCARGAR ZIP DEL SMN ====
 $tempFolder = Join-Path $env:TEMP "smnzip"
-$zipFile    = Join-Path $tempFolder "smn.zip"
 
-# Limpia carpeta temporal
-if (Test-Path $tempFolder) { Remove-Item $tempFolder -Recurse -Force }
-New-Item -Path $tempFolder -ItemType Directory | Out-Null
+# Crear carpeta temporal si no existe
+if (-not (Test-Path $tempFolder)) {
+    New-Item -Path $tempFolder -ItemType Directory | Out-Null
+}
+
+$zipFile = Join-Path $tempFolder "smn.zip"
 
 Invoke-WebRequest -Uri "https://ssl.smn.gob.ar/dpd/zipopendata.php?dato=tiepre" -OutFile $zipFile
 
