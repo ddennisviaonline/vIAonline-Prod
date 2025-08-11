@@ -239,53 +239,6 @@ $nowGMT3
 #Descarga reporte de clima y lo convierte en csv
 #Variables
 ### optimizado para github
-try {
-    # ... tu código previo ...
-
-    # Sube archivo a GitHub
-    $uriPut = "https://api.github.com/repos/$owner/$repo/contents/$path"
-    try {
-        $responsePut = Invoke-RestMethod `
-            -Uri $uriPut `
-            -Headers @{ Authorization = "token $token"; "User-Agent" = "AzureFunctionClimaScript" } `
-            -Method PUT `
-            -Body $jsonBody
-    }
-    catch {
-        # Captura respuesta de error HTTP
-        if ($_.Exception.Response) {
-            $reader = New-Object System.IO.StreamReader($_.Exception.Response.GetResponseStream())
-            $errorResponse = $reader.ReadToEnd() | ConvertFrom-Json
-            throw "Error GitHub: $($errorResponse.message) | Docs: $($errorResponse.documentation_url)"
-        }
-        else {
-            throw $_.Exception.Message
-        }
-    }
-
-    # Respuesta exitosa
-    $clima = @{
-        mensaje   = "Archivo clima.txt actualizado en GitHub correctamente"
-        clima     = $climaResumen
-        commitUrl = $responsePut.commit.html_url
-    }
-
-    Push-OutputBinding -Name Response -Value ([HttpResponseContext]@{
-        StatusCode = 200
-        Body       = $clima | ConvertTo-Json
-    })
-}
-catch {
-    $errorMsg = @{
-        error   = "Error en Azure Function"
-        detalle = $_.Exception.Message
-    }
-    Push-OutputBinding -Name Response -Value ([HttpResponseContext]@{
-        StatusCode = 500
-        Body       = $errorMsg | ConvertTo-Json
-    })
-}
-
 <#
 try {
     # Configuración GitHub
@@ -379,3 +332,137 @@ catch {
 }
 
 #>
+
+
+
+#$clima
+###
+
+<#
+$Dir = "C:\inetpub\wwwroot\clima\"
+$file = "ClimaArg.zip"
+$filePath = $Dir + $file 
+$txtfiles = $Dir + "*.txt"
+$csvFile =$Dir + "ClimaArg.csv"
+$csvHeader =$Dir + "ClimaArgHeaders.csv"
+Remove-Item -Path $txtfiles -Force
+Invoke-WebRequest -Uri "https://ssl.smn.gob.ar/dpd/zipopendata.php?dato=tiepre" -OutFile $filePath
+#Extrae ZIP
+Expand-Archive -Path $filePath -DestinationPath $Dir -Force
+#pone Headers
+Set-Content -Path $csvFile -Value "Ciudad;Fecha;Hora;EstadoDelCielo;Visibilidad;Temperatura;PuntoRocio;Humedad;Viento;Presion" -Encoding UTF8
+$fileClima = Get-ChildItem -Path $Dir -Filter *.txt | Select-Object -ExpandProperty Name
+$txtfileClima = $Dir + $fileClima
+get-Content -Path $txtfileClima | Add-Content -Path $csvFile
+$listCima =  Import-Csv $csvFile -Delimiter ';' | Where-Object {$_.PSObject.Properties.Value -match '^Aeroparque'} | Select-Object -First 1
+$listCima
+$clima = $listCima.EstadoDelCielo
+$primeraPalabra = $clima.Split(" ")[0]
+$primeraPalabra
+$clima = " CABA" + ", " + $listCima.Temperatura + "º " + $primeraPalabra
+#>
+
+$head = "
+<!DOCTYPE html>
+<html lang='es'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>vIA online</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #FEFBF4;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .encabezado-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .fecha, .clima {
+            font-size: 1rem;
+            color: #555;
+        }
+        .noticia {
+            background-color: #FEFBF4;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .noticia h2 {
+            color: #333;
+            font-size: 1.3em;
+        }
+        .publicidad {
+            text-align: center;
+            margin: 30px 0;
+            padding: 10px;
+            background-color: #FEFBF4;
+            border: 1px dashed #aaa;
+            border-radius: 5px;
+        }
+        .publicidad img {
+            max-width: 100%;
+            height: auto;
+        }
+        .desplegable {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .flecha {
+            font-size: 18px;
+            transition: transform 0.3s ease;
+            display: inline-block;
+        }
+
+        .noticia.abierto .flecha {
+            transform: rotate(180deg);
+        }
+        .noticia .contenido {
+            display: none;
+            margin-top: 10px;
+        }
+
+        .noticia.abierto .contenido {
+            display: block;
+        }
+        .desplegable {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+        .flecha {
+            font-size: 18px;
+            transition: transform 0.3s ease;
+            display: inline-block;
+        }
+        .noticia.abierto .flecha {
+            transform: rotate(180deg);
+        }
+
+
+    </style>
+</head>
+<body>
+    <div style='text-align: center;'>
+    <img src='$logo' alt='Imagen centrada' style='width: 300px;''>
+    </div>
+
+    <div class='encabezado-info'>
+        <div class='fecha'>$fechaGMTLess3</div>
+        <div class='clima'>Clima:$clima</div>
+    </div>
+"
