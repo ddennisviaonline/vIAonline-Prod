@@ -111,3 +111,131 @@ try {
     # El archivo no existe, no se necesita sha
     $sha = $null
 }
+
+
+
+# si no exite crea file
+#if (Test-Path $RutaLinkCache) {
+#    $CSVcache = Import-Csv -Path $RutaLinkCache
+#    }
+<#
+if (-not (Test-Path -Path $RutaLinkCache)) {
+    $LinksCache += [PSCustomObject]@{ FechayHora = ""; LinkOrigen = ""; TituloOrigen = ""; Titulo = ""; Imagen = ""; Intro = ""; Noticia = ""; Datos = "" }
+    $LinksCache | Export-Csv -Path $RutaLinkCache -Encoding UTF8 -NoTypeInformation
+} else {
+$CSVcache = Import-Csv -Path $RutaLinkCache
+}
+#>
+<#
+function IA-Titulo {
+    param (
+            [string]$linkFuente
+        )
+    return "Se consultó el titulo a la IA"
+}
+
+function IA-Intro {
+    param (
+            [string]$linkFuente
+        )
+    return "Se consultó el Intro a la IA"
+}
+
+function IA-Nota {
+    param (
+        [string]$linkFuente
+    )
+    return "Se consultó la Nota a la IA $linkFuente"
+}
+
+function IA-Datos {
+    param (
+            [string]$linkFuente
+        )
+    return "Se consultó los Datos a la IA"
+}
+#>
+
+
+
+### una vez que se tienen los titulos se procesan en la IA #####################################################################
+<#
+function Invoke-OpenAIChatGPT4omini {
+
+    param(
+        $question
+    )
+    
+    # Clave y endpoint de Azure OpenAI
+    $AZURE_OPENAI_API_KEY = ""
+    $AZURE_OPENAI_ENDPOINT = "https://jira-ia.openai.azure.com/"
+
+    # Encabezados, asegurando que el Content-Type tenga charset=utf-8
+    $headers = @{
+        "api-key" = "$AZURE_OPENAI_API_KEY"
+        "Content-Type" = "application/json; charset=utf-8"
+        "Accept" = "application/json"
+    }
+
+    # ConstrucciÃ³n del mensaje
+    $messages = @()
+    $messages += @{
+        role = 'user'
+        content = "$question"
+    }
+
+    # Crear el cuerpo de la solicitud en formato JSON
+    $body = [ordered]@{
+        messages = $messages
+    } | ConvertTo-Json -Depth 3
+
+    # Realizar la solicitud POST usando Invoke-WebRequest
+    $response = Invoke-WebRequest -Method POST `
+        -Uri "$AZURE_OPENAI_ENDPOINT/openai/deployments/gpt-4o-mini/chat/completions?api-version=2025-01-01-preview" `
+        -Headers $headers `
+        -Body $body `
+        -ContentType "application/json; charset=utf-8"
+
+    # Verificar la respuesta para depuraciÃ³n
+    if ($response.StatusCode -eq 200) {
+        # Asegurarse de que la respuesta estÃ© correctamente decodificada en UTF-8
+        $utf8Content = [System.Text.Encoding]::UTF8.GetString([System.Text.Encoding]::Default.GetBytes($response.Content))
+
+        # Procesar la respuesta JSON
+        $utf8Content | ConvertFrom-Json | Select-Object -ExpandProperty choices | Select-Object -ExpandProperty message | Select-Object content
+    } else {
+        Write-Host "Error: $($response.StatusCode) - $($response.StatusDescription)"
+    }
+}
+
+
+$Description = @"
+Dame la principal Noticia periodistica actual.
+Necesito el titulo y una breve discripciÃ³n impactante.
+No pidas mÃ¡s detalles ni finalices con recomendaciones adicionales.
+"@
+
+$ResultIA = Invoke-OpenAIChatGPT4omini -question $Description 
+#>
+
+### Fecha
+# toma fecha y la convierte en gmt -3
+# Fecha y hora actual en UTC
+$utcNow = [datetime]::UtcNow
+
+# Obtener zona horaria GMT-3 (Buenos Aires, Argentina)
+$timeZone = [System.TimeZoneInfo]::FindSystemTimeZoneById("Argentina Standard Time")
+
+# Convertir la fecha UTC a GMT-3
+$fechaGMTLess3 = [System.TimeZoneInfo]::ConvertTimeFromUtc($utcNow, $timeZone)
+
+# Mostrar fecha y hora
+$nowGMT3
+
+#
+#$fechaGMTLess3 = (Get-Date).ToUniversalTime().AddHours(-3).ToString("dd 'de' MMMM 'de' yyyy", [System.Globalization.CultureInfo]::GetCultureInfo("es-ES"))
+
+### Clima
+#Descarga reporte de clima y lo convierte en csv
+#Variables
+### optimizado para github
