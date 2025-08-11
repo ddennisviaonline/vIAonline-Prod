@@ -239,8 +239,54 @@ $nowGMT3
 #Descarga reporte de clima y lo convierte en csv
 #Variables
 ### optimizado para github
+try {
+    # ... tu código previo ...
 
+    # Sube archivo a GitHub
+    $uriPut = "https://api.github.com/repos/$owner/$repo/contents/$path"
+    try {
+        $responsePut = Invoke-RestMethod `
+            -Uri $uriPut `
+            -Headers @{ Authorization = "token $token"; "User-Agent" = "AzureFunctionClimaScript" } `
+            -Method PUT `
+            -Body $jsonBody
+    }
+    catch {
+        # Captura respuesta de error HTTP
+        if ($_.Exception.Response) {
+            $reader = New-Object System.IO.StreamReader($_.Exception.Response.GetResponseStream())
+            $errorResponse = $reader.ReadToEnd() | ConvertFrom-Json
+            throw "Error GitHub: $($errorResponse.message) | Docs: $($errorResponse.documentation_url)"
+        }
+        else {
+            throw $_.Exception.Message
+        }
+    }
 
+    # Respuesta exitosa
+    $clima = @{
+        mensaje   = "Archivo clima.txt actualizado en GitHub correctamente"
+        clima     = $climaResumen
+        commitUrl = $responsePut.commit.html_url
+    }
+
+    Push-OutputBinding -Name Response -Value ([HttpResponseContext]@{
+        StatusCode = 200
+        Body       = $clima | ConvertTo-Json
+    })
+}
+catch {
+    $errorMsg = @{
+        error   = "Error en Azure Function"
+        detalle = $_.Exception.Message
+    }
+    Push-OutputBinding -Name Response -Value ([HttpResponseContext]@{
+        StatusCode = 500
+        Body       = $errorMsg | ConvertTo-Json
+    })
+}
+
+<#
 try {
     # Configuración GitHub
     $path   = "clima/clima.txt"
@@ -331,3 +377,5 @@ catch {
         Body       = $errorMsg | ConvertTo-Json
     })
 }
+
+#>
