@@ -1,50 +1,35 @@
-﻿# MODULO CLIMA AEROPARQUE
-# Descarga un archivo csv ubicado en la carpeta main de github y descarga un txt en la carpeta master de github
-param($Request, $TriggerMetadata)
+﻿param($Request, $TriggerMetadata)
 
 # ==== CONFIGURACIÓN GITHUB ====
 $owner = "ddennisviaonline"
 $repo = "vIAonline-Prod"
-$csvPath = "lista.csv"  # Ejemplo: "datos/archivo.csv"
-$txtPath = "archivo.csv"
-$branchsource = "main" # powershell
-$branch = "master" # webpage
+$csvPath = "lista.csv"       # CSV de origen (rama main)
+$newCsvPath = "archivo.csv"  # CSV que vamos a subir (rama master)
+$branchsource = "main"
+$branch = "master"
 $token = $env:GitHubToken
 
- Invoke-WebRequest -Uri "https://ssl.smn.gob.ar/dpd/zipopendata.php?dato=tiepre" -OutFile $zipFile
+# ==== 1. DESCARGAR CSV DESDE GITHUB ====
+$csvUri = "https://raw.githubusercontent.com/$owner/$repo/$branchsource/$csvPath"
+try {
+    $csvData = Invoke-RestMethod -Uri $csvUri -Headers @{ "User-Agent" = "PowerShell" } | ConvertFrom-Csv
+} catch {
+    throw "No se pudo descargar el CSV desde GitHub: $_"
+}
 
-    # Extrae ZIP
-    Expand-Archive -Path $zipFile -DestinationPath $Dir -Force
+# ==== 2. LÓGICA: EJEMPLO ====
+# Supongamos que agregamos una columna con la fecha de procesamiento
+$csvProcesado = $csvData | ForEach-Object {
+    $_ | Add-Member -NotePropertyName "FechaProcesado" -NotePropertyValue (Get-Date -Format "yyyy-MM-dd HH:mm:ss") -Force
+    $_
+}
 
-    # Headers CSV
-    $headers = "Ciudad;Fecha;Hora;EstadoDelCielo;Visibilidad;Temperatura;PuntoDew;Humedad;Viento;Presion"
+# Convertimos el objeto a formato CSV (sin el tipo de objeto en la 1° línea)
+$fileContent = $csvProcesado | ConvertTo-Csv -NoTypeInformation
 
-    # Lee todos los TXT y concatena contenido con headers
-    $txtFiles = Get-ChildItem -Path $Dir -Filter *.txt
-    $csvLines = @($headers)
-    foreach ($file in $txtFiles) {
-        $csvLines += Get-Content $file.FullName
-    }
-    # Convierte array de líneas a una cadena con saltos de línea
-    $csvString = $csvLines -join "`n"
-
-    # Importa CSV desde string con delimitador ';'
-    $csvData = $csvString | ConvertFrom-Csv -Delimiter ';'
-
-    # Filtra Aeroparque
-    $record = $csvData | Where-Object { $_.Ciudad -match '^Aeroparque' } | Select-Object -First 1
-    if (-not $record) { throw "No se encontró información para Aeroparque." }
-
-    $estado = $record.EstadoDelCielo
-    $primeraPalabra = $estado.Split(" ")[0]
-    $fileContent= "CABA, $($record.Temperatura)º $primeraPalabra"
-
-
-
-
-# ==== 3. SUBIR TXT A GITHUB (script anterior adaptado) ====
-# Obtener SHA si el archivo existe
-$uriGet = "https://api.github.com/repos/$owner/$repo/contents/$txtPath?ref=$branch"
+# ==== 3. SUBIR CSV A GITHUB ====
+# Obtener SHA si ya existe
+$uriGet = "https://api.github.com/repos/$owner/$repo/contents/$newCsvPath?ref=$branch"
 try {
     $response = Invoke-RestMethod -Uri $uriGet -Headers @{ Authorization = "token $token"; "User-Agent" = "PowerShell" } -Method GET
     $sha = $response.sha
@@ -53,28 +38,28 @@ try {
 }
 
 # Codificar contenido en Base64
-#$contentBase64 = [Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes($fileContent))
+$contentBase64 = [Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes($fileContent -join "`n"))
 
 # Crear body para PUT
 $body = @{
-    message = "Archivo TXT generado desde Azure Function"
-    content = $fileContent
-    branch = $branch
+    message = "CSV generado desde Azure Function"
+    content = $contentBase64
+    branch  = $branch
 }
 if ($sha) { $body.sha = $sha }
 $jsonBody = $body | ConvertTo-Json -Depth 10
 
 # Subir archivo
-$uriPut = "https://api.github.com/repos/$owner/$repo/contents/$txtPath"
+$uriPut = "https://api.github.com/repos/$owner/$repo/contents/$newCsvPath"
 $responsePut = Invoke-RestMethod -Uri $uriPut -Headers @{ Authorization = "token $token"; "User-Agent" = "PowerShell" } -Method PUT -Body $jsonBody
 
 # Respuesta HTTP
 $bodyOut = @{
-    message = "TXT generado y guardado en GitHub correctamente"
+    message   = "CSV generado y guardado en GitHub correctamente"
     commitUrl = $responsePut.commit.html_url
 } | ConvertTo-Json
 
 Push-OutputBinding -Name Response -Value ([HttpResponseContext]@{
     StatusCode = 200
-    Body = $bodyOut
+    Body       = $bodyOut
 })
