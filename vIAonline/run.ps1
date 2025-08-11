@@ -466,3 +466,179 @@ $head = "
         <div class='clima'>Clima:$clima</div>
     </div>
 "
+####
+
+### Busca imagenes en google
+#Solo traigo de la lista los que no tiene autor
+#$textos = $Articulos
+#$links= get-content -Path C:\inetpub\wwwroot\Publicidad\publicidad.txt
+
+$textossinAutores = $Articulos | Where-Object { [string]::IsNullOrWhiteSpace($_.Autor) } 
+$news = @()
+$new = @()
+$Counter = 0
+$linkIndex = 0
+#Aca es en donde empezamos a armar los contenidos
+
+# Cargar la lista del CSV
+$csvData = $links
+# Contador para el foreach
+$counter = 0
+# Índice para el CSV
+$csvIndex = 0
+
+#### compara contra $CSVcache a ver si existe. si no existe busca en la ia si no lo pasa por alto
+$ids1 = $textossinAutores.url
+$ids2 = $CSVcache.LinkOrigen
+
+$ids1 = $textossinAutores
+$ids2 = $CSVcache
+# IDs en lista1 que NO están en lista2
+$soloEnLista1 = $ids1 | Where-Object { $ids2.LinkOrigen -notcontains $_.url }
+$cache = @()
+### agrego al csv los nuevos los cuales van a tener campos en blancos
+foreach ($registro in $soloEnLista1){
+$fechaHora = $nowGMT3 #Get-Date 
+$cache += [PSCustomObject]@{ FechayHora = "$fechaHora"; LinkOrigen = $registro.URL; TituloOrigen = $registro.Titulo; Titulo = ""; Imagen = ""; Intro = ""; Noticia = ""; Datos = "" }
+}
+
+$TodosLosRegistros = $CSVcache + $cache
+# Ordenar por fecha descendente (más reciente primero)
+$TodosLosRegistros = $TodosLosRegistros | Sort-Object -Property FechayHora -Descending
+# Si hay más de 100 registros, mantener solo los primeros 100
+if ($TodosLosRegistros.Count -gt 100) {
+    $TodosLosRegistros = $TodosLosRegistros | Select-Object -First 100
+}
+
+#troubleshooting
+#$LinksCache += [PSCustomObject]@{ FechayHora = "$fechaHora"; LinkOrigen = $LinkOrigen; TituloOrigen = $textos; Titulo = $tituloIA; Imagen = $url; Intro = $introIA; Noticia = $ianews; Datos = $DatosNoticiaIA }
+#$LinksCache | Export-Csv -Path $RutaLinkCache -Encoding UTF8 -NoTypeInformation
+#$LinksCache =@()
+foreach ($noticia in $TodosLosRegistros){
+$LinkOrigen = $noticia.LinkOrigen #$URLOrigen + $noticia.URL
+$textos = $noticia.TituloOrigen
+#$links= get-content -Path C:\inetpub\wwwroot\Publicidad\publicidad.txt
+
+#### si está incompleto consulto en la ia y en google
+####
+$incompletos = $noticia  | Where-Object {
+    -not $_.Titulo  -and
+    -not $_.Imagen  -and
+    -not $_.Intro   -and
+    -not $_.Noticia -and
+    -not $_.Datos
+}
+
+if (!$incompletos) {
+    Write-Host "✅ Hay registros completos."
+    # Aquí puedes hacer algo con $completos
+    $FechayHora = $noticia.FechayHora
+    $LinkOrigen = $noticia.LinkOrigen   
+    $TituloOrigen = $noticia.TituloOrigen
+    $TituloIA = $noticia.Titulo
+    $Imagen = $noticia.Imagen   
+    $IntroIA = $noticia.Intro    
+    $NoticiaIA = $noticia.Noticia      
+    $DatosIA = $noticia.Datos 
+} else {
+    Write-Host "❌ No hay registros completos."
+
+####
+$TituloIA = consulta-IA -tipo Titulo -linkFuente 'www'
+$IntroIA = consulta-IA -tipo Intro -linkFuente 'www'
+$NoticiaIA = consulta-IA -tipo Nota -linkFuente 'www'
+$DatosIA = consulta-IA -tipo Datos -linkFuente 'www'
+# Resultado final
+
+
+
+
+    $new =  $tituloIA #$noticia.Titulo
+    $query = $textos # titulo para que google me traiga la imagen
+    $Imagen = "https://www.google.com/search?q={0}&tbm=isch" -f ($query -replace " ", "+")
+
+    try {
+    # Realiza la solicitud web
+    $response = Invoke-WebRequest -Uri $Imagen
+    $array  = $response.Images.outerHTML
+
+    } catch {
+    Write-Host "Error al realizar la solicitud web: $($_.Exception.Message)"
+}
+
+    $linea2 = $array[2]
+    
+    
+    if ($linea2 -match 'src="(https://encrypted-tbn0\.gstatic\.com[^"]+)"') {
+    $Imagen = $matches[1]
+    if ($Imagen -eq $urlcache ) {$Imagen= $matches[3]
+    Write-Host "es igual" -ForegroundColor Cyan
+    Write-Host $linea2 -ForegroundColor Cyan
+    Write-Host $urlcache -ForegroundColor Cyan
+    }
+    #Write-Output $url
+}
+}
+$fechaHora = Get-Date 
+#Agrego datos al csv !!!!! despues hay que corregirlo para que solo agregue los que no existan
+$LinksCache += [PSCustomObject]@{ FechayHora = "$fechaHora"; LinkOrigen = $LinkOrigen; TituloOrigen = $textos; Titulo = $TituloIA; Imagen = $Imagen; Intro = $NoticiaIA; Noticia = $NoticiaIA; Datos = $DatosIA }
+
+
+$news += "
+<div class='noticia' onclick='this.classList.toggle(""abierto"")'>
+    <h1 style='margin: 0; text-align: center;'>$TituloIA</h1> 
+    <img src='$Imagen' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>$introIA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>$NoticiaIA<br></p>
+        <p>$DatosIA</p>
+    </div>
+</div>
+"
+
+    #evita poner imagenes duplicadas
+    $urlcache =  $Imagen
+
+### publicidad
+###
+    Write-Output "Procesando item: $item"
+
+    $counter++
+
+    if ($counter % 3 -eq 0) {
+        if ($csvIndex -lt $csvData.Count) {
+            $registro = $csvData[$csvIndex]
+            Write-Output "Registro del CSV en salto $counter : $($registro | Out-String)"
+            $ImgAdsLink = $registro.Imagen
+            $LinkAdsLink = $registro.Link
+            $TextoAdsLink = $registro.Texto
+            $news += "
+        <div class='publicidad' style='background-color: white; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='$LinkAdsLink' target='_blank'>
+                <img src='$ImgAdsLink ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='$LinkAdsLink' target='_blank'>
+                $TextoAdsLink
+                </a>
+             </p>
+          </div>
+        
+        "
+            $csvIndex++
+        } else {
+            Write-Warning "No hay más registros en el CSV."
+        }
+    }
+}
+
