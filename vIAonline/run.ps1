@@ -12,11 +12,12 @@ $branchsource = "main" # powershell
 $branch = "master" # webpage
 $token = $env:GitHubToken
 
-$uriGet = "https://api.github.com/repos/$owner/$repo/contents/$path?ref=$branchsource"
+# ==== 1. DESCARGAR ads.CSV DESDE GITHUB ====
+$csvUri = "https://api.github.com/repos/$owner/$repo/contents/$path?ref=$branchsource"
 try {
-    $response = Invoke-RestMethod -Uri $uriGet -Headers @{ Authorization = "token $token"; "User-Agent" = "PowerShell" } -Method GET
-    $sha = $response.sha
+    $csvContent = Invoke-RestMethod -Uri $csvUri -Headers @{ "User-Agent" = "PowerShell" }
+    # Si quieres procesar el CSV como tabla:
+    $links = $csvContent | ConvertFrom-Csv
 } catch {
-    # El archivo no existe, no se necesita sha
-    $sha = $null
+    throw "No se pudo descargar el CSV desde GitHub: $_"
 }
