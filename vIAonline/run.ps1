@@ -22,3 +22,11 @@ try {
     # El archivo no existe, no se necesita sha
     $sha = $null
 }
+
+$logo = "https://github.com/ddennisviaonline/vIAonline-Prod/blob/master/Imagenes/Logocorto.png?raw=true" # CREAR DNS PARA QUE APUNTE A ESTE LINK
+
+# 1. Carga el HTML desde archivo
+#$html = Get-Content -Path ".\archivo.html" -Raw
+$URLOrigen = "https://infobae.com"
+$response = Invoke-WebRequest -Uri $URLOrigen
+$html = $response.Content
