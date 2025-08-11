@@ -239,3 +239,95 @@ $nowGMT3
 #Descarga reporte de clima y lo convierte en csv
 #Variables
 ### optimizado para github
+param($Request, $TriggerMetadata)
+
+try {
+    # Configuración GitHub
+    $path   = "clima/clima.txt"
+
+
+    if (-not $token) { throw "GitHubToken no configurado en Application Settings." }
+
+    # Carpeta temporal
+    $Dir = Join-Path $env:TEMP "clima"
+    New-Item -ItemType Directory -Path $Dir -Force | Out-Null
+
+    # Archivos temporales
+    $zipFile = Join-Path $Dir "ClimaArg.zip"
+
+    # Descarga ZIP
+    Invoke-WebRequest -Uri "https://ssl.smn.gob.ar/dpd/zipopendata.php?dato=tiepre" -OutFile $zipFile
+
+    # Extrae ZIP
+    Expand-Archive -Path $zipFile -DestinationPath $Dir -Force
+
+    # Headers CSV
+    $headers = "Ciudad;Fecha;Hora;EstadoDelCielo;Visibilidad;Temperatura;PuntoDew;Humedad;Viento;Presion"
+
+    # Lee todos los TXT y concatena contenido con headers
+    $txtFiles = Get-ChildItem -Path $Dir -Filter *.txt
+    $csvLines = @($headers)
+    foreach ($file in $txtFiles) {
+        $csvLines += Get-Content $file.FullName
+    }
+    # Convierte array de líneas a una cadena con saltos de línea
+    $csvString = $csvLines -join "`n"
+
+    # Importa CSV desde string con delimitador ';'
+    $csvData = $csvString | ConvertFrom-Csv -Delimiter ';'
+
+    # Filtra Aeroparque
+    $record = $csvData | Where-Object { $_.Ciudad -match '^Aeroparque' } | Select-Object -First 1
+    if (-not $record) { throw "No se encontró información para Aeroparque." }
+
+    $estado = $record.EstadoDelCielo
+    $primeraPalabra = $estado.Split(" ")[0]
+    $climaResumen = "CABA, $($record.Temperatura)º $primeraPalabra"
+
+    # Prepara contenido para GitHub
+    $contentBase64 = [Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes($climaResumen))
+
+    # Consulta SHA si existe
+    $uriGet = "https://api.github.com/repos/$owner/$repo/contents/$path?ref=$branchsource"
+    try {
+        $response = Invoke-RestMethod -Uri $uriGet -Headers @{ Authorization = "token $token"; "User-Agent" = "PowerShell" } -Method GET
+        $sha = $response.sha
+    } catch {
+        $sha = $null
+    }
+
+    # Crea cuerpo para subir archivo
+    $body = @{
+        message = "Actualización clima desde Azure Function"
+        content = $contentBase64
+        branch  = $branch
+    }
+    if ($sha) { $body.sha = $sha }
+    $jsonBody = $body | ConvertTo-Json -Depth 10
+
+    # Sube archivo a GitHub
+    $uriPut = "https://api.github.com/repos/$owner/$repo/contents/$path"
+    $responsePut = Invoke-RestMethod -Uri $uriPut -Headers @{ Authorization = "token $token"; "User-Agent" = "PowerShell" } -Method PUT -Body $jsonBody
+
+    # Respuesta exitosa
+    $clima = @{
+        mensaje   = "Archivo clima.txt actualizado en GitHub correctamente"
+        clima     = $climaResumen
+        commitUrl = $responsePut.commit.html_url
+    }
+
+    Push-OutputBinding -Name Response -Value ([HttpResponseContext]@{
+        StatusCode = 200
+        Body       = $result | ConvertTo-Json
+    })
+}
+catch {
+    $errorMsg = @{
+        error   = "Error en Azure Function"
+        detalle = $_.Exception.Message
+    }
+    Push-OutputBinding -Name Response -Value ([HttpResponseContext]@{
+        StatusCode = 500
+        Body       = $errorMsg | ConvertTo-Json
+    })
+}
