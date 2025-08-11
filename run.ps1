@@ -100,7 +100,7 @@ $cache = $null
 # Inicializar array vacío
 $LinksCache = @()
 $CSVcache = @()
-
+<#
 # ==== 1. DESCARGAR ads.CSV DESDE GITHUB ====
 $csvUri = "https://raw.githubusercontent.com/$owner/$repo/$branchsource/$vIAcache"
 
@@ -111,7 +111,21 @@ try {
     # El archivo no existe, no se necesita sha
     $sha = $null
 }
+#>
+###
+# ==== 1. DESCARGAR ads.CSV DESDE GITHUB ====
+<#
+$csvUri = "https://api.github.com/repos/$owner/$repo/contents/$path?ref=$branchsource"
 
+try {
+    $response = Invoke-RestMethod -Uri $csvUri -Headers @{ Authorization = "token $token"; "User-Agent" = "PowerShell" } -Method GET
+    $sha = $response.sha
+} catch {
+    # El archivo no existe, no se necesita sha
+    $sha = $null
+}
+#>
+###
 
 
 # si no exite crea file
@@ -295,7 +309,7 @@ try {
     } catch {
         $sha = $null
     }
-
+    <#
     # Crea cuerpo para subir archivo
     $body = @{
         message = "Actualización clima desde Azure Function"
@@ -330,4 +344,5 @@ catch {
         StatusCode = 500
         Body       = $errorMsg | ConvertTo-Json
     })
+    #>
 }
