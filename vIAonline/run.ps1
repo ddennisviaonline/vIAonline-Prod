@@ -306,7 +306,8 @@ try {
     $jsonBody = $body | ConvertTo-Json -Depth 10
 
     # Sube archivo a GitHub
-    $uriPut = "https://api.github.com/repos/$owner/$repo/contents/$path"
+    #$uriPut = "https://api.github.com/repos/$owner/$repo/contents/$path"
+    $uriPut = "https://api.github.com/repos/$owner/$repo/$path"
     $responsePut = Invoke-RestMethod -Uri $uriPut -Headers @{ Authorization = "token $token"; "User-Agent" = "PowerShell" } -Method PUT -Body $jsonBody
 
     # Respuesta exitosa
