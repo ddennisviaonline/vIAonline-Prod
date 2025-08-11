@@ -3,31 +3,53 @@
 # ==== CONFIGURACIÓN GITHUB ====
 $owner = "ddennisviaonline"
 $repo = "vIAonline-Prod"
-$csvPath = "lista.csv"       # CSV de origen (rama main)
-$newCsvPath = "archivo.csv"  # CSV que vamos a subir (rama master)
-$branchsource = "main"
+$newCsvPath = "caba.csv"  # CSV final en rama master
 $branch = "master"
 $token = $env:GitHubToken
 
-# ==== 1. DESCARGAR CSV DESDE GITHUB ====
-$csvUri = "https://raw.githubusercontent.com/$owner/$repo/$branchsource/$csvPath"
-try {
-    $csvData = Invoke-RestMethod -Uri $csvUri -Headers @{ "User-Agent" = "PowerShell" } | ConvertFrom-Csv
-} catch {
-    throw "No se pudo descargar el CSV desde GitHub: $_"
+# ==== 1. DESCARGAR ZIP DEL SMN ====
+$tempFolder = Join-Path $env:TEMP "smnzip"
+$zipFile    = Join-Path $tempFolder "smn.zip"
+
+# Limpia carpeta temporal
+if (Test-Path $tempFolder) { Remove-Item $tempFolder -Recurse -Force }
+New-Item -Path $tempFolder -ItemType Directory | Out-Null
+
+Invoke-WebRequest -Uri "https://ssl.smn.gob.ar/dpd/zipopendata.php?dato=tiepre" -OutFile $zipFile
+
+# ==== 2. EXTRAER ZIP ====
+Expand-Archive -Path $zipFile -DestinationPath $tempFolder
+
+# ==== 3. LEER Y UNIR TXT ====
+$txtFiles = Get-ChildItem -Path $tempFolder -Filter *.txt
+if (-not $txtFiles) { throw "No se encontraron archivos TXT en el ZIP." }
+
+# Lee headers desde el primer archivo
+$headers = (Get-Content $txtFiles[0].FullName)[0]
+$csvLines = @($headers)
+
+foreach ($file in $txtFiles) {
+    $csvLines += Get-Content $file.FullName | Select-Object -Skip 1
 }
 
-# ==== 2. LÓGICA: EJEMPLO ====
-# Supongamos que agregamos una columna con la fecha de procesamiento
-$csvProcesado = $csvData | ForEach-Object {
-    $_ | Add-Member -NotePropertyName "FechaProcesado" -NotePropertyValue (Get-Date -Format "yyyy-MM-dd HH:mm:ss") -Force
-    $_
+# ==== 4. CONVERTIR A OBJETO Y FILTRAR AEROPARQUE ====
+$csvData = ($csvLines -join "`n") | ConvertFrom-Csv -Delimiter ';'
+$record = $csvData | Where-Object { $_.Ciudad -match '^Aeroparque' } | Select-Object -First 1
+
+if (-not $record) { throw "No se encontró información para Aeroparque." }
+
+# Preparamos un CSV con una sola fila
+$resultObject = [PSCustomObject]@{
+    Ciudad       = "CABA"
+    Temperatura  = "$($record.Temperatura)º"
+    Estado       = ($record.EstadoDelCielo.Split(" ")[0])
+    Fecha        = $record.Fecha
+    Hora         = $record.Hora
 }
 
-# Convertimos el objeto a formato CSV (sin el tipo de objeto en la 1° línea)
-$fileContent = $csvProcesado | ConvertTo-Csv -NoTypeInformation
+$fileContent = $resultObject | ConvertTo-Csv -NoTypeInformation
 
-# ==== 3. SUBIR CSV A GITHUB ====
+# ==== 5. SUBIR CSV A GITHUB ====
 # Obtener SHA si ya existe
 $uriGet = "https://api.github.com/repos/$owner/$repo/contents/$newCsvPath?ref=$branch"
 try {
@@ -37,12 +59,12 @@ try {
     $sha = $null
 }
 
-# Codificar contenido en Base64
+# Codificar contenido a Base64
 $contentBase64 = [Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes($fileContent -join "`n"))
 
 # Crear body para PUT
 $body = @{
-    message = "CSV generado desde Azure Function"
+    message = "CSV CABA generado desde Azure Function"
     content = $contentBase64
     branch  = $branch
 }
@@ -53,9 +75,9 @@ $jsonBody = $body | ConvertTo-Json -Depth 10
 $uriPut = "https://api.github.com/repos/$owner/$repo/contents/$newCsvPath"
 $responsePut = Invoke-RestMethod -Uri $uriPut -Headers @{ Authorization = "token $token"; "User-Agent" = "PowerShell" } -Method PUT -Body $jsonBody
 
-# Respuesta HTTP
+# ==== 6. RESPUESTA HTTP ====
 $bodyOut = @{
-    message   = "CSV generado y guardado en GitHub correctamente"
+    message   = "CSV de CABA generado y guardado en GitHub correctamente"
     commitUrl = $responsePut.commit.html_url
 } | ConvertTo-Json
 
