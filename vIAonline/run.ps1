@@ -239,7 +239,7 @@ $nowGMT3
 #Descarga reporte de clima y lo convierte en csv
 #Variables
 ### optimizado para github
-param($Request, $TriggerMetadata)
+#param($Request, $TriggerMetadata)
 
 try {
     # Configuración GitHub
