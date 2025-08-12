@@ -3,10 +3,10 @@
 # ==== CONFIGURACIÓN GITHUB ====
 $owner = "ddennisviaonline"
 $repo = "vIAonline-Prod"
-$csvPath = "lista.csv"         # Ruta del CSV en main
+$csvPath = "lista.csv"               # Ruta del CSV en main
 $csvOutputPath = "listaOUTPUT.csv"   # Ruta/nombre del CSV en master
-$branchsource = "main"         # Rama origen
-$branch = "master"             # Rama destino
+$branchsource = "main"               # Rama origen
+$branch = "master"                   # Rama destino
 $token = $env:GitHubToken
 
 # ==== 1. DESCARGAR CSV DESDE GITHUB ====
@@ -19,7 +19,7 @@ try {
 }
 
 # ==== 2. CONVERTIR EL CSV A TEXTO EN MEMORIA ====
-$fileContent = $csvData | ConvertTo-Csv -NoTypeInformation | Out-String
+$fileContent = ($csvData | ConvertTo-Csv -NoTypeInformation) -join "`n"
 
 if ([string]::IsNullOrWhiteSpace($fileContent)) {
     throw "El contenido CSV está vacío, no se puede subir a GitHub."
@@ -41,10 +41,14 @@ $contentBase64 = [Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes($fileC
 $body = @{
     message = "CSV copiado desde main a master por Azure Function"
     content = $contentBase64
-    branch = $branch
+    branch  = $branch
 }
-if ($sha) { $body.sha = $sha }
-$jsonBody = $body | ConvertTo-Json -Depth 10
+if ($sha) { 
+    $body.sha = "$sha"  # Asegurar que sea string
+}
+
+# Convertir a UTF-8 JSON
+$jsonBody = $body | ConvertTo-Json -Depth 10 -Compress | ForEach-Object { $_ -replace '\\u0027', "'" }
 
 # ==== 6. SUBIR ARCHIVO A GITHUB ====
 $uriPut = "https://api.github.com/repos/$owner/$repo/contents/$csvOutputPath"
