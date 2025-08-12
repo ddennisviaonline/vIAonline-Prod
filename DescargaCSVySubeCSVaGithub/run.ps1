@@ -32,17 +32,18 @@ try {
     if ($response -and $response.sha) {
         $sha = $response.sha
 
-        # DELETE
+        # DELETE en la URL sin ?ref
+        $uriDelete = "https://api.github.com/repos/$owner/$repo/contents/$csvOutputPath"
         $deleteBody = @{
             message = "Eliminando archivo antes de sobrescribir desde Azure Function"
             sha     = $sha
             branch  = $branch
         } | ConvertTo-Json -Depth 10 -Compress
 
-        Invoke-RestMethod -Uri $uriGet -Headers @{ Authorization = "token $token"; "User-Agent" = "PowerShell" } -Method DELETE -Body $deleteBody
+        Invoke-RestMethod -Uri $uriDelete -Headers @{ Authorization = "token $token"; "User-Agent" = "PowerShell" } -Method DELETE -Body $deleteBody
     }
 } catch {
-    # Si no existe, no hacemos nada
+    # Si no existe, se ignora
 }
 
 # ==== 4. CODIFICAR A BASE64 ====
@@ -60,7 +61,7 @@ $responsePut = Invoke-RestMethod -Uri $uriPut -Headers @{ Authorization = "token
 
 # ==== 6. RESPUESTA HTTP ====
 $bodyOut = @{
-    message = "CSV copiado correctamente de main a master (sobrescribiendo archivo)"
+    message = "CSV copiado correctamente de main a master (sobrescribiendo archivo si existía)"
     commitUrl = $responsePut.commit.html_url
 } | ConvertTo-Json
 
