@@ -6,7 +6,7 @@ $repo = "vIAonline-Prod"
 $csvPath = "lista.csv"         # Ruta del CSV en main
 $csvOutputPath = "listaOUTPUT.csv"   # Ruta/nombre del CSV en master
 $branchsource = "main"         # Rama origen
-$branch = "main"             # Rama destino
+$branch = "master"             # Rama destino
 $token = $env:GitHubToken
 
 # ==== 1. DESCARGAR CSV DESDE GITHUB ====
