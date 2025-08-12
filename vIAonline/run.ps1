@@ -692,7 +692,7 @@ if ($sha) { $body.sha = $sha }
 $jsonBody = $body | ConvertTo-Json -Depth 10
 
 # ==== 6. SUBIR ARCHIVO A GITHUB ====
-$uriPut = "https://api.github.com/repos/$owner/$repo/contents/$csvOutputPath"
+$uriPut = "https://api.github.com/repos/$owner/$repo/contents/vIAonline/$csvOutputPath"
 $responsePut = Invoke-RestMethod -Uri $uriPut -Headers @{ Authorization = "token $token"; "User-Agent" = "PowerShell" } -Method PUT -Body $jsonBody
 
 # ==== 7. RESPUESTA HTTP ====
