@@ -671,7 +671,7 @@ if ([string]::IsNullOrWhiteSpace($fileContent)) {
 }
 
 # ==== 3. OBTENER SHA SI EL ARCHIVO YA EXISTE ====
-$uriGet = "https://api.github.com/repos/$owner/$repo/contents/vIAonline/$csvOutputPath?ref=$branch"
+$uriGet = "https://api.github.com/repos/$owner/$repo/contents/$csvOutputPath?ref=$branch"
 try {
     $response = Invoke-RestMethod -Uri $uriGet -Headers @{ Authorization = "token $token"; "User-Agent" = "PowerShell" } -Method GET
     $sha = $response.sha
@@ -692,7 +692,7 @@ if ($sha) { $body.sha = $sha }
 $jsonBody = $body | ConvertTo-Json -Depth 10
 
 # ==== 6. SUBIR ARCHIVO A GITHUB ====
-$uriPut = "https://api.github.com/repos/$owner/$repo/contents/vIAonline/$csvOutputPath"
+$uriPut = "https://api.github.com/repos/$owner/$repo/contents/$csvOutputPath"
 $responsePut = Invoke-RestMethod -Uri $uriPut -Headers @{ Authorization = "token $token"; "User-Agent" = "PowerShell" } -Method PUT -Body $jsonBody
 
 # ==== 7. RESPUESTA HTTP ====
