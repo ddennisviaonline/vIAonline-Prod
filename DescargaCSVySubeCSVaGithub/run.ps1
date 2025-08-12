@@ -3,29 +3,29 @@
 # ==== CONFIGURACIÓN GITHUB ====
 $owner = "ddennisviaonline"
 $repo = "vIAonline-Prod"
-$csvPath = "lista.csv"         # CSV original en main
-$csvOutputPath = "archivo.csv" # CSV que vamos a generar en master
-$branchsource = "main"
-$branch = "master"
+$csvPath = "lista.csv"         # Ruta del CSV en main
+$csvOutputPath = "lista.csv"   # Ruta/nombre del CSV en master
+$branchsource = "main"         # Rama origen
+$branch = "master"             # Rama destino
 $token = $env:GitHubToken
 
 # ==== 1. DESCARGAR CSV DESDE GITHUB ====
 $csvUri = "https://raw.githubusercontent.com/$owner/$repo/$branchsource/$csvPath"
 try {
-    $csvContent = Invoke-RestMethod -Uri $csvUri -Headers @{ "User-Agent" = "PowerShell" }
-    $csvData = $csvContent | ConvertFrom-Csv
+    $csvContentRaw = Invoke-RestMethod -Uri $csvUri -Headers @{ "User-Agent" = "PowerShell" } -Method GET
+    $csvData = $csvContentRaw | ConvertFrom-Csv
 } catch {
     throw "No se pudo descargar el CSV desde GitHub: $_"
 }
 
-# ==== 2. LÓGICA: Ejemplo agregar columna con fecha ====
-$csvData | ForEach-Object { $_ | Add-Member -NotePropertyName "FechaProcesado" -NotePropertyValue (Get-Date -Format "yyyy-MM-dd HH:mm:ss") -Force }
+# ==== 2. CONVERTIR EL CSV A TEXTO EN MEMORIA ====
+$fileContent = $csvData | ConvertTo-Csv -NoTypeInformation | Out-String
 
-# ==== 3. CONVERTIR A CSV EN MEMORIA ====
-$fileContent = $csvData | Export-Csv -NoTypeInformation | Out-String
+if ([string]::IsNullOrWhiteSpace($fileContent)) {
+    throw "El contenido CSV está vacío, no se puede subir a GitHub."
+}
 
-# ==== 4. SUBIR CSV A GITHUB ====
-# Obtener SHA si el archivo ya existe
+# ==== 3. OBTENER SHA SI EL ARCHIVO YA EXISTE ====
 $uriGet = "https://api.github.com/repos/$owner/$repo/contents/$csvOutputPath?ref=$branch"
 try {
     $response = Invoke-RestMethod -Uri $uriGet -Headers @{ Authorization = "token $token"; "User-Agent" = "PowerShell" } -Method GET
@@ -34,25 +34,25 @@ try {
     $sha = $null
 }
 
-# Codificar en Base64
+# ==== 4. CODIFICAR A BASE64 ====
 $contentBase64 = [Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes($fileContent))
 
-# Crear body para PUT
+# ==== 5. CREAR BODY PARA PUT ====
 $body = @{
-    message = "Archivo CSV generado desde Azure Function"
+    message = "CSV copiado desde main a master por Azure Function"
     content = $contentBase64
     branch = $branch
 }
 if ($sha) { $body.sha = $sha }
 $jsonBody = $body | ConvertTo-Json -Depth 10
 
-# Subir archivo
+# ==== 6. SUBIR ARCHIVO A GITHUB ====
 $uriPut = "https://api.github.com/repos/$owner/$repo/contents/$csvOutputPath"
 $responsePut = Invoke-RestMethod -Uri $uriPut -Headers @{ Authorization = "token $token"; "User-Agent" = "PowerShell" } -Method PUT -Body $jsonBody
 
-# ==== 5. RESPUESTA HTTP ====
+# ==== 7. RESPUESTA HTTP ====
 $bodyOut = @{
-    message = "CSV generado y guardado en GitHub correctamente"
+    message = "CSV copiado correctamente de main a master"
     commitUrl = $responsePut.commit.html_url
 } | ConvertTo-Json
 
