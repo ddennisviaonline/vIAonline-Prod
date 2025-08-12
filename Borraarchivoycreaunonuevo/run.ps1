@@ -1,12 +1,11 @@
-﻿# Borra el archivo si esxite y crea uno nuevo
-param($Request, $TriggerMetadata)
+﻿param($Request, $TriggerMetadata)
 
 # ==== CONFIGURACIÓN ====
-$owner   = "ddennisviaonline"
-$repo    = "vIAonline-Prod"
+$owner    = "ddennisviaonline"
+$repo     = "vIAonline-Prod"
 $filePath = "lista.csv"   # Ruta en el repo
-$branch  = "main"
-$token   = $env:GITHUB_TOKEN # Guardado en Azure Function → Configuration
+$branch   = "main"
+$token    = $env:GitHubToken  # Guardado en Azure Function → Configuration
 
 # ==== ENCABEZADOS PARA GITHUB ====
 $headers = @{
@@ -14,7 +13,7 @@ $headers = @{
     "User-Agent"  = "AzureFunction"
 }
 
-# ==== OBTENER SHA DEL ARCHIVO ====
+# ==== OBTENER SHA DEL ARCHIVO (si existe) ====
 try {
     $shaUrl = "https://api.github.com/repos/$owner/$repo/contents/$filePath?ref=$branch"
     $fileInfo = Invoke-RestMethod -Uri $shaUrl -Headers $headers -Method GET
