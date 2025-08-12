@@ -671,7 +671,7 @@ if ([string]::IsNullOrWhiteSpace($fileContent)) {
 }
 
 # ==== 3. OBTENER SHA SI EL ARCHIVO YA EXISTE ====
-$uriGet = "https://api.github.com/repos/$owner/$repo/contents/$csvOutputPath?ref=$branch"
+$uriGet = "https://api.github.com/repos/$owner/$repo/contents/vIAonline/$csvOutputPath?ref=$branch"
 try {
     $response = Invoke-RestMethod -Uri $uriGet -Headers @{ Authorization = "token $token"; "User-Agent" = "PowerShell" } -Method GET
     $sha = $response.sha
