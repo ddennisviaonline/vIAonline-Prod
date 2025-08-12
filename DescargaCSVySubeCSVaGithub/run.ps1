@@ -25,38 +25,42 @@ if ([string]::IsNullOrWhiteSpace($fileContent)) {
     throw "El contenido CSV está vacío, no se puede subir a GitHub."
 }
 
-# ==== 3. OBTENER SHA SI EL ARCHIVO YA EXISTE ====
+# ==== 3. ELIMINAR ARCHIVO EXISTENTE SI HAY ====
 $uriGet = "https://api.github.com/repos/$owner/$repo/contents/$csvOutputPath?ref=$branch"
 try {
     $response = Invoke-RestMethod -Uri $uriGet -Headers @{ Authorization = "token $token"; "User-Agent" = "PowerShell" } -Method GET
-    $sha = $response.sha
+    if ($response -and $response.sha) {
+        $sha = $response.sha
+
+        # DELETE
+        $deleteBody = @{
+            message = "Eliminando archivo antes de sobrescribir desde Azure Function"
+            sha     = $sha
+            branch  = $branch
+        } | ConvertTo-Json -Depth 10 -Compress
+
+        Invoke-RestMethod -Uri $uriGet -Headers @{ Authorization = "token $token"; "User-Agent" = "PowerShell" } -Method DELETE -Body $deleteBody
+    }
 } catch {
-    $sha = $null
+    # Si no existe, no hacemos nada
 }
 
 # ==== 4. CODIFICAR A BASE64 ====
 $contentBase64 = [Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes($fileContent))
 
-# ==== 5. CREAR BODY PARA PUT ====
+# ==== 5. SUBIR NUEVO ARCHIVO ====
+$uriPut = "https://api.github.com/repos/$owner/$repo/contents/$csvOutputPath"
 $body = @{
     message = "CSV copiado desde main a master por Azure Function"
     content = $contentBase64
     branch  = $branch
-}
-if ($sha) { 
-    $body.sha = "$sha"  # Asegurar que sea string
-}
+} | ConvertTo-Json -Depth 10 -Compress
 
-# Convertir a UTF-8 JSON
-$jsonBody = $body | ConvertTo-Json -Depth 10 -Compress | ForEach-Object { $_ -replace '\\u0027', "'" }
+$responsePut = Invoke-RestMethod -Uri $uriPut -Headers @{ Authorization = "token $token"; "User-Agent" = "PowerShell" } -Method PUT -Body $body
 
-# ==== 6. SUBIR ARCHIVO A GITHUB ====
-$uriPut = "https://api.github.com/repos/$owner/$repo/contents/$csvOutputPath"
-$responsePut = Invoke-RestMethod -Uri $uriPut -Headers @{ Authorization = "token $token"; "User-Agent" = "PowerShell" } -Method PUT -Body $jsonBody
-
-# ==== 7. RESPUESTA HTTP ====
+# ==== 6. RESPUESTA HTTP ====
 $bodyOut = @{
-    message = "CSV copiado correctamente de main a master"
+    message = "CSV copiado correctamente de main a master (sobrescribiendo archivo)"
     commitUrl = $responsePut.commit.html_url
 } | ConvertTo-Json
 
