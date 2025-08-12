@@ -642,10 +642,6 @@ $news += "
     }
 }
 
-
-
-$fileContent = $LinksCache | ConvertTo-Csv -NoTypeInformation
-
 # ==== CONFIGURACIÓN GITHUB ====
 $owner = "ddennisviaonline"
 $repo = "vIAonline-Prod"
@@ -656,7 +652,7 @@ $branch = "main"             # Rama destino
 $token = $env:GitHubToken
 
 # ==== 2. CONVERTIR EL CSV A TEXTO EN MEMORIA ====
-$fileContent = $csvData | ConvertTo-Csv -NoTypeInformation | Out-String
+$fileContent = $LinksCache | ConvertTo-Csv -NoTypeInformation | Out-String
 
 if ([string]::IsNullOrWhiteSpace($fileContent)) {
     throw "El contenido CSV está vacío, no se puede subir a GitHub."
