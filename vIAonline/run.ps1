@@ -11,7 +11,7 @@ $txtPath = "archivo.txt"
 $branchsource = "main" # powershell
 $branch = "master" # webpage
 $token = $env:GitHubToken
-
+<#
 # ==== 1. DESCARGAR ads.CSV DESDE GITHUB ====
 $csvUri = "https://api.github.com/repos/$owner/$repo/contents/$path?ref=$branchsource"
 
@@ -22,8 +22,20 @@ try {
     # El archivo no existe, no se necesita sha
     $sha = $null
 }
+#>
 
 $logo = "https://github.com/ddennisviaonline/vIAonline-Prod/blob/master/Imagenes/Logocorto.png?raw=true" # CREAR DNS PARA QUE APUNTE A ESTE LINK
+
+### se hace el import de vIAcache, que son los link anteriormente consultados, para que no lo vuelva a consultar
+# ==== 1. DESCARGAR CSV DESDE GITHUB ====
+$csvUri = "https://raw.githubusercontent.com/$owner/$repo/$branchsource/vIAonline/$csvPath"
+try {
+    $csvContentRaw = Invoke-RestMethod -Uri $csvUri -Headers @{ "User-Agent" = "PowerShell" } -Method GET
+    $csvData = $csvContentRaw | ConvertFrom-Csv
+} catch {
+    throw "No se pudo descargar el CSV desde GitHub: $_"
+}
+
 
 # 1. Carga el HTML desde archivo
 #$html = Get-Content -Path ".\archivo.html" -Raw
@@ -646,7 +658,7 @@ $news += "
 $owner = "ddennisviaonline"
 $repo = "vIAonline-Prod"
 $csvPath = "lista.csv"         # Ruta del CSV en main
-$csvOutputPath = "NOTAS-OUTPUT.csv"   # Ruta/nombre del CSV en master
+$csvOutputPath = "vIAcache.csv"   # Ruta/nombre del CSV en master
 $branchsource = "main"         # Rama origen
 $branch = "main"             # Rama destino
 $token = $env:GitHubToken
