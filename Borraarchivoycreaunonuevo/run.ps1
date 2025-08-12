@@ -3,9 +3,9 @@
 # ==== CONFIGURACIÓN ====
 $owner    = "ddennisviaonline"
 $repo     = "vIAonline-Prod"
-$filePath = "lista.csv"
+$filePath = "lista.csv"   # Ruta en el repo
 $branch   = "main"
-$token    = $env:GitHubToken
+$token    = $env:GitHubToken  # Guardado en Azure Function → Configuration
 
 # ==== ENCABEZADOS PARA GITHUB ====
 $headers = @{
@@ -14,7 +14,6 @@ $headers = @{
 }
 
 # ==== OBTENER SHA DEL ARCHIVO (si existe) ====
-$sha = $null
 try {
     $shaUrl = "https://api.github.com/repos/$owner/$repo/contents/$filePath?ref=$branch"
     $fileInfo = Invoke-RestMethod -Uri $shaUrl -Headers $headers -Method GET
@@ -23,28 +22,37 @@ try {
     $sha = $null
 }
 
+# ==== SI EXISTE, ELIMINARLO ====
+if ($sha) {
+    $deleteUrl = "https://api.github.com/repos/$owner/$repo/contents/$filePath"
+    $deleteBody = @{
+        message = "Eliminando archivo antes de actualizar"
+        sha     = $sha
+        branch  = $branch
+    } | ConvertTo-Json -Depth 3
+
+    Invoke-RestMethod -Uri $deleteUrl -Headers $headers -Method DELETE -Body $deleteBody
+
+    # Esperar 2 segundos para que GitHub procese la eliminación
+    Start-Sleep -Seconds 2
+}
+
 # ==== CREAR NUEVO CONTENIDO ====
 $newContent = "col1,col2,col3`nvalor1,valor2,valor3"
 $encodedContent = [Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes($newContent))
 
-# ==== SUBIR EL ARCHIVO (con sha si ya existía) ====
+# ==== SUBIR EL NUEVO ARCHIVO ====
 $uploadUrl = "https://api.github.com/repos/$owner/$repo/contents/$filePath"
 $uploadBody = @{
-    message = "Reemplazando archivo desde Azure Function"
+    message = "Subiendo nuevo archivo desde Azure Function"
     content = $encodedContent
     branch  = $branch
-}
+} | ConvertTo-Json -Depth 3
 
-if ($sha) {
-    $uploadBody.sha = $sha
-}
-
-$uploadBodyJson = $uploadBody | ConvertTo-Json -Depth 3
-Invoke-RestMethod -Uri $uploadUrl -Headers $headers -Method PUT -Body $uploadBodyJson
+Invoke-RestMethod -Uri $uploadUrl -Headers $headers -Method PUT -Body $uploadBody
 
 # ==== RESPUESTA ====
 @{
     status = "Archivo reemplazado exitosamente"
     file   = $filePath
 } | ConvertTo-Json
-
