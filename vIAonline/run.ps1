@@ -673,11 +673,23 @@ $body = @{
 }
 if ($sha) { $body.sha = $sha }
 $jsonBody = $body | ConvertTo-Json -Depth 10
+####
+$uriGet = "https://api.github.com/repos/$owner/$repo/contents/$newCsvPath?ref=$branch"
+$fileInfo = Invoke-RestMethod -Uri $uriGet -Headers @{ Authorization = "token $token"; "User-Agent" = "PowerShell" }
+$sha = $fileInfo.sha
+$jsonBody = @{
+    message = "Actualizando archivo.csv"
+    content = [Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes($fileContent))
+    sha     = $sha
+} | ConvertTo-Json -Depth 3
+$uriPut = "https://api.github.com/repos/$owner/$repo/contents/$newCsvPath"
+Invoke-RestMethod -Uri $uriPut -Headers @{ Authorization = "token $token"; "User-Agent" = "PowerShell" } -Method PUT -Body $jsonBody
 
+<#
 # Subir archivo
 $uriPut = "https://api.github.com/repos/$owner/$repo/contents/$newCsvPath"
 $responsePut = Invoke-RestMethod -Uri $uriPut -Headers @{ Authorization = "token $token"; "User-Agent" = "PowerShell" } -Method PUT -Body $jsonBody
-
+#>
 # Respuesta HTTP
 $bodyOut = @{
     message   = "CSV generado y guardado en GitHub correctamente"
