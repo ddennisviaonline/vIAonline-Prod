@@ -28,7 +28,7 @@ $logo = "https://github.com/ddennisviaonline/vIAonline-Prod/blob/master/Imagenes
 
 ### se hace el import de vIAcache, que son los link anteriormente consultados, para que no lo vuelva a consultar
 # ==== 1. DESCARGAR CSV DESDE GITHUB ====
-$csvUri = "https://raw.githubusercontent.com/$owner/$repo/$branchsource/vIAonline/$csvPath"
+$csvUri = "https://raw.githubusercontent.com/$owner/$repo/$branchsource/vIAonline/$filevIAcache"
 try {
     $csvContentRaw = Invoke-RestMethod -Uri $csvUri -Headers @{ "User-Agent" = "PowerShell" } -Method GET
     $csvData = $csvContentRaw | ConvertFrom-Csv
