@@ -3,7 +3,7 @@
 # ==== CONFIGURACIÓN ====
 $owner    = "ddennisviaonline"
 $repo     = "vIAonline-Prod"
-$filePath = "lista.csv"
+$filePath = "lista2.csv"
 $branch   = "master"
 $token    = $env:GitHubTokenFull
 
