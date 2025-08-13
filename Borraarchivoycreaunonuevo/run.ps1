@@ -4,7 +4,7 @@
 $owner    = "ddennisviaonline"
 $repo     = "vIAonline-Prod"
 $filePath = "lista.csv"
-$branch   = "main"
+$branch   = "master"
 $token    = $env:GitHubToken
 
 # ==== ENCABEZADOS PARA GITHUB ====
