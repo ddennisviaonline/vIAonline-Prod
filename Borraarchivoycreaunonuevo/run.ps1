@@ -1,49 +1,58 @@
 ﻿param($Request, $TriggerMetadata)
 
-# ==== CONFIGURACIÓN ====
-$owner    = "ddennisviaonline"
-$repo     = "vIAonline-Prod"
-$filePath = "lista.csv"
-$branch   = "master"
-$token    = $env:GitHubToken
+# Parsear el cuerpo JSON para obtener archivo, si no viene usar valor por defecto
+try {
+    $data = $Request.Body | ConvertFrom-Json
+    $filePath = if ($data.filePath) { $data.filePath } else { "lista.csv" }
+} catch {
+    $filePath = "lista.csv"
+}
 
-# ==== ENCABEZADOS PARA GITHUB ====
+# Configuración
+$owner  = "ddennisviaonline"
+$repo   = "vIAonline-Prod"
+$branch = "main"
+$token  = $env:GitHubToken
+
+# Headers para GitHub
 $headers = @{
     Authorization = "token $token"
     "User-Agent"  = "AzureFunction"
 }
 
-# ==== OBTENER SHA DEL ARCHIVO ====
 try {
+    # Obtener SHA del archivo
     $shaUrl = "https://api.github.com/repos/$owner/$repo/contents/$filePath?ref=$branch"
     $fileInfo = Invoke-RestMethod -Uri $shaUrl -Headers $headers -Method GET
     $sha = $fileInfo.sha
-} catch {
-    # Si no existe, devolvemos mensaje y salimos
+
+    if (-not $sha) {
+        throw "No se encontró SHA para el archivo."
+    }
+
+    # Preparar cuerpo para borrar archivo
+    $deleteUrl = "https://api.github.com/repos/$owner/$repo/contents/$filePath"
+    $deleteBody = @{
+        message = "Borrando archivo desde Azure Function"
+        sha     = $sha
+        branch  = $branch
+    } | ConvertTo-Json -Depth 3
+
+    # Ejecutar DELETE
+    Invoke-RestMethod -Uri $deleteUrl -Headers $headers -Method DELETE -Body $deleteBody
+
     $response = @{
-        status = "Archivo no existe"
+        status = "Archivo borrado exitosamente"
         file   = $filePath
-    } | ConvertTo-Json
-    Write-Output $response
-    exit
+    }
+
+} catch {
+    $response = @{
+        status = "Error al borrar archivo"
+        error  = $_.Exception.Message
+        file   = $filePath
+    }
 }
 
-# ==== BORRAR EL ARCHIVO ====
-$deleteUrl = "https://api.github.com/repos/$owner/$repo/contents/$filePath"
-$deleteBody = @{
-    message = "Borrando archivo desde Azure Function"
-    sha     = $sha
-    branch  = $branch
-} | ConvertTo-Json -Depth 3
-
-Invoke-RestMethod -Uri $deleteUrl -Headers $headers -Method DELETE -Body $deleteBody
-
-# ==== RESPUESTA ====
-$response = @{
-    status = "Archivo borrado exitosamente"
-    file   = $filePath
-} | ConvertTo-Json
-
-Write-Output $response
-
-
+# Retornar JSON
+$response | ConvertTo-Json
