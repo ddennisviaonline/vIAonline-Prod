@@ -12,7 +12,7 @@ try {
 $owner  = "ddennisviaonline"
 $repo   = "vIAonline-Prod"
 $branch = "main"
-$token  = $env:GitHubToken
+$token  = $env:GitHubTokenFull
 
 # Headers para GitHub
 $headers = @{
