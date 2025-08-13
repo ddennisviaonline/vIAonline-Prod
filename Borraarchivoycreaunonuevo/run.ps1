@@ -12,7 +12,7 @@ $headers = @{
     Authorization = "token $token"
     "User-Agent"  = "AzureFunction"
 }
-
+<#
 # ==== OBTENER SHA DEL ARCHIVO ====
 try {
     $shaUrl = "https://api.github.com/repos/$owner/$repo/contents/$filePath?ref=$branch"
@@ -27,7 +27,7 @@ try {
     Write-Output $response
     exit
 }
-
+#>
 # ==== BORRAR EL ARCHIVO ====
 $deleteUrl = "https://api.github.com/repos/$owner/$repo/contents/$filePath"
 $deleteBody = @{
