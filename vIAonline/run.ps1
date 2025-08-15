@@ -13,8 +13,8 @@ $branch = "master" # webpage
 $token = $env:GitHubToken
 <#
 # ==== 1. DESCARGAR ads.CSV DESDE GITHUB ====
-$csvUri = "https://api.github.com/repos/$owner/$repo/contents/$path?ref=$branchsource"
-
+$urlpath = $path + "?ref=" + $branchsource
+$csvUri = "https://api.github.com/repos/$owner/$repo/contents/$urlpath"
 try {
     $response = Invoke-RestMethod -Uri $csvUri -Headers @{ Authorization = "token $token"; "User-Agent" = "PowerShell" } -Method GET
     $sha = $response.sha
@@ -706,5 +706,6 @@ Push-OutputBinding -Name Response -Value ([HttpResponseContext]@{
     StatusCode = 200
     Body = $bodyOut
 })
+
 
 
