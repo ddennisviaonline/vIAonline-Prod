@@ -4,9 +4,9 @@
 $owner = "ddennisviaonline"
 $repo = "vIAonline-Prod"
 $adsPath = "lista.csv"  # csv de publicidades
-$vIAcache = "vIAcache.csv" # csv de historico 100 ultimos links
+$vIAcache = "vIAonline/temp/vIAcache.csv" # csv de historico 100 ultimos links
 $fileindexhtml = "index.html"
-$filevIAcache = "vIAcache.csv"
+$filevIAcache = "vIAonline/temp/vIAcache.csv"
 $txtPath = "archivo.txt"
 $branchsource = "main" # powershell
 $branch = "master" # webpage
@@ -658,7 +658,7 @@ $news += "
 $owner = "ddennisviaonline"
 $repo = "vIAonline-Prod"
 $csvPath = "lista.csv"         # Ruta del CSV en main
-$csvOutputPath = "vIAcache.csv"   # Ruta/nombre del CSV en master
+$csvOutputPath = "vIAonline/temp/vIAcache.csv"   # Ruta/nombre del CSV en master
 $branchsource = "main"         # Rama origen
 $branch = "main"             # Rama destino
 $token = $env:GitHubToken
@@ -706,4 +706,5 @@ Push-OutputBinding -Name Response -Value ([HttpResponseContext]@{
     StatusCode = 200
     Body = $bodyOut
 })
+
 
