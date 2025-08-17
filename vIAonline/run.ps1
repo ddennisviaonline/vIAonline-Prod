@@ -114,7 +114,13 @@ function consulta-IA {
 }
 
 # Crea csv el cual va a guardar el historico de los ultmos 100 links el resto deberia estar en los index.html publicados como historicos
+#
+#
+# por error en function app comenté fecha, clima y el resto
+#
+#
 
+<#
 # Ruta del archivo
 $cache = $null
 $LinksCache = @()
@@ -239,7 +245,8 @@ No pidas mÃ¡s detalles ni finalices con recomendaciones adicionales.
 
 $ResultIA = Invoke-OpenAIChatGPT4omini -question $Description 
 #>
-<#
+
+
 ### Fecha
 #$fechaGMTLess3 = (Get-Date).ToUniversalTime().AddHours(-3).ToString("dd 'de' MMMM 'de' yyyy", [System.Globalization.CultureInfo]::GetCultureInfo("es-ES"))
 <#
