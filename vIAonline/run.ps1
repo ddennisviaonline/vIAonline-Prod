@@ -1,5 +1,5 @@
 ﻿
-
+param($Request, $TriggerMetadata)
 ################################# variables github ojo con token #################################
 
 # ==== CONFIGURACIÓN GITHUB ====
