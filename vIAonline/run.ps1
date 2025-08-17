@@ -40,6 +40,15 @@ $links = Invoke-WebRequest -Uri $csvUrl | Select-Object -ExpandProperty Content 
 # Mostrar contenido
 $links
 
+# Crea csv el cual va a guardar el historico de los ultmos 100 links el resto deberia estar en los index.html publicados como historicos
+#
+#
+# por error en function app comenté fecha, clima y el resto
+#
+#
+
+<#
+
 ##################################################################################################
 
 ################################# LOGO PAGINA CREAR VINCULO FUERA DE GITHUB#######################
@@ -113,14 +122,7 @@ function consulta-IA {
     
 }
 
-# Crea csv el cual va a guardar el historico de los ultmos 100 links el resto deberia estar en los index.html publicados como historicos
-#
-#
-# por error en function app comenté fecha, clima y el resto
-#
-#
 
-<#
 # Ruta del archivo
 $cache = $null
 $LinksCache = @()
