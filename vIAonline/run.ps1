@@ -24,7 +24,7 @@ try {
 }
 #>
 
-$logo = "https://github.com/ddennisviaonline/vIAonline-Prod/blob/master/Imagenes/Logocorto.png?raw=true" # CREAR DNS PARA QUE APUNTE A ESTE LINK
+$logo = "https://viaonline.com.ar/Imagenes/Logocorto.png" 
 
 ### se hace el import de vIAcache, que son los link anteriormente consultados, para que no lo vuelva a consultar
 # ==== 1. DESCARGAR CSV DESDE GITHUB ====
@@ -706,6 +706,7 @@ Push-OutputBinding -Name Response -Value ([HttpResponseContext]@{
     StatusCode = 200
     Body = $bodyOut
 })
+
 
 
 
