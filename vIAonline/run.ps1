@@ -242,7 +242,7 @@ $ResultIA = Invoke-OpenAIChatGPT4omini -question $Description
 
 ### Fecha
 $fechaGMTLess3 = (Get-Date).ToUniversalTime().AddHours(-3).ToString("dd 'de' MMMM 'de' yyyy", [System.Globalization.CultureInfo]::GetCultureInfo("es-ES"))
-
+<#
 ### Clima
 #### DESDE ACA EXTRAER ZIP EN MEMORIA
 Add-Type -AssemblyName System.IO.Compression
@@ -283,7 +283,7 @@ $clima = " CABA" + ", " + $listCima.Temperatura + "º " + $primeraPalabra
 # Liberar recursos
 $zip.Dispose()
 $memStream.Dispose()
-
+#>
 
 #### HASTA ACA EXTRAER ZIP EN MEMORIA
 <#
