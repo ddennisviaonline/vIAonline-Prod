@@ -18,10 +18,3 @@ $branch = "master" # webpage
 $token = $env:GitHubToken
 ##################################################################################################
 
-Clear
-# 1. Carga el HTML desde archivo
-#$html = Get-Content -Path ".\archivo.html" -Raw
-$URLOrigen = "https://infobae.com"
-$response = Invoke-WebRequest -Uri $URLOrigen
-$html = $response.Content
-
