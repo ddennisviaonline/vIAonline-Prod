@@ -31,11 +31,19 @@ $html = $response.Content
 
 # ==== 1. DESCARGAR ads.CSV DESDE GITHUB ====
 # URL raw del CSV
-$csvUrl = "https://raw.githubusercontent.com/ddennisviaonline/vIAonline-Prod/main/vIAonline/ads/ads.csv"
+try {
+    $csvUrl = "https://raw.githubusercontent.com/ddennisviaonline/vIAonline-Prod/main/vIAonline/ads/ads.csv"
 
+    Write-Output "Descargando CSV desde $csvUrl"
 
-# Importar el CSV directamente
-$links = Invoke-WebRequest -Uri $csvUrl | Select-Object -ExpandProperty Content | ConvertFrom-Csv
+    $response = Invoke-WebRequest -Uri $csvUrl -UseBasicParsing
+    Write-Output "StatusCode: $($response.StatusCode)"
 
-# Mostrar contenido
+    $links = $response.Content | ConvertFrom-Csv
+    Write-Output "Se cargaron $($links.Count) filas del CSV"
+}
+catch {
+    Write-Error "Error al obtener el CSV: $_"
+}
+
 $links
