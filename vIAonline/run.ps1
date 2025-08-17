@@ -28,7 +28,14 @@ $html = $response.Content
 ################################# IMPORT AVISOS PUBLICITARIOS####################################
 #$links = Import-Csv -Path "C:\bats\vIA ONLINE\ads\ads.csv" #PUBLICIDAD
 ### reemplazar el import csv on-prem por gitjhub
+# Crea csv el cual va a guardar el historico de los ultmos 100 links el resto deberia estar en los index.html publicados como historicos
+#
+#
+# por error en function app comenté fecha, clima y el resto
+#
+#
 
+<#
 # ==== 1. DESCARGAR ads.CSV DESDE GITHUB ====
 # URL raw del CSV
 $csvUrl = "https://raw.githubusercontent.com/ddennisviaonline/vIAonline-Prod/main/vIAonline/ads/ads.csv"
@@ -40,14 +47,7 @@ $links = Invoke-WebRequest -Uri $csvUrl | Select-Object -ExpandProperty Content 
 # Mostrar contenido
 $links
 
-# Crea csv el cual va a guardar el historico de los ultmos 100 links el resto deberia estar en los index.html publicados como historicos
-#
-#
-# por error en function app comenté fecha, clima y el resto
-#
-#
 
-<#
 
 ##################################################################################################
 
