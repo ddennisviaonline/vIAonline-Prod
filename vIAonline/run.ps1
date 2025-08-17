@@ -1,7 +1,4 @@
-﻿# Version 0.8 | MODIFICADO PARA GRABAR EN GITHUB y CLIMA EN MEMORIA
-# Get-PackageProvider -Name NuGet -ForceBootstrap 
-# Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force
-# REQUIERE Install-Package HtmlAgilityPack 
+﻿
 
 ################################# variables github ojo con token #################################
 
