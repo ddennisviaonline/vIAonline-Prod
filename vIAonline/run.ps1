@@ -25,25 +25,3 @@ $URLOrigen = "https://infobae.com"
 $response = Invoke-WebRequest -Uri $URLOrigen
 $html = $response.Content
 
-################################# IMPORT AVISOS PUBLICITARIOS####################################
-#$links = Import-Csv -Path "C:\bats\vIA ONLINE\ads\ads.csv" #PUBLICIDAD
-### reemplazar el import csv on-prem por gitjhub
-
-# ==== 1. DESCARGAR ads.CSV DESDE GITHUB ====
-# URL raw del CSV
-try {
-    $csvUrl = "https://raw.githubusercontent.com/ddennisviaonline/vIAonline-Prod/main/vIAonline/ads/ads.csv"
-
-    Write-Output "Descargando CSV desde $csvUrl"
-
-    $response = Invoke-WebRequest -Uri $csvUrl -UseBasicParsing
-    Write-Output "StatusCode: $($response.StatusCode)"
-
-    $links = $response.Content | ConvertFrom-Csv
-    Write-Output "Se cargaron $($links.Count) filas del CSV"
-}
-catch {
-    Write-Error "Error al obtener el CSV: $_"
-}
-
-$links
