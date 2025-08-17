@@ -241,7 +241,7 @@ $ResultIA = Invoke-OpenAIChatGPT4omini -question $Description
 #>
 
 ### Fecha
-$fechaGMTLess3 = (Get-Date).ToUniversalTime().AddHours(-3).ToString("dd 'de' MMMM 'de' yyyy", [System.Globalization.CultureInfo]::GetCultureInfo("es-ES"))
+#$fechaGMTLess3 = (Get-Date).ToUniversalTime().AddHours(-3).ToString("dd 'de' MMMM 'de' yyyy", [System.Globalization.CultureInfo]::GetCultureInfo("es-ES"))
 <#
 ### Clima
 #### DESDE ACA EXTRAER ZIP EN MEMORIA
