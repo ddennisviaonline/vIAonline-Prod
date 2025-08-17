@@ -15,6 +15,7 @@ $filevIAcache = "vIAcache.csv"
 $txtPath = "archivo.txt"
 $branchsource = "main" # powershell
 $branch = "master" # webpage
+$token = $env:GitHubToken
 ##################################################################################################
 
 Clear
