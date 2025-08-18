@@ -19,7 +19,7 @@ $branch = "master" # webpage
 $token = $env:GitHubToken
 ##################################################################################################
 
-Clear
+
 # 1. Carga el HTML desde archivo
 #$html = Get-Content -Path ".\archivo.html" -Raw
 $URLOrigen = "https://infobae.com"
@@ -262,7 +262,7 @@ $zip = New-Object System.IO.Compression.ZipArchive($memStream)
 
 # Buscar el TXT dentro del ZIP
 $txtEntry = $zip.Entries | Where-Object { $_.FullName -like "*.txt" }
-
+Write-Host $txtEntry
 if ($txtEntry) {
     $reader = New-Object System.IO.StreamReader($txtEntry.Open())
     $txtContent = $reader.ReadToEnd()
@@ -277,11 +277,12 @@ if ($txtEntry) {
     # Mostrar datos
   $listCima = $listCima | Where-Object { $_.Ciudad -match '^Aeroparque' } | Select-Object -First 1
 }
-$listCima
+Write-Host $listCima
 $clima = $listCima.EstadoDelCielo
 $primeraPalabra = $clima.Split(" ")[0]
 $primeraPalabra
 $clima = $primeraPalabra # " CABA" + ", " + $listCima.Temperatura + "º " + $primeraPalabra
+Write-Host $clima
 # Liberar recursos
 $zip.Dispose()
 $memStream.Dispose()
@@ -527,9 +528,9 @@ $DatosIA = consulta-IA -tipo Datos -linkFuente 'www'
     if ($linea2 -match 'src="(https://encrypted-tbn0\.gstatic\.com[^"]+)"') {
     $Imagen = $matches[1]
     if ($Imagen -eq $urlcache ) {$Imagen= $matches[3]
-    Write-Host "es igual" -ForegroundColor Cyan
-    Write-Host $linea2 -ForegroundColor Cyan
-    Write-Host $urlcache -ForegroundColor Cyan
+    #Write-Host "es igual" -ForegroundColor Cyan
+    #Write-Host $linea2 -ForegroundColor Cyan
+    #Write-Host $urlcache -ForegroundColor Cyan
     }
     #Write-Output $url
 }
