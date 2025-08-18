@@ -281,7 +281,7 @@ $listCima
 $clima = $listCima.EstadoDelCielo
 $primeraPalabra = $clima.Split(" ")[0]
 $primeraPalabra
-$clima = $listCima # " CABA" + ", " + $listCima.Temperatura + "º " + $primeraPalabra
+$clima = $primeraPalabra # " CABA" + ", " + $listCima.Temperatura + "º " + $primeraPalabra
 # Liberar recursos
 $zip.Dispose()
 $memStream.Dispose()
