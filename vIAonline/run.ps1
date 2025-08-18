@@ -422,15 +422,17 @@ $head = "
         <div class='clima'>Clima:$clima</div>
     </div>
     <!-- Bloque de anuncio -->
-  <ins class='adsbygoogle'
-       style='display:block'
-       data-ad-client='ca-pub-1894152981922395'
-       data-ad-slot='TU-CODIGO-DE-SLOT'
-       data-ad-format='auto'
-       data-full-width-responsive='true'></ins>
-  <script>
-       (adsbygoogle = window.adsbygoogle || []).push({});
-  </script>
+    <script async src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1894152981922395'
+        crossorigin='anonymous'></script>
+    <ins class='adsbygoogle'
+        style='display:block; text-align:center;'
+        data-ad-layout='in-article'
+        data-ad-format='fluid'
+        data-ad-client='ca-pub-1894152981922395'
+        data-ad-slot='4289209070'></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
 "
 
 ####
