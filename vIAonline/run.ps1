@@ -246,10 +246,10 @@ $fechaGMTLess3 = (Get-Date).ToUniversalTime().AddHours(-3).ToString("dd 'de' MMM
 
 ### Clima
 ### modificado para function apps
-# URL del ZIP clima
+# ================= Configuración =================
 $urlClima = "https://ssl.smn.gob.ar/dpd/zipopendata.php?dato=tiepre"
 
-# ================= Función para descargar y procesar clima =================
+# ================= Función para obtener clima =================
 function Get-Clima {
     try {
         # Descargar ZIP en memoria
@@ -293,6 +293,7 @@ function Get-Clima {
     }
 }
 
+# ================= Ejecución principal =================
 $clima = Get-Clima
 Write-Output "Clima actual: $clima"
 
