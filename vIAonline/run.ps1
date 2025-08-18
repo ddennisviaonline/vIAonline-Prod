@@ -4,7 +4,7 @@
 # REQUIERE Install-Package HtmlAgilityPack 
 
 ################################# variables github ojo con token #################################
-
+param($Request, $TriggerMetadata)
 # ==== CONFIGURACIÓN GITHUB ====
 $owner = "ddennisviaonline"
 $repo = "vIAonline-Prod"
