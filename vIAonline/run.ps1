@@ -245,60 +245,7 @@ $ResultIA = Invoke-OpenAIChatGPT4omini -question $Description
 $fechaGMTLess3 = (Get-Date).ToUniversalTime().AddHours(-3).ToString("dd 'de' MMMM 'de' yyyy", [System.Globalization.CultureInfo]::GetCultureInfo("es-ES"))
 
 ### Clima
-### modificado para function apps
-# ================= Configuración =================
-$urlClima = "https://ssl.smn.gob.ar/dpd/zipopendata.php?dato=tiepre"
 
-# ================= Función para obtener clima =================
-function Get-Clima {
-    try {
-        # Descargar ZIP en memoria
-        $bytes = (Invoke-WebRequest -Uri $urlClima -UseBasicParsing).Content
-
-        # Abrir ZIP en memoria
-        $memStream = [System.IO.MemoryStream]::new($bytes)
-        $zip = [System.IO.Compression.ZipArchive]::new($memStream)
-
-        # Buscar TXT dentro del ZIP
-        $txtEntry = $zip.Entries | Where-Object { $_.FullName -like "*.txt" }
-
-        if ($txtEntry) {
-            $reader = [System.IO.StreamReader]::new($txtEntry.Open(), [System.Text.Encoding]::GetEncoding("iso-8859-1"))
-            $txtContent = $reader.ReadToEnd()
-            $reader.Close()
-
-            # Encabezados del CSV
-            $headers = "Ciudad","Fecha","Hora","EstadoDelCielo","Visibilidad","Temperatura","PuntoRocio","Humedad","Viento","Presion"
-            $listCima = $txtContent | ConvertFrom-Csv -Delimiter ";" -Header $headers
-
-            # Filtrar Aeroparque
-            $row = $listCima | Where-Object { $_.Ciudad -match '^Aeroparque' } | Select-Object -First 1
-
-            if ($row) {
-                $primeraPalabra = $row.EstadoDelCielo.Split(" ")[0]
-                $clima = "CABA, $($row.Temperatura)º $primeraPalabra"
-                return $clima
-            }
-        }
-
-        return "Clima no disponible"
-    }
-    catch {
-        Write-Error "Error obteniendo clima: $_"
-        return "Error clima"
-    }
-    finally {
-        if ($zip) { $zip.Dispose() }
-        if ($memStream) { $memStream.Dispose() }
-    }
-}
-
-# ================= Ejecución principal =================
-$clima = Get-Clima
-Write-Output "Clima actual: $clima"
-
-### fin modificado para funcion apps
-<#
 #### DESDE ACA EXTRAER ZIP EN MEMORIA
 Add-Type -AssemblyName System.IO.Compression
 
@@ -339,7 +286,7 @@ $clima = " CABA" + ", " + $listCima.Temperatura + "º " + $primeraPalabra
 $zip.Dispose()
 $memStream.Dispose()
 
-#> 
+
 #### HASTA ACA EXTRAER ZIP EN MEMORIA
 <#
 #Descarga reporte de clima y lo convierte en csv
