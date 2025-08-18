@@ -246,42 +246,55 @@ $fechaGMTLess3 = (Get-Date).ToUniversalTime().AddHours(-3).ToString("dd 'de' MMM
 
 ### Clima
 ### modificado para function apps
-# URL del ZIP
-$url = "https://ssl.smn.gob.ar/dpd/zipopendata.php?dato=tiepre"
+# URL del ZIP clima
+$urlClima = "https://ssl.smn.gob.ar/dpd/zipopendata.php?dato=tiepre"
 
-# Descargar ZIP en memoria (más confiable en Azure)
-$bytes = (Invoke-WebRequest -Uri $url).Content
+# ================= Función para descargar y procesar clima =================
+function Get-Clima {
+    try {
+        # Descargar ZIP en memoria
+        $bytes = (Invoke-WebRequest -Uri $urlClima -UseBasicParsing).Content
 
-# Cargar ZIP en memoria (sin Add-Type)
-$memStream = [System.IO.MemoryStream]::new($bytes)
-$zip = [System.IO.Compression.ZipArchive]::new($memStream)
+        # Abrir ZIP en memoria
+        $memStream = [System.IO.MemoryStream]::new($bytes)
+        $zip = [System.IO.Compression.ZipArchive]::new($memStream)
 
-# Buscar el TXT
-$txtEntry = $zip.Entries | Where-Object { $_.FullName -like "*.txt" }
+        # Buscar TXT dentro del ZIP
+        $txtEntry = $zip.Entries | Where-Object { $_.FullName -like "*.txt" }
 
-if ($txtEntry) {
-    $reader = New-Object System.IO.StreamReader($txtEntry.Open(), [System.Text.Encoding]::GetEncoding("iso-8859-1"))
-    $txtContent = $reader.ReadToEnd()
-    $reader.Close()
+        if ($txtEntry) {
+            $reader = [System.IO.StreamReader]::new($txtEntry.Open(), [System.Text.Encoding]::GetEncoding("iso-8859-1"))
+            $txtContent = $reader.ReadToEnd()
+            $reader.Close()
 
-    # Encabezados
-    $headers = "Ciudad","Fecha","Hora","EstadoDelCielo","Visibilidad","Temperatura","PuntoRocio","Humedad","Viento","Presion"
+            # Encabezados del CSV
+            $headers = "Ciudad","Fecha","Hora","EstadoDelCielo","Visibilidad","Temperatura","PuntoRocio","Humedad","Viento","Presion"
+            $listCima = $txtContent | ConvertFrom-Csv -Delimiter ";" -Header $headers
 
-    $listCima = $txtContent | ConvertFrom-Csv -Delimiter ";" -Header $headers
-    $listCima = $listCima | Where-Object { $_.Ciudad -match '^Aeroparque' } | Select-Object -First 1
+            # Filtrar Aeroparque
+            $row = $listCima | Where-Object { $_.Ciudad -match '^Aeroparque' } | Select-Object -First 1
+
+            if ($row) {
+                $primeraPalabra = $row.EstadoDelCielo.Split(" ")[0]
+                $clima = "CABA, $($row.Temperatura)º $primeraPalabra"
+                return $clima
+            }
+        }
+
+        return "Clima no disponible"
+    }
+    catch {
+        Write-Error "Error obteniendo clima: $_"
+        return "Error clima"
+    }
+    finally {
+        if ($zip) { $zip.Dispose() }
+        if ($memStream) { $memStream.Dispose() }
+    }
 }
 
-$clima = $null
-if ($listCima) {
-    $primeraPalabra = $listCima.EstadoDelCielo.Split(" ")[0]
-    $clima = "CABA, $($listCima.Temperatura)º $primeraPalabra"
-}
-
-Write-Output "Resultado clima: $clima"
-
-# Liberar
-$zip.Dispose()
-$memStream.Dispose()
+$clima = Get-Clima
+Write-Output "Clima actual: $clima"
 
 ### fin modificado para funcion apps
 <#
