@@ -1,4 +1,5 @@
-﻿function Get-Clima {
+﻿param($Request, $TriggerMetadata)
+function Get-Clima {
     try {
         Write-Output "=== Descargando ZIP del SMN ==="
         $url = "https://ssl.smn.gob.ar/dpd/zipopendata.php?dato=tiepre"
