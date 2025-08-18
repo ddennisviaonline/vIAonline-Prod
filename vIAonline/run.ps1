@@ -245,57 +245,62 @@ $ResultIA = Invoke-OpenAIChatGPT4omini -question $Description
 $fechaGMTLess3 = (Get-Date).ToUniversalTime().AddHours(-3).ToString("dd 'de' MMMM 'de' yyyy", [System.Globalization.CultureInfo]::GetCultureInfo("es-ES"))
 
 ### Clima
-
-# ================= Configuración =================
-$urlClima = "https://ssl.smn.gob.ar/dpd/zipopendata.php?dato=tiepre"
-
-# ================= Función para obtener clima =================
 function Get-Clima {
     try {
-        # Descargar ZIP en memoria
-        $bytes = (Invoke-WebRequest -Uri $urlClima -UseBasicParsing).Content
+        Write-Output "=== Descargando ZIP del SMN ==="
+        $url = "https://ssl.smn.gob.ar/dpd/zipopendata.php?dato=tiepre"
+        $resp = Invoke-WebRequest -Uri $url -UseBasicParsing -TimeoutSec 15
 
-        # Abrir ZIP en memoria
-        $memStream = [System.IO.MemoryStream]::new($bytes)
-        $zip = [System.IO.Compression.ZipArchive]::new($memStream)
-
-        # Buscar TXT dentro del ZIP
-        $txtEntry = $zip.Entries | Where-Object { $_.FullName -like "*.txt" }
-
-        if ($txtEntry) {
-            $reader = [System.IO.StreamReader]::new($txtEntry.Open(), [System.Text.Encoding]::GetEncoding("iso-8859-1"))
-            $txtContent = $reader.ReadToEnd()
-            $reader.Close()
-
-            # Encabezados del CSV
-            $headers = "Ciudad","Fecha","Hora","EstadoDelCielo","Visibilidad","Temperatura","PuntoRocio","Humedad","Viento","Presion"
-            $listCima = $txtContent | ConvertFrom-Csv -Delimiter ";" -Header $headers
-
-            # Filtrar Aeroparque
-            $row = $listCima | Where-Object { $_.Ciudad -match '^Aeroparque' } | Select-Object -First 1
-
-            if ($row) {
-                $primeraPalabra = $row.EstadoDelCielo.Split(" ")[0]
-                $clima = "CABA, $($row.Temperatura)º $primeraPalabra"
-                return $clima
-            }
+        if (-not $resp -or -not $resp.Content) {
+            throw "No se pudo descargar el archivo del SMN."
         }
 
-        return "Clima no disponible"
+        $bytes = $resp.Content
+        $ms = New-Object System.IO.MemoryStream(,$bytes)
+        $zip = New-Object System.IO.Compression.ZipArchive($ms)
+
+        $txtEntry = $zip.Entries | Where-Object { $_.FullName -like "*.txt" } | Select-Object -First 1
+        if (-not $txtEntry) {
+            throw "No se encontró ningún archivo TXT dentro del ZIP."
+        }
+
+        # Usamos ISO-8859-1 porque el TXT del SMN no está en UTF-8
+        $reader = New-Object System.IO.StreamReader($txtEntry.Open(), [System.Text.Encoding]::GetEncoding("iso-8859-1"))
+        $txtContent = $reader.ReadToEnd()
+        $reader.Close()
+
+        # Definir encabezados
+        $headers = "Ciudad","Fecha","Hora","EstadoDelCielo","Visibilidad","Temperatura","PuntoRocio","Humedad","Viento","Presion"
+
+        # Convertir a objetos
+        $listCima = $txtContent | ConvertFrom-Csv -Delimiter ";" -Header $headers
+
+        # Buscar Aeroparque (CABA)
+        $aeroparque = $listCima | Where-Object { $_.Ciudad -match '^Aeroparque' } | Select-Object -First 1
+        if (-not $aeroparque) {
+            throw "No se encontró la estación Aeroparque en el TXT."
+        }
+
+        # Armar el clima
+        $primeraPalabra = $aeroparque.EstadoDelCielo.Split(" ")[0]
+        $clima = "CABA, $($aeroparque.Temperatura)º $primeraPalabra"
+
+        # Liberar recursos
+        $zip.Dispose()
+        $ms.Dispose()
+
+        return $clima
     }
     catch {
-        Write-Error "Error obteniendo clima: $_"
+        Write-Error "Error en Get-Clima: $_"
         return "Error clima"
-    }
-    finally {
-        if ($zip) { $zip.Dispose() }
-        if ($memStream) { $memStream.Dispose() }
     }
 }
 
-# ================= Ejecución principal =================
+# EJECUCIÓN DE PRUEBA
 $clima = Get-Clima
-Write-Output "Clima actual: $clima"
+Write-Output "Resultado clima: $clima"
+
 
 
 #### HASTA ACA EXTRAER ZIP EN MEMORIA
