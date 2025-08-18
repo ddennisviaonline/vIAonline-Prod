@@ -246,46 +246,56 @@ $fechaGMTLess3 = (Get-Date).ToUniversalTime().AddHours(-3).ToString("dd 'de' MMM
 
 ### Clima
 
-#### DESDE ACA EXTRAER ZIP EN MEMORIA
-Add-Type -AssemblyName System.IO.Compression
+# ================= Configuración =================
+$urlClima = "https://ssl.smn.gob.ar/dpd/zipopendata.php?dato=tiepre"
 
-# URL del ZIP
-$url = "https://ssl.smn.gob.ar/dpd/zipopendata.php?dato=tiepre"
+# ================= Función para obtener clima =================
+function Get-Clima {
+    try {
+        # Descargar ZIP en memoria
+        $bytes = (Invoke-WebRequest -Uri $urlClima -UseBasicParsing).Content
 
-# Descargar ZIP en memoria
-$response = Invoke-WebRequest -Uri $url -UseBasicParsing
-$bytes = $response.Content
+        # Abrir ZIP en memoria
+        $memStream = [System.IO.MemoryStream]::new($bytes)
+        $zip = [System.IO.Compression.ZipArchive]::new($memStream)
 
-# Cargar ZIP en memoria
-$memStream = New-Object System.IO.MemoryStream(,$bytes)
-$zip = New-Object System.IO.Compression.ZipArchive($memStream)
+        # Buscar TXT dentro del ZIP
+        $txtEntry = $zip.Entries | Where-Object { $_.FullName -like "*.txt" }
 
-# Buscar el TXT dentro del ZIP
-$txtEntry = $zip.Entries | Where-Object { $_.FullName -like "*.txt" }
-Write-Host $txtEntry
-if ($txtEntry) {
-    $reader = New-Object System.IO.StreamReader($txtEntry.Open())
-    $txtContent = $reader.ReadToEnd()
-    $reader.Close()
+        if ($txtEntry) {
+            $reader = [System.IO.StreamReader]::new($txtEntry.Open(), [System.Text.Encoding]::GetEncoding("iso-8859-1"))
+            $txtContent = $reader.ReadToEnd()
+            $reader.Close()
 
-    # Definir encabezados personalizados
-    $headers = "Ciudad","Fecha","Hora","EstadoDelCielo","Visibilidad","Temperatura","PuntoRocio","Humedad","Viento","Presion"
+            # Encabezados del CSV
+            $headers = "Ciudad","Fecha","Hora","EstadoDelCielo","Visibilidad","Temperatura","PuntoRocio","Humedad","Viento","Presion"
+            $listCima = $txtContent | ConvertFrom-Csv -Delimiter ";" -Header $headers
 
-    # Convertir TXT a CSV usando encabezados y delimitador ;
-    $listCima = $txtContent | ConvertFrom-Csv -Delimiter ";" -Header $headers
+            # Filtrar Aeroparque
+            $row = $listCima | Where-Object { $_.Ciudad -match '^Aeroparque' } | Select-Object -First 1
 
-    # Mostrar datos
-  $listCima = $listCima | Where-Object { $_.Ciudad -match '^Aeroparque' } | Select-Object -First 1
+            if ($row) {
+                $primeraPalabra = $row.EstadoDelCielo.Split(" ")[0]
+                $clima = "CABA, $($row.Temperatura)º $primeraPalabra"
+                return $clima
+            }
+        }
+
+        return "Clima no disponible"
+    }
+    catch {
+        Write-Error "Error obteniendo clima: $_"
+        return "Error clima"
+    }
+    finally {
+        if ($zip) { $zip.Dispose() }
+        if ($memStream) { $memStream.Dispose() }
+    }
 }
-Write-Host $listCima
-$clima = $listCima.EstadoDelCielo
-$primeraPalabra = $clima.Split(" ")[0]
-$primeraPalabra
-$clima = $primeraPalabra # " CABA" + ", " + $listCima.Temperatura + "º " + $primeraPalabra
-Write-Host $clima
-# Liberar recursos
-$zip.Dispose()
-$memStream.Dispose()
+
+# ================= Ejecución principal =================
+$clima = Get-Clima
+Write-Output "Clima actual: $clima"
 
 
 #### HASTA ACA EXTRAER ZIP EN MEMORIA
