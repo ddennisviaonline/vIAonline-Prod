@@ -245,6 +245,46 @@ $ResultIA = Invoke-OpenAIChatGPT4omini -question $Description
 $fechaGMTLess3 = (Get-Date).ToUniversalTime().AddHours(-3).ToString("dd 'de' MMMM 'de' yyyy", [System.Globalization.CultureInfo]::GetCultureInfo("es-ES"))
 
 ### Clima
+### modificado para function apps
+# URL del ZIP
+$url = "https://ssl.smn.gob.ar/dpd/zipopendata.php?dato=tiepre"
+
+# Descargar ZIP en memoria (más confiable en Azure)
+$bytes = (Invoke-WebRequest -Uri $url).Content
+
+# Cargar ZIP en memoria (sin Add-Type)
+$memStream = [System.IO.MemoryStream]::new($bytes)
+$zip = [System.IO.Compression.ZipArchive]::new($memStream)
+
+# Buscar el TXT
+$txtEntry = $zip.Entries | Where-Object { $_.FullName -like "*.txt" }
+
+if ($txtEntry) {
+    $reader = New-Object System.IO.StreamReader($txtEntry.Open(), [System.Text.Encoding]::GetEncoding("iso-8859-1"))
+    $txtContent = $reader.ReadToEnd()
+    $reader.Close()
+
+    # Encabezados
+    $headers = "Ciudad","Fecha","Hora","EstadoDelCielo","Visibilidad","Temperatura","PuntoRocio","Humedad","Viento","Presion"
+
+    $listCima = $txtContent | ConvertFrom-Csv -Delimiter ";" -Header $headers
+    $listCima = $listCima | Where-Object { $_.Ciudad -match '^Aeroparque' } | Select-Object -First 1
+}
+
+$clima = $null
+if ($listCima) {
+    $primeraPalabra = $listCima.EstadoDelCielo.Split(" ")[0]
+    $clima = "CABA, $($listCima.Temperatura)º $primeraPalabra"
+}
+
+Write-Output "Resultado clima: $clima"
+
+# Liberar
+$zip.Dispose()
+$memStream.Dispose()
+
+### fin modificado para funcion apps
+<#
 #### DESDE ACA EXTRAER ZIP EN MEMORIA
 Add-Type -AssemblyName System.IO.Compression
 
@@ -285,7 +325,7 @@ $clima = " CABA" + ", " + $listCima.Temperatura + "º " + $primeraPalabra
 $zip.Dispose()
 $memStream.Dispose()
 
-
+#> 
 #### HASTA ACA EXTRAER ZIP EN MEMORIA
 <#
 #Descarga reporte de clima y lo convierte en csv
