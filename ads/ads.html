@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang='es'>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto Vía Online</title>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            background: #FEFBF4; 
+            padding: 20px; 
+        }
+        form { 
+            max-width: 500px; 
+            margin: auto; 
+            background: #FEFBF4;  /* Fondo del formulario igual al de la página */
+            padding: 20px; 
+            border-radius: 10px; 
+            box-shadow: 0 0 10px rgba(0,0,0,0.1); 
+        }
+        label { display: block; margin-top: 10px; }
+        input, textarea { width: 100%; padding: 8px; margin-top: 5px; border-radius: 5px; border: 1px solid #ccc; }
+        button { margin-top: 15px; padding: 10px 20px; background: #0052cc; color: #fff; border: none; border-radius: 5px; cursor: pointer; }
+        button:hover { background: #003d99; }
+        .message { text-align:center; margin-top: 15px; }
+        p { font-size: 12px; color: #666; text-align: center; }
+        a { color: #0052cc; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div style='text-align: center;'>
+        <a href='https://viaonline.com.ar/'>
+            <img src='https://viaonline.com.ar/Imagenes/Logocorto.png' alt='Imagen centrada' style='width: 300px;'>
+        </a>
+    </div>
+
+    <form action="enviar.php" method="POST">
+        <label>Nombre:</label>
+        <input type="text" name="name" required>
+
+        <label>Email:</label>
+        <input type="email" name="email" required>
+
+        <label>Mensaje:</label>
+        <textarea name="message" rows="5" required></textarea>
+
+        <!-- reCAPTCHA -->
+        <div class="g-recaptcha" data-sitekey="TU_SITE_KEY"></div>
+
+        <button type="submit">Enviar</button>
+    </form>
+
+    <p>
+        © 2025 VIA ONLINE. Todos los derechos reservados.  
+        Queda prohibida la reproducción total o parcial de los contenidos de este sitio sin autorización previa y por escrito.  
+        Las marcas, logotipos y contenidos pertenecen a sus respectivos propietarios.  
+        Este sitio web puede contener enlaces a sitios externos sobre los cuales VIA ONLINE no tiene responsabilidad alguna.  
+        El uso de este sitio implica la aceptación de nuestros <a href='https://viaonline.com.ar/TerminosyCondiciones.html'>Términos y Condiciones</a> y nuestra <a href='https://viaonline.com.ar/privacidad.html'>Política de Privacidad</a>.
+    </p>
+</body>
+</html>
