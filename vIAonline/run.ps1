@@ -4,7 +4,7 @@
 # REQUIERE Install-Package HtmlAgilityPack 
 
 ################################# variables github ojo con token #################################
-param($Request, $TriggerMetadata)
+#param($Request, $TriggerMetadata)
 # ==== CONFIGURACIÓN GITHUB ====
 $owner = "ddennisviaonline"
 $repo = "vIAonline-Prod"
@@ -18,6 +18,9 @@ $branch = "master" # webpage
 $token = $env:GitHubToken
 
 ##################################################################################################
+#Clima desde APP
+#API Key de WeatherAPI
+$apiKey = $env:WeatherAPI
 
 Clear
 # 1. Carga el HTML desde archivo
@@ -246,6 +249,8 @@ $fechaGMTLess3 = (Get-Date).ToUniversalTime().AddHours(-3).ToString("dd 'de' MMM
 
 ### Clima
 #### DESDE ACA EXTRAER ZIP EN MEMORIA
+
+<#
 Add-Type -AssemblyName System.IO.Compression
 
 # URL del ZIP
@@ -284,8 +289,27 @@ $clima = " CABA" + ", " + $listCima.Temperatura + "º " + $primeraPalabra
 # Liberar recursos
 $zip.Dispose()
 $memStream.Dispose()
+#>
 
 
+$tokenClima
+# Ciudad de la que deseas obtener el clima
+$ciudad = "Buenos Aires"
+
+# URL de la API
+$url = "http://api.weatherapi.com/v1/current.json?key=$apiKey&q=$ciudad&lang=es"
+
+# Petición HTTP y parseo de la respuesta JSON
+$response = Invoke-RestMethod -Uri $url -Method Get
+
+# Mostrar resultados
+Write-Host "Ciudad: $($response.location.name), $($response.location.country)"
+Write-Host "Temperatura: $($response.current.temp_c) °C"
+Write-Host "Sensación térmica: $($response.current.feelslike_c) °C"
+Write-Host "Condición: $($response.current.condition.text)"
+Write-Host "Última actualización: $($response.current.last_updated)"
+
+$clima = " CABA" + ", " + $($response.current.temp_c) + "º " + $($response.current.condition.text)
 #### HASTA ACA EXTRAER ZIP EN MEMORIA
 <#
 #Descarga reporte de clima y lo convierte en csv
@@ -321,9 +345,9 @@ $head = "
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <title>vIA online</title>
+    <link rel='icon' type='image/png' sizes='512x512' href='https://viaonline.com.ar/Imagenes/favicon.ico'>
       <!-- Script global de AdSense (va una sola vez en toda la web) -->
-  <script async src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1894152981922395'
-     crossorigin='anonymous'></script>
+    <meta name='google-adsense-account' content='ca-pub-1894152981922395'>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -421,18 +445,6 @@ $head = "
         <div class='fecha'>$fechaGMTLess3</div>
         <div class='clima'>Clima:$clima</div>
     </div>
-    <!-- Bloque de anuncio -->
-    <script async src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1894152981922395'
-        crossorigin='anonymous'></script>
-    <ins class='adsbygoogle'
-        style='display:block; text-align:center;'
-        data-ad-layout='in-article'
-        data-ad-format='fluid'
-        data-ad-client='ca-pub-1894152981922395'
-        data-ad-slot='4289209070'></ins>
-    <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
 "
 
 ####
@@ -589,15 +601,15 @@ $news += "
             $LinkAdsLink = $registro.Link
             $TextoAdsLink = $registro.Texto
             $news += "
-        <div class='publicidad' style='background-color: white; padding: 10px; border-radius: 5px;'>
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
           <p><strong>Publicidad</strong></p>
-                <a href='$LinkAdsLink' target='_blank'>
+                <a href='$LinkAdsLink'>
                 <img src='$ImgAdsLink ' 
                 alt='Anuncio Publicitario'  
                 style='max-width: 100%; height: auto;'>
              </a>
              <p style='margin-top: 10px; text-align: center;'>
-                <a href='$LinkAdsLink' target='_blank'>
+                <a href='$LinkAdsLink'>
                 $TextoAdsLink
                 </a>
              </p>
