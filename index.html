@@ -1,0 +1,2313 @@
+
+<!DOCTYPE html>
+<html lang='es'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>vIA online</title>
+    <link rel='icon' type='image/png' sizes='512x512' href='https://viaonline.com.ar/Imagenes/favicon.ico'>
+      <!-- Script global de AdSense (va una sola vez en toda la web) -->
+    <meta name='google-adsense-account' content='ca-pub-1894152981922395'>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #FEFBF4;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .encabezado-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .fecha, .clima {
+            font-size: 1rem;
+            color: #555;
+        }
+        .noticia {
+            background-color: #FEFBF4;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .noticia h2 {
+            color: #333;
+            font-size: 1.3em;
+        }
+        .publicidad {
+            text-align: center;
+            margin: 30px 0;
+            padding: 10px;
+            background-color: #FEFBF4;
+            border: 1px dashed #aaa;
+            border-radius: 5px;
+        }
+        .publicidad img {
+            max-width: 100%;
+            height: auto;
+        }
+        .desplegable {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .flecha {
+            font-size: 18px;
+            transition: transform 0.3s ease;
+            display: inline-block;
+        }
+
+        .noticia.abierto .flecha {
+            transform: rotate(180deg);
+        }
+        .noticia .contenido {
+            display: none;
+            margin-top: 10px;
+        }
+
+        .noticia.abierto .contenido {
+            display: block;
+        }
+        .desplegable {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+        .flecha {
+            font-size: 18px;
+            transition: transform 0.3s ease;
+            display: inline-block;
+        }
+        .noticia.abierto .flecha {
+            transform: rotate(180deg);
+        }
+
+
+    </style>
+</head>
+<body>
+    <div style='text-align: center;'>
+        <a href='https://viaonline.com.ar/'>
+            <img src='https://viaonline.com.ar/Imagenes/Logocorto.png' alt='Imagen centrada' style='width: 300px;'>
+        </a>
+    </div>
+    <div class='encabezado-info'>
+        <div class='fecha'>31 de agosto de 2025</div>
+        <div class='clima'>Clima: CABA, 16.2º Fuertes lluvias</div>
+    </div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7jH0V6nDW0mA1zZkGbSZaZEEoLlz-TtiPkeWs4gZO2IHiGs1IH-rN1i4OJw&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Intro a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRe0wZybo4uf0ByJ7plqf8-T_3qOjKpswXz1YXBNVzAsgdQPdXUs3SA_M7m0Tc&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Intro a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT72wCKY2Hwj9vev-1AqY4vmgJ_uFwyNhAno8jjvsmXYwmXxum_chDeRctC5pk&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Intro a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publicite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjv7eHRGt2rkjqc38txGMlYyC3FBY-ezHG7O31h_A5yBWlNpBmaLNeBrQUTQE&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Intro a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5px0LGRgp7gKgsriQ8wUcGMrWBhFBGCFP0NC7Tmwl8T0f9b6NJyEMmaWf&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Intro a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqdyJ6oRt9wMZITG3eIkpJrERbUzid4VVYjcNUWVc8Qo6IVEeuqXkuMTgfUQ&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Intro a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publicite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5o-_LwUmL-WkXQlfJkwumig0-M38RiOfA-haxfRMTX77tiiiz6_Gu_Jz25A&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Intro a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrzJWJ_UA5-N1upIDJo0fRqjCPz662puyvGsET_pGPxMn_WzY7L-TtyHXpQw&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Intro a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrsc-seDm0YVUHVUbihPsN_a-ch7D0Vn1NHZ7VMQLz2X-6Ac9JhVrzcJrpng&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Intro a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publicite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStKu33_n3uOT1V5youYjyBkLCAHTl-3CVCPC8kNbYqlWlXe8kixskIKCc7vAI&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Intro a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRohjVPUeqIDDaRQEkiXpQQnKgmtaqZcBkxdHgg4aZf4eUoySONdH6VFo02jw&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Intro a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN9iwhdyshd6emi9Abv_Wi1NUWo8a_Qt0MEIOFLeVm6ossqVHI0tpArvtKww&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Intro a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publicite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdjwaGP3NK9DE1qzU2Jl5gD4DsxqxYqnSqwo6H2G9u-CmcxWXeCL7BHDChOA&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Intro a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQO7oUAPc6re8Q45QWsB_4r2coCTByc1Eti1uQhPSUAhZOK3gqjF9eLdMZCkw&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Intro a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqlbeoej81rZsEX02Y-vf9qW2M3Oyz3AT6Fe2Z6DqN5-tGiZlPV0AlvXFnzA&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Intro a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publicite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTS8-3U6IexoPI7YrOjT8-TddBfyo74_i96KkCbiabU2iqnKeEMHBmx1P9T&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Intro a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRprTGAmwaa1wU0oCme8hWiSbWI1_lAr4_PKd3BnwesrUEY0Un2jF9-Kqdfe6Y&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Intro a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgytq0Gy_ZeNcjVhuV1_9asdYA9OKs1aduFPqM89MB5Im_AheVnmavjG2nOQ&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Intro a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publicite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmLJk9P1YohJ95gr6-0PJGJicxtrW9E_swq004kRVkXl3Q6GLyopkWtKM5dg&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Intro a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDGonwIxLmCfE4kLM8it0QONhJkcBq_DlPCnUArQ8-I0iZfq4d2urk8AFqEg&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Intro a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7jH0V6nDW0mA1zZkGbSZaZEEoLlz-TtiPkeWs4gZO2IHiGs1IH-rN1i4OJw&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Intro a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publicite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtFsxcKg5ACYdbXzEfh19SCQ1_CkKYNIHuohPO63x2UyYqPHuNuIToh41sGw&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Intro a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTEugSMVUuGS-lMbfjhYsD09rl6ONLumPI-a7-8_UykG0VQLvbO6q3dXPPyA&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Intro a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRFfBvMKAZ3h3WwzzNN4TidA0QLFKSIV-pRjEKbRQ6e0k9PE_wMFiRDMlLZAU&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Intro a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publicite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6mmSmV8ZcTF27LIGt4utqEl1KiBpGPTM79SHNkyW9UrCxM40Pz7DTyev0Mw&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Intro a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvB83gmTqALGN2unE7Xb2xmnW3YIrNfp8lN3KmQUjXw6nzLV0MAU9P6nhQBQ&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Intro a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRjn-uQUo9h4oTIB97BpMhMSzqCN_gnim3e-_ni4BG3iIrKWifqcOIRkzbeA&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Intro a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publicite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUkzArZlGkED9TAR-goCd1nsLoLfQXNrqpYOzEZZLSHxRBzAf7-oDh4ix1rns&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Intro a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRXbApdyNI2KA5BGL1CFCBQstHYqw8hAyEn8vcrQQAwvO9Md9Tq1te7YIKh_A&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Intro a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRB1bOtMWkz5N76qWtE4T5vlc9gBLhEH9v1sgvXMn1WgWXVM4fnWd6JC9QZHg&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Intro a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publicite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqwz8WqyttOYImh9XbVCaRgACsNs30Ile-eSWqeD9BXUtgkN_gqVd3NhzaLWQ&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Intro a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREm5uQsglUP59FCqNK_xnW82Qr02b59d2Wp6uuhXSDbLm96JnWHE_too0Ezoc&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Intro a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwnw6DJc8QMK6N9GmNpz7Bx6O0NyB7kZUh-30-YIKv3BTIovrJbEh6r22qhg&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Intro a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publicite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQaAcfelP3MlNHIi_Wk2iF149Mx4Hng1XbNnxf20WCxYO5wZvGTztikWW3nXA&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Intro a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiySCiQxzQwkNw6s0Pa0NW9H0DUwHVrwOaYKruq3VeYpMOmbIBmKhJpFFR3w&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Intro a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6kvgkNiInU_BBFt287B8FVuMF_3LOFMorZsgaXUIHjWhE7f4ZL0R6e8_4Fg&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Intro a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publicite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVr90H7ueSprrDjs-me81oYfZKm7tjINIVkHh_15wPMkyP2nGUhtYZChd-Iw&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQaWXBAVwSD2BpYgI8C9U1kHvStysv4d9vvsWJbc03Q9FWj4_lNUyGpK5ZuQtw&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkyUOcyOaurZyirkyOfRlfahZhLFqL1BJgiuQSgUaKKdFHSATV9tp5ARoyXg&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publicite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXkLPSy0kK9_-sXXPBVOYJaifLy5o0-YDacwSO5SmTrcczMITnOtOKMkDEgQ&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSV2o-fEbM7FgC2MXLusfvGWYf3AaQwa6F4Dh7V6nuSog9wgE1qnvZ5L5tX5Q&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2NTNywevvMjYWQApHSvC8pBunw3AL6MC_OU3PlZ01SXrTNNdU7pnOSXgONw&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publicite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMbu90Sp9tZGnNHoJt549nDQMSgbPwtQLbTDxF6bcO6KDXRTO4-vo_uFc2ieM&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-5Ej0F2LhkyUe-vzw4STDHgkWR1EkZno6akD0hqBX9Et3vjjyNS-E_3QM3L8&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoIepvXrDOxkb0IYzko47E_MnjLKs3jvjbeYTHAmI_e9fHEjq8MkNbYqHlHnE&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publicite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDVGoqU-xUA9BD3_Jo2WxJoRtcb4iAK3JOWLecHkk8V1fYoPhPpg-VbCr-XA&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6AG9YmMMvBh-T7Cx9Nw2QjlkZOUoe08ZlCYes9gmg2BRoBjfsqG5LCOiL9O4&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwaeaPVjRPGsWpjxKOeNUuEV_7vKspz1PiqtB-9qySzzRNmsDcsj-meQVDiw&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publicite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxzzTbAZnWTzO3XIaXbLVkbikx92ejwXeF4lVZ5aRvJdepewOuXOqhCGJqelg&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSu9xPjZ4ZmU_1dtxi5XJYFhI4pCjX8Cgsmc3vVKhLw-Ly3ckUjUgg1BbDb7Xk&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRXSlf4fskw8mc7oidD1BEvcNh_ZTlQcJWx2ZiiI9i3B3BHHtgFgnpcQkk2g&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publicite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTB4ToRW2NO1a3yZVDRLYhzUof_tiOW8n9hF2XNdA_hTs7zQ7M8bQSD7Tmj74s&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJKpkiy2_5_zUf6_nL2XuW7jFrU5bzsch-3rMRDH64TXaYQ--00Uonh8JQb0E&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROiGztB0Vl7tL4-EGJnL8BfvHVnLwQBt7FbI6RPRKeirbAo04NenNftlTYxsg&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publicite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOmZDKysTEQ01m9QpKDMO6EyOI1fUMInkiBHs3rNhYT1d_XvpiE38qYwyP4qA&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRxBW17GQjrRaZTLAJ1lobw7D-vxb9JnzLo8jv08qnEuJamV_K05hLiqfjtkk&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQm3ttvU721_ZgLE7LlcwPw49ReBGwJl3Xvw7eADArSys6i5RnNFTtWv_EQNw0&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publicite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9hiwDqPT12_GMFQYCJiOMLXVmegRGr6u1Ra4fe3kfaM5Nw8MH7gv-CJFRQQ&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZjfB_PZ374XFgk3paRMb17XLl_xXbA8Kxh1LZoNFrJrXC-n79LqXB9-f_-g&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpW_H2K7B3U3VkUwhzrEbl3rijX0RFpWeA9f1YRDKJ7O0kDKIyvDo0ztFVsBk&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publicite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyAJROBLnGzGksp6lmqPQKpb8-LyrdvE2S82LIGGP5jSC85GCCgS7Vnda1JQ&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxASWwqvfHTYy2BOvHR693j4pe6DSSAbZ8xeeWN4mAU8r5smKc0fM1qXQD5u0&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRD3gkp-AJo3MA7n-TOOVydNhcja_jbd5pvoDsXGDXEnBCG-4zVucVis1vkJA&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publicite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKI_wXtOx91BTRSJ7VHfQ_720i2dwTcUV6NKwsFhefm1wOiEh8AcTzw7L1Hcs&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0F7TrXReTbR-5NuMh4NR3Ci71BwbbT0E_K7UWxUeivNQobLpHaT3TDMW3IA&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGxSWtgC0mv4mXHuL-eesPlb2ztisCwuNeD694Tswva7KRDewIbMcJRpnVZeY&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publicite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgS4SuKAe8PP4ZXUiqhhw00nACmI1rUNXE9etcLtMEdULp6_PNx33qCu2bTw&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwB7Av7BxA9hAFO2hdm3Vwc2VfrdnlA5tr90AALnok7xNPazgW5WQEhzeK0w&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSf4NrVKZKQqtQTJuAH3rqIkN5gWoMFYUMdq1rjY2GRlRS_bPPKDBwDeSc1Zw&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publicite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6exvQY2clgqTzApo8YAPYM6KuMOckcQNATnkTAY9WL_Jv49bUYD2cEPpk8w&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8cBzi1AjLUmaHJE8dKd6coi8TQyTsPyTZxNF64oFuzthKZrxzeTDz2P5pyQ&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBpbasJJnzYJteBr2PCu3yqP2i51sqpi1V6k1W3AWkSdUcOJDaGn5my6TZWQ&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publicite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpz6IB8SMNvcBiOh286cz11j_9CF3IpDh3a9mQjZzXSFY2g9F_BZsfFJJ_sw&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlOWCDHXdHEh5KKlu3ieAKiDdvuevILVV2jy1Opkoo3Ia84f2hxo-dwr1pdus&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmj_7SbpPdzhoVKs4MShrwJuSNl8HBObmokoyCTvJRhamA5f3aTjUn3OkE9Q&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publicite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9rBLMv1e4tJu6rl-MtunYAKRLDobhcZD6yOCUtU_VM_OOttZohUvx_Sd-DA&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNQFz3OQCZun2_965DLBGRrIitJWqtspRiXn5kWHIFedrrUk5sI2Y0XfDnEA&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9e2ldfVc6nmmZ7UK0kf1crfxKMkY2U40akver5ybSVJNfzTT832OwM70htw&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publicite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSx4TS8fCddOua1VMvDjUgsRCgq5UNDUqoJUr9lNYsckf-yL8vfmIRaRaczozI&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSp5drcugPQX4m-jKdIBxMWa7bcIpyW8VBICgzQo2T4wZ2Om7erqC7gf_lwXA&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkhYs4gdiVbk49fNlhuEmpMBIAw5QhyQsLP962UekoH-rGpbISL-j75SNHTg&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publicite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhWCsN7_chdnLjEcppBRQVQUaSuya_XLOADHt2oo5teMi5XljY4OWdrF75vyY&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfMaNJpt4TsMo_W6P6-WesdmQqWLkYq8VqCvyHevfSB01gJhdl-n5sysQzRyA&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQf6BZdbFJL-B2iu3zDHw8cXzDgM3qrRpCHqwyPMVdg6PBVHCEJInc6YcxpmaU&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publicite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMO-S1dFIYgodKsFSHF9dsvpx1TNRj5_2LjQAyUpVoIIXDBXQxoHFRB8rx6jc&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIsggJWYFqUrB397byFYMjJROnj6kfwzckP0jwhbTkW3YjQCCLjs5jvmZEUA&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvwjHZLzbxfXH9ocL93ZIIp3_trBZJPlR5qPJkoXBdHPWdeI6NlYHX5iluFYY&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publicite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTM4CiYHTEnwXjPKjOPBqu3iRP0BEvb0MDvi2P9JnzbTWdnz8sbn6E-Niv7Eg&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaRRAZakVKAou1ooqEQHcuHP467NIgWtM0ii8nTnE4BF-G5mVjRr0zSyGboA&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-TSRLeew5LcNoncUTibMCN4iljofrvz_7wRoe4Of65NpP2ISZxFhU2bR843w&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publicite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpNwjL9WqcAd5tamxFW3ZtsVsFN6fVKwqfqzjnu_r6Ejg0U8472FZKS0uGng&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCWz2CsD1JRwCQUlxEwnyMM7iNaqnND0NHwFLjzlTt3uR2iVdnp1cRD8a7jjE&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWBIj2kUXTaZZViGKKys9VtttdxCbzfrlHqGSUX6lpwPzgn68OiSwkwd4UDTg&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publicite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQj7iWNcQ-HeOlrcBladWK5v1b9NsRJqBTqcBfQIJ4rirjh0jCpUBerAGQ1xQ&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpREha0LA4jWgBU88JNP0J3oc9JfKtBG_aulPQW-Lzd9J73YlViatCT6tYKg&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2UhB6cKH5LbmUNHecaMw9I4RCaDVEPNl7Oo67FqXYjkiLk0YBACLtD-2-Ww&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publicite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbAh5QJH0gjeJHL43xBMrf2wy6FWqM922CuvJ8X28zS04JcpuGPHQFVxVr5A&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrLZxMhtfZlvO4eKom-nzzYyYX4Jwg63llM0EjPyx15FZzRYCACPWNNENPxOk&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgg9eQ8ME4lKHnw2HwUPmcOlarU8ABo-EzY6xDfESQ7uVNTjKNXAeOqymAW1Q&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publicite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+<div class='noticia' onclick='this.classList.toggle("abierto")'>
+    <h1 style='margin: 0; text-align: center;'>Se consultó el Titulo a la IA</h1> 
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsOvbwK3Yj2y_35CamzJcgz1_T98r7XRF23euWaWywHMIWrS2BjYDYRfO6TQ&amp;s' 
+         alt='Imagen centrada' 
+         style='display: block; margin: auto; width: 40%;'>
+
+    <div class='desplegable'>
+        <h2 style='margin: 0;'>Se consultó la Nota a la IA</h2>  
+        <span class='flecha'>▼</span>
+    </div>
+
+    <div class='contenido'>
+        <p>Se consultó la Nota a la IA<br></p>
+        <p>Se consultó el Datos a la IA</p>
+    </div>
+</div>
+ 
+<p style='font-size: 12px; color: #666; text-align: center;'>
+    © 2025 VIA ONLINE. Todos los derechos reservados.  
+    Queda prohibida la reproducción total o parcial de los contenidos de este sitio sin autorización previa y por escrito.  
+    Las marcas, logotipos y contenidos pertenecen a sus respectivos propietarios.  
+    Este sitio web puede contener enlaces a sitios externos sobre los cuales VIA ONLINE no tiene responsabilidad alguna.  
+    El uso de este sitio implica la aceptación de nuestros <a href='https://viaonline.com.ar/TerminosyCondiciones.html'>Términos y Condiciones</a> y nuestra <a href='https://viaonline.com.ar/privacidad.html'>Política de Privacidad</a>.
+</p>
+
+</body>
+</html>
