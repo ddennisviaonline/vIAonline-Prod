@@ -4,7 +4,7 @@
 # REQUIERE Install-Package HtmlAgilityPack 
 
 ################################# variables github ojo con token #################################
-param($Request, $TriggerMetadata)
+#aram($Request, $TriggerMetadata)
 # ==== CONFIGURACIÓN GITHUB ====
 $owner = "ddennisviaonline"
 $repo = "vIAonline-Prod"
@@ -19,7 +19,7 @@ $token = $env:GitHubToken
 
 ##################################################################################################
 #Clima desde APP
-#API Key de WeatherAPI
+# API Key de WeatherAPI
 $apiKey = $env:WeatherAPI
 
 Clear
@@ -87,6 +87,55 @@ $Articulos  #| Export-Csv -Path "resultados.csv" -NoTypeInformation -Encoding UT
 
 #FUNCIONES
 
+####
+# IA
+function Invoke-OpenAIChatGPT4omini {
+
+    param(
+        $question
+    )
+    
+    # Clave y endpoint de Azure OpenAI
+    $AZURE_OPENAI_API_KEY = $env:AZURE_OPENAI_ENDPOINT_AzureOpenAI35Turbo 
+    $AZURE_OPENAI_ENDPOINT = $env:AZURE_OPENAI_ENDPOINT_AzureOpenAI35Turbo
+    # Encabezados, asegurando que el Content-Type tenga charset=utf-8
+    $headers = @{
+        "api-key" = "$AZURE_OPENAI_API_KEY"
+        "Content-Type" = "application/json; charset=utf-8"
+        "Accept" = "application/json"
+    }
+
+    # Construcción del mensaje
+    $messages = @()
+    $messages += @{
+        role = 'user'
+        content = "$question"
+    }
+
+    # Crear el cuerpo de la solicitud en formato JSON
+    $body = [ordered]@{
+        messages = $messages
+    } | ConvertTo-Json -Depth 3
+
+    # Realizar la solicitud POST usando Invoke-WebRequest
+    $response = Invoke-WebRequest -Method POST `
+        -Uri "$AZURE_OPENAI_ENDPOINT" `
+        -Headers $headers `
+        -Body $body `
+        -ContentType "application/json; charset=utf-8"
+
+    # Verificar la respuesta para depuración
+    if ($response.StatusCode -eq 200) {
+        # Asegurarse de que la respuesta esté correctamente decodificada en UTF-8
+        $utf8Content = [System.Text.Encoding]::UTF8.GetString([System.Text.Encoding]::Default.GetBytes($response.Content))
+
+        # Procesar la respuesta JSON
+        $utf8Content | ConvertFrom-Json | Select-Object -ExpandProperty choices | Select-Object -ExpandProperty message | Select-Object content
+    } else {
+        Write-Host "Error: $($response.StatusCode) - $($response.StatusDescription)"
+    }
+}
+
 function consulta-IA {
     [CmdletBinding()]
     param (
@@ -99,16 +148,52 @@ function consulta-IA {
     )
     switch ($tipo) {
         "Titulo" {
-            return "Se consultó el Titulo a la IA"
+        $DescriptionTitiulo = @"
+        Del siguiente link de la noticia: $linkFuente
+        Creame el titulo de la Noticia periodistica.
+        Necesito que no contenga agregados de " ni *.
+        No pidas más detalles ni finalices con recomendaciones adicionales.
+"@
+
+        $ResultIAtitle = Invoke-OpenAIChatGPT4omini -question $DescriptionTitiulo
+        return $ResultIAtitle.content
+            
         }
         "Intro" {
-            return "Se consultó la Intro a la IA"
+        $DescriptionIntro = @"
+        Del siguiente link de la noticia: $linkFuente
+        Creame breve introducción de la Noticia periodistica.
+        Necesito que no contenga agregados de " ni *.
+        No pidas más detalles ni finalices con recomendaciones adicionales.
+"@
+        $ResultIAIntro = Invoke-OpenAIChatGPT4omini -question $DescriptionIntro
+        return $ResultIAIntro.content
+            #return "Se consultó la Intro a la IA"
         }
         "Nota" {
-            return "Se consultó la Nota a la IA"
+        $DescriptionNota = @"
+        Del siguiente link de la noticia: $linkFuente
+        Creame la noticia peridistica completa.
+        Necesito que no contenga agregados de " ni *.
+        No pidas más detalles ni finalices con recomendaciones adicionales.
+"@
+        $ResultIANota = Invoke-OpenAIChatGPT4omini -question $DescriptionNota
+        return $ResultIANota.content
         }
         "Datos" {
-            return "Se consultó el Datos a la IA"
+        $DescriptionDatos = @"
+        Del siguiente link de la noticia: $linkFuente
+        Extrae únicamente los datos esenciales de la noticia. 
+        No agregues explicaciones, conclusiones, ni texto adicional. 
+        Devuélvelos en formato JSON con las siguientes claves:
+        - titulo
+        - fecha
+        - lugar
+        - hechos
+        No escribas nada fuera del JSON.
+"@
+        $ResultIADatos = Invoke-OpenAIChatGPT4omini -question $DescriptionDatos
+        return $ResultIADatos.content
         }
         default {
             Write-Warning "Acción no reconocida."
@@ -488,7 +573,7 @@ $TodosLosRegistros = $CSVcache + $cache
 $TodosLosRegistros = $TodosLosRegistros | Sort-Object -Property FechayHora -Descending
 # Si hay más de 100 registros, mantener solo los primeros 100
 if ($TodosLosRegistros.Count -gt 100) {
-    $TodosLosRegistros = $TodosLosRegistros | Select-Object -First 100
+    $TodosLosRegistros = $TodosLosRegistros | Select-Object -First 100 #### CANTIDAD DE RETGISTROS A MOSTRAR
 }
 
 #troubleshooting
@@ -525,10 +610,10 @@ if (!$incompletos) {
     Write-Host "❌ No hay registros completos."
 
 ####
-$TituloIA = consulta-IA -tipo Titulo -linkFuente 'www'
-$IntroIA = consulta-IA -tipo Intro -linkFuente 'www'
-$NoticiaIA = consulta-IA -tipo Nota -linkFuente 'www'
-$DatosIA = consulta-IA -tipo Datos -linkFuente 'www'
+$TituloIA = consulta-IA -tipo Titulo -linkFuente $LinkOrigen
+$IntroIA = consulta-IA -tipo Intro -linkFuente $LinkOrigen
+$NoticiaIA = consulta-IA -tipo Nota -linkFuente $LinkOrigen
+$DatosIA = consulta-IA -tipo Datos -linkFuente $LinkOrigen
 # Resultado final
 
 
