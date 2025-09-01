@@ -162,7 +162,7 @@ function consulta-IA {
         "Intro" {
         $DescriptionIntro = @"
         Del siguiente link de la noticia: $linkFuente
-        Creame breve introducción de la Noticia periodistica.
+        Creame breve introducción de no mas 25 palabras de la Noticia periodistica.
         Necesito que no contenga agregados de " ni *.
         No pidas más detalles ni finalices con recomendaciones adicionales.
 "@
@@ -173,7 +173,7 @@ function consulta-IA {
         "Nota" {
         $DescriptionNota = @"
         Del siguiente link de la noticia: $linkFuente
-        Creame introducción detallada con tus palabras de la Noticia periodistica..
+        Lee la siguiente noticia y redacta un resumen con tus propias palabras. No copies frases textuales ni uses comillas, y conserva solo la información principal y objetiva. Mantén un estilo periodístico claro y conciso.
         Necesito que no contenga agregados de " ni *.
         No pidas más detalles ni finalices con recomendaciones adicionales.
         No devuelvas un mensaje consultando si podes ayudarnos con algo mas.
