@@ -4,7 +4,7 @@
 # REQUIERE Install-Package HtmlAgilityPack 
 
 ################################# variables github ojo con token #################################
-#aram($Request, $TriggerMetadata)
+param($Request, $TriggerMetadata)
 # ==== CONFIGURACIÓN GITHUB ====
 $owner = "ddennisviaonline"
 $repo = "vIAonline-Prod"
@@ -377,7 +377,8 @@ $memStream.Dispose()
 #>
 
 
-$tokenClima
+$apiKey = $env:tokenClima
+$apiKey = "565ad21f8c3243af9bb120755252208"
 # Ciudad de la que deseas obtener el clima
 $ciudad = "Buenos Aires"
 
