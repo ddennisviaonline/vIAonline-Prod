@@ -173,9 +173,11 @@ function consulta-IA {
         "Nota" {
         $DescriptionNota = @"
         Del siguiente link de la noticia: $linkFuente
-        Creame la noticia peridistica completa.
+        Creame introducción detallada con tus palabras de la Noticia periodistica..
         Necesito que no contenga agregados de " ni *.
         No pidas más detalles ni finalices con recomendaciones adicionales.
+        No devuelvas un mensaje consultando si podes ayudarnos con algo mas.
+        Si no logras resolver la noticias no comentes nada.
 "@
         $ResultIANota = Invoke-OpenAIChatGPT4omini -question $DescriptionNota
         return $ResultIANota.content
