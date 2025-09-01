@@ -378,7 +378,6 @@ $memStream.Dispose()
 
 
 $apiKey = $env:tokenClima
-$apiKey = "565ad21f8c3243af9bb120755252208"
 # Ciudad de la que deseas obtener el clima
 $ciudad = "Buenos Aires"
 
