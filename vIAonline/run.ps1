@@ -96,7 +96,7 @@ function Invoke-OpenAIChatGPT4omini {
     )
     
     # Clave y endpoint de Azure OpenAI
-    $AZURE_OPENAI_API_KEY = $env:AZURE_OPENAI_ENDPOINT_AzureOpenAI35Turbo 
+    $AZURE_OPENAI_API_KEY = $env:AZURE_OPENAI_API_KEY_AzureOpenAI35Turbo                                  
     $AZURE_OPENAI_ENDPOINT = $env:AZURE_OPENAI_ENDPOINT_AzureOpenAI35Turbo
     # Encabezados, asegurando que el Content-Type tenga charset=utf-8
     $headers = @{
