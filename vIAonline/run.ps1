@@ -187,11 +187,8 @@ function consulta-IA {
         Del siguiente link de la noticia: $linkFuente
         Extrae únicamente los datos esenciales de la noticia. 
         No agregues explicaciones, conclusiones, ni texto adicional. 
-        Devuélvelos en formato JSON con las siguientes claves:
-        - titulo
-        - fecha
-        - lugar
-        - hechos
+        Devuélvelos en formato JSON como una lista ordenada, sin usar nombres de claves.
+        El orden de los elementos debe ser: título, lugar, hechos.
         No escribas nada fuera del JSON.
 "@
         $ResultIADatos = Invoke-OpenAIChatGPT4omini -question $DescriptionDatos
@@ -615,7 +612,7 @@ if (!$incompletos) {
 $TituloIA = consulta-IA -tipo Titulo -linkFuente $LinkOrigen
 $IntroIA = consulta-IA -tipo Intro -linkFuente $LinkOrigen
 $NoticiaIA = consulta-IA -tipo Nota -linkFuente $LinkOrigen
-$DatosIA = consulta-IA -tipo Datos -linkFuente $LinkOrigen
+#$DatosIA = consulta-IA -tipo Datos -linkFuente $LinkOrigen
 # Resultado final
 
 
