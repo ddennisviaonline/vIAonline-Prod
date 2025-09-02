@@ -6,7 +6,7 @@
 ################################# variables github ojo con token #################################
 #param($Request, $TriggerMetadata)
 param($Timer)
-
+Write-Output "Timer disparado correctamente"
 # Obtener hora actual (ya es hora Argentina por WEBSITE_TIME_ZONE)
 $TimeStamp = Get-Date
 
@@ -1083,4 +1083,5 @@ $bodyOut = @{
     commitUrl = $responsePut.commit.html_url
 } | ConvertTo-Json
 ### Crea privacidad ACA
+
 
