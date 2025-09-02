@@ -613,6 +613,7 @@ $TituloIA = consulta-IA -tipo Titulo -linkFuente $LinkOrigen
 $IntroIA = consulta-IA -tipo Intro -linkFuente $LinkOrigen
 $NoticiaIA = consulta-IA -tipo Nota -linkFuente $LinkOrigen
 #$DatosIA = consulta-IA -tipo Datos -linkFuente $LinkOrigen
+$DatosIA = $null
 # Resultado final
 
 
