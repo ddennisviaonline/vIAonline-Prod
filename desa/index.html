@@ -10,72 +10,90 @@
 	<meta name="google-adsense-account" content="ca-pub-1894152981922395">
     <link rel='icon' type='image/png' sizes='512x512' href='https://viaonline.com.ar/Imagenes/favicon.ico'>
     <style>
-	body {
-		font-family: 'Roboto', Arial, sans-serif;
-		background-color: #FEFBF4;
-		color: #222;
-		line-height: 1.6;
-		max-width: 800px;
-		margin: 0 auto;
-		padding: 20px;
-	}
-	
-	/* Titulares */
-	h1 {
-		color: #1A73E8; /* Azul primario */
-		text-align: center;
-		font-size: 2em;
-		margin-bottom: 20px;
-		line-height: 1.2;
-	}
-	h2 {
-		color: #222;
-		font-size: 1.4em;
-		margin-bottom: 10px;
-	}
-	
-	/* Noticias como tarjetas */
-	.noticia {
-		background-color: #fff;
-		padding: 20px;
-		margin-bottom: 25px;
-		border-radius: 8px;
-		box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08);
-		transition: transform 0.2s ease, box-shadow 0.2s ease;
-	}
-	.noticia:hover {
-		transform: translateY(-2px);
-		box-shadow: 0 6px 12px rgba(0,0,0,0.12);
-	}
-	
-	/* Publicidad diferenciada */
-	.publicidad {
-		text-align: center;
-		margin: 30px 0;
-		padding: 15px;
-		background-color: #E8F0FE; /* Azul clarito */
-		border: 1px dashed #1A73E8;
-		border-radius: 6px;
-	}
-	
-	/* Info secundaria */
-	.fecha, .clima {
-		font-size: 0.9rem;
-		color: #555;
-	}
-	
-	/* Flechas interactivas */
-	.flecha {
-		font-size: 18px;
-		transition: transform 0.3s ease, color 0.2s ease;
-		display: inline-block;
-	}
-	.desplegable:hover .flecha {
-		color: #F9AB00; /* Amarillo secundario */
-	}
-	.noticia.abierto .flecha {
-		transform: rotate(180deg);
-	}
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #FEFBF4;
+        }
+        h1 {
+            color: #0E4365;
+            text-align: center;
+			line-height: 1.1;
+        }
+        .encabezado-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .fecha, .clima {
+            font-size: 1rem;
+            color: #555;
+        }
+        .noticia {
+            background-color: #FEFBF4;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .noticia h2 {
+            color: #333;
+            font-size: 1.3em;
+        }
+        .publicidad {
+            text-align: center;
+            margin: 30px 0;
+            padding: 10px;
+            background-color: #FEFBF4;
+            border: 1px dashed #aaa;
+            border-radius: 5px;
+        }
+        .publicidad img {
+            max-width: 100%;
+            height: auto;
+        }
+        .desplegable {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .flecha {
+            font-size: 18px;
+            transition: transform 0.3s ease;
+            display: inline-block;
+        }
+
+        .noticia.abierto .flecha {
+            transform: rotate(180deg);
+        }
+        .noticia .contenido {
+            display: none;
+            margin-top: 10px;
+        }
+
+        .noticia.abierto .contenido {
+            display: block;
+        }
+        .desplegable {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+        .flecha {
+            font-size: 18px;
+            transition: transform 0.3s ease;
+            display: inline-block;
+        }
+        .noticia.abierto .flecha {
+            transform: rotate(180deg);
+        }
+
 
     </style>
 </head>
@@ -111,7 +129,7 @@
          style='display: block; margin: auto; width: 100%;'>
 
     <div class='desplegable'>
-        <h2 style='margin: 0; line-height: 1;'>Miles de seguidores de Bolsonaro se movilizaron para respaldarlo en el tramo final del juicio en su contra por golpismo.</h2>  
+        <h2 style='margin: 0;'>Miles de seguidores de Bolsonaro se movilizaron para respaldarlo en el tramo final del juicio en su contra por golpismo.</h2>  
         <span class='flecha'>▼</span>
     </div>
 
