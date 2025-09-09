@@ -372,7 +372,7 @@ $ResultIA = Invoke-OpenAIChatGPT4omini -question $Description
 
 ### Fecha
 $fechaGMTLess3 = (Get-Date).ToUniversalTime().AddHours(-3).ToString("dd 'de' MMMM 'de' yyyy", [System.Globalization.CultureInfo]::GetCultureInfo("es-ES"))
-$fechaGMTLess3 = "📆" + ' ' + $fechaGMTLess3
+$fechaActual = "📆" + ' ' + $fechaGMTLess3
 ### Clima
 #### DESDE ACA EXTRAER ZIP EN MEMORIA
 
@@ -728,7 +728,7 @@ $head = "
 
     <!-- Fecha y clima -->
     <div class='encabezado-info'>
-        <div class='fecha'>$fechaGMTLess3</div>
+        <div class='fecha'>$fechaActual</div>
         <div class='clima'>Clima:$clima</div>
         <div class='clima'>$oficial</div>
         <div class='clima'>$blue</div>
