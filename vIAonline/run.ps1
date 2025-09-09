@@ -1,17 +1,28 @@
-﻿# Version 0.8 | MODIFICADO PARA GRABAR EN GITHUB y CLIMA EN MEMORIA
+﻿# Version 0.9 | Analizar porque no funciona google adsense | Ambiente de Desarrollo Toma el mismo csv pero el index lo guarda en DESA
+
+# ==============================================
+#            AMBIENTE DE PROD
+# Cambiar 
+# param($Timer)
+# $token = $env:GitHubToken
+# $apiKey = $env:WeatherAPI
+# Clave y endpoint de Azure OpenAI
+# $AZURE_OPENAI_API_KEY = $env:AZURE_OPENAI_API_KEY_AzureOpenAI35Turbo                                  
+# $AZURE_OPENAI_ENDPOINT = $env:AZURE_OPENAI_ENDPOINT_AzureOpenAI35Turbo
+# $filePath = "desa/index.html"       # Ruta exacta dentro del repo (case-sensitive)
+# ==============================================
+
 # Get-PackageProvider -Name NuGet -ForceBootstrap 
 # Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force
 # REQUIERE Install-Package HtmlAgilityPack 
 
 ################################# variables github ojo con token #################################
-#param($Request, $TriggerMetadata)
 param($Timer)
 Write-Output "Timer disparado correctamente"
 # Obtener hora actual (ya es hora Argentina por WEBSITE_TIME_ZONE)
 $TimeStamp = Get-Date
 
 Write-Output "Tarea ejecutada a las: $TimeStamp"
-
 
 # ==== CONFIGURACIÓN GITHUB ====
 $owner = "ddennisviaonline"
@@ -36,6 +47,39 @@ Clear
 $URLOrigen = "https://infobae.com"
 $response = Invoke-WebRequest -Uri $URLOrigen
 $html = $response.Content
+################################# Publicidad ####################################
+# Viaonline
+$ViaADS = @"
+<div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+  <p><strong>Publicidad</strong></p>
+        <a href='$LinkAdsLink'>
+        <img src='$ImgAdsLink ' 
+        alt='Anuncio Publicitario'  
+        style='max-width: 80%; height: auto;'>
+     </a>
+     <p style='margin-top: 10px; text-align: center;'>
+        <a href='$LinkAdsLink'>
+        $TextoAdsLink
+        </a>
+     </p>
+  </div>
+"@
+
+# Google
+$googleADS = "<script async src=""https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1894152981922395""
+     crossorigin=""anonymous""></script>
+<ins class=""adsbygoogle""
+     style=""display:block; text-align:center;""
+     data-ad-layout=""in-article""
+     data-ad-format=""fluid""
+     data-ad-client=""ca-pub-1894152981922395""
+     data-ad-slot=""4289209070""></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+"
+#################################################################################################
+
 
 ################################# IMPORT AVISOS PUBLICITARIOS####################################
 #$links = Import-Csv -Path "C:\bats\vIA ONLINE\ads\ads.csv" #PUBLICIDAD
@@ -384,7 +428,9 @@ $memStream.Dispose()
 #>
 
 
-$apiKey = $env:tokenClima
+#$tokenClima
+#$apiKey = $env:tokenClima
+$apiKey = "565ad21f8c3243af9bb120755252208"
 # Ciudad de la que deseas obtener el clima
 $ciudad = "Buenos Aires"
 
@@ -441,102 +487,113 @@ $head = "
       <!-- Script global de AdSense (va una sola vez en toda la web) -->
     <meta name='google-adsense-account' content='ca-pub-1894152981922395'>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #FEFBF4;
-        }
-        h1 {
-            color: #333;
-            text-align: center;
-        }
-        .encabezado-info {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-        .fecha, .clima {
-            font-size: 1rem;
-            color: #555;
-        }
-        .noticia {
-            background-color: #FEFBF4;
-            padding: 15px;
-            margin-bottom: 20px;
-            border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        .noticia h2 {
-            color: #333;
-            font-size: 1.3em;
-        }
-        .publicidad {
-            text-align: center;
-            margin: 30px 0;
-            padding: 10px;
-            background-color: #FEFBF4;
-            border: 1px dashed #aaa;
-            border-radius: 5px;
-        }
-        .publicidad img {
-            max-width: 100%;
-            height: auto;
-        }
-        .desplegable {
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        .flecha {
-            font-size: 18px;
-            transition: transform 0.3s ease;
-            display: inline-block;
-        }
+/* Contenedor principal de noticias */
 
-        .noticia.abierto .flecha {
-            transform: rotate(180deg);
-        }
-        .noticia .contenido {
-            display: none;
-            margin-top: 10px;
-        }
+.contenedor-noticias {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 columnas en PC */
+    gap: 20px;
+    margin: 20px;
+}
 
-        .noticia.abierto .contenido {
-            display: block;
-        }
-        .desplegable {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
-        }
-        .flecha {
-            font-size: 18px;
-            transition: transform 0.3s ease;
-            display: inline-block;
-        }
-        .noticia.abierto .flecha {
-            transform: rotate(180deg);
-        }
+    body {
+        background-color: #FEFBF4;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+    }
 
+    /* Logo centrado */
+    .logo {
+        text-align: center;
+        margin-bottom: 10px;
+    }
 
+    .logo img {
+        width: 400px;
+    }
+
+/* Cada noticia */
+.noticia {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    cursor: pointer;
+    background-color: #FEFBF4;
+    transition: box-shadow 0.3s;
+}
+
+.noticia:hover {
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.noticia h1, .noticia h2 {
+    margin: 0 0 10px 0;
+    font-size: 16px;
+    text-align: center;
+}
+
+.noticia img {
+    width: 100%;
+    display: block;
+    margin-bottom: 10px;
+}
+
+/* Desplegable contenido */
+.contenido {
+    display: none;
+    margin-top: 10px;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.noticia.abierto .contenido {
+    display: block;
+}
+
+/* Fila de publicidad */
+.publicidad {
+    grid-column: 1 / -1; /* ocupa todo el ancho */
+    text-align: center;
+    padding: 20px;
+    background-color: #f0f0f0;
+    font-weight: bold;
+    border-radius: 8px;
+}
+
+/* Contenedor fecha y clima */
+.encabezado-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 0 10px;
+}
+
+/* Adaptación a celulares */
+@media (max-width: 768px) {
+    .contenedor-noticias {
+        grid-template-columns: 1fr; /* una columna */
+    }
+}
     </style>
 </head>
 <body>
-    <div style='text-align: center;'>
+
+    <!-- Logo -->
+    <div class='logo'>
         <a href='https://viaonline.com.ar/'>
-            <img src='$logo' alt='Imagen centrada' style='width: 300px;'>
+            <img src='https://viaonline.com.ar/Imagenes/Logocorto.png' alt='Imagen centrada'>
         </a>
     </div>
+
+    <!-- Fecha y clima -->
     <div class='encabezado-info'>
         <div class='fecha'>$fechaGMTLess3</div>
         <div class='clima'>Clima:$clima</div>
     </div>
+
+<div class='contenedor-noticias'>
 "
 
 ####
@@ -587,6 +644,8 @@ if ($TodosLosRegistros.Count -gt 100) {
 #$LinksCache += [PSCustomObject]@{ FechayHora = "$fechaHora"; LinkOrigen = $LinkOrigen; TituloOrigen = $textos; Titulo = $tituloIA; Imagen = $url; Intro = $introIA; Noticia = $ianews; Datos = $DatosNoticiaIA }
 #$LinksCache | Export-Csv -Path $RutaLinkCache -Encoding UTF8 -NoTypeInformation
 #$LinksCache =@()
+#alterna publicidad con el contador
+$adscnt = 0
 foreach ($noticia in $TodosLosRegistros){
 $LinkOrigen = $noticia.LinkOrigen #$URLOrigen + $noticia.URL
 $textos = $noticia.TituloOrigen
@@ -621,7 +680,6 @@ $TituloIA = consulta-IA -tipo Titulo -linkFuente $LinkOrigen
 $IntroIA = consulta-IA -tipo Intro -linkFuente $LinkOrigen
 $NoticiaIA = consulta-IA -tipo Nota -linkFuente $LinkOrigen
 #$DatosIA = consulta-IA -tipo Datos -linkFuente $LinkOrigen
-$DatosIA = $null
 # Resultado final
 
 
@@ -658,6 +716,33 @@ $fechaHora = Get-Date
 $LinksCache += [PSCustomObject]@{ FechayHora = "$fechaHora"; LinkOrigen = $LinkOrigen; TituloOrigen = $textos; Titulo = $TituloIA; Imagen = $Imagen; Intro = $NoticiaIA; Noticia = $NoticiaIA; Datos = $DatosIA }
 
 
+
+
+$news += "
+		<div class='noticia' onclick='this.classList.toggle(""abierto"")'>
+			<h1>$TituloIA</h1>
+			<img src='$Imagen' alt='Imagen noticia 1'>
+			<div class=""desplegable""><h2>$introIA ▼</h2></div>
+			<div class=""contenido"">
+				<p>$NoticiaIA</p>
+			</div>
+		</div>
+"
+
+
+<#
+$news += "
+    <div class='noticia' onclick='this.classList.toggle('abierto')'>
+        <h1>$TituloIA</h1>
+        <img src='$Imagen' alt='Imagen noticia'>
+        <div class='desplegable'><h2>$introIA ▼</h2></div>
+        <div class='contenido'>
+            <p>$NoticiaIA</p>
+        </div>
+    </div>
+"
+#>
+<#
 $news += "
 <div class='noticia' onclick='this.classList.toggle(""abierto"")'>
     <h1 style='margin: 0; text-align: center;'>$TituloIA</h1> 
@@ -676,7 +761,7 @@ $news += "
     </div>
 </div>
 "
-
+#>
     #evita poner imagenes duplicadas
     $urlcache =  $Imagen
 
@@ -686,20 +771,22 @@ $news += "
 
     $counter++
 
-    if ($counter % 3 -eq 0) {
+    if ($counter % 8 -eq 0) {
         if ($csvIndex -lt $csvData.Count) {
             $registro = $csvData[$csvIndex]
             Write-Output "Registro del CSV en salto $counter : $($registro | Out-String)"
             $ImgAdsLink = $registro.Imagen
             $LinkAdsLink = $registro.Link
             $TextoAdsLink = $registro.Texto
-            $news += "
+            $news += $ViaADS
+            <#
+             "
         <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
           <p><strong>Publicidad</strong></p>
                 <a href='$LinkAdsLink'>
                 <img src='$ImgAdsLink ' 
                 alt='Anuncio Publicitario'  
-                style='max-width: 100%; height: auto;'>
+                style='max-width: 80%; height: auto;'>
              </a>
              <p style='margin-top: 10px; text-align: center;'>
                 <a href='$LinkAdsLink'>
@@ -709,13 +796,15 @@ $news += "
           </div>
         
         "
+        #>
             $csvIndex++
         } else {
             Write-Warning "No hay más registros en el CSV."
         }
     }
 }
-
+$news += $googleADS
+$news += "</div>"
 ################################# EXPORTA LOS REGISTROS DE NOTICIAS A GITHUB #################################
 ################################# ELIMINA REGISTRO VIEJO Y EXPORTA EL NUEVO ##################################
 $LinksCache # | Export-Csv -Path $RutaLinkCache -Encoding UTF8 -NoTypeInformation
@@ -1083,5 +1172,4 @@ $bodyOut = @{
     commitUrl = $responsePut.commit.html_url
 } | ConvertTo-Json
 ### Crea privacidad ACA
-
 
