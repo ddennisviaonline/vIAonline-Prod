@@ -5,7 +5,7 @@
 # Cambiar 
 param($Timer)
 $token = $env:GitHubToken
-$apiKey = $env:WeatherAPI
+
 #Clave y endpoint de Azure OpenAI
 $AZURE_OPENAI_API_KEY = $env:AZURE_OPENAI_API_KEY_AzureOpenAI35Turbo                                  
 $AZURE_OPENAI_ENDPOINT = $env:AZURE_OPENAI_ENDPOINT_AzureOpenAI35Turbo
@@ -419,6 +419,9 @@ $memStream.Dispose()
 
 
 #$tokenClima
+
+#####
+$apiKey = $env:WeatherAPI
 # Ciudad de la que deseas obtener el clima
 $ciudad = "Buenos Aires"
 
