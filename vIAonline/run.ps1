@@ -1,14 +1,14 @@
-﻿# Version 10 | Cotización dolar, iconos Clima, feriados
+﻿# Version 0.9 | Analizar porque no funciona google adsense | Ambiente de Desarrollo Toma el mismo csv pero el index lo guarda en DESA
 
 # ==============================================
 #            AMBIENTE DE PROD
 # Cambiar 
-param($Timer)
-$token = $env:GitHubToken
-$apiKey = $env:WeatherAPI
-#Clave y endpoint de Azure OpenAI
-$AZURE_OPENAI_API_KEY = $env:AZURE_OPENAI_API_KEY_AzureOpenAI35Turbo                                  
-$AZURE_OPENAI_ENDPOINT = $env:AZURE_OPENAI_ENDPOINT_AzureOpenAI35Turbo
+# param($Timer)
+# $token = $env:GitHubToken
+# $apiKey = $env:WeatherAPI
+# Clave y endpoint de Azure OpenAI
+# $AZURE_OPENAI_API_KEY = $env:AZURE_OPENAI_API_KEY_AzureOpenAI35Turbo                                  
+# $AZURE_OPENAI_ENDPOINT = $env:AZURE_OPENAI_ENDPOINT_AzureOpenAI35Turbo
 # $filePath = "desa/index.html"       # Ruta exacta dentro del repo (case-sensitive)
 # ==============================================
 
@@ -17,7 +17,13 @@ $AZURE_OPENAI_ENDPOINT = $env:AZURE_OPENAI_ENDPOINT_AzureOpenAI35Turbo
 # REQUIERE Install-Package HtmlAgilityPack 
 
 ################################# variables github ojo con token #################################
-#param($Request, $TriggerMetadata)
+param($Timer)
+Write-Output "Timer disparado correctamente"
+# Obtener hora actual (ya es hora Argentina por WEBSITE_TIME_ZONE)
+$TimeStamp = Get-Date
+
+Write-Output "Tarea ejecutada a las: $TimeStamp"
+
 # ==== CONFIGURACIÓN GITHUB ====
 $owner = "ddennisviaonline"
 $repo = "vIAonline-Prod"
@@ -28,10 +34,12 @@ $filevIAcache = "vIAcache.csv"
 $txtPath = "archivo.txt"
 $branchsource = "main" # powershell
 $branch = "master" # webpage
+$token = $env:GitHubToken
 
 ##################################################################################################
 #Clima desde APP
 # API Key de WeatherAPI
+$apiKey = $env:WeatherAPI
 
 Clear
 # 1. Carga el HTML desde archivo
@@ -44,14 +52,14 @@ $html = $response.Content
 $ViaADS = @"
 <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
   <p><strong>Publicidad</strong></p>
-        <a href='$LinkAdsLink'>
-        <img src='$ImgAdsLink ' 
+        <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+        <img src='https://viaonline.com.ar/ads/publicite.png ' 
         alt='Anuncio Publicitario'  
         style='max-width: 80%; height: auto;'>
      </a>
      <p style='margin-top: 10px; text-align: center;'>
-        <a href='$LinkAdsLink'>
-        $TextoAdsLink
+        <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+        
         </a>
      </p>
   </div>
@@ -139,7 +147,9 @@ function Invoke-OpenAIChatGPT4omini {
         $question
     )
     
-
+    # Clave y endpoint de Azure OpenAI
+    $AZURE_OPENAI_API_KEY = $env:AZURE_OPENAI_API_KEY_AzureOpenAI35Turbo                                  
+    $AZURE_OPENAI_ENDPOINT = $env:AZURE_OPENAI_ENDPOINT_AzureOpenAI35Turbo
     # Encabezados, asegurando que el Content-Type tenga charset=utf-8
     $headers = @{
         "api-key" = "$AZURE_OPENAI_API_KEY"
@@ -372,7 +382,7 @@ $ResultIA = Invoke-OpenAIChatGPT4omini -question $Description
 
 ### Fecha
 $fechaGMTLess3 = (Get-Date).ToUniversalTime().AddHours(-3).ToString("dd 'de' MMMM 'de' yyyy", [System.Globalization.CultureInfo]::GetCultureInfo("es-ES"))
-$fechaGMTLess3 = "📆" + ' ' + $fechaGMTLess3
+
 ### Clima
 #### DESDE ACA EXTRAER ZIP EN MEMORIA
 
@@ -419,6 +429,8 @@ $memStream.Dispose()
 
 
 #$tokenClima
+#$apiKey = $env:tokenClima
+$apiKey = "565ad21f8c3243af9bb120755252208"
 # Ciudad de la que deseas obtener el clima
 $ciudad = "Buenos Aires"
 
@@ -428,43 +440,6 @@ $url = "http://api.weatherapi.com/v1/current.json?key=$apiKey&q=$ciudad&lang=es"
 # Petición HTTP y parseo de la respuesta JSON
 $response = Invoke-RestMethod -Uri $url -Method Get
 
-$condicionClimatica = $($response.current.condition.text)
-
-# Asignamos el ícono según la condición
-if ($condicionClimatica -eq "Despejado") {
-    $IconCondicion = "☀️"
-}
-elseif ($condicionClimatica -eq "Algo nublado" -or $condicionClimatica -eq "Parcialmente nublado") {
-    $IconCondicion = "🌤️"
-}
-elseif ($condicionClimatica -eq "Nublado") {
-    $IconCondicion = "☁️"
-}
-elseif ($condicionClimatica -eq "Lluvias aisladas" -or $condicionClimatica -eq "Lluvia ligera") {
-    $IconCondicion = "🌦️"
-}
-elseif ($condicionClimatica -eq "Lluvia moderada") {
-    $IconCondicion = "🌧️"
-}
-elseif ($condicionClimatica -eq "Lluvia fuerte" -or $condicionClimatica -eq "Tormenta intensa") {
-    $IconCondicion = "⛈️"
-}
-elseif ($condicionClimatica -eq "Tormenta severa" -or $condicionClimatica -eq "Granizo") {
-    $IconCondicion = "🌩️"
-}
-elseif ($condicionClimatica -eq "Nieve") {
-    $IconCondicion = "❄️"
-}
-elseif ($condicionClimatica -eq "Niebla" -or $condicionClimatica -eq "Neblina") {
-    $IconCondicion = "🌫️"
-}
-elseif ($condicionClimatica -eq "Ventoso" -or $condicionClimatica -eq "Viento fuerte") {
-    $IconCondicion = "🌬️"
-}
-else {
-    $IconCondicion = "❓"  # Por si no coincide con ninguna condición
-}
-
 # Mostrar resultados
 Write-Host "Ciudad: $($response.location.name), $($response.location.country)"
 Write-Host "Temperatura: $($response.current.temp_c) °C"
@@ -472,7 +447,7 @@ Write-Host "Sensación térmica: $($response.current.feelslike_c) °C"
 Write-Host "Condición: $($response.current.condition.text)"
 Write-Host "Última actualización: $($response.current.last_updated)"
 
-$clima = " CABA" + ", " + $($response.current.temp_c) + "º " + $IconCondicion + ' ' + $($response.current.condition.text)
+$clima = " CABA" + ", " + $($response.current.temp_c) + "º " + $($response.current.condition.text)
 #### HASTA ACA EXTRAER ZIP EN MEMORIA
 <#
 #Descarga reporte de clima y lo convierte en csv
@@ -501,147 +476,6 @@ $clima = " CABA" + ", " + $listCima.Temperatura + "º " + $primeraPalabra
 #>
 #incio HTML
 #"El primer diario hecho con IA."
-$dolar = @'
-<div class="ticker-container">
-  <div class="ticker-text" id="ticker">
-    Cargando cotizaciones...
-  </div>
-</div>
-
-<script>
-async function cargarCotizaciones() {
-  try {
-    const response = await fetch("https://dolarapi.com/v1/dolares");
-    const data = await response.json();
-
-    let html = data.map(d => {
-         return `<span class="dolar-item">💵 <b>${d.nombre}</b>: Compra ${d.compra} / Venta ${d.venta}</span>`;
-    }).join("");
-
-    document.getElementById("ticker").innerHTML = html;
-  } catch (error) {
-    document.getElementById("ticker").textContent = "Error al cargar cotizaciones";
-    console.error(error);
-  }
-}
-
-cargarCotizaciones();
-setInterval(cargarCotizaciones, 300000);
-</script>
-'@
-
-# URL de la API
-$url = "https://dolarapi.com/v1/dolares"
-
-try {
-    # Obtener datos en formato JSON
-    $response = Invoke-RestMethod -Uri $url -Method Get
-    
-    # Mostrar todos los tipos de dólar
-    $response | Select-Object nombre, compra, venta
-    
-    
-    $dolaroficial = $response | Where-Object { $_.casa -eq "oficial" }
-    $oficial = "💵 Dólar oficial - Compra: $($dolaroficial.compra) | Venta: $($dolaroficial.venta)"
-    
-    $dolarBlue = $response | Where-Object { $_.casa -eq "blue" }
-    $blue = "💵 Dólar Blue - Compra: $($dolarBlue.compra) | Venta: $($dolarBlue.venta)"
-}
-catch {
-    Write-Host "Error al obtener la cotización: $_"
-}
-
-### Obtengo fecha de feriado
-# Definir el año
-$anio = (Get-Date).Year
-
-# URL de la API de feriados
-$Url = "https://www.argentina.gob.ar/interior/feriados-nacionales-$anio"
-  try {
-        $pagina = Invoke-WebRequest -Uri $Url -UseBasicParsing
-    } catch {
-    Write-Host "Ocurrió un error al acceder a la URL: $_"
-}
-
-# Si $pagina.Content es un string con saltos de línea
-$array = $pagina.Content -split "`r?`n"
-
-# Ahora sí $array es un array donde cada elemento es una línea
-$lineas476a479 = $array[393..424]
-$lineas476a479
-function Clasificar-Feriados {
-    param (
-        [Parameter(Mandatory=$true)]
-        [string[]]$lineasFeriados
-    )
-
-    # 1️⃣ Unir líneas en un JSON válido
-    $jsonText = "[" + ($lineasFeriados -join "`n") + "]"
-
-    # 2️⃣ Quitar la coma final sobrante si existe
-    $jsonText = $jsonText -replace ",\s*\]$", "]"
-
-    # 3️⃣ Convertir a objetos PowerShell
-    try {
-        $feriados = $jsonText | ConvertFrom-Json
-    } catch {
-        Write-Error "Error al convertir JSON. Revisa el formato de las líneas."
-        return
-    }
-
-    # 4️⃣ Clasificar por tipo de etiqueta
-    $feriadosB = $feriados | Where-Object { $_.label -match "\(b\)" }
-    $feriadosC = $feriados | Where-Object { $_.label -match "\(c\)" }
-    $feriadosSinBC = $feriados | Where-Object { $_.label -notmatch "\(b\)|\(c\)" }
-
-    # 5️⃣ Devolver las variables como un objeto para fácil acceso
-    return [PSCustomObject]@{
-        B = $feriadosB
-        C = $feriadosC
-        SinBC = $feriadosSinBC
-    }
-}
-
-# -----------------------------
-# Ejemplo de uso con tu variable
-$resultado = Clasificar-Feriados -lineasFeriados $lineas476a479
-
-# Mostrar los feriados que no son (b) ni (c)
-$resultado.SinBC | ForEach-Object {
-    "$($_.date) - $($_.label) - $($_.type)"
-}
-$feriados = $resultado.SinBC
-# Si querés también podés acceder a los que son (b) o (c):
-# $resultado.B
-# $resultado.C
-# Fecha actual
-$hoy = Get-Date
-
-# Filtrar feriados que sean posteriores a hoy y ordenar por fecha
-$proximoFeriadoSinBC = $resultado.SinBC |
-    Where-Object { [datetime]::Parse($_.date) -ge $hoy } |
-    Sort-Object { [datetime]::Parse($_.date) } |
-    Select-Object -First 1
-
-# Mostrar resultado
-if ($proximoFeriadoSinBC) {
-    Write-Output "Próximo feriado (sin (b) ni (c)): $($proximoFeriadoSinBC.label) - Fecha: $($proximoFeriadoSinBC.date)"
-} else {
-    Write-Output "No hay próximos feriados sin (b) ni (c) en la lista."
-}
-$fecha = $proximoFeriadoSinBC.date 
-
-# Convertir a tipo DateTime
-$fechaDateTime = [datetime]::ParseExact($fecha, "dd/MM/yyyy", $null)
-
-# Formatear en español
-$fechaFormateada = $fechaDateTime.ToString("dddd dd 'de' MMMM 'de' yyyy", [System.Globalization.CultureInfo]::GetCultureInfo("es-ES"))
-
-$fechaFormateada
-
- $ProximoFeriado = "📆 Próximo feriado: " + $proximoFeriadoSinBC.label + ' ' + $fechaFormateada
-###
-
 $head = "
 <!DOCTYPE html>
 <html lang='es'>
@@ -757,10 +591,8 @@ $head = "
     <div class='encabezado-info'>
         <div class='fecha'>$fechaGMTLess3</div>
         <div class='clima'>Clima:$clima</div>
-        <div class='clima'>$oficial</div>
-        <div class='clima'>$blue</div>
-        <div class='clima'>$ProximoFeriado</div>        
     </div>
+
 <div class='contenedor-noticias'>
 "
 
@@ -1072,10 +904,7 @@ $botom +="
 
 ######################################## eliminar el archivo index y subir el nuevo############################
 #$head + ' ' + $news + ' '  + $botom |  Out-File -FilePath "C:\inetpub\wwwroot\index.html" -Encoding utf8 -Force
-
-$indexfile = $head + ' ' + $news + ' '  + $botom 
-
-Write-Host $indexfile -ForegroundColor Cyan
+$indexfile = $head + ' ' + $news + ' '  + $botom
 
 ### desde aca borra el file vIAcache.csv
 # ==== CONFIGURACIÓN ====
