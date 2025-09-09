@@ -1,0 +1,1184 @@
+
+<!DOCTYPE html>
+<html lang='es'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>vIA online</title>
+    <link rel='icon' type='image/png' sizes='512x512' href='https://viaonline.com.ar/Imagenes/favicon.ico'>
+      <!-- Script global de AdSense (va una sola vez en toda la web) -->
+    <meta name='google-adsense-account' content='ca-pub-1894152981922395'>
+    <style>
+/* Contenedor principal de noticias */
+
+.contenedor-noticias {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 columnas en PC */
+    gap: 20px;
+    margin: 20px;
+}
+
+    body {
+        background-color: #FEFBF4;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+    }
+
+    /* Logo centrado */
+    .logo {
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    .logo img {
+        width: 400px;
+    }
+
+/* Cada noticia */
+.noticia {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    cursor: pointer;
+    background-color: #FEFBF4;
+    transition: box-shadow 0.3s;
+}
+
+.noticia:hover {
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.noticia h1, .noticia h2 {
+    margin: 0 0 10px 0;
+    font-size: 16px;
+    text-align: center;
+}
+
+.noticia img {
+    width: 100%;
+    display: block;
+    margin-bottom: 10px;
+}
+
+/* Desplegable contenido */
+.contenido {
+    display: none;
+    margin-top: 10px;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.noticia.abierto .contenido {
+    display: block;
+}
+
+/* Fila de publicidad */
+.publicidad {
+    grid-column: 1 / -1; /* ocupa todo el ancho */
+    text-align: center;
+    padding: 20px;
+    background-color: #f0f0f0;
+    font-weight: bold;
+    border-radius: 8px;
+}
+
+/* Contenedor fecha y clima */
+.encabezado-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 0 10px;
+}
+
+/* Adaptación a celulares */
+@media (max-width: 768px) {
+    .contenedor-noticias {
+        grid-template-columns: 1fr; /* una columna */
+    }
+}
+    </style>
+</head>
+<body>
+
+    <!-- Logo -->
+    <div class='logo'>
+        <a href='https://viaonline.com.ar/'>
+            <img src='https://viaonline.com.ar/Imagenes/Logocorto.png' alt='Imagen centrada'>
+        </a>
+    </div>
+
+    <!-- Fecha y clima -->
+    <div class='encabezado-info'>
+        <div class='fecha'>08 de septiembre de 2025</div>
+        <div class='clima'>Clima: CABA, 11.3º Despejado</div>
+    </div>
+
+<div class='contenedor-noticias'>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Cuenta regresiva para el inicio de la venta de las entradas para el Mundial 2026</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRJOHDkOZlT5cXp3H9GFrELVu_I2tkS17dm4QBd1poUyxFaK7Y95re_buc4aE&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Se aproxima el inicio de la venta de entradas para el Mundial 2026, generando gran expectativa entre los fanáticos del fútbol. ▼</h2></div>
+			<div class="contenido">
+				<p>En un artículo publicado en Infobae se informa que está por comenzar la venta de entradas para el Mundial 2026. Todos los fanáticos del fútbol podrán adquirir sus boletos a partir de la próxima semana. Se espera que la demanda sea muy alta debido a la emoción y expectativa que genera este evento deportivo de gran magnitud.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Operativos contra los carteles en el Caribe: el Pentágono prepara el despliegue de cazas F-35 en Puerto Rico</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDaTb07kQ_ROG7tikHd5m8P6hex60UkKEjQVZ4fhTw2wYWWC-O8oPRVkP2K-Q&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El Pentágono prepara el despliegue de cazas F-35 en Puerto Rico para operativos contra los carteles en el Caribe. ▼</h2></div>
+			<div class="contenido">
+				<p>El Pentágono planea desplegar cazas F-35 en Puerto Rico como parte de operativos contra carteles en el Caribe.Esta medida se toma en medio de la creciente presencia de carteles de droga en la región, con el objetivo de fortalecer la lucha contra el narcotráfico en el área.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Max Verstappen correrá con una Ferrari en un legendario circuito: el examen que deberá rendir.</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRe7gnZMJ9b3dpoyiC7PazPejiQi0fVQqwjh3SxVShaErSgvKps14I_dt9BLA&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Max Verstappen correrá con una Ferrari en el legendario circuito de Fiorano como parte de un examen que deberá rendir. La noticia ha generado gran expectativa en el mundo automovilístico, ya que se espera que el piloto demuestre su habilidad al volante de un nuevo equipo. La prueba se llevará a cabo en los próximos días y será crucial para determinar el futuro de Verstappen en la escudería italiana. ▼</h2></div>
+			<div class="contenido">
+				<p>Max Verstappen correrá con una Ferrari en el legendario circuito de Fiorano como parte de un examen que deberá rendir. La noticia ha generado gran expectativa en el mundo automovilístico, ya que se espera que el piloto demuestre su habilidad al volante de un nuevo equipo. La prueba se llevará a cabo en los próximos días y será crucial para determinar el futuro de Verstappen en la escudería italiana.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>La dura crítica del jefe de Mercedes a Kimi Antonelli por sus malos resultados en la F1 decepcionante</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTWPuMs16Jw-EX_wTNhXvteW4NE75DiTkncJAiQiCSK8_u2gmUN2Rz6BLNeQ&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>En el artículo se menciona que el jefe de Mercedes criticó a Kimi Antonelli por sus malos resultados en la F1, calificándolos como decepcionantes. El piloto no ha tenido un buen desempeño en la temporada y la crítica se basa en su falta de impulsividad y agresividad en las carreras. ▼</h2></div>
+			<div class="contenido">
+				<p>En el artículo se menciona que el jefe de Mercedes criticó a Kimi Antonelli por sus malos resultados en la F1, calificándolos como decepcionantes. El piloto no ha tenido un buen desempeño en la temporada y la crítica se basa en su falta de impulsividad y agresividad en las carreras.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Una ciudadana argentina israelí se encuentra entre las víctimas mortales de atentado en Jerusalén</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuty-EbJcZDNmWMir_UK0-UbiFFetrouEZ_3fkc0sOaULZaRUcRjh0hFiq2g&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Una ciudadana argentina-israelí se encuentra entre las víctimas mortales de un atentado en Jerusalén. El ataque, perpetrado por un hombre armado, dejó un saldo de tres personas fallecidas y varias heridas. La mujer, identificada como Micaela M. de 38 años, se encontraba en el lugar del incidente y lamentablemente perdió la vida. Las autoridades están investigando el suceso para determinar las circunstancias del ataque. ▼</h2></div>
+			<div class="contenido">
+				<p>Una ciudadana argentina-israelí se encuentra entre las víctimas mortales de un atentado en Jerusalén. El ataque, perpetrado por un hombre armado, dejó un saldo de tres personas fallecidas y varias heridas. La mujer, identificada como Micaela M. de 38 años, se encontraba en el lugar del incidente y lamentablemente perdió la vida. Las autoridades están investigando el suceso para determinar las circunstancias del ataque.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>República Checa, Rumanía y Hungría desmantelaron una red de espionaje bielorrusa en Europa.</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvWTi36AR6FqralZ0NOQ8ZFI3_5VFFMZuIsnmtt_NBSkNL10bPX6nuuF1N-Q&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La República Checa, Rumania y Hungría han desmantelado una red de espionaje bielorrusa en Europa. Esta operación conjunta ha llevado al arresto de varios agentes de inteligencia que trabajaban para Bielorrusia en los tres países mencionados. Se ha revelado que esta red se dedicaba a recopilar información sensible sobre opositores políticos y periodistas, lo que ha generado preocupación en la región. ▼</h2></div>
+			<div class="contenido">
+				<p>La República Checa, Rumania y Hungría han desmantelado una red de espionaje bielorrusa en Europa. Esta operación conjunta ha llevado al arresto de varios agentes de inteligencia que trabajaban para Bielorrusia en los tres países mencionados. Se ha revelado que esta red se dedicaba a recopilar información sensible sobre opositores políticos y periodistas, lo que ha generado preocupación en la región.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Elecciones en Noruega: Los partidos de izquierda y los ecologistas ganan por un estrecho margen</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFVQvXaG_fn_XzNZBvYxL_vbnbIkhiaRsXqSAlA6G8f7hs4SBEVZkwekglMw&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>En las recientes elecciones en Noruega, los partidos de izquierda y los ecologistas lograron una victoria por un estrecho margen. Aunque los resultados finales aún no están confirmados, se espera que estos partidos puedan formar gobierno juntos. Los votantes expresaron su preocupación por temas como el cambio climático y la desigualdad social, lo que se reflejó en los resultados de las elecciones. ▼</h2></div>
+			<div class="contenido">
+				<p>En las recientes elecciones en Noruega, los partidos de izquierda y los ecologistas lograron una victoria por un estrecho margen. Aunque los resultados finales aún no están confirmados, se espera que estos partidos puedan formar gobierno juntos. Los votantes expresaron su preocupación por temas como el cambio climático y la desigualdad social, lo que se reflejó en los resultados de las elecciones.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Racing eliminó al Real Madrid y se clasificó a la final del Mundial de Clubes Juvenil Sub-18.</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRY8tcR4qdsCTo16XQa7nADWfGelgWyGSPzeZtRL-RZcJGeohyZXCwIp_3Rm6s&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Racing eliminó al Real Madrid en las semifinales del Mundial de Clubes Juvenil Sub-18 y se clasificó a la final del torneo. El equipo argentino logró una victoria histórica contra uno de los gigantes europeos del fútbol juvenil y ahora buscará el título en el campeonato internacional. ▼</h2></div>
+			<div class="contenido">
+				<p>Racing eliminó al Real Madrid en las semifinales del Mundial de Clubes Juvenil Sub-18 y se clasificó a la final del torneo. El equipo argentino logró una victoria histórica contra uno de los gigantes europeos del fútbol juvenil y ahora buscará el título en el campeonato internacional.</p>
+			</div>
+		</div>
+ <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+  <p><strong>Publicidad</strong></p>
+        <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+        <img src='https://viaonline.com.ar/ads/publicite.png ' 
+        alt='Anuncio Publicitario'  
+        style='max-width: 80%; height: auto;'>
+     </a>
+     <p style='margin-top: 10px; text-align: center;'>
+        <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+        
+        </a>
+     </p>
+  </div> 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Más de 500000 personas fueron afectadas por el terremoto en Afganistán, alertó UNICEF</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNvrJ8YJq0AvFVnWKLtabOo4YPIwrj72aoQWS6DOj_b6k5vnVVqIgIKnOQkxc&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Unicef alertó que más de 500,000 personas resultaron afectadas por el terremoto en Afganistán. La organización ha proporcionado asistencia humanitaria de emergencia, incluyendo suministros de agua limpia y servicios de salud, para ayudar a los afectados por el desastre natural. ▼</h2></div>
+			<div class="contenido">
+				<p>Unicef alertó que más de 500,000 personas resultaron afectadas por el terremoto en Afganistán. La organización ha proporcionado asistencia humanitaria de emergencia, incluyendo suministros de agua limpia y servicios de salud, para ayudar a los afectados por el desastre natural.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Axion Energy y TICMAS llevan la tecnología y la historia local a seis escuelas de Campana</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTu2mCMVmQ42FHz76A-cCFIxbUYfB2hohnd17IBB8LBCsZj889QIMunVH0mw&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Axion Energy y Ticmas han implementado un programa en seis escuelas de Campana que combina la tecnología y la historia local para enriquecer la educación de los estudiantes. A través de esta iniciativa, se busca acercar a los jóvenes a sus raíces culturales y fomentar el interés por la tecnología. ▼</h2></div>
+			<div class="contenido">
+				<p>Axion Energy y Ticmas han implementado un programa en seis escuelas de Campana que combina la tecnología y la historia local para enriquecer la educación de los estudiantes. A través de esta iniciativa, se busca acercar a los jóvenes a sus raíces culturales y fomentar el interés por la tecnología.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Arte y Real Estate: Una propuesta que cautivó a los asistentes de arteBA 2025</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRF2EcGfcFbFO3we8vFMYOm3ylMQ2i3-271QidAYkvVmOOqhIrZhpNpjHnws2Q&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>En la última edición de arteBA 2025 se destacó la propuesta que combina arte y real estate, la cual cautivó a los asistentes. Esta iniciativa presentó atractivas propuestas inmobiliarias que incorporaban obras de arte en sus espacios. Los visitantes se mostraron muy interesados en esta fusión entre arte y arquitectura, generando gran expectativa y entusiasmo en el evento. ▼</h2></div>
+			<div class="contenido">
+				<p>En la última edición de arteBA 2025 se destacó la propuesta que combina arte y real estate, la cual cautivó a los asistentes. Esta iniciativa presentó atractivas propuestas inmobiliarias que incorporaban obras de arte en sus espacios. Los visitantes se mostraron muy interesados en esta fusión entre arte y arquitectura, generando gran expectativa y entusiasmo en el evento.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>El FBI alertó sobre los riesgos del cifrado extremo a extremo en los dispositivos Apple</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQU1u9sgxbcLdMFyBBccylBDnHvKQugGdZpkhjx8uynz4ODi4jyVooGl8OYOA&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El FBI emitió una alerta sobre los peligros del cifrado extremo a extremo en los dispositivos de Apple. Esta tecnología dificulta la intervención de las autoridades en investigaciones criminales, ya que impide el acceso a la información de los dispositivos. El FBI advierte que esto puede beneficiar a delincuentes y terroristas al dificultar la obtención de pruebas en casos de seguridad nacional. ▼</h2></div>
+			<div class="contenido">
+				<p>El FBI emitió una alerta sobre los peligros del cifrado extremo a extremo en los dispositivos de Apple. Esta tecnología dificulta la intervención de las autoridades en investigaciones criminales, ya que impide el acceso a la información de los dispositivos. El FBI advierte que esto puede beneficiar a delincuentes y terroristas al dificultar la obtención de pruebas en casos de seguridad nacional.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Crisis política en Francia: tras la caída de Bayrou, Macron nombrará a un nuevo primer ministro en los próximos días</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVQO_aGO87p5G8qMGQQaN3tnV1FDP4fMfC1fEyT8_ioVTId6vLwiCqFoyWjQ&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>En Francia, se vive una crisis política tras la renuncia de Francois Bayrou como ministro de Justicia. El presidente Emmanuel Macron deberá nombrar un nuevo primer ministro en los próximos días para hacer frente a esta situación. ▼</h2></div>
+			<div class="contenido">
+				<p>En Francia, se vive una crisis política tras la renuncia de Francois Bayrou como ministro de Justicia. El presidente Emmanuel Macron deberá nombrar un nuevo primer ministro en los próximos días para hacer frente a esta situación.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1></h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAiz0SmcZiXG_Iw7UrI104vmpQcMITug8WQJYtEJjAg9s85bShbg2iaB7qS60&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>En Uruguay, fueron encontrados muertos los hermanos de 2 y 6 años que habían sido secuestrados por su padre. Los cuerpos fueron hallados en un descampado, luego de una intensa búsqueda que duró varios días. La madre de los niños había denunciado la desaparición de los mismos, tras no regresar de un encuentro con su padre. La policía maneja la hipótesis de un homicidio seguido de suicidio por parte del progenitor. ▼</h2></div>
+			<div class="contenido">
+				<p>En Uruguay, fueron encontrados muertos los hermanos de 2 y 6 años que habían sido secuestrados por su padre. Los cuerpos fueron hallados en un descampado, luego de una intensa búsqueda que duró varios días. La madre de los niños había denunciado la desaparición de los mismos, tras no regresar de un encuentro con su padre. La policía maneja la hipótesis de un homicidio seguido de suicidio por parte del progenitor.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Corrupción en Costa Rica: Comisión Legislativa recomienda levantar fuero presidencial a Rodrigo Chaves</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSta9dRRavtnPw-NvtxsdvadxD5spATbTeDyirK9aOGz1MnjtRcpmDSGFs0lg&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La Comisión Legislativa de Costa Rica recomendó levantar el fuero presidencial a Rodrigo Chaves por casos de corrupción. ▼</h2></div>
+			<div class="contenido">
+				<p>La Comisión Legislativa de Costa Rica recomendó levantar el fuero presidencial a Rodrigo Chaves por casos de corrupción.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Cuál es el gigante regional en el que invierte Amazon con la intención de competir con Mercado Libre</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScr2lY75X2SW6H6hTMRSGWLDG4elPbmY0XON-ee9jMwJXtFp9btCVtglfHxQ&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Amazon está invirtiendo en una empresa de logística regional denominada Rappi, con el objetivo de competir con Mercado Libre en América Latina. Rappi es una empresa colombiana que ofrece servicios de entrega rápida y compras en línea, y ha experimentado un crecimiento significativo en la región en los últimos años. Amazon busca expandir su presencia en el mercado latinomamericano a través de esta asociación con Rappi. ▼</h2></div>
+			<div class="contenido">
+				<p>Amazon está invirtiendo en una empresa de logística regional denominada Rappi, con el objetivo de competir con Mercado Libre en América Latina. Rappi es una empresa colombiana que ofrece servicios de entrega rápida y compras en línea, y ha experimentado un crecimiento significativo en la región en los últimos años. Amazon busca expandir su presencia en el mercado latinomamericano a través de esta asociación con Rappi.</p>
+			</div>
+		</div>
+ <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+  <p><strong>Publicidad</strong></p>
+        <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+        <img src='https://viaonline.com.ar/ads/publicite.png ' 
+        alt='Anuncio Publicitario'  
+        style='max-width: 80%; height: auto;'>
+     </a>
+     <p style='margin-top: 10px; text-align: center;'>
+        <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+        
+        </a>
+     </p>
+  </div> 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1></h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTifYbIluhykM4JuMXrbQOHwtbs5x6hOhE5iw8mAvHazeqKtZrKtBTltsFFyQ&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>En un video de 13 segundos se muestra el momento en que tres delincuentes roban el techo solar de un auto en Vicente López. La rápida acción de los ladrones fue captada por una cámara de seguridad. Posteriormente, los tres sujetos fueron detenidos por la policía. ▼</h2></div>
+			<div class="contenido">
+				<p>En un video de 13 segundos se muestra el momento en que tres delincuentes roban el techo solar de un auto en Vicente López. La rápida acción de los ladrones fue captada por una cámara de seguridad. Posteriormente, los tres sujetos fueron detenidos por la policía.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>A la espera del iPhone 17 liviano: ¿qué podría pasar con el precio de las acciones de Apple y su valor de mercado?</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhga3cygFqwcCoIlR57uszV2I5kF0WoFDjHtFKyR74cTn8YYMkT2XWSfvZFg&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Apple se prepara para el lanzamiento del iPhone 17, un dispositivo más liviano y con nuevas funcionalidades. Se espera que este lanzamiento tenga un impacto en el precio de las acciones de la empresa y en su valor de mercado. Los analistas predicen que las acciones de Apple podrían subir en caso de una buena aceptación del nuevo producto, lo que impulsaría su valor en el mercado. ▼</h2></div>
+			<div class="contenido">
+				<p>Apple se prepara para el lanzamiento del iPhone 17, un dispositivo más liviano y con nuevas funcionalidades. Se espera que este lanzamiento tenga un impacto en el precio de las acciones de la empresa y en su valor de mercado. Los analistas predicen que las acciones de Apple podrían subir en caso de una buena aceptación del nuevo producto, lo que impulsaría su valor en el mercado.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>El negocio del feedlot puede volverse insostenible</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGcHQSdMGcSV7PTzp003_2b5aMg3qp39FfMPwjUSZjDvmtNx7wtBjv2OnAXA&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La noticia habla sobre cómo el negocio del feedlot puede volverse insostenible debido al aumento de los costos de producción y la baja rentabilidad. Esto se debe a factores como el aumento en el precio del maíz y la soja, el aumento de los precios de los insumos y la competencia con otros países exportadores de carne. Esto genera preocupación en los productores de feedlot, quienes deben buscar estrategias para adaptarse a esta nueva realidad y mantener la rentabilidad de sus negocios. ▼</h2></div>
+			<div class="contenido">
+				<p>La noticia habla sobre cómo el negocio del feedlot puede volverse insostenible debido al aumento de los costos de producción y la baja rentabilidad. Esto se debe a factores como el aumento en el precio del maíz y la soja, el aumento de los precios de los insumos y la competencia con otros países exportadores de carne. Esto genera preocupación en los productores de feedlot, quienes deben buscar estrategias para adaptarse a esta nueva realidad y mantener la rentabilidad de sus negocios.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>El llamativo accidente que sufrió Erling Haaland con el micro de la selección de Noruega.</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5FFprV44AzX8zawVc5He1f5wSfWUCcvURiFvFp_LCcUQSQayjmCqJP5LOBYQ&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El jugador de fútbol Erling Haaland sufrió un accidente con el micro de la selección de Noruega cuando regresaban de un partido. El vehículo se deslizó en la carretera por el hielo, pero afortunadamente no hubo heridos. El delantero, considerado una de las grandes promesas del fútbol mundial, llegó ileso al hotel donde se hospedaba el equipo. ▼</h2></div>
+			<div class="contenido">
+				<p>El jugador de fútbol Erling Haaland sufrió un accidente con el micro de la selección de Noruega cuando regresaban de un partido. El vehículo se deslizó en la carretera por el hielo, pero afortunadamente no hubo heridos. El delantero, considerado una de las grandes promesas del fútbol mundial, llegó ileso al hotel donde se hospedaba el equipo.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Concluyó una nueva edición del Borgespalooza: la cultura es un derecho</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmZu5udRyAwSlnlm_ovlR_obEcCn_cPlxXedWf6R4LSgJSBjZkRXHq58lvQQ&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>En una nueva edición del Borgespalooza, se celebró la cultura como un derecho y no un privilegio. El evento ha concluido con éxito, destacando la importancia de garantizar el acceso a la cultura para todos. ▼</h2></div>
+			<div class="contenido">
+				<p>En una nueva edición del Borgespalooza, se celebró la cultura como un derecho y no un privilegio. El evento ha concluido con éxito, destacando la importancia de garantizar el acceso a la cultura para todos.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Los milagros de Carlo Acutis: Los dos hechos reconocidos por el Vaticano que lo llevaron a la canonización</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSk-DNJJArmmaA4am7oLZX4sijyTaUDY3TzL4FBl1XX_cxqhUJuLFCUbCvektI&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El Vaticano reconoció dos milagros atribuidos a Carlo Acutis, lo que lo llevó a ser canonizado. Los milagros confirmados incluyen la curación de un niño brasileño con páncreas anormal y la remisión inexplicable de una mujer italiana con leucemia. Carlo Acutis fue un joven italiano fallecido a los 15 años en 2006, que será reconocido como santo por la Iglesia Católica. ▼</h2></div>
+			<div class="contenido">
+				<p>El Vaticano reconoció dos milagros atribuidos a Carlo Acutis, lo que lo llevó a ser canonizado. Los milagros confirmados incluyen la curación de un niño brasileño con páncreas anormal y la remisión inexplicable de una mujer italiana con leucemia. Carlo Acutis fue un joven italiano fallecido a los 15 años en 2006, que será reconocido como santo por la Iglesia Católica.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>ANMAT refuerza controles sobre seguridad de medicamentos para la diabetes</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRs1J-WMd7APXFPg-B4oxRJcxq9QXVsNKZVKc1nW-LyhYh4xSLZ97Drf0t0BA&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La ANMAT ha aumentado los controles sobre la seguridad de los medicamentos para la diabetes en Argentina. Esto se debe a que se han detectado irregularidades en algunos productos, poniendo en riesgo la salud de los pacientes. La medida busca garantizar la calidad y eficacia de estos medicamentos, asegurando que cumplan con los estándares de seguridad necesarios para su uso. ▼</h2></div>
+			<div class="contenido">
+				<p>La ANMAT ha aumentado los controles sobre la seguridad de los medicamentos para la diabetes en Argentina. Esto se debe a que se han detectado irregularidades en algunos productos, poniendo en riesgo la salud de los pacientes. La medida busca garantizar la calidad y eficacia de estos medicamentos, asegurando que cumplan con los estándares de seguridad necesarios para su uso.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>El sufrimiento del periodista Juan Fossaroli al dar una vuelta en Monza con Colapinto: "Me asustas, vamos despacito"</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQR61kJyxXks-pMpJoTP0oywTFXWHJBV-CkipYg5KLvVFS4W9oKhH2U-kMQPA&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El periodista Juan Fossaroli vivió momentos de tensión al dar una vuelta en Monza con el piloto argentino Franco Colapinto. Durante la experiencia, el periodista expresó su temor por la velocidad a la que iban, pidiendo que fuera más despacio. La vuelta fue transmitida en vivo y se pudo apreciar la angustia de Fossaroli durante el recorrido. ▼</h2></div>
+			<div class="contenido">
+				<p>El periodista Juan Fossaroli vivió momentos de tensión al dar una vuelta en Monza con el piloto argentino Franco Colapinto. Durante la experiencia, el periodista expresó su temor por la velocidad a la que iban, pidiendo que fuera más despacio. La vuelta fue transmitida en vivo y se pudo apreciar la angustia de Fossaroli durante el recorrido.</p>
+			</div>
+		</div>
+ <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+  <p><strong>Publicidad</strong></p>
+        <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+        <img src='https://viaonline.com.ar/ads/publicite.png ' 
+        alt='Anuncio Publicitario'  
+        style='max-width: 80%; height: auto;'>
+     </a>
+     <p style='margin-top: 10px; text-align: center;'>
+        <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+        
+        </a>
+     </p>
+  </div> 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Miguel Russo evoluciona pero todavía no se sumó a los entrenamientos de Boca: los motivos</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS08vLH6vuN3ZaNVPL0sToeqOci7CTC2-POW8wl1LNDO08Nur3Pfh11agzfeKY&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El técnico de Boca Juniors, Miguel Russo, continúa evolucionando favorablemente en su proceso de recuperación, pero aún no ha podido sumarse a los entrenamientos del equipo por motivos que no han sido especificados. ▼</h2></div>
+			<div class="contenido">
+				<p>El técnico de Boca Juniors, Miguel Russo, continúa evolucionando favorablemente en su proceso de recuperación, pero aún no ha podido sumarse a los entrenamientos del equipo por motivos que no han sido especificados.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Tragedia en Mendoza: una moto chocó contra el muro y provocó un derrumbe que mató a una nena de 3 años</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWcUPgs7OzMUWiY1xLuchRblc9w1oBQky8Y3qEgb3toFLYOI_aQ3ttLw304Nk&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2> ▼</h2></div>
+			<div class="contenido">
+				<p></p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>El detrás de escena de la polémica orden de McLaren en el GP de Italia de F1: el careo entre Norris y Piastri</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtiznZp4_zqJVVnw8QT2N608yh6Fvozk_0mmmpTTjwm-udoggTGqc2Ku63saQ&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El artículo analiza la polémica orden de equipo de McLaren en el Gran Premio de Italia de F1 entre los pilotos Lando Norris y Oscar Piastri. Se revela que Piastri recibió indicaciones de no intentar adelantar a Norris durante la carrera, lo que generó malestar en el piloto australiano. Se destaca el enfrentamiento que tuvieron ambos pilotos en el motorhome después de la carrera, donde Piastri expresó su disgusto por la situación. El equipo McLaren justificó su decisión con el objetivo de maximizar los puntos en juego para el campeonato de constructores. ▼</h2></div>
+			<div class="contenido">
+				<p>El artículo analiza la polémica orden de equipo de McLaren en el Gran Premio de Italia de F1 entre los pilotos Lando Norris y Oscar Piastri. Se revela que Piastri recibió indicaciones de no intentar adelantar a Norris durante la carrera, lo que generó malestar en el piloto australiano. Se destaca el enfrentamiento que tuvieron ambos pilotos en el motorhome después de la carrera, donde Piastri expresó su disgusto por la situación. El equipo McLaren justificó su decisión con el objetivo de maximizar los puntos en juego para el campeonato de constructores.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Los videojuegos de ejercicio físico podrían ser aliados contra el deterioro cognitivo</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRo4YxjPGmTCdcYEOoVulpD1zTT-8nmdWP0NTDBzVdqA83rja_yIoy4ORSHG-s&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>En un estudio publicado por la revista científica Nature Aging, se destaca que los videojuegos de ejercicio físico podrían ser aliados en la lucha contra el deterioro cognitivo en adultos mayores. Se encontró que las personas que jugaron estos videojuegos lograron mejorar su función cognitiva, así como también su capacidad para realizar actividades diarias. Los investigadores sugieren que esta actividad podría ser una forma efectiva y divertida de mejorar la salud cerebral en la tercera edad. ▼</h2></div>
+			<div class="contenido">
+				<p>En un estudio publicado por la revista científica Nature Aging, se destaca que los videojuegos de ejercicio físico podrían ser aliados en la lucha contra el deterioro cognitivo en adultos mayores. Se encontró que las personas que jugaron estos videojuegos lograron mejorar su función cognitiva, así como también su capacidad para realizar actividades diarias. Los investigadores sugieren que esta actividad podría ser una forma efectiva y divertida de mejorar la salud cerebral en la tercera edad.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Israel continúa su campaña contra edificios de Hamas en Gaza mientras el grupo terrorista analiza otra propuesta de tregua</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcvJbx_1UwD0EA4nVjjrOp62VVpW2FyGrkZ_ltBCb4X-1AMWMPb6QzwEDreg&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Israel continúa su campaña contra edificios de Hamas en Gaza, mientras el grupo terrorista analiza una nueva propuesta de tregua. Los ataques israelíes han dejado varios muertos y heridos, provocando una escalada de tensiones en la región. Por su parte, Hamas está evaluando la posibilidad de aceptar un alto el fuego propuesto por mediadores internacionales. ▼</h2></div>
+			<div class="contenido">
+				<p>Israel continúa su campaña contra edificios de Hamas en Gaza, mientras el grupo terrorista analiza una nueva propuesta de tregua. Los ataques israelíes han dejado varios muertos y heridos, provocando una escalada de tensiones en la región. Por su parte, Hamas está evaluando la posibilidad de aceptar un alto el fuego propuesto por mediadores internacionales.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Me estás mintiendo: el divertido cruce entre Guillermo Barros Schelotto y Diego Latorre tras el título de Vélez</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS08vLH6vuN3ZaNVPL0sToeqOci7CTC2-POW8wl1LNDO08Nur3Pfh11agzfeKY&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El ex futbolista y actual entrenador Guillermo Barros Schelotto y el comentarista deportivo Diego Latorre tuvieron un divertido cruce en un programa de televisión luego de que Vélez se consagrara campeón. Barros Schelotto acusó a Latorre de mentirle sobre un supuesto mensaje de felicitación, lo que generó risas entre ambos. La charla amena y jocosa mostró la buena relación que mantienen más allá de las diferencias de opiniones en el ámbito futbolístico. ▼</h2></div>
+			<div class="contenido">
+				<p>El ex futbolista y actual entrenador Guillermo Barros Schelotto y el comentarista deportivo Diego Latorre tuvieron un divertido cruce en un programa de televisión luego de que Vélez se consagrara campeón. Barros Schelotto acusó a Latorre de mentirle sobre un supuesto mensaje de felicitación, lo que generó risas entre ambos. La charla amena y jocosa mostró la buena relación que mantienen más allá de las diferencias de opiniones en el ámbito futbolístico.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Kicillof contó cómo fue el intercambio por WhatsApp con Guillermo Francos tras las elecciones bonaerenses</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHveHcMjYqMteULsO6cYb3RTafcGwqqSKNJHphDWqHfdAvMCFA0nLg6v3eGY8&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El gobernador de la provincia de Buenos Aires, Axel Kicillof, reveló detalles de una conversación por WhatsApp que mantuvo con el periodista Guillermo Francos luego de las elecciones bonaerenses. Kicillof explicó que Francos le envió un mensaje felicitándolo por su victoria y él le agradeció, destacando la importancia de la participación ciudadana en el proceso electoral. ▼</h2></div>
+			<div class="contenido">
+				<p>El gobernador de la provincia de Buenos Aires, Axel Kicillof, reveló detalles de una conversación por WhatsApp que mantuvo con el periodista Guillermo Francos luego de las elecciones bonaerenses. Kicillof explicó que Francos le envió un mensaje felicitándolo por su victoria y él le agradeció, destacando la importancia de la participación ciudadana en el proceso electoral.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>El gobierno bonaerense estableció que las billeteras digitales deberán retener ingresos brutos.</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFmEIVaezbUP9utNOaVhrEHhSoC422a0z-ryl4ElE5IWd7KrjxNZ8NOZToZw&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El gobierno bonaerense ha establecido que las billeteras digitales deberán retener ingresos brutos a partir de ahora. Esta medida busca regularizar la situación impositiva de estas plataformas y garantizar un mayor control fiscal en la provincia de Buenos Aires. ▼</h2></div>
+			<div class="contenido">
+				<p>El gobierno bonaerense ha establecido que las billeteras digitales deberán retener ingresos brutos a partir de ahora. Esta medida busca regularizar la situación impositiva de estas plataformas y garantizar un mayor control fiscal en la provincia de Buenos Aires.</p>
+			</div>
+		</div>
+ <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+  <p><strong>Publicidad</strong></p>
+        <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+        <img src='https://viaonline.com.ar/ads/publicite.png ' 
+        alt='Anuncio Publicitario'  
+        style='max-width: 80%; height: auto;'>
+     </a>
+     <p style='margin-top: 10px; text-align: center;'>
+        <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+        
+        </a>
+     </p>
+  </div> 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Sin lluvias y con temperaturas primaverales: cómo estará el tiempo durante esta semana, según el SMN</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQNy4od8300pnx-r3FfWhgKaWxgEEQz6tNtZ-CQ63MaDNvixnefebhXWFNpg&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El Servicio Meteorológico Nacional informó que durante esta semana no se esperan lluvias en gran parte del país, con temperaturas primaverales en varias regiones. En el centro y norte de Argentina se prevén días cálidos y soleados, mientras que en la Patagonia se esperan algunas nevadas y vientos intensos. En general, se espera un clima estable y agradable en la mayor parte del territorio nacional. ▼</h2></div>
+			<div class="contenido">
+				<p>El Servicio Meteorológico Nacional informó que durante esta semana no se esperan lluvias en gran parte del país, con temperaturas primaverales en varias regiones. En el centro y norte de Argentina se prevén días cálidos y soleados, mientras que en la Patagonia se esperan algunas nevadas y vientos intensos. En general, se espera un clima estable y agradable en la mayor parte del territorio nacional.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>UNCTAD: La falta de previsibilidad en el comercio exterior encarece costos logísticos globales</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYlNYJzxLwpG3Tqm_r6KMTbwnjWPu7pizYnsoPP6nsGGZFp3Fu8eVjHZrTz28&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Según un informe de la UNCTAD, la falta de previsibilidad en el comercio exterior está encareciendo los costos logísticos a nivel global. Esta situación impacta especialmente a los países en desarrollo, quienes se ven perjudicados por la inestabilidad en las regulaciones comerciales. Esta incertidumbre provoca un aumento en los costos de transporte y almacenamiento, lo que dificulta la planificación y la toma de decisiones en las empresas. La UNCTAD alerta sobre la importancia de establecer políticas que generen mayor estabilidad en el comercio internacional para reducir los costos logísticos y mejorar la eficiencia en las cadenas de suministro a nivel mundial. ▼</h2></div>
+			<div class="contenido">
+				<p>Según un informe de la UNCTAD, la falta de previsibilidad en el comercio exterior está encareciendo los costos logísticos a nivel global. Esta situación impacta especialmente a los países en desarrollo, quienes se ven perjudicados por la inestabilidad en las regulaciones comerciales. Esta incertidumbre provoca un aumento en los costos de transporte y almacenamiento, lo que dificulta la planificación y la toma de decisiones en las empresas. La UNCTAD alerta sobre la importancia de establecer políticas que generen mayor estabilidad en el comercio internacional para reducir los costos logísticos y mejorar la eficiencia en las cadenas de suministro a nivel mundial.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>El director de la Agencia Atómica de la ONU advirtió sobre la necesidad de reanudar los controles nucleares en Irán</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTryyykYFKD86WcADWOOEoVPzZjIgKbGej-MnXjQ96BluxxQ0ZgmcHu3e2nUzw&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El director de la Agencia Atómica de la ONU advirtió que es urgente reanudar los controles nucleares en Irán, ya que considera que no queda mucho tiempo para hacerlo. Esta alerta sucede en un contexto de tensión por el programa nuclear iraní y el incumplimiento de ciertos acuerdos internacionales. ▼</h2></div>
+			<div class="contenido">
+				<p>El director de la Agencia Atómica de la ONU advirtió que es urgente reanudar los controles nucleares en Irán, ya que considera que no queda mucho tiempo para hacerlo. Esta alerta sucede en un contexto de tensión por el programa nuclear iraní y el incumplimiento de ciertos acuerdos internacionales.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Murio Rick Davies, cantante y cofundador de Supertramp</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkycwAdJiD7kyODI1JCj-UT15CbS35Ybt-99KZJQJ3roP_LcCZb6quLxzjLo4&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El músico Rick Davies, cantante y cofundador de la banda Supertramp, falleció a los 81 años. Davies fue parte clave del grupo británico, conocido por éxitos como "The Logical Song" y "Breakfast in America". Su legado musical perdurará en la memoria de sus fanáticos. ▼</h2></div>
+			<div class="contenido">
+				<p>El músico Rick Davies, cantante y cofundador de la banda Supertramp, falleció a los 81 años. Davies fue parte clave del grupo británico, conocido por éxitos como "The Logical Song" y "Breakfast in America". Su legado musical perdurará en la memoria de sus fanáticos.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Rupert Murdoch aseguró la sucesión de su imperio mediático en manos de uno de sus hijos</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVPrA_mMHyPH2wvWK7pk4w-W2lqy1Zf1kR4IpIya9myqOV7F1NtiYAlCC-5Rk&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Rupert Murdoch aseguró que la sucesión de su imperio mediático estará en manos de uno de sus hijos. Aunque no reveló quién será su heredero, mencionó que es un proceso que lleva tiempo planificando. Murdoch es un magnate de los medios de comunicación con un vasto imperio que incluye empresas como Fox News y The Wall Street Journal. ▼</h2></div>
+			<div class="contenido">
+				<p>Rupert Murdoch aseguró que la sucesión de su imperio mediático estará en manos de uno de sus hijos. Aunque no reveló quién será su heredero, mencionó que es un proceso que lleva tiempo planificando. Murdoch es un magnate de los medios de comunicación con un vasto imperio que incluye empresas como Fox News y The Wall Street Journal.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Lanús y Argentinos se enfrentan por un lugar en la semifinal de la Copa Argentina: hora, TV y formaciones</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkEBGBrVfWyGk94HCKbCuqUf5Rc2i-Q2xYxg1Iyf5VIe9TrB_6g7K3N41GVyk&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>En un encuentro correspondiente a los cuartos de final de la Copa Argentina, Lanús y Argentinos Juniors se enfrentarán en busca de un lugar en las semifinales. El partido se llevará a cabo el próximo viernes y se podrá ver por televisión. Ambos equipos presentarán formaciones tentativas para el encuentro. ▼</h2></div>
+			<div class="contenido">
+				<p>En un encuentro correspondiente a los cuartos de final de la Copa Argentina, Lanús y Argentinos Juniors se enfrentarán en busca de un lugar en las semifinales. El partido se llevará a cabo el próximo viernes y se podrá ver por televisión. Ambos equipos presentarán formaciones tentativas para el encuentro.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Copa Davis: la selección argentina viajó a Países Bajos con el deseo de conseguir la clasificación al Final 8</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeEFkWZuc482myWw1iHB-awxK9Duxk5ylzqFYd2hO7D99vNAUJzk4rtSQtBw&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La selección argentina de Copa Davis viajó a Países Bajos con el objetivo de clasificar a la final 8. El equipo argentino buscaba conseguir la clasificación en esta serie de partidos. ▼</h2></div>
+			<div class="contenido">
+				<p>La selección argentina de Copa Davis viajó a Países Bajos con el objetivo de clasificar a la final 8. El equipo argentino buscaba conseguir la clasificación en esta serie de partidos.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Dibu Martínez mostró la intimidad del asado de la selección y el ritual de bienvenida para un juvenil antes de viajar a Ecuador</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQN2ZxF4JC317fXjGQZLOaLsszwHVDgE2La5AR5sle033ibUMXzmpF7RApYmI4&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El arquero de la selección argentina, Emiliano Martínez, compartió en sus redes sociales la intimidad de un asado del equipo y el ritual de bienvenida a un juvenil antes de viajar a Ecuador. En las imágenes se puede ver a los jugadores disfrutando de la comida y realizando una ceremonia para desearle suerte al joven futbolista. ▼</h2></div>
+			<div class="contenido">
+				<p>El arquero de la selección argentina, Emiliano Martínez, compartió en sus redes sociales la intimidad de un asado del equipo y el ritual de bienvenida a un juvenil antes de viajar a Ecuador. En las imágenes se puede ver a los jugadores disfrutando de la comida y realizando una ceremonia para desearle suerte al joven futbolista.</p>
+			</div>
+		</div>
+ <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+  <p><strong>Publicidad</strong></p>
+        <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+        <img src='https://viaonline.com.ar/ads/publicite.png ' 
+        alt='Anuncio Publicitario'  
+        style='max-width: 80%; height: auto;'>
+     </a>
+     <p style='margin-top: 10px; text-align: center;'>
+        <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+        
+        </a>
+     </p>
+  </div> 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Cómo es el estado de salud de los jugadores de rugby que sobrevivieron tras el trágico choque en la Ruta 19</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTc-eVhG0uMXUS51rlK3WIBpEMfZrGIE61q-Lhio0scwvBasww9jb-Fa-BcFcc&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El estado de salud de los jugadores de rugby que sobrevivieron al trágico choque en la ruta 19 es delicado pero estable. Se encuentran internados en terapia intensiva y han sido sometidos a cirugías. Los médicos están evaluando día a día su evolución. ▼</h2></div>
+			<div class="contenido">
+				<p>El estado de salud de los jugadores de rugby que sobrevivieron al trágico choque en la ruta 19 es delicado pero estable. Se encuentran internados en terapia intensiva y han sido sometidos a cirugías. Los médicos están evaluando día a día su evolución.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Cómo le fue al gobierno en la localidad del conurbano donde Milei irrumpió con el cartel "Kirchnerismo nunca más"</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6nrfAwwCEv3I8BJ5x_GNUcV0JstNd7uUYYuLZbzv1JPEAmGAmLiqfI3l-EBs&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>En la localidad del conurbano donde Javier Milei irrumpió con el cartel "Kirchnerismo nunca más", el gobierno sufrió un revés en las elecciones. El Frente de Todos obtuvo menos del 20% de los votos, mientras que Juntos por el Cambio se posicionó como la fuerza más votada, seguida por Espert-Unidos. El resultado evidencia un descontento con el oficialismo en esa zona del país. ▼</h2></div>
+			<div class="contenido">
+				<p>En la localidad del conurbano donde Javier Milei irrumpió con el cartel "Kirchnerismo nunca más", el gobierno sufrió un revés en las elecciones. El Frente de Todos obtuvo menos del 20% de los votos, mientras que Juntos por el Cambio se posicionó como la fuerza más votada, seguida por Espert-Unidos. El resultado evidencia un descontento con el oficialismo en esa zona del país.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Mayra Mendoza: El desdoblamiento salió bien pero el resultado es multicausal.</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKncxS_ztBL1kKK9L-xL-F6XtnewzTxl3azjtuYbeeULnjazBV9BsXjuVxLg&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El desdoblamiento de las elecciones en la provincia de Buenos Aires fue evaluado positivamente por la intendenta Mayra Mendoza, quien destacó que el resultado fue multicausal. ▼</h2></div>
+			<div class="contenido">
+				<p>El desdoblamiento de las elecciones en la provincia de Buenos Aires fue evaluado positivamente por la intendenta Mayra Mendoza, quien destacó que el resultado fue multicausal.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Como la alianza entre Hezbollah, Irán y la dictadura de Maduro construyó un imperio del narcotráfico en Venezuela.</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBqzUlo27WTWxio_F4iu1A__6gCCeCiXQ1cHuwhcdf15n9rHBNttW_bil9skk&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El artículo detalla la alianza entre Hezbollah, Irán y la dictadura de Maduro en Venezuela, la cual ha permitido la construcción de un imperio del narcotráfico en el país. Se menciona que dicha alianza utiliza a Venezuela como plataforma para acceder al mercado estadounidense de drogas, así como la corrupción y complicidad de las autoridades venezolanas en este negocio ilícito. Además, se destaca la presencia de terroristas de Hezbollah en suelo venezolano, lo que representa una amenaza para la seguridad no solo de la región, sino también a nivel global. ▼</h2></div>
+			<div class="contenido">
+				<p>El artículo detalla la alianza entre Hezbollah, Irán y la dictadura de Maduro en Venezuela, la cual ha permitido la construcción de un imperio del narcotráfico en el país. Se menciona que dicha alianza utiliza a Venezuela como plataforma para acceder al mercado estadounidense de drogas, así como la corrupción y complicidad de las autoridades venezolanas en este negocio ilícito. Además, se destaca la presencia de terroristas de Hezbollah en suelo venezolano, lo que representa una amenaza para la seguridad no solo de la región, sino también a nivel global.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>El árbol resistente a la sequía que brinda sombra y puede plantarse en el jardín de casa</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTy_4GI6DMA-_hB6IjGbIUuXKx4iH-qc6qLKfeqsEnFPmBYpDooHZztKpE4Fw&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Un árbol resistente a la sequía ha sido desarrollado, el cual brinda sombra y puede ser plantado en el jardín de casa. Este árbol, conocido como el "árbol de la lluvia", puede sobrevivir con mínimas cantidades de agua y fue creado mediante técnicas de biotecnología. Además de ser una opción para combatir la desertificación, este árbol ofrece la posibilidad de ser plantado en entornos urbanos gracias a su resistencia y capacidad para proveer sombra. ▼</h2></div>
+			<div class="contenido">
+				<p>Un árbol resistente a la sequía ha sido desarrollado, el cual brinda sombra y puede ser plantado en el jardín de casa. Este árbol, conocido como el "árbol de la lluvia", puede sobrevivir con mínimas cantidades de agua y fue creado mediante técnicas de biotecnología. Además de ser una opción para combatir la desertificación, este árbol ofrece la posibilidad de ser plantado en entornos urbanos gracias a su resistencia y capacidad para proveer sombra.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>SpaceX compró espectros por 17000 millones de dólares para expandir Starlink</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSHo2t8LrXptXNaKw1l8Ir1gVllqMfPQxVNYZXFRU_GurX1ObGFVcgsY0uM9M&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La multinacional SpaceX ha adquirido espectros por 17,000 millones de dólares con el objetivo de expandir Starlink, su red de internet satelital. Con esta inversión, la empresa busca mejorar y ampliar su cobertura para ofrecer servicios de conectividad en diversas zonas del mundo. ▼</h2></div>
+			<div class="contenido">
+				<p>La multinacional SpaceX ha adquirido espectros por 17,000 millones de dólares con el objetivo de expandir Starlink, su red de internet satelital. Con esta inversión, la empresa busca mejorar y ampliar su cobertura para ofrecer servicios de conectividad en diversas zonas del mundo.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>La autocritica de un diputado electo de la Libertad Avanza: "Mi mama es jubilada y no llega a fin de mes"</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyZMVnVJOhK46FUipOfCcq7Iz_zL_6_XbGgyrB7EtHwVKOirLJ6kN4jtVPw2Y&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El diputado electo de La Libertad expresó autocrítica, reconociendo que su madre, jubilada, tiene dificultades para llegar a fin de mes. Afirmó que a pesar de su posición, sigue comprometido en trabajar para mejorar la calidad de vida de todos los ciudadanos. ▼</h2></div>
+			<div class="contenido">
+				<p>El diputado electo de La Libertad expresó autocrítica, reconociendo que su madre, jubilada, tiene dificultades para llegar a fin de mes. Afirmó que a pesar de su posición, sigue comprometido en trabajar para mejorar la calidad de vida de todos los ciudadanos.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Científicos descubren cómo el sueño profundo fortalece músculos y huesos.</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcVyqv4t3i41ig9xFmPTY4xjhhWbudsRTU84IqfzantbCs1Yhg7NxNK6ppJyo&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Científicos han descubierto que el sueño profundo fortalece los músculos y huesos. Durante esta etapa del sueño, se liberan hormonas que promueven el crecimiento y la reparación muscular, así como la formación ósea. Este hallazgo podría ser clave en el tratamiento de enfermedades óseas y musculares en el futuro. ▼</h2></div>
+			<div class="contenido">
+				<p>Científicos han descubierto que el sueño profundo fortalece los músculos y huesos. Durante esta etapa del sueño, se liberan hormonas que promueven el crecimiento y la reparación muscular, así como la formación ósea. Este hallazgo podría ser clave en el tratamiento de enfermedades óseas y musculares en el futuro.</p>
+			</div>
+		</div>
+ <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+  <p><strong>Publicidad</strong></p>
+        <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+        <img src='https://viaonline.com.ar/ads/publicite.png ' 
+        alt='Anuncio Publicitario'  
+        style='max-width: 80%; height: auto;'>
+     </a>
+     <p style='margin-top: 10px; text-align: center;'>
+        <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+        
+        </a>
+     </p>
+  </div> 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Lo mejor de la jornada en las eliminatorias de Europa: las tres asistencias de Retegui en el 5-4 de Italia a un histórico triunfo</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3ICC_vPdPOfDzVGOlL2B9peEHvhqHCmrd3fTciYNuK3_M5b8g-RrL5pL3qOw&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>En las eliminatorias de Europa, Italia logró un histórico triunfo por 5-4 sobre su rival. Destacó la actuación de Retegui, quien brindó tres asistencias clave para la victoria de su equipo. ▼</h2></div>
+			<div class="contenido">
+				<p>En las eliminatorias de Europa, Italia logró un histórico triunfo por 5-4 sobre su rival. Destacó la actuación de Retegui, quien brindó tres asistencias clave para la victoria de su equipo.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>El oro marcó un nuevo récord histórico y ya subió 37% en lo que va de 2025.</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUAInKnP7ns1-Y3tpGrZ_snFv9wWKdUEK7carqLbQ623hxR8zaU-k344cU-w&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El precio del oro registró un nuevo récord histórico, aumentando un 37% en lo que va del año 2025. Esta alza se debe a la incertidumbre económica global y a la búsqueda de refugio en activos seguros por parte de los inversionistas. Esta tendencia alcista del oro parece continuar en el corto plazo. ▼</h2></div>
+			<div class="contenido">
+				<p>El precio del oro registró un nuevo récord histórico, aumentando un 37% en lo que va del año 2025. Esta alza se debe a la incertidumbre económica global y a la búsqueda de refugio en activos seguros por parte de los inversionistas. Esta tendencia alcista del oro parece continuar en el corto plazo.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>El jefe de gabinete de Zelensky y Marco Rubio conversaron tras el ataque al edificio gubernamental en Kiev.</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSJiThOkfoiE-DT2Tyf8iSz-aSfIkwR0RmGYGd1B9DrrWyZFhAXV5rSPLRwg&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El jefe de gabinete de Zelensky y Marco Rubio conversaron tras el ataque al edificio gubernamental en Kiev. El senador estadounidense expresó su solidaridad con Ucrania y condenó el ataque, reafirmando el apoyo de Estados Unidos al país europeo. Por su parte, el jefe de gabinete de Zelensky agradeció la solidaridad y aseguró que su gobierno seguirá trabajando para fortalecer la democracia en Ucrania. ▼</h2></div>
+			<div class="contenido">
+				<p>El jefe de gabinete de Zelensky y Marco Rubio conversaron tras el ataque al edificio gubernamental en Kiev. El senador estadounidense expresó su solidaridad con Ucrania y condenó el ataque, reafirmando el apoyo de Estados Unidos al país europeo. Por su parte, el jefe de gabinete de Zelensky agradeció la solidaridad y aseguró que su gobierno seguirá trabajando para fortalecer la democracia en Ucrania.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Kicillof recibió llamadas de los presidentes de Uruguay y Brasil y sigue esperando comunicación con Milei</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuX03m5pIGrBXHuxEEcwGURkxKEanxt14Ema2agZ-pig0pUEybqElYUbo39A&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El gobernador de la provincia de Buenos Aires, Axel Kicillof, recibió llamadas de los presidentes de Uruguay y Brasil, pero continúa esperando una comunicación con el candidato a diputado nacional José Luis Espert. ▼</h2></div>
+			<div class="contenido">
+				<p>El gobernador de la provincia de Buenos Aires, Axel Kicillof, recibió llamadas de los presidentes de Uruguay y Brasil, pero continúa esperando una comunicación con el candidato a diputado nacional José Luis Espert.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>El fuerte cruce entre los padres de Max Verstappen y Checo Pérez por el pasado de sus hijos en Red Bull: ¡Qué cobarde es!</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdS283dnaQBjgFw8_92L9z3QWiXuFYKC6AOWaLLcRIemgURhF6vKDH_Lt5Dik&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Los padres de Max Verstappen y Checo Pérez protagonizaron un fuerte cruce por el pasado de sus hijos en Red Bull. El padre de Verstappen criticó a Pérez por haber aceptado un papel secundario en el equipo, mientras que el padre de Pérez respondió defendiendo las decisiones de su hijo y calificando de "cobarde" la actitud de su contraparte. ▼</h2></div>
+			<div class="contenido">
+				<p>Los padres de Max Verstappen y Checo Pérez protagonizaron un fuerte cruce por el pasado de sus hijos en Red Bull. El padre de Verstappen criticó a Pérez por haber aceptado un papel secundario en el equipo, mientras que el padre de Pérez respondió defendiendo las decisiones de su hijo y calificando de "cobarde" la actitud de su contraparte.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>La triple terapia y otros hitos científicos mejoran la expectativa de vida de pacientes con fibrosis quística</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9iLOIUv4T2xNSyqV9xcfcJ8sjVWZfco7rx44bceiLf6gkGaOIRHjv3_AnnA&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Un nuevo estudio reveló que la triple terapia y otros avances científicos están mejorando la expectativa de vida de pacientes con fibrosis quística. Esta enfermedad genética afecta principalmente a los pulmones y al sistema digestivo, pero los nuevos tratamientos están logrando aumentar la esperanza de vida de los pacientes, así como mejorar su calidad de vida. Los avances en el campo de la medicina están brindando nuevas esperanzas a quienes padecen esta enfermedad. ▼</h2></div>
+			<div class="contenido">
+				<p>Un nuevo estudio reveló que la triple terapia y otros avances científicos están mejorando la expectativa de vida de pacientes con fibrosis quística. Esta enfermedad genética afecta principalmente a los pulmones y al sistema digestivo, pero los nuevos tratamientos están logrando aumentar la esperanza de vida de los pacientes, así como mejorar su calidad de vida. Los avances en el campo de la medicina están brindando nuevas esperanzas a quienes padecen esta enfermedad.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Quiénes eran las víctimas del choque fatal en Entre Ríos: la historia de los amigos que se volvían a juntar y viajaban a pescar.</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSU-VSh1Ag2QCTeq46diyXurPFOBHkmIkYlDlGU64LWhFE1_Bj1djm6KhcLYQ&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Un grupo de amigos que se reunían para pescar en Entre Ríos sufrieron un trágico accidente cuando un conductor ebrio chocó contra su vehículo. Cuatro personas murieron en el accidente, dos resultaron heridas de gravedad y una logró sobrevivir ilesa. Los amigos se dirigían a pescar juntos, como solían hacer, cuando ocurrió la colisión. La comunidad local se encuentra consternada por la pérdida de estos jóvenes. ▼</h2></div>
+			<div class="contenido">
+				<p>Un grupo de amigos que se reunían para pescar en Entre Ríos sufrieron un trágico accidente cuando un conductor ebrio chocó contra su vehículo. Cuatro personas murieron en el accidente, dos resultaron heridas de gravedad y una logró sobrevivir ilesa. Los amigos se dirigían a pescar juntos, como solían hacer, cuando ocurrió la colisión. La comunidad local se encuentra consternada por la pérdida de estos jóvenes.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>El podcast de Ricardo Lorenzetti: Inteligencia artificial y la humanización de los algoritmos</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScl2V-Lbj5WlKBP97ycktjBG7bIB8QZ6F4vu9puS6ZXTIr2G1dqNlP44ZJaw&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>En el podcast de Ricardo Lorenzetti se discute sobre la inteligencia artificial y la humanización de los algoritmos. Se analiza la importancia de que los algoritmos sean desarrollados de manera ética y respetuosa con los valores humanos, promoviendo la transparencia y la equidad en su uso. Lorenzetti destaca la necesidad de regular y controlar estos avances tecnológicos para asegurar que sean beneficiosos para la sociedad. ▼</h2></div>
+			<div class="contenido">
+				<p>En el podcast de Ricardo Lorenzetti se discute sobre la inteligencia artificial y la humanización de los algoritmos. Se analiza la importancia de que los algoritmos sean desarrollados de manera ética y respetuosa con los valores humanos, promoviendo la transparencia y la equidad en su uso. Lorenzetti destaca la necesidad de regular y controlar estos avances tecnológicos para asegurar que sean beneficiosos para la sociedad.</p>
+			</div>
+		</div>
+ <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+  <p><strong>Publicidad</strong></p>
+        <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+        <img src='https://viaonline.com.ar/ads/publicite.png ' 
+        alt='Anuncio Publicitario'  
+        style='max-width: 80%; height: auto;'>
+     </a>
+     <p style='margin-top: 10px; text-align: center;'>
+        <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+        
+        </a>
+     </p>
+  </div> 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Juicio por filicidio en Salta: alegatos y veredicto por la muerte de Leonel Francia</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQT8nEOGlRIS3TlUtAriOekv0EBSBUXAIPDhrkmvPJRXKjbX_Je2rQiY7guVm8&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2> ▼</h2></div>
+			<div class="contenido">
+				<p></p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Oficializaron la emergencia agropecuaria para Buenos Aires y San Juan</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSL-8MDQRBTWtuehHczxxM8ZBj66nLXr55-tS7j6QKaQR7k2m9aNxoV_CfjXrY&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>En Buenos Aires y San Juan, se oficializó la emergencia agropecuaria debido a las condiciones climáticas adversas que afectaron a los productores. Esta medida permitirá a los agricultores acceder a beneficios impositivos y líneas de crédito especiales para hacer frente a las pérdidas ocasionadas por las adversidades climáticas. ▼</h2></div>
+			<div class="contenido">
+				<p>En Buenos Aires y San Juan, se oficializó la emergencia agropecuaria debido a las condiciones climáticas adversas que afectaron a los productores. Esta medida permitirá a los agricultores acceder a beneficios impositivos y líneas de crédito especiales para hacer frente a las pérdidas ocasionadas por las adversidades climáticas.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>El Bambú busca su lugar en el Delta bonaerense</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOvpFxYZllUzPJFtbYdT63JsAg1JaOAZHKS-10rlhuTaOxZsFe1ZMrLPdpJdY&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El bambú está siendo estudiado como una alternativa prometedora para la producción en el Delta del Río Paraná, en la Provincia de Buenos Aires. Esta planta de rápido crecimiento podría ser utilizada para la reforestación de zonas degradadas y la generación de productos como papel, alimentos y bioconstrucción. ▼</h2></div>
+			<div class="contenido">
+				<p>El bambú está siendo estudiado como una alternativa prometedora para la producción en el Delta del Río Paraná, en la Provincia de Buenos Aires. Esta planta de rápido crecimiento podría ser utilizada para la reforestación de zonas degradadas y la generación de productos como papel, alimentos y bioconstrucción.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Proteger lo que nos identifica: árboles nativos y sanidad vegetal</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCr3eMyv0CXxA_r42HAMrPfJfCFzQ-eK6o-_EtXS3cxjUDOQtOhfJkAiFpVg&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>En el artículo se destaca la importancia de proteger los árboles nativos y la sanidad vegetal como parte fundamental de nuestra identidad. Se enfatiza en la necesidad de conservar estas especies para mantener el equilibrio ecológico y prevenir la propagación de enfermedades que puedan afectar a la vegetación. ▼</h2></div>
+			<div class="contenido">
+				<p>En el artículo se destaca la importancia de proteger los árboles nativos y la sanidad vegetal como parte fundamental de nuestra identidad. Se enfatiza en la necesidad de conservar estas especies para mantener el equilibrio ecológico y prevenir la propagación de enfermedades que puedan afectar a la vegetación.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Chapadmalal: qué ofrece este destino natural ubicado a pocos minutos de Mar del Plata</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbJcy8LMwVeDqbRv-kjq9wWQ2Zf1DEJciUnt8nfLRnvRMA2p5tJaFGo4rcfA&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>En Chapadmalal, un destino natural ubicado a pocos minutos de Mar del Plata, se encuentra una amplia oferta turística con playas extensas, tranquilidad y paisajes naturales. Entre sus atractivos se destacan actividades al aire libre como surf, pesca, senderismo y avistaje de aves. Además, cuenta con opciones gastronómicas y alojamientos para disfrutar de una estadía tranquila y en contacto con la naturaleza. ▼</h2></div>
+			<div class="contenido">
+				<p>En Chapadmalal, un destino natural ubicado a pocos minutos de Mar del Plata, se encuentra una amplia oferta turística con playas extensas, tranquilidad y paisajes naturales. Entre sus atractivos se destacan actividades al aire libre como surf, pesca, senderismo y avistaje de aves. Además, cuenta con opciones gastronómicas y alojamientos para disfrutar de una estadía tranquila y en contacto con la naturaleza.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Cómo influye el sentido del olfato en la memoria y la formación de recuerdos</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9RhibenZctwESR900Kxjqxh76VRAY3GiNVP9pD6kJNalpFAAzjlKd5cjNEQ&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El sentido del olfato tiene un papel importante en la formación de recuerdos, según expertos en neurociencia. El olor de un lugar o un alimento puede evocar recuerdos de forma más intensa que otros estímulos. Además, se ha descubierto que el sentido del olfato se encuentra directamente conectado con el hipocampo, la parte del cerebro encargada de la memoria. Esta conexión explica por qué los olores pueden despertar recuerdos de forma tan vívida. ▼</h2></div>
+			<div class="contenido">
+				<p>El sentido del olfato tiene un papel importante en la formación de recuerdos, según expertos en neurociencia. El olor de un lugar o un alimento puede evocar recuerdos de forma más intensa que otros estímulos. Además, se ha descubierto que el sentido del olfato se encuentra directamente conectado con el hipocampo, la parte del cerebro encargada de la memoria. Esta conexión explica por qué los olores pueden despertar recuerdos de forma tan vívida.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Caos en Londres por la huelga en el metro que afecta a millones de pasajeros</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxlH6prJRNQqt2rqGhOwbd7p3bXcqcWUszND3Gji0nGknF5O1nvwanx5qsJEI&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>En Londres se ha desatado el caos debido a una huelga en el metro que ha afectado a millones de pasajeros. La paralización del servicio ha generado largas filas y retrasos en el transporte público de la ciudad, causando molestias a los ciudadanos. ▼</h2></div>
+			<div class="contenido">
+				<p>En Londres se ha desatado el caos debido a una huelga en el metro que ha afectado a millones de pasajeros. La paralización del servicio ha generado largas filas y retrasos en el transporte público de la ciudad, causando molestias a los ciudadanos.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Al menos 15 personas resultaron heridas en un ataque armado en Jerusalén; los agresores fueron neutralizados</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSpdtET3ReAc1xwDy1_j4OjXcExlV_9p0SgHwKRY7hiURPdP7o5IPBR0_HhoE&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Al menos 15 personas resultaron heridas en un ataque armado en Jerusalén. Los agresores fueron neutralizados por las autoridades. ▼</h2></div>
+			<div class="contenido">
+				<p>Al menos 15 personas resultaron heridas en un ataque armado en Jerusalén. Los agresores fueron neutralizados por las autoridades.</p>
+			</div>
+		</div>
+ <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+  <p><strong>Publicidad</strong></p>
+        <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+        <img src='https://viaonline.com.ar/ads/publicite.png ' 
+        alt='Anuncio Publicitario'  
+        style='max-width: 80%; height: auto;'>
+     </a>
+     <p style='margin-top: 10px; text-align: center;'>
+        <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+        
+        </a>
+     </p>
+  </div> 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Crece la violencia en Santa Cruz de la Sierra: una ola de secuestros y sicariatos sugiere la presencia de mafias internacionales en Bolivia.</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKy0LdXF5Z6qSsZFzrsPQXqfDLR9vL2VjN7dFi5bNHCMe_rvE8sGEgacCjsf8&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>En Santa Cruz de la Sierra, Bolivia, se ha reportado un aumento de la violencia con una ola de secuestros y sicariatos, lo que sugiere la presencia de mafias internacionales en la región. Este incremento de la criminalidad ha generado preocupación entre los habitantes de la ciudad. ▼</h2></div>
+			<div class="contenido">
+				<p>En Santa Cruz de la Sierra, Bolivia, se ha reportado un aumento de la violencia con una ola de secuestros y sicariatos, lo que sugiere la presencia de mafias internacionales en la región. Este incremento de la criminalidad ha generado preocupación entre los habitantes de la ciudad.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>El canciller alemán advirtió que la conquista de Ucrania sería solo el principio del plan imperialista de Putin</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlxAaXxoxlL9oO3qsTrZMZAffG6Tz-EOYVS3zxoJq6jYIhbqq0ts1_Pgpu&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El canciller alemán advirtió que la conquista de Ucrania por parte de Putin sería solo el principio de un plan imperialista. Expresó su preocupación por las posibles consecuencias de una invasión rusa en Ucrania y llamó a la comunidad internacional a tomar medidas para evitar un conflicto de mayor escala. ▼</h2></div>
+			<div class="contenido">
+				<p>El canciller alemán advirtió que la conquista de Ucrania por parte de Putin sería solo el principio de un plan imperialista. Expresó su preocupación por las posibles consecuencias de una invasión rusa en Ucrania y llamó a la comunidad internacional a tomar medidas para evitar un conflicto de mayor escala.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Lionel Scaloni hablará en conferencia de prensa antes de viajar a Ecuador para el último partido de eliminatorias.</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_UEEzt3ToMruRBNFWjwxL-DxmYBbjkz-1Ogkbzth9J8ODSDRBObfQzezCUZI&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El entrenador Lionel Scaloni brindará una conferencia de prensa antes de viajar a Ecuador para el último partido de eliminatorias. En la conferencia se espera que hable sobre la actualidad del equipo y las expectativas para el importante encuentro. ▼</h2></div>
+			<div class="contenido">
+				<p>El entrenador Lionel Scaloni brindará una conferencia de prensa antes de viajar a Ecuador para el último partido de eliminatorias. En la conferencia se espera que hable sobre la actualidad del equipo y las expectativas para el importante encuentro.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1></h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7JpPrsFcBZDMqln45E6xnQylI8NIrmSh-7wQPQxWuc-47zfGfsXfvWA2qcg&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2> ▼</h2></div>
+			<div class="contenido">
+				<p></p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Emboscada, disparos, caos y huida: ataque terrorista deja al menos seis muertos en Jerusalén</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1bNl_EG2ejhFXlCfKI26jSbpv5GjwrU9DAW-Nx559N2DBvYpq5IilUJZ2tg&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>En Jerusalén, un ataque terrorista dejó al menos seis muertos. De acuerdo con las autoridades, hubo una emboscada con disparos que generó caos y provocó la huida de las personas en la zona. La violencia se desató en un contexto tenso en la región, donde se están llevando a cabo manifestaciones y enfrentamientos entre grupos extremistas. ▼</h2></div>
+			<div class="contenido">
+				<p>En Jerusalén, un ataque terrorista dejó al menos seis muertos. De acuerdo con las autoridades, hubo una emboscada con disparos que generó caos y provocó la huida de las personas en la zona. La violencia se desató en un contexto tenso en la región, donde se están llevando a cabo manifestaciones y enfrentamientos entre grupos extremistas.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Dimisión del primer ministro Ishiba desató una carrera por la sucesión en Japón</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMG8mM6pscHrT5PIZk7XhmXsgWdKwi6Y1boefs1FWOKN3aTE5xdlZETGAPYA&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El primer ministro de Japón, Ishiba, presentó su renuncia, desencadenando una competencia por su sucesión. Diversos candidatos se postulan para ocupar el cargo, entre ellos el ministro de Finanzas Taro Aso y el ministro de Relaciones Exteriores Fumio Kishida. Se espera que la decisión final se tome en las próximas semanas. ▼</h2></div>
+			<div class="contenido">
+				<p>El primer ministro de Japón, Ishiba, presentó su renuncia, desencadenando una competencia por su sucesión. Diversos candidatos se postulan para ocupar el cargo, entre ellos el ministro de Finanzas Taro Aso y el ministro de Relaciones Exteriores Fumio Kishida. Se espera que la decisión final se tome en las próximas semanas.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>"Nunca me habían hecho una falta tan grave": la brutal patada que recibió el Messi tailandés y dio la vuelta al mundo"</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1um67BW2h6TK_a6FbgMAM8Zur2O3JxyaWdz1ULGUrmUauaK_FKfig-JQiPQ&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Un jugador tailandés realizó una brutal falta contra el futbolista Lionel Messi, dejándolo gravemente herido con una patada en la espalda durante un partido amistoso. La agresión se hizo viral en las redes sociales, generando conmoción en todo el mundo. ▼</h2></div>
+			<div class="contenido">
+				<p>Un jugador tailandés realizó una brutal falta contra el futbolista Lionel Messi, dejándolo gravemente herido con una patada en la espalda durante un partido amistoso. La agresión se hizo viral en las redes sociales, generando conmoción en todo el mundo.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Cayeron las expectativas de las pymes sobre la situación económica y hay alerta por la inestabilidad política.</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8NcYLZLYTqzTBh6ByxLUb1thK2dWxoy1l-4ACpCfXwsi-6GYsYKG8ALsZsQ&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Las expectativas de las pymes sobre la situación económica han caído debido a la inestabilidad política en el país. Existe preocupación por el panorama actual, que ha generado incertidumbre en el sector empresarial. ▼</h2></div>
+			<div class="contenido">
+				<p>Las expectativas de las pymes sobre la situación económica han caído debido a la inestabilidad política en el país. Existe preocupación por el panorama actual, que ha generado incertidumbre en el sector empresarial.</p>
+			</div>
+		</div>
+ <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+  <p><strong>Publicidad</strong></p>
+        <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+        <img src='https://viaonline.com.ar/ads/publicite.png ' 
+        alt='Anuncio Publicitario'  
+        style='max-width: 80%; height: auto;'>
+     </a>
+     <p style='margin-top: 10px; text-align: center;'>
+        <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+        
+        </a>
+     </p>
+  </div> 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Otra amenaza de Kim Jong Un: Supervisó la prueba de un nuevo motor de cohete para misiles balísticos intercontinentales</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFioI0WeGJiD7Yysre8Z3XpkzFGlUu6zZjg_rq-jxx8b4RaT53oCvJNakYx8Y&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El líder norcoreano Kim Jong-un supervisó la prueba de un nuevo motor de cohete para misiles balísticos intercontinentales, lo que representa una nueva amenaza para la comunidad internacional. El test fue realizado en medio de las tensiones por el programa nuclear de Corea del Norte y las negativas a las propuestas de diálogo por parte de Estados Unidos. ▼</h2></div>
+			<div class="contenido">
+				<p>El líder norcoreano Kim Jong-un supervisó la prueba de un nuevo motor de cohete para misiles balísticos intercontinentales, lo que representa una nueva amenaza para la comunidad internacional. El test fue realizado en medio de las tensiones por el programa nuclear de Corea del Norte y las negativas a las propuestas de diálogo por parte de Estados Unidos.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Un barco de la flotilla humanitaria sufrió daños en Túnez: las autoridades aseguraron que se trató de un incendio interno</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTZgq4cotDiNV941_rqN3ia6XJaSJhXwqTDLxwD9IogDHFj6zwQGMDHvDP1Bw&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Un barco de la flotilla humanitaria sufrió daños en Túnez, donde las autoridades informaron que se trató de un incendio interno. El incidente no dejó heridos, pero sí generó preocupación ya que la nave transportaba ayuda humanitaria. Los tripulantes lograron controlar el fuego y se espera que las labores de reparación permitan reanudar la misión en los próximos días. ▼</h2></div>
+			<div class="contenido">
+				<p>Un barco de la flotilla humanitaria sufrió daños en Túnez, donde las autoridades informaron que se trató de un incendio interno. El incidente no dejó heridos, pero sí generó preocupación ya que la nave transportaba ayuda humanitaria. Los tripulantes lograron controlar el fuego y se espera que las labores de reparación permitan reanudar la misión en los próximos días.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Quién ganó en mi municipio: El mapa de los resultados por distrito de las elecciones Buenos Aires 2025</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQaLflv7QvLsCu3yrGcbAzx6IIB7HOQ44cLphJndOJsGANZZ7lNh0i6fd0Siw&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>En las elecciones en Buenos Aires del 2025, se publicó un mapa con los resultados por distrito, permitiendo a los ciudadanos conocer quién ganó en su municipio. Los datos revelan el desempeño de los diferentes partidos políticos en cada zona de la provincia. ▼</h2></div>
+			<div class="contenido">
+				<p>En las elecciones en Buenos Aires del 2025, se publicó un mapa con los resultados por distrito, permitiendo a los ciudadanos conocer quién ganó en su municipio. Los datos revelan el desempeño de los diferentes partidos políticos en cada zona de la provincia.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>La selección de Túnez logró el pasaje al Mundial 2026: la lista de los 18 clasificados a la Copa del Mundo.</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0ld8aq6wzc0zS5aR5OftpdmJA8XJ-EK8jfb6U5cxoks-9_FRkc7rjJHATlVE&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La selección de Túnez logró clasificar al Mundial 2026, convirtiéndose en uno de los 18 equipos clasificados hasta el momento. La noticia resalta el logro del equipo tunecino en obtener su boleto para la próxima Copa del Mundo. ▼</h2></div>
+			<div class="contenido">
+				<p>La selección de Túnez logró clasificar al Mundial 2026, convirtiéndose en uno de los 18 equipos clasificados hasta el momento. La noticia resalta el logro del equipo tunecino en obtener su boleto para la próxima Copa del Mundo.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>La logística del futuro: sostenible, digital y con fuertes brechas entre países</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqG4LlGuHGuyR9tFHgX8usvm5OyLiQ5LpJ26a7rDHalXC3vc7taDxeEDVtQA&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>En la noticia se destaca la importancia de la logística sostenible en el futuro, resaltando la digitalización como un factor clave. Se menciona que existen brechas significativas entre los países en cuanto a la implementación de estas prácticas. ▼</h2></div>
+			<div class="contenido">
+				<p>En la noticia se destaca la importancia de la logística sostenible en el futuro, resaltando la digitalización como un factor clave. Se menciona que existen brechas significativas entre los países en cuanto a la implementación de estas prácticas.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>El gesto en un partido de béisbol que generó repudio: una fanática se quedó con una pelota que un padre le había regalado a su hijo</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQziLwjYl3JlGu3hpHEb3k5Yiv3KCBqmTCWQvfnT6R6kIkE9uBJSOQPZqx8pQ&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>En un partido de béisbol, una fanática se quedó con una pelota que un padre le había regalado a su hijo. El gesto generó repudio por parte de los espectadores y usuarios en las redes sociales. La mujer decidió quedarse con la pelota a pesar de las súplicas del padre para que se la devolviera. La situación fue captada por las cámaras y se viralizó rápidamente en Internet. ▼</h2></div>
+			<div class="contenido">
+				<p>En un partido de béisbol, una fanática se quedó con una pelota que un padre le había regalado a su hijo. El gesto generó repudio por parte de los espectadores y usuarios en las redes sociales. La mujer decidió quedarse con la pelota a pesar de las súplicas del padre para que se la devolviera. La situación fue captada por las cámaras y se viralizó rápidamente en Internet.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>La industria y la construcción se frenaron en julio y confirman la falta de reactivación.</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgstZDayShbskaFNSYu2tO5EGyrrEBGKoeWpGGo_eujVUYAgBJWeMdxjezfwg&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>En julio, tanto la industria como el sector de la construcción en Argentina experimentaron una desaceleración, lo que confirma la falta de reactivación en la economía del país. Esta situación se debe a diversos factores como la inflación, los altos costos de producción y la incertidumbre política y económica actual. La caída en la actividad productiva en ambos sectores representa un obstáculo para la recuperación económica que se espera en el país. ▼</h2></div>
+			<div class="contenido">
+				<p>En julio, tanto la industria como el sector de la construcción en Argentina experimentaron una desaceleración, lo que confirma la falta de reactivación en la economía del país. Esta situación se debe a diversos factores como la inflación, los altos costos de producción y la incertidumbre política y económica actual. La caída en la actividad productiva en ambos sectores representa un obstáculo para la recuperación económica que se espera en el país.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Los decanos de la UBA piden al gobierno que no vete la ley de financiamiento universitario.</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWFe2KAnfcUPHDTuYS43A-utnm3q6HlFSjHGJ-6NOFbaRT6NO3Lj5L_QK7N58&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Los decanos de la Universidad de Buenos Aires solicitaron al gobierno que no vete la ley de financiamiento universitario. Esta ley busca restablecer el financiamiento perdido durante el gobierno anterior y garantizar la continuidad de las actividades académicas. Los decanos expresaron su preocupación por el impacto negativo que tendría un posible veto presidencial en la educación universitaria. ▼</h2></div>
+			<div class="contenido">
+				<p>Los decanos de la Universidad de Buenos Aires solicitaron al gobierno que no vete la ley de financiamiento universitario. Esta ley busca restablecer el financiamiento perdido durante el gobierno anterior y garantizar la continuidad de las actividades académicas. Los decanos expresaron su preocupación por el impacto negativo que tendría un posible veto presidencial en la educación universitaria.</p>
+			</div>
+		</div>
+ <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+  <p><strong>Publicidad</strong></p>
+        <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+        <img src='https://viaonline.com.ar/ads/publicite.png ' 
+        alt='Anuncio Publicitario'  
+        style='max-width: 80%; height: auto;'>
+     </a>
+     <p style='margin-top: 10px; text-align: center;'>
+        <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+        
+        </a>
+     </p>
+  </div> 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Investigación en Brasil revela que un capo del PCC vive en Santa Cruz de la Sierra con una identidad falsa.</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZAKe-fM2VMVQJbVjntzyNo17qv0TbWjOsT0McfEqXY2z8yOVcKJNThvhwbk8&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La investigación en Brasil reveló que un líder del grupo criminal PCC vive en Santa Cruz de la Sierra con una identidad falsa. El hombre, identificado como Gilberto Aparecido Dos Santos, habría huido a Bolivia para evitar ser capturado en su país. Las autoridades bolivianas ya estarían al tanto de su presencia en el país. ▼</h2></div>
+			<div class="contenido">
+				<p>La investigación en Brasil reveló que un líder del grupo criminal PCC vive en Santa Cruz de la Sierra con una identidad falsa. El hombre, identificado como Gilberto Aparecido Dos Santos, habría huido a Bolivia para evitar ser capturado en su país. Las autoridades bolivianas ya estarían al tanto de su presencia en el país.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Bayer Leverkusen despide a su peor entrenador tras tres partidos y pagará millonaria indemnización</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLUfW9dCKUKMzFo6j1qmW0gUg-UC50wqHoZOj8sCmXDcmgaa7RmQEB_OorSA&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El Bayer Leverkusen despidió a su peor entrenador después de tres partidos y deberá pagar una millonaria indemnización. El club alemán decidió prescindir de los servicios del técnico tras los malos resultados obtenidos en el inicio de la temporada. ▼</h2></div>
+			<div class="contenido">
+				<p>El Bayer Leverkusen despidió a su peor entrenador después de tres partidos y deberá pagar una millonaria indemnización. El club alemán decidió prescindir de los servicios del técnico tras los malos resultados obtenidos en el inicio de la temporada.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Macron ante su mayor dilema político: los tres escenarios tras la caída de Bayrou</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCfodPlMpq4k0N5zZy_OVtO74Oi7AaH0Eq7bvh97q-qRNPWPI81ESc8nx8eQ&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El presidente de Francia, Emmanuel Macron, se enfrenta a un importante dilema político luego de la caída de su ministro y aliado François Bayrou. Se plantean tres posibles escenarios: buscar una nueva alianza política, enfrentar la crisis en solitario o incluso renunciar a la presidencia. Macron deberá tomar decisiones clave para mantener la estabilidad en su gobierno y su liderazgo en el país. ▼</h2></div>
+			<div class="contenido">
+				<p>El presidente de Francia, Emmanuel Macron, se enfrenta a un importante dilema político luego de la caída de su ministro y aliado François Bayrou. Se plantean tres posibles escenarios: buscar una nueva alianza política, enfrentar la crisis en solitario o incluso renunciar a la presidencia. Macron deberá tomar decisiones clave para mantener la estabilidad en su gobierno y su liderazgo en el país.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Las acciones suben después de que Wall Street coquetea con otro récord</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvQW6uEy86Dqxf3NZAXrLHGTIB-XBI8dTT4KFLIBhALRXHbXo9MUlh3TCFke0&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>En Wall Street, las acciones subieron luego de que se registrara un nuevo récord en el mercado. Los principales índices bursátiles cerraron con ganancias, mostrando una tendencia positiva en la jornada. Esta situación se dio después de varios días de volatilidad en el mercado financiero. ▼</h2></div>
+			<div class="contenido">
+				<p>En Wall Street, las acciones subieron luego de que se registrara un nuevo récord en el mercado. Los principales índices bursátiles cerraron con ganancias, mostrando una tendencia positiva en la jornada. Esta situación se dio después de varios días de volatilidad en el mercado financiero.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1></h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxZnUZe0i1rc0ceCGuoFS7pN93-J-dkAI6o_cA2s3wl_WkK4lP_slet1wb_O0&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>En Mar del Plata, un hombre en estado de ebriedad y sin documentación chocó varios autos y agredió a dos mujeres policías. El sujeto fue detenido y trasladado a la comisaría. ▼</h2></div>
+			<div class="contenido">
+				<p>En Mar del Plata, un hombre en estado de ebriedad y sin documentación chocó varios autos y agredió a dos mujeres policías. El sujeto fue detenido y trasladado a la comisaría.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>EEUU alertó sobre el riesgo de una grave escalada tras el ataque ruso a Kiev que alcanzó la sede del gobierno</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQac_n7r9iki3-7dxFD8KhdI0DvXIju8mGCdwfwgd4gm4vIZJwXHwps7cQVj1U&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>En un ataque ruso a Kiev, la sede del gobierno ucraniano fue alcanzada. Estados Unidos ha alertado sobre el riesgo de una grave escalada como consecuencia de este ataque. ▼</h2></div>
+			<div class="contenido">
+				<p>En un ataque ruso a Kiev, la sede del gobierno ucraniano fue alcanzada. Estados Unidos ha alertado sobre el riesgo de una grave escalada como consecuencia de este ataque.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Comenzó la Liga Evolución de la Conmebol: los detalles de la fiesta de apertura y del inicio de la competencia</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVkiczBJOVr0Cy5B98ms67oWrYBew7_fF-l1i4sMVJhprcEIl1OV9ORTuoAw&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La Liga Evolución de la CONMEBOL comenzó con una fiesta de apertura y el inicio de la competencia. El evento contó con la presencia de importantes figuras del fútbol y se llevó a cabo en un ambiente festivo. La competencia promete ser emocionante y se espera que reúna a los mejores equipos de la región. ▼</h2></div>
+			<div class="contenido">
+				<p>La Liga Evolución de la CONMEBOL comenzó con una fiesta de apertura y el inicio de la competencia. El evento contó con la presencia de importantes figuras del fútbol y se llevó a cabo en un ambiente festivo. La competencia promete ser emocionante y se espera que reúna a los mejores equipos de la región.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Sube el dólar, las acciones caen hasta 20% en Nueva York y los bonos se derrumban 9% tras la apertura del mercado</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGG3YTWw0PgLNYtyiIkb1aQbWFwO5npoYVb2egeybsB5RJFc6ljd5GaEDy234&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El dólar subió y las acciones cayeron hasta un 20% en la Bolsa de Nueva York, mientras que los bonos se derrumbaron un 9% tras la apertura del mercado. Esta situación refleja la inestabilidad económica actual que está afectando a los mercados financieros. Pueden esperarse días difíciles en el ámbito económico global. ▼</h2></div>
+			<div class="contenido">
+				<p>El dólar subió y las acciones cayeron hasta un 20% en la Bolsa de Nueva York, mientras que los bonos se derrumbaron un 9% tras la apertura del mercado. Esta situación refleja la inestabilidad económica actual que está afectando a los mercados financieros. Pueden esperarse días difíciles en el ámbito económico global.</p>
+			</div>
+		</div>
+ <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+  <p><strong>Publicidad</strong></p>
+        <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+        <img src='https://viaonline.com.ar/ads/publicite.png ' 
+        alt='Anuncio Publicitario'  
+        style='max-width: 80%; height: auto;'>
+     </a>
+     <p style='margin-top: 10px; text-align: center;'>
+        <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+        
+        </a>
+     </p>
+  </div> 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Santa Fe entra en la recta final para aprobar la nueva constitución: ¿Qué modificaciones se hicieron y cuándo se jura?</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgGUo08A4Jk8ZR-zWGHQKjw6x7sg7bq7hpupIGrXdc7hnm2jxzGdMYW0HnfTU&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>En Santa Fe, se está por aprobar una nueva constitución provincial con modificaciones importantes. Entre los cambios se destaca la reforma en la composición de la Corte Suprema de Justicia, que ahora estará integrada por siete miembros en lugar de cinco. Además, se establece la obligatoriedad de contar con un mínimo de tres mujeres en dicho órgano. También se incluyen disposiciones relacionadas con la igualdad de género y la protección del medio ambiente. Se espera que la nueva constitución sea jurada en los próximos días. ▼</h2></div>
+			<div class="contenido">
+				<p>En Santa Fe, se está por aprobar una nueva constitución provincial con modificaciones importantes. Entre los cambios se destaca la reforma en la composición de la Corte Suprema de Justicia, que ahora estará integrada por siete miembros en lugar de cinco. Además, se establece la obligatoriedad de contar con un mínimo de tres mujeres en dicho órgano. También se incluyen disposiciones relacionadas con la igualdad de género y la protección del medio ambiente. Se espera que la nueva constitución sea jurada en los próximos días.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Quiénes eran las víctimas del atentado terrorista en un estación de autobús de Jerusalén</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVUKRKlR6aJG0EwxQax-1i2wsWPvwRck37i3n2Vxh9rsw9YCzAfGHjv7Y8f7g&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>En un atentado terrorista en una estación de autobús en Jerusalén, Israel, varias personas resultaron muertas o heridas. Entre las víctimas se encontraban ciudadanos israelíes y extranjeros. El ataque generó conmoción en la región y se investigan las circunstancias del mismo. ▼</h2></div>
+			<div class="contenido">
+				<p>En un atentado terrorista en una estación de autobús en Jerusalén, Israel, varias personas resultaron muertas o heridas. Entre las víctimas se encontraban ciudadanos israelíes y extranjeros. El ataque generó conmoción en la región y se investigan las circunstancias del mismo.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Andrés Malamud: el éxito de Kicillof es la superación de la etapa kirchnerista del peronismo</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6_b3hpKgda_KzvgMp0JmbmjQLAgvqD1DEy08YQBOgFHABr-E8RJM2hFxqOvs&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>En una entrevista realizada a Andrés Malamud, se destaca el éxito del gobernador de la provincia de Buenos Aires, Axel Kicillof, como una superación de la etapa kirchnerista del peronismo. Malamud resalta que Kicillof ha logrado implementar un estilo de gestión más pragmático y dialoguista, alejándose del kirchnerismo más radical. Además, destaca que el gobernador ha logrado generar consensos en temas clave como la deuda y la reforma judicial. ▼</h2></div>
+			<div class="contenido">
+				<p>En una entrevista realizada a Andrés Malamud, se destaca el éxito del gobernador de la provincia de Buenos Aires, Axel Kicillof, como una superación de la etapa kirchnerista del peronismo. Malamud resalta que Kicillof ha logrado implementar un estilo de gestión más pragmático y dialoguista, alejándose del kirchnerismo más radical. Además, destaca que el gobernador ha logrado generar consensos en temas clave como la deuda y la reforma judicial.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>El fuerte comunicado del plantel de Independiente tras la descalificación de la Copa Sudamericana: dolor e injusticia</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSQSJ11I1NMT_FY-YPGjbRnG1ykYL0N36iIavs-XivDA6JABlOWEJP8HDE8I8&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El plantel de Independiente emitió un comunicado en respuesta a su descalificación de la Copa Sudamericana, expresando su dolor e indignación por lo que consideran una injusticia. El equipo mostró su desacuerdo con la decisión y defendió su integridad y la transparencia de su proceso deportivo. ▼</h2></div>
+			<div class="contenido">
+				<p>El plantel de Independiente emitió un comunicado en respuesta a su descalificación de la Copa Sudamericana, expresando su dolor e indignación por lo que consideran una injusticia. El equipo mostró su desacuerdo con la decisión y defendió su integridad y la transparencia de su proceso deportivo.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>El ambicioso plan de Thibaut Courtois para salvar una icónica disco en su país</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxk9A9yquVc9FcXsgYKhwGoqulak5lrgvstHOMVgJiApB9dpvYzZHEamdFHcY&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El arquero belga Thibaut Courtois planea salvar una icónica discoteca en su país, Bélgica. El establecimiento se encuentra en riesgo de cierre debido a la crisis económica provocada por la pandemia. Courtois tiene planeado invertir en el lugar y renovarlo, con el objetivo de mantener viva la historia y cultura de la discoteca. ▼</h2></div>
+			<div class="contenido">
+				<p>El arquero belga Thibaut Courtois planea salvar una icónica discoteca en su país, Bélgica. El establecimiento se encuentra en riesgo de cierre debido a la crisis económica provocada por la pandemia. Courtois tiene planeado invertir en el lugar y renovarlo, con el objetivo de mantener viva la historia y cultura de la discoteca.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Juicio por filicidio en Salta: condenaron a prisión perpetua a la madre de Leonel Francia.</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7C21tIBgHLAKO8kke0OUl2KBPoGPn_BJ6Gsjsikxrm2fybuwyEHJArctNtA&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2> ▼</h2></div>
+			<div class="contenido">
+				<p></p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1></h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2G41qgarDhDKsyPnGEW-nkqo25COtQOFfAMWKhunenBvuyfxn01k0e5Qp08E&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Un grupo de encapuchados armados con un ariete robó 20 millones de pesos de una estación de servicio en Mar del Plata. Los delincuentes ingresaron al establecimiento, redujeron a los empleados y se llevaron el dinero en cuestión de minutos. La policía se encuentra investigando el caso y revisando las cámaras de seguridad para dar con los responsables del hecho. ▼</h2></div>
+			<div class="contenido">
+				<p>Un grupo de encapuchados armados con un ariete robó 20 millones de pesos de una estación de servicio en Mar del Plata. Los delincuentes ingresaron al establecimiento, redujeron a los empleados y se llevaron el dinero en cuestión de minutos. La policía se encuentra investigando el caso y revisando las cámaras de seguridad para dar con los responsables del hecho.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>La casa de Cris Vanadia revela el secreto de la creatividad en la era digital</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR79guZigbu26_trLoAt6K00BULxYJI5sD57CElD1rac9bxCQaoKajKwRvgzt4&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La casa de Cris Vanadia revela el secreto de la creatividad en la era digital. Se trata de un espacio que potencia la inspiración a través de la tecnología y el diseño de vanguardia. En este lugar se busca fomentar la innovación y el talento de los creativos, ofreciendo un ambiente propicio para el desarrollo de ideas creativas en la era digital. ▼</h2></div>
+			<div class="contenido">
+				<p>La casa de Cris Vanadia revela el secreto de la creatividad en la era digital. Se trata de un espacio que potencia la inspiración a través de la tecnología y el diseño de vanguardia. En este lugar se busca fomentar la innovación y el talento de los creativos, ofreciendo un ambiente propicio para el desarrollo de ideas creativas en la era digital.</p>
+			</div>
+		</div>
+ <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+  <p><strong>Publicidad</strong></p>
+        <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+        <img src='https://viaonline.com.ar/ads/publicite.png ' 
+        alt='Anuncio Publicitario'  
+        style='max-width: 80%; height: auto;'>
+     </a>
+     <p style='margin-top: 10px; text-align: center;'>
+        <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+        
+        </a>
+     </p>
+  </div> 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Javier Milei: "Hemos tenido una clara derrota y hay que aceptarlo"</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlyychmApdgRVPnO5Rk2-PW2z97LzSHLs1qVT0g1_eM6Ut1BTQWM3xBwb0I1U&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El político Javier Milei reconoció la derrota de su partido en las elecciones, destacando la importancia de aceptar los resultados. A pesar de esto, se mostró optimista y aseguró que seguirán trabajando por sus ideales. ▼</h2></div>
+			<div class="contenido">
+				<p>El político Javier Milei reconoció la derrota de su partido en las elecciones, destacando la importancia de aceptar los resultados. A pesar de esto, se mostró optimista y aseguró que seguirán trabajando por sus ideales.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Católicos de la comunidad LGTBIQ realizan primer gran peregrinaje al Vaticano</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzmxhJVhiU9fUSkMdiO979mIyBw67wmImWyEDfG3mDR2j6wC2gpSQIYJRCa5w&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Católicos de la comunidad LGTBIQ realizaron el primer gran peregrinaje al Vaticano en el marco del Jubileo. Una delegación de la comunidad LGTBIQ llegó al Vaticano para expresar su fe y solicitar un trato más inclusivo por parte de la iglesia católica. La peregrinación fue vista como un paso importante hacia la aceptación y el reconocimiento de la diversidad dentro de la iglesia. ▼</h2></div>
+			<div class="contenido">
+				<p>Católicos de la comunidad LGTBIQ realizaron el primer gran peregrinaje al Vaticano en el marco del Jubileo. Una delegación de la comunidad LGTBIQ llegó al Vaticano para expresar su fe y solicitar un trato más inclusivo por parte de la iglesia católica. La peregrinación fue vista como un paso importante hacia la aceptación y el reconocimiento de la diversidad dentro de la iglesia.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Diosdado Cabello pidió a los venezolanos prepararse en todos los frentes ante el despliegue de Estados Unidos en el Caribe</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmwW5wTipfdr5sd1S0V15t7_iLpNFgxu7oocCsR08r6jyEaCxyjXiwKXMuhw&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El político venezolano Diosdado Cabello instó a los venezolanos a prepararse en todos los frentes ante el despliegue de Estados Unidos en el Caribe. Esta advertencia se produce en medio de las tensiones entre ambas naciones. ▼</h2></div>
+			<div class="contenido">
+				<p>El político venezolano Diosdado Cabello instó a los venezolanos a prepararse en todos los frentes ante el despliegue de Estados Unidos en el Caribe. Esta advertencia se produce en medio de las tensiones entre ambas naciones.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>El régimen de Nicolás Maduro anunció que reforzará la presencia militar en los estados caribeños de Venezuela.</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDlt2pkbUSXgnePHHfb8T5LbDPAsTEWcPbXbxVH5nkC_I-B-7P2Je46I1F1V8&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El régimen de Nicolás Maduro anunció que reforzará la presencia militar en los estados caribeños de Venezuela. Esta decisión busca aumentar la seguridad en la región debido a la presencia de grupos armados ilegales y el narcotráfico. ▼</h2></div>
+			<div class="contenido">
+				<p>El régimen de Nicolás Maduro anunció que reforzará la presencia militar en los estados caribeños de Venezuela. Esta decisión busca aumentar la seguridad en la región debido a la presencia de grupos armados ilegales y el narcotráfico.</p>
+			</div>
+		</div>
+ <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1894152981922395"
+     crossorigin="anonymous"></script>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-1894152981922395"
+     data-ad-slot="4289209070"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ </div> 
+<p style='font-size: 12px; color: #666; text-align: center;'>
+    © 2025 VIA ONLINE. Todos los derechos reservados.  
+    Queda prohibida la reproducción total o parcial de los contenidos de este sitio sin autorización previa y por escrito.  
+    Las marcas, logotipos y contenidos pertenecen a sus respectivos propietarios.  
+    Este sitio web puede contener enlaces a sitios externos sobre los cuales VIA ONLINE no tiene responsabilidad alguna.  
+    El uso de este sitio implica la aceptación de nuestros <a href='https://viaonline.com.ar/TerminosyCondiciones.html'>Términos y Condiciones</a> y nuestra <a href='https://viaonline.com.ar/privacidad.html'>Política de Privacidad</a>.
+</p>
+
+</body>
+</html>
