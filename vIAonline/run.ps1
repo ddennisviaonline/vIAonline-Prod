@@ -419,7 +419,25 @@ $memStream.Dispose()
 
 
 #$tokenClima
+$apiKey = $env:tokenClima
+# Ciudad de la que deseas obtener el clima
+$ciudad = "Buenos Aires"
 
+# URL de la API
+$url = "http://api.weatherapi.com/v1/current.json?key=$apiKey&q=$ciudad&lang=es"
+
+# Petición HTTP y parseo de la respuesta JSON
+$response = Invoke-RestMethod -Uri $url -Method Get
+
+# Mostrar resultados
+Write-Host "Ciudad: $($response.location.name), $($response.location.country)"
+Write-Host "Temperatura: $($response.current.temp_c) °C"
+Write-Host "Sensación térmica: $($response.current.feelslike_c) °C"
+Write-Host "Condición: $($response.current.condition.text)"
+Write-Host "Última actualización: $($response.current.last_updated)"
+
+$clima = " CABA" + ", " + $($response.current.temp_c) + "º " + $($response.current.condition.text)
+<#
 #####
 $apiKey = $env:WeatherAPI
 # Ciudad de la que deseas obtener el clima
@@ -476,6 +494,8 @@ Write-Host "Condición: $($response.current.condition.text)"
 Write-Host "Última actualización: $($response.current.last_updated)"
 
 $clima = " CABA" + ", " + $($response.current.temp_c) + "º " + $IconCondicion + ' ' + $($response.current.condition.text)
+
+#>
 #### HASTA ACA EXTRAER ZIP EN MEMORIA
 <#
 #Descarga reporte de clima y lo convierte en csv
