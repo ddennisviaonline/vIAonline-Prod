@@ -52,14 +52,14 @@ $html = $response.Content
 $ViaADS = @"
 <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
   <p><strong>Publicidad</strong></p>
-        <a href='$LinkAdsLink'>
-        <img src='$ImgAdsLink ' 
+        <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+        <img src='https://viaonline.com.ar/ads/publicite.png ' 
         alt='Anuncio Publicitario'  
         style='max-width: 80%; height: auto;'>
      </a>
      <p style='margin-top: 10px; text-align: center;'>
-        <a href='$LinkAdsLink'>
-        $TextoAdsLink
+        <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+        
         </a>
      </p>
   </div>
