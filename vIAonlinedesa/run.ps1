@@ -3,7 +3,6 @@
 # ==============================================
 #            AMBIENTE DE Desarrollo
 # Cambiar 
-#param($Request, $TriggerMetadata)
 param($Timer)
 $token = $env:GitHubToken
 
