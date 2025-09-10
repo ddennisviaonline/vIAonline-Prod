@@ -450,8 +450,11 @@ elseif ($condicionClimatica -eq "Nieve") {
 elseif ($condicionClimatica -eq "Niebla" -or $condicionClimatica -eq "Neblina") {
     $IconCondicion = "🌫️"
 }
+elseif ($condicionClimatica -eq "Ventoso" -or $condicionClimatica -eq "Viento fuerte") {
+    $IconCondicion = "🌬️"
+}
 else {
-    $IconCondicion = "🌬️"  # Por si no coincide con ninguna condición dejo ventoso en vez de poner una X
+    $IconCondicion = "🌬️☁️"  # Por si no coincide con ninguna condición
 }
 
 $clima = " CABA" + ", " + $($response.current.temp_c) + "º " + $IconCondicion + ' ' + $condicionClimatica
