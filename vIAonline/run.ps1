@@ -7,8 +7,8 @@ param($Timer)
 $token = $env:GitHubToken
 
 #Clave y endpoint de Azure OpenAI
-$AZURE_OPENAI_API_KEY = $env:AZURE_OPENAI_API_KEY_AzureOpenAI35Turbo                                  
-$AZURE_OPENAI_ENDPOINT = $env:AZURE_OPENAI_ENDPOINT_AzureOpenAI35Turbo
+$AZURE_OPENAI_API_KEY = $env:AZURE_OPENAI_API_KEY_AzureOpenAI4oTurbo                                 
+$AZURE_OPENAI_ENDPOINT = $env:AZURE_OPENAI_ENDPOINT_AzureOpenAI4oTurbo
 # $filePath = "desa/index.html"       # Ruta exacta dentro del repo (case-sensitive)
 # ==============================================
 
