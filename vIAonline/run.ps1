@@ -1,5 +1,5 @@
 ﻿# Version 10 | Cotización dolar, iconos Clima, feriados
-
+# Cambios, se agregaron iconos de clima, se corrigio publicidad vIA y se migróa GPT4oTurbo
 # ==============================================
 #            AMBIENTE DE PROD
 # Cambiar 
@@ -75,7 +75,7 @@ $googleADS = "<script async src=""https://pagead2.googlesyndication.com/pagead/j
 
 
 ################################# LOGO PAGINA CREAR VINCULO FUERA DE GITHUB#######################
-$logo = "https://viaonline.com.ar/Imagenes/Logocorto.png"
+$logo = "https://viaonline.com.ar/Imagenes/LogocortoLite.png"
 
 #$logo = "file:///C:\inetpub\wwwroot\Imagenes\Logocorto.png"
 #Copy-Item -Path "C:\bats\vIA ONLINE\Imagenes" -Destination "C:\inetpub\wwwroot" -Recurse -Force
