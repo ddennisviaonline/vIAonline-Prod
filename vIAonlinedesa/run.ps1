@@ -167,7 +167,7 @@ function consulta-IA {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory)]
-        [ValidateSet("Titulo", "Intro", "Nota", "Datos")]
+        [ValidateSet("Titulo", "Intro", "Nota", "Datos", "Traducir")]
         [string]$tipo,
 
         [Parameter(Mandatory)]
@@ -184,6 +184,17 @@ function consulta-IA {
 
         $ResultIAtitle = Invoke-OpenAIChatGPT4omini -question $DescriptionTitiulo
         return $ResultIAtitle.content
+            
+        }
+        "Traducir" {
+        $DescriptionTraducir = @"
+        Eres un traductor de texto y necesito que me traduzcas en español el siguiente texto: $linkFuente
+        Necesito que no contenga agregados de " ni *.
+        No pidas más detalles ni finalices con recomendaciones adicionales.
+"@
+
+        $ResultIATraducir = Invoke-OpenAIChatGPT4omini -question $DescriptionTraducir
+        return $ResultIATraducir.content
             
         }
         "Intro" {
@@ -850,6 +861,160 @@ if ($TodosLosRegistros.Count -gt 100) {
 #$LinksCache | Export-Csv -Path $RutaLinkCache -Encoding UTF8 -NoTypeInformation
 #$LinksCache =@()
 #alterna publicidad con el contador
+### AGENDA
+### CONSULTO SI EXISTE EL ARCHIVO SI NO EXISTE LO CREO LA AGENDA
+$fechaformatfile = Get-Date -Format "ddMMyyyy"
+$FileNameAgenda = "agenda" + $fechaformatfile + ".csv"
+
+# URL API
+$urlAPI = "https://raw.githubusercontent.com/ddennisviaonline/vIAonline-Prod/main/vIAonline/agenda/" + $FileNameAgenda
+try {
+    $response = Invoke-RestMethod -Uri $urlAPI -UseBasicParsing -ErrorAction Stop
+    $agenda = $true
+    Write-Host "El archivo existe. Tamaño: $($response.size) bytes"
+} catch {
+    $agenda = $false
+    Write-Host "El archivo NO existe."
+}
+
+if ($agenda) {
+    $AgendaCompleta = Invoke-WebRequest -Uri $urlAPI | Select-Object -ExpandProperty Content | ConvertFrom-Csv
+    # Mostrar contenido
+    $AgendaCompleta
+    Write-Host "Está activo"
+} else {
+    Write-Host "No está activo"
+$data = @()
+
+    # ME TRAIGO LAS EFEMERIDES DEL DIA
+   
+### efemerides
+
+# Fecha de hoy
+$hoy = Get-Date
+$mes = $hoy.Month
+$dia = $hoy.Day
+$fechacsvreg = Get-Date -Format "yyyy-MM-dd"
+
+# URLs API
+$UrlEventos = "https://byabbe.se/on-this-day/$mes/$dia/events.json"
+$UrlNacimientos = "https://byabbe.se/on-this-day/$mes/$dia/births.json"
+$UrlFallecimientos = "https://byabbe.se/on-this-day/$mes/$dia/deaths.json"
+
+# Descarga de datos
+$Eventos = Invoke-RestMethod -Uri $UrlEventos
+$Nacimientos = Invoke-RestMethod -Uri $UrlNacimientos
+$Fallecimientos = Invoke-RestMethod -Uri $UrlFallecimientos
+
+# Creamos arrays
+$ArrayEventos = $Eventos.events | Select-Object year, description
+$ArrayNacimientos = $Nacimientos.births | Select-Object year, description
+$ArrayFallecimientos = $Fallecimientos.deaths | Select-Object year, description
+
+# Mostramos resultados (los primeros 5 de cada uno, ordenados por año descendente)
+Write-Host "=== Eventos ==="
+$ArrayEventos = $ArrayEventos | Sort-Object year -Descending | Select-Object -Last 5 
+
+Write-Host "`n=== Nacimientos ==="
+$ArrayNacimientos = $ArrayNacimientos | Sort-Object year -Descending | Select-Object -First 5
+
+Write-Host "`n=== Fallecimientos ==="
+$ArrayFallecimientos = $ArrayFallecimientos | Sort-Object year -Descending | Select-Object -First 5 
+
+Foreach ($event in $ArrayEventos){
+$eventyear = $($event.year)
+$eventdescription = $($event.description)
+$Traducido = consulta-IA -tipo Traducir -linkFuente $eventdescription
+    $data += [PSCustomObject]@{
+        Fecha       = $eventyear
+        Tipo        = "EfemerideEvento"
+        Descripcion = $Traducido
+    }
+}
+
+Foreach ($event in $ArrayNacimientos){
+$eventyear = $($event.year)
+$eventdescription = $($event.description)
+$Traducido = consulta-IA -tipo Traducir -linkFuente $eventdescription
+    $data += [PSCustomObject]@{
+        Fecha       = $eventyear
+        Tipo        = "EfemerideNacimientos"
+        Descripcion = $Traducido
+    }
+}
+
+Foreach ($event in $ArrayFallecimientos){
+$eventyear = $($event.year)
+$eventdescription = $($event.description)
+$Traducido = consulta-IA -tipo Traducir -linkFuente $eventdescription
+    $data += [PSCustomObject]@{
+        Fecha       = $eventyear
+        Tipo        = "EfemerideFallecimientos"
+        Descripcion = $Traducido
+    }
+}
+
+# Convertir objetos a CSV en memoria
+$agendacsv = $data | ConvertTo-Csv -NoTypeInformation
+
+# Unir las líneas en un solo string
+$agendaCompleta = $agendacsv -join "`n"
+
+    #crea CSV en 
+    # Datos de ejemplo
+
+
+
+    ### desde aca borra el file vIAcache.csv
+
+# ==== CONFIGURACIÓN ====
+$usuario = "ddennisviaonline"
+$repo = "vIAonline-Prod"
+$archivo = "vIAonline/agenda/" + $FileNameAgenda # "agenda.csv"       # Ruta exacta dentro del repo (case-sensitive)
+$rama = "main"              # Rama donde está el archivo
+# Convertir a Base64
+$bytes  = [System.Text.Encoding]::UTF8.GetBytes($agendaCompleta)
+$base64 = [System.Convert]::ToBase64String($bytes)
+
+# Crear body para la API
+$body = @{
+    message = "Agrego agenda_eventos.csv"
+    branch  = $rama
+    content = $base64
+} | ConvertTo-Json -Depth 10
+
+# Headers con token
+$headers = @{ Authorization = "token $token" }
+
+# Subir a GitHub
+Invoke-RestMethod -Uri "https://api.github.com/repos/$usuario/$repo/contents/$archivo" `
+                  -Method Put `
+                  -Headers $headers `
+                  -Body $body
+}
+
+### agrega al html las efemerides
+$EfemerideEvento = $AgendaCompleta | Where-Object { $_.Tipo -eq "EfemerideEvento" } | ForEach-Object { "$($_.Fecha) - $($_.Descripcion)" }
+$EfemerideNacimientos = $AgendaCompleta | Where-Object { $_.Tipo -eq "EfemerideNacimientos" } | ForEach-Object { "$($_.Fecha) - $($_.Descripcion)" }
+$EfemerideFallecimientos = $AgendaCompleta | Where-Object { $_.Tipo -eq "EfemerideFallecimientos" }  | ForEach-Object { "$($_.Fecha) - $($_.Descripcion)" }
+$news += "
+		<div class='noticia' onclick='this.classList.toggle(""abierto"")'>
+			<h1>Efemérides</h1>
+			<img src='https://viaonline.com.ar/Imagenes/LogoEfemerides.png' alt='Imagen Efemerides'>
+			<div class=""desplegable""><h2>Efemérides: los hechos que marcaron la historia
+En esta sección encontrarás un recorrido por los acontecimientos más importantes que ocurrieron en esta misma fecha, a lo largo de distintos años. Desde hitos históricos y culturales hasta nacimientos y fallecimientos de personalidades destacadas, un repaso diario para mantener viva la memoria y comprender mejor nuestro presente. ▼</h2></div>
+			<div class=""contenido"">
+				<p>$EfemerideEvento</p>
+                <p>$EfemerideNacimientos</p>
+                <p>$EfemerideFallecimientos</p>
+			</div>
+		</div>
+"
+
+###
+###
+
+
 $adscnt = 0
 foreach ($noticia in $TodosLosRegistros){
 $LinkOrigen = $noticia.LinkOrigen #$URLOrigen + $noticia.URL
