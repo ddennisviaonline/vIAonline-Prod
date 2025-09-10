@@ -471,6 +471,92 @@ else {
 }
 
 $clima = " CABA" + ", " + $($response.current.temp_c) + "º " + $IconCondicion + ' ' + $condicionClimatica
+#$clima = " CABA" + ", " + $($response.current.temp_c) + "º " + $($response.current.condition.text)
+<#
+#####
+$apiKey = $env:WeatherAPI
+# Ciudad de la que deseas obtener el clima
+$ciudad = "Buenos Aires"
+
+# URL de la API
+$url = "http://api.weatherapi.com/v1/current.json?key=$apiKey&q=$ciudad&lang=es"
+
+# Petición HTTP y parseo de la respuesta JSON
+$response = Invoke-RestMethod -Uri $url -Method Get
+
+$condicionClimatica = $($response.current.condition.text)
+
+# Asignamos el ícono según la condición
+if ($condicionClimatica -eq "Despejado") {
+    $IconCondicion = "☀️"
+}
+elseif ($condicionClimatica -eq "Algo nublado" -or $condicionClimatica -eq "Parcialmente nublado") {
+    $IconCondicion = "🌤️"
+}
+elseif ($condicionClimatica -eq "Nublado") {
+    $IconCondicion = "☁️"
+}
+elseif ($condicionClimatica -eq "Lluvias aisladas" -or $condicionClimatica -eq "Lluvia ligera") {
+    $IconCondicion = "🌦️"
+}
+elseif ($condicionClimatica -eq "Lluvia moderada") {
+    $IconCondicion = "🌧️"
+}
+elseif ($condicionClimatica -eq "Lluvia fuerte" -or $condicionClimatica -eq "Tormenta intensa") {
+    $IconCondicion = "⛈️"
+}
+elseif ($condicionClimatica -eq "Tormenta severa" -or $condicionClimatica -eq "Granizo") {
+    $IconCondicion = "🌩️"
+}
+elseif ($condicionClimatica -eq "Nieve") {
+    $IconCondicion = "❄️"
+}
+elseif ($condicionClimatica -eq "Niebla" -or $condicionClimatica -eq "Neblina") {
+    $IconCondicion = "🌫️"
+}
+elseif ($condicionClimatica -eq "Ventoso" -or $condicionClimatica -eq "Viento fuerte") {
+    $IconCondicion = "🌬️"
+}
+else {
+    $IconCondicion = "❓"  # Por si no coincide con ninguna condición
+}
+
+# Mostrar resultados
+Write-Host "Ciudad: $($response.location.name), $($response.location.country)"
+Write-Host "Temperatura: $($response.current.temp_c) °C"
+Write-Host "Sensación térmica: $($response.current.feelslike_c) °C"
+Write-Host "Condición: $($response.current.condition.text)"
+Write-Host "Última actualización: $($response.current.last_updated)"
+
+$clima = " CABA" + ", " + $($response.current.temp_c) + "º " + $IconCondicion + ' ' + $($response.current.condition.text)
+
+#>
+#### HASTA ACA EXTRAER ZIP EN MEMORIA
+<#
+#Descarga reporte de clima y lo convierte en csv
+#Variables
+$Dir = "C:\inetpub\wwwroot\clima\"
+$file = "ClimaArg.zip"
+$filePath = $Dir + $file 
+$txtfiles = $Dir + "*.txt"
+$csvFile =$Dir + "ClimaArg.csv"
+$csvHeader =$Dir + "ClimaArgHeaders.csv"
+Remove-Item -Path $txtfiles -Force
+Invoke-WebRequest -Uri "https://ssl.smn.gob.ar/dpd/zipopendata.php?dato=tiepre" -OutFile $filePath
+#Extrae ZIP
+Expand-Archive -Path $filePath -DestinationPath $Dir -Force
+#pone Headers
+Set-Content -Path $csvFile -Value "Ciudad;Fecha;Hora;EstadoDelCielo;Visibilidad;Temperatura;PuntoRocio;Humedad;Viento;Presion" -Encoding UTF8
+$fileClima = Get-ChildItem -Path $Dir -Filter *.txt | Select-Object -ExpandProperty Name
+$txtfileClima = $Dir + $fileClima
+get-Content -Path $txtfileClima | Add-Content -Path $csvFile
+$listCima =  Import-Csv $csvFile -Delimiter ';' | Where-Object {$_.PSObject.Properties.Value -match '^Aeroparque'} | Select-Object -First 1
+$listCima
+$clima = $listCima.EstadoDelCielo
+$primeraPalabra = $clima.Split(" ")[0]
+$primeraPalabra
+$clima = " CABA" + ", " + $listCima.Temperatura + "º " + $primeraPalabra
+#>
 #incio HTML
 #"El primer diario hecho con IA."
 
@@ -845,7 +931,25 @@ $head = "
 <div class='contenedor-noticias'>
 "
 
+### agrega al html las efemerides
+$EfemerideEvento = $AgendaCompleta | Where-Object { $_.Tipo -eq "EfemerideEvento" } | ForEach-Object { "$($_.Fecha) - $($_.Descripcion)" }
+$EfemerideNacimientos = $AgendaCompleta | Where-Object { $_.Tipo -eq "EfemerideNacimientos" } | ForEach-Object { "$($_.Fecha) - $($_.Descripcion)" }
+$EfemerideFallecimientos = $AgendaCompleta | Where-Object { $_.Tipo -eq "EfemerideFallecimientos" }  | ForEach-Object { "$($_.Fecha) - $($_.Descripcion)" }
+$news += "
+		<div class='noticia' onclick='this.classList.toggle(""abierto"")'>
+			<h1>Efemérides</h1>
+			<img src='https://viaonline.com.ar/Imagenes/LogoEfemerides.png' alt='Imagen Efemerides'>
+			<div class=""desplegable""><h2>Efemérides: los hechos que marcaron la historia
+En esta sección encontrarás un recorrido por los acontecimientos más importantes que ocurrieron en esta misma fecha, a lo largo de distintos años. Desde hitos históricos y culturales hasta nacimientos y fallecimientos de personalidades destacadas, un repaso diario para mantener viva la memoria y comprender mejor nuestro presente. ▼</h2></div>
+			<div class=""contenido"">
+				<p>$EfemerideEvento</p>
+                <p>$EfemerideNacimientos</p>
+                <p>$EfemerideFallecimientos</p>
+			</div>
+		</div>
+"
 
+###
 ####
 
 ### Busca imagenes en google
@@ -875,26 +979,6 @@ $news = @()
 $new = @()
 $Counter = 0
 $linkIndex = 0
-
-### agrega al html las efemerides
-$EfemerideEvento = $AgendaCompleta | Where-Object { $_.Tipo -eq "EfemerideEvento" } | ForEach-Object { "$($_.Fecha) - $($_.Descripcion)" }
-$EfemerideNacimientos = $AgendaCompleta | Where-Object { $_.Tipo -eq "EfemerideNacimientos" } | ForEach-Object { "$($_.Fecha) - $($_.Descripcion)" }
-$EfemerideFallecimientos = $AgendaCompleta | Where-Object { $_.Tipo -eq "EfemerideFallecimientos" }  | ForEach-Object { "$($_.Fecha) - $($_.Descripcion)" }
-$news += "
-		<div class='noticia' onclick='this.classList.toggle(""abierto"")'>
-			<h1>Efemérides</h1>
-			<img src='https://viaonline.com.ar/Imagenes/LogoEfemerides.png' alt='Imagen Efemerides'>
-			<div class=""desplegable""><h2>Efemérides: los hechos que marcaron la historia
-En esta sección encontrarás un recorrido por los acontecimientos más importantes que ocurrieron en esta misma fecha, a lo largo de distintos años. Desde hitos históricos y culturales hasta nacimientos y fallecimientos de personalidades destacadas, un repaso diario para mantener viva la memoria y comprender mejor nuestro presente. ▼</h2></div>
-			<div class=""contenido"">
-				<p>$EfemerideEvento</p>
-                <p>$EfemerideNacimientos</p>
-                <p>$EfemerideFallecimientos</p>
-			</div>
-		</div>
-"
-
-###
 #Aca es en donde empezamos a armar los contenidos
 
 # Cargar la lista del CSV
