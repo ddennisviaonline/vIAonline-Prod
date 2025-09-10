@@ -1,0 +1,1186 @@
+
+<!DOCTYPE html>
+<html lang='es'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>vIA online</title>
+    <link rel='icon' type='image/png' sizes='512x512' href='https://viaonline.com.ar/Imagenes/favicon.ico'>
+      <!-- Script global de AdSense (va una sola vez en toda la web) -->
+    <meta name='google-adsense-account' content='ca-pub-1894152981922395'>
+    <style>
+/* Contenedor principal de noticias */
+
+.contenedor-noticias {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 columnas en PC */
+    gap: 20px;
+    margin: 20px;
+}
+
+    body {
+        background-color: #FEFBF4;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+    }
+
+    /* Logo centrado */
+    .logo {
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    .logo img {
+        width: 400px;
+    }
+
+/* Cada noticia */
+.noticia {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    cursor: pointer;
+    background-color: #FEFBF4;
+    transition: box-shadow 0.3s;
+}
+
+.noticia:hover {
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.noticia h1, .noticia h2 {
+    margin: 0 0 10px 0;
+    font-size: 16px;
+    text-align: center;
+}
+
+.noticia img {
+    width: 100%;
+    display: block;
+    margin-bottom: 10px;
+}
+
+/* Desplegable contenido */
+.contenido {
+    display: none;
+    margin-top: 10px;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.noticia.abierto .contenido {
+    display: block;
+}
+
+/* Fila de publicidad */
+.publicidad {
+    grid-column: 1 / -1; /* ocupa todo el ancho */
+    text-align: center;
+    padding: 20px;
+    background-color: #f0f0f0;
+    font-weight: bold;
+    border-radius: 8px;
+}
+
+/* Contenedor fecha y clima */
+.encabezado-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 0 10px;
+}
+
+/* Adaptación a celulares */
+@media (max-width: 768px) {
+    .contenedor-noticias {
+        grid-template-columns: 1fr; /* una columna */
+    }
+}
+    </style>
+</head>
+<body>
+
+    <!-- Logo -->
+    <div class='logo'>
+        <a href='https://viaonline.com.ar/'>
+            <img src='https://viaonline.com.ar/Imagenes/Logocorto.png' alt='Imagen centrada'>
+        </a>
+    </div>
+
+    <!-- Fecha y clima -->
+    <div class='encabezado-info'>
+        <div class='fecha'>📆 09 de septiembre de 2025</div>
+        <div class='clima'>Clima: CABA, 14.7º Despejado</div>
+        <div class='clima'>💵 Dólar oficial - Compra: 1375 | Venta: 1425</div>
+        <div class='clima'>💵 Dólar Blue - Compra: 1365 | Venta: 1385</div>
+        <div class='clima'>📆 Próximo feriado: Día de la  Raza (12/10) viernes 10 de octubre de 2025</div>        
+    </div>
+<div class='contenedor-noticias'>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Las cuatro sedes que podrían albergar la finalissima entre Argentina y España, el mítico estadio que pica en punta.</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTou64fFMpMPsPto009_HvrAm9TDyMOIcgt0Am0LFAuU_gnOp_LmqlNBXHrdJ4&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Las posibles sedes para la finalísima entre Argentina y España en el mítico estadio que pica en punta se analizan. ▼</h2></div>
+			<div class="contenido">
+				<p>Argentina y España podrían enfrentarse en la finalissima de un torneo internacional amistoso en 2025, y se están considerando cuatro sedes posibles para albergar el partido. Una de las sedes propuestas es el mítico estadio "Que Pica en Punta", con capacidad para más de 80,000 espectadores. Otras opciones incluyen estadios en Brasilia, Moscú y Tokio. Se espera que la decisión final se tome en las próximas semanas.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Donald Trump cuestionó el ataque de Israel a Qatar: "No estoy contento con lo que sucedió"</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtXYaho29d-IhzJ91nog8ybGep9gmWYECqHn-r_3DeH4U25h7UHcEybFCGL38&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Donald Trump criticó el ataque de Israel a Qatar, mostrando su descontento con la situación actual en Medio Oriente. ▼</h2></div>
+			<div class="contenido">
+				<p>Donald Trump criticó el ataque de Israel a Qatar y expresó su descontento por lo sucedido. No está satisfecho con la situación entre ambos países.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Todos los goles de las Eliminatorias Europeas: el impactante triunfo de Noruega y el grito histórico de Cristiano Ronaldo.</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj1Ncy3juiti3aOVzENgZd8sS07eJvt7POKV2pH_d7_kUhP24_W3GJLXpsaQ&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Noruega sorprendió con una victoria impactante en las eliminatorias europeas, mientras Cristiano Ronaldo marcó un gol histórico en otro partido. ▼</h2></div>
+			<div class="contenido">
+				<p>La selección de Noruega logró un triunfo histórico en las eliminatorias europeas, con una destacada actuación de Cristiano Ronaldo. En el partido se marcaron varios goles, siendo uno de ellos el número 110 de Ronaldo con la camiseta de Portugal. Noruega logró la victoria por 2-1, en un partido que quedará en la memoria de los aficionados al fútbol.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Sin Messi, Argentina visita a Ecuador por la última fecha de las Eliminatorias 2026: hora, TV y posibles formaciones.</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7fsRZFqDNydZMCxQMkFbk2nHqKwYLZvHrsHhN0sbVUzqbBHGUctT1ME7UL5s&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Argentina se enfrenta a Ecuador en el cierre de las eliminatorias 2026 sin la presencia de Messi. Consulta la hora, TV y posibles formaciones. ▼</h2></div>
+			<div class="contenido">
+				<p>La selección argentina se enfrentará a Ecuador en la última fecha de las eliminatorias para el Mundial 2026, sin contar con la presencia de Lionel Messi. El partido se llevará a cabo en Ecuador y se podrán ver por televisión. Aún no se han confirmado las formaciones de ambos equipos para el encuentro.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Elecciones Argentina 2025: �?ltimas noticias antes de los comicios legislativos nacionales.</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnySnLdhfVcVv_NCDLvzf7A9j5JThpYKsA2_sGTO23LkWxW0w3ig8WRuV3sOA&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>En el marco de las elecciones legislativas nacionales de Argentina en 2025, se presentan las últimas noticias antes de los comicios. Los ciudadanos se preparan para elegir a sus representantes en un clima de expectativa y debate político. La jornada electoral será clave para el futuro del país, con distintas fuerzas políticas buscando ganar posiciones en el Congreso. Se espera una alta participación ciudadana y un escrutinio detallado de los resultados para determinar el rumbo político que tomará Argentina en los próximos años. ▼</h2></div>
+			<div class="contenido">
+				<p>En el marco de las elecciones legislativas nacionales de Argentina en 2025, se presentan las últimas noticias antes de los comicios. Los ciudadanos se preparan para elegir a sus representantes en un clima de expectativa y debate político. La jornada electoral será clave para el futuro del país, con distintas fuerzas políticas buscando ganar posiciones en el Congreso. Se espera una alta participación ciudadana y un escrutinio detallado de los resultados para determinar el rumbo político que tomará Argentina en los próximos años.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Carolina González: cuando hablamos de transformación digital es inevitable hablar de educación.</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoGVFMHPmbXsasqjqQkaFjcVNMeycPWyDTAhbu_Qe_1KAfiGAqQjMcKSqcZWw&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El artículo hace énfasis en la importancia de la transformación digital en la educación, resaltando la necesidad de adaptar los métodos de enseñanza a las nuevas tecnologías. Carolina González, experta en innovación educativa, enfatiza la importancia de incorporar la digitalización en todos los niveles educativos para preparar a los estudiantes para el futuro. Se destaca la necesidad de integrar herramientas digitales en el aula y capacitar a los docentes en su uso para mejorar la calidad de la educación. ▼</h2></div>
+			<div class="contenido">
+				<p>El artículo hace énfasis en la importancia de la transformación digital en la educación, resaltando la necesidad de adaptar los métodos de enseñanza a las nuevas tecnologías. Carolina González, experta en innovación educativa, enfatiza la importancia de incorporar la digitalización en todos los niveles educativos para preparar a los estudiantes para el futuro. Se destaca la necesidad de integrar herramientas digitales en el aula y capacitar a los docentes en su uso para mejorar la calidad de la educación.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Europa y el Mercosur: un poco más cerca</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQT3EpEGOpNTFtn68Plz9Ce9I1_VeN_lfaqjOVANkpxIEmI-ERSLVPFI_J9Tg&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Europa y el Mercosur están avanzando hacia un acuerdo comercial que beneficiará a ambos bloques. Tras varios años de negociaciones, se espera que pronto se concrete un tratado que permitirá aumentar las exportaciones de productos agrícolas del Mercosur hacia Europa. Esta alianza traerá nuevas oportunidades de negocio para los países involucrados y fortalecerá las relaciones comerciales entre ambos continentes. ▼</h2></div>
+			<div class="contenido">
+				<p>Europa y el Mercosur están avanzando hacia un acuerdo comercial que beneficiará a ambos bloques. Tras varios años de negociaciones, se espera que pronto se concrete un tratado que permitirá aumentar las exportaciones de productos agrícolas del Mercosur hacia Europa. Esta alianza traerá nuevas oportunidades de negocio para los países involucrados y fortalecerá las relaciones comerciales entre ambos continentes.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1></h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQP-4wIBGXhhwWw0rYJGIZThbMn88s2JCXmNA50W2DgWnF7Wi8HWZTb4g5xqA&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>En un incidente impactante, un conductor de aplicaciones atropelló a un ciclista y luego bajó del auto para correr el cuerpo y escapar con una pasajera a bordo. El hecho quedó registrado en video y la policía está investigando lo ocurrido. ▼</h2></div>
+			<div class="contenido">
+				<p>En un incidente impactante, un conductor de aplicaciones atropelló a un ciclista y luego bajó del auto para correr el cuerpo y escapar con una pasajera a bordo. El hecho quedó registrado en video y la policía está investigando lo ocurrido.</p>
+			</div>
+		</div>
+ <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+  <p><strong>Publicidad</strong></p>
+        <a href=''>
+        <img src=' ' 
+        alt='Anuncio Publicitario'  
+        style='max-width: 80%; height: auto;'>
+     </a>
+     <p style='margin-top: 10px; text-align: center;'>
+        <a href=''>
+        
+        </a>
+     </p>
+  </div> 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Pierde el pelo pero no las mañas: el impactante gol de tiro libre de Ronaldinho a los 45 años</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoY5udr_ccVbIsT-uBi381NGxlHibTo8dWwiujy1GBqJAk-I830QUvI1pS7kU&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El ex futbolista brasileño Ronaldinho, a sus 45 años, sorprendió al mundo con un increíble gol de tiro libre en un partido amistoso. A pesar de haber perdido su cabello, demostró que sigue conservando su habilidad y maestría en el campo de juego. ▼</h2></div>
+			<div class="contenido">
+				<p>El ex futbolista brasileño Ronaldinho, a sus 45 años, sorprendió al mundo con un increíble gol de tiro libre en un partido amistoso. A pesar de haber perdido su cabello, demostró que sigue conservando su habilidad y maestría en el campo de juego.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Pese al revés electoral, JP Morgan redobla la apuesta y recomienda invertir en activos argentinos</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzKx6XzqAPpACGQSJIfENjhthL2KhxRRbVNu5-3I53ARhh924dKqjDOBefAw&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Según JP Morgan, a pesar de los resultados adversos en las elecciones primarias en Argentina, se sigue recomendando invertir en activos argentinos. La firma financiera considera que la situación política actual podría mejorar y que existen oportunidades de inversión en el país. ▼</h2></div>
+			<div class="contenido">
+				<p>Según JP Morgan, a pesar de los resultados adversos en las elecciones primarias en Argentina, se sigue recomendando invertir en activos argentinos. La firma financiera considera que la situación política actual podría mejorar y que existen oportunidades de inversión en el país.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Mahiques fue reelegido como presidente de la Asociación Internacional de Fiscales</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5w1KRLkvG0K50xm2oIKnMGsuHxgliXDt2dJDDcrFmwaWChE-xiu7wHRpcBg&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>En la noticia se informa que Mahiques fue reelegido como presidente de la Asociación Internacional de Fiscales en 2025. Mahiques agradeció la confianza en su liderazgo y se comprometió a seguir trabajando para fortalecer la labor de los fiscales a nivel internacional. ▼</h2></div>
+			<div class="contenido">
+				<p>En la noticia se informa que Mahiques fue reelegido como presidente de la Asociación Internacional de Fiscales en 2025. Mahiques agradeció la confianza en su liderazgo y se comprometió a seguir trabajando para fortalecer la labor de los fiscales a nivel internacional.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>El negocio del feedlot puede volverse insostenible</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGcHQSdMGcSV7PTzp003_2b5aMg3qp39FfMPwjUSZjDvmtNx7wtBjv2OnAXA&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El feedlot es una práctica común en la ganadería, sin embargo, puede volverse insostenible debido a la falta de rentabilidad y los altos costos de producción. Esto se debe en parte a la fluctuación de los precios de los alimentos y las complicaciones en la cadena de suministro. Los productores deben buscar alternativas para hacer frente a estos desafíos y mantener su negocio a flote. ▼</h2></div>
+			<div class="contenido">
+				<p>El feedlot es una práctica común en la ganadería, sin embargo, puede volverse insostenible debido a la falta de rentabilidad y los altos costos de producción. Esto se debe en parte a la fluctuación de los precios de los alimentos y las complicaciones en la cadena de suministro. Los productores deben buscar alternativas para hacer frente a estos desafíos y mantener su negocio a flote.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Por qué la palabra maquiavélico no significa lo que muchos creen</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_pKeS0VfvuxKpmkvE82Qxlk7dZmcWKulfOj6-9dygnnIRuRF62gZML29A_w&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>En el artículo se explica el origen y significado de la palabra "maquiavélico", la cual no proviene de Nicolas Maquiavelo como comúnmente se cree. Su significado se refiere a acciones astutas y manipuladoras, vinculadas al personaje Maquiavelo a partir de su obra "El Príncipe", pero el término se utilizaba mucho antes en la literatura. Dicha palabra se relaciona más con el ámbito político y la estrategia en vez de la maldad o la villanía. ▼</h2></div>
+			<div class="contenido">
+				<p>En el artículo se explica el origen y significado de la palabra "maquiavélico", la cual no proviene de Nicolas Maquiavelo como comúnmente se cree. Su significado se refiere a acciones astutas y manipuladoras, vinculadas al personaje Maquiavelo a partir de su obra "El Príncipe", pero el término se utilizaba mucho antes en la literatura. Dicha palabra se relaciona más con el ámbito político y la estrategia en vez de la maldad o la villanía.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Además de Messi, los dos jugadores de la selección liberados por Scaloni antes del cierre de las eliminatorias ante Ecuador</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmZZsu1_nI1Mla7hArqM7HSP2mRmeiRKW5F20qPOvYgbol9UbDozEaAtd5kz4&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La selección argentina de fútbol liberó a dos jugadores además de Lionel Messi antes del cierre de las eliminatorias ante Ecuador. Los futbolistas liberados son Nicolás Tagliafico y Rodrigo De Paul. Scaloni decidió darles descanso para el último partido de las eliminatorias. ▼</h2></div>
+			<div class="contenido">
+				<p>La selección argentina de fútbol liberó a dos jugadores además de Lionel Messi antes del cierre de las eliminatorias ante Ecuador. Los futbolistas liberados son Nicolás Tagliafico y Rodrigo De Paul. Scaloni decidió darles descanso para el último partido de las eliminatorias.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Proteger lo que nos identifica: árboles nativos y sanidad vegetal</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCr3eMyv0CXxA_r42HAMrPfJfCFzQ-eK6o-_EtXS3cxjUDOQtOhfJkAiFpVg&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>En el artículo se destaca la importancia de proteger los árboles nativos y la sanidad vegetal como parte fundamental de nuestra identidad. Se enfatiza en la necesidad de conservar estas especies para mantener el equilibrio ecológico y prevenir la propagación de enfermedades que puedan afectar a la vegetación. ▼</h2></div>
+			<div class="contenido">
+				<p>En el artículo se destaca la importancia de proteger los árboles nativos y la sanidad vegetal como parte fundamental de nuestra identidad. Se enfatiza en la necesidad de conservar estas especies para mantener el equilibrio ecológico y prevenir la propagación de enfermedades que puedan afectar a la vegetación.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Un amigo incondicional y un papá increíble: quién era el hombre que murió atropellado por un chofer de aplicación en José C. Paz.</h1>
+			<img src='' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Un hombre fue atropellado por un chofer de aplicación en José C. Paz, Argentina. La víctima era muy querida en su comunidad, siendo descrito como un amigo incondicional y un padre increíble. La noticia conmocionó a quienes lo conocían, generando gran tristeza en su entorno. ▼</h2></div>
+			<div class="contenido">
+				<p>Un hombre fue atropellado por un chofer de aplicación en José C. Paz, Argentina. La víctima era muy querida en su comunidad, siendo descrito como un amigo incondicional y un padre increíble. La noticia conmocionó a quienes lo conocían, generando gran tristeza en su entorno.</p>
+			</div>
+		</div>
+ <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+  <p><strong>Publicidad</strong></p>
+        <a href=''>
+        <img src=' ' 
+        alt='Anuncio Publicitario'  
+        style='max-width: 80%; height: auto;'>
+     </a>
+     <p style='margin-top: 10px; text-align: center;'>
+        <a href=''>
+        
+        </a>
+     </p>
+  </div> 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Prevención y chequeos gratuitos: una campaña refuerza la lucha contra el cáncer de piel en Argentina.</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWDFu8OCGDysmYl_qx8fSArT0BR-Yb_QPhz_5UVly3kx-2YxV9q0A6nwr2Qm0&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>En Argentina se está llevando a cabo una campaña de prevención y chequeos gratuitos para combatir el cáncer de piel. La iniciativa busca concientizar sobre la importancia de la detección temprana de esta enfermedad. La campaña incluye la realización de controles dermatológicos en distintos puntos del país y la distribución gratuita de protectores solares. ▼</h2></div>
+			<div class="contenido">
+				<p>En Argentina se está llevando a cabo una campaña de prevención y chequeos gratuitos para combatir el cáncer de piel. La iniciativa busca concientizar sobre la importancia de la detección temprana de esta enfermedad. La campaña incluye la realización de controles dermatológicos en distintos puntos del país y la distribución gratuita de protectores solares.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Argentina lideró el crecimiento de tráfico aéreo en la región durante julio</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSF1ig9TCxJlpge3Ok5I44qzFhXVJiqs21UiU-UeqHed4QJ1KpjimA1nvFV&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Según un informe de la Asociación Latinoamericana y del Caribe de Transporte Aéreo (ALTA), Argentina lideró el crecimiento de tráfico aéreo en la región durante el mes de julio. El país registró un incremento del 22,8% en comparación con el mismo período del año pasado. Este crecimiento se debe en parte a la reactivación de la actividad turística y la flexibilización de las restricciones por la pandemia. ▼</h2></div>
+			<div class="contenido">
+				<p>Según un informe de la Asociación Latinoamericana y del Caribe de Transporte Aéreo (ALTA), Argentina lideró el crecimiento de tráfico aéreo en la región durante el mes de julio. El país registró un incremento del 22,8% en comparación con el mismo período del año pasado. Este crecimiento se debe en parte a la reactivación de la actividad turística y la flexibilización de las restricciones por la pandemia.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Paraguay se enfrentará a Perú en la despedida de las eliminatorias: hora, TV y formaciones.</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVhxJDmmEz8JK8zSkDcnt9lmw7FEBiVwqX2HIYJbgaW8EmB3W-yM0uuw5Vf4A&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Paraguay se enfrentará a Perú en la despedida de las eliminatorias. El encuentro se llevará a cabo el sábado a las 20:30 horas en el estadio Defensores del Chaco, y será transmitido por televisión. Ambos equipos buscarán cerrar su participación en las eliminatorias de la mejor manera posible. ▼</h2></div>
+			<div class="contenido">
+				<p>Paraguay se enfrentará a Perú en la despedida de las eliminatorias. El encuentro se llevará a cabo el sábado a las 20:30 horas en el estadio Defensores del Chaco, y será transmitido por televisión. Ambos equipos buscarán cerrar su participación en las eliminatorias de la mejor manera posible.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Santa Fe entra en la recta final para aprobar la nueva constitución: ¿Qué modificaciones se hicieron y cuándo se jura?</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgGUo08A4Jk8ZR-zWGHQKjw6x7sg7bq7hpupIGrXdc7hnm2jxzGdMYW0HnfTU&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>En Santa Fe, se está por aprobar una nueva constitución provincial con modificaciones importantes. Entre los cambios se destaca la reforma en la composición de la Corte Suprema de Justicia, que ahora estará integrada por siete miembros en lugar de cinco. Además, se establece la obligatoriedad de contar con un mínimo de tres mujeres en dicho órgano. También se incluyen disposiciones relacionadas con la igualdad de género y la protección del medio ambiente. Se espera que la nueva constitución sea jurada en los próximos días. ▼</h2></div>
+			<div class="contenido">
+				<p>En Santa Fe, se está por aprobar una nueva constitución provincial con modificaciones importantes. Entre los cambios se destaca la reforma en la composición de la Corte Suprema de Justicia, que ahora estará integrada por siete miembros en lugar de cinco. Además, se establece la obligatoriedad de contar con un mínimo de tres mujeres en dicho órgano. También se incluyen disposiciones relacionadas con la igualdad de género y la protección del medio ambiente. Se espera que la nueva constitución sea jurada en los próximos días.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1></h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQi1Rx4FFQRy6iiRN_J71C51cx8J4MUHn3SoN3z2VQDn764jVcqRv-tx6369Q&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2> ▼</h2></div>
+			<div class="contenido">
+				<p></p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>La logística del futuro: sostenible, digital y con fuertes brechas entre países</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqG4LlGuHGuyR9tFHgX8usvm5OyLiQ5LpJ26a7rDHalXC3vc7taDxeEDVtQA&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El artículo habla sobre cómo la logística del futuro será sostenible, digital y presentará fuertes brechas entre los diferentes países. Se destaca la importancia de adaptarse a las nuevas tecnologías y prácticas sostenibles para garantizar la eficiencia en el transporte de mercancías a nivel global. Además, se menciona que existen disparidades en cuanto a la infraestructura tecnológica y las políticas de cada país, lo que puede afectar la competitividad en el mercado internacional. ▼</h2></div>
+			<div class="contenido">
+				<p>El artículo habla sobre cómo la logística del futuro será sostenible, digital y presentará fuertes brechas entre los diferentes países. Se destaca la importancia de adaptarse a las nuevas tecnologías y prácticas sostenibles para garantizar la eficiencia en el transporte de mercancías a nivel global. Además, se menciona que existen disparidades en cuanto a la infraestructura tecnológica y las políticas de cada país, lo que puede afectar la competitividad en el mercado internacional.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Ex mandatarios iberoamericanos alertaron sobre los riesgos para María Corina Machado y exigieron garantías a su integridad</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhc_u6WTi59gGLtpZuMScFLeUN3KjnO2BFnfu_FxNY9vLQOY1nryL5-j5m4w&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El artículo menciona que ex mandatarios iberoamericanos expresaron su preocupación por los riesgos que enfrenta María Corina Machado en Venezuela. Exigieron garantías para su integridad y manifestaron su apoyo a la líder opositora. ▼</h2></div>
+			<div class="contenido">
+				<p>El artículo menciona que ex mandatarios iberoamericanos expresaron su preocupación por los riesgos que enfrenta María Corina Machado en Venezuela. Exigieron garantías para su integridad y manifestaron su apoyo a la líder opositora.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>La casa de Cris Vanadia revela el secreto de la creatividad en la era digital</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR79guZigbu26_trLoAt6K00BULxYJI5sD57CElD1rac9bxCQaoKajKwRvgzt4&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La casa de Cris Vanadia revela el secreto de la creatividad en la era digital. Se trata de un espacio que potencia la inspiración a través de la tecnología y el diseño de vanguardia. En este lugar se busca fomentar la innovación y el talento de los creativos, ofreciendo un ambiente propicio para el desarrollo de ideas creativas en la era digital. ▼</h2></div>
+			<div class="contenido">
+				<p>La casa de Cris Vanadia revela el secreto de la creatividad en la era digital. Se trata de un espacio que potencia la inspiración a través de la tecnología y el diseño de vanguardia. En este lugar se busca fomentar la innovación y el talento de los creativos, ofreciendo un ambiente propicio para el desarrollo de ideas creativas en la era digital.</p>
+			</div>
+		</div>
+ <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+  <p><strong>Publicidad</strong></p>
+        <a href=''>
+        <img src=' ' 
+        alt='Anuncio Publicitario'  
+        style='max-width: 80%; height: auto;'>
+     </a>
+     <p style='margin-top: 10px; text-align: center;'>
+        <a href=''>
+        
+        </a>
+     </p>
+  </div> 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Plazo fijo: cuanto pagan los principales bancos tras la derrota del gobierno en la provincia de Buenos Aires</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCTcU4LXeEa83zJpTAlloi5uRROMPplcXrqiyGI4B9EIu_ecAyxY6Dx7Kt7_I&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>En el contexto de la derrota del gobierno en la provincia de Buenos Aires, los principales bancos de Argentina han aumentado las tasas de interés que pagan por los plazos fijos. Algunas entidades están ofreciendo tasas de hasta el 40% anual, lo que representa una oportunidad para los ahorristas en un momento de incertidumbre económica. ▼</h2></div>
+			<div class="contenido">
+				<p>En el contexto de la derrota del gobierno en la provincia de Buenos Aires, los principales bancos de Argentina han aumentado las tasas de interés que pagan por los plazos fijos. Algunas entidades están ofreciendo tasas de hasta el 40% anual, lo que representa una oportunidad para los ahorristas en un momento de incertidumbre económica.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Quién es Sébastien Lecornu, el animal político que Macron eligió para estabilizar Francia</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQY-qYsYgL0NickgkaYsFshfCmFBhotWNriSWkMFJYz2jxDlOe_DVEMQBWh-A&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Sebastien Lecornu, un político francés de 35 años, ha sido señalado como el elegido por Emmanuel Macron para estabilizar Francia. Lecornu ha pasado por varios cargos políticos y se le considera un "animal político". Macron confía en él para fortalecer su gobierno y su partido de cara a las próximas elecciones. ▼</h2></div>
+			<div class="contenido">
+				<p>Sebastien Lecornu, un político francés de 35 años, ha sido señalado como el elegido por Emmanuel Macron para estabilizar Francia. Lecornu ha pasado por varios cargos políticos y se le considera un "animal político". Macron confía en él para fortalecer su gobierno y su partido de cara a las próximas elecciones.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>El régimen de Nicolás Maduro anunció que reforzará la presencia militar en los estados caribeños de Venezuela.</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDlt2pkbUSXgnePHHfb8T5LbDPAsTEWcPbXbxVH5nkC_I-B-7P2Je46I1F1V8&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El régimen de Nicolás Maduro anunció que reforzará la presencia militar en los estados caribeños de Venezuela. Esta decisión busca aumentar la seguridad en la región debido a la presencia de grupos armados ilegales y el narcotráfico. ▼</h2></div>
+			<div class="contenido">
+				<p>El régimen de Nicolás Maduro anunció que reforzará la presencia militar en los estados caribeños de Venezuela. Esta decisión busca aumentar la seguridad en la región debido a la presencia de grupos armados ilegales y el narcotráfico.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Investigación revela que Boris Johnson recibió más de 300 mil dólares tras reunirse con Nicolás Maduro en 2024</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTeYHTEn5vWJoDwtQrrTJcXdmtFpMBbUQJ4puBeB6ZHB5sBAq5qIBlZ9J0Nl80&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Según una investigación periodística, Boris Johnson recibió más de 300 mil dólares tras reunirse con Nicolás Maduro en 2024. El motivo de la reunión y los detalles de la transacción no han sido revelados en el informe. ▼</h2></div>
+			<div class="contenido">
+				<p>Según una investigación periodística, Boris Johnson recibió más de 300 mil dólares tras reunirse con Nicolás Maduro en 2024. El motivo de la reunión y los detalles de la transacción no han sido revelados en el informe.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Impresionante aterrizaje de emergencia en un paraíso del Caribe: había 164 personas a bordo</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFMhvIv-TU1vWFN5DfBecbsonHvHaO5JbOEXNuQycKF8uMr211nfuUrDDewQ&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Un avión con 164 personas a bordo realizó un aterrizaje de emergencia en una isla del Caribe. El incidente ocurrió debido a un problema técnico en el motor de la aeronave, que obligó al piloto a realizar la maniobra. Afortunadamente, todos los pasajeros y la tripulación resultaron ilesos y fueron evacuados de manera segura. ▼</h2></div>
+			<div class="contenido">
+				<p>Un avión con 164 personas a bordo realizó un aterrizaje de emergencia en una isla del Caribe. El incidente ocurrió debido a un problema técnico en el motor de la aeronave, que obligó al piloto a realizar la maniobra. Afortunadamente, todos los pasajeros y la tripulación resultaron ilesos y fueron evacuados de manera segura.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>La mirada de Frana sobre el campeón del US Open: "Para nosotros, Horacio es uno de nuestros líderes"</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRQyiauAryQrv9c2Cgn9Arsn_j9ySRsKP--_Ej_wuJFm5Ss8rZMxtWxqcgXA&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>En una entrevista reciente, Guillermo Frana elogió a Horacio Zeballos por su destacado desempeño como campeón del US Open. Frana destacó que Zeballos es uno de los líderes del equipo argentino de tenis y resaltó su dedicación y compromiso en cada partido. ▼</h2></div>
+			<div class="contenido">
+				<p>En una entrevista reciente, Guillermo Frana elogió a Horacio Zeballos por su destacado desempeño como campeón del US Open. Frana destacó que Zeballos es uno de los líderes del equipo argentino de tenis y resaltó su dedicación y compromiso en cada partido.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1></h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzFU_oCkMB8TBtIyAG_SKjLmXK5hu8hZCu0G8AgPifUsqFBceTFnI08uhKBw&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>En un shopping de Rosario, un hombre peleó con un cliente por un trabajo y comenzó a disparar al aire. El suceso provocó pánico entre los transeúntes, pero afortunadamente no hubo heridos. La policía logró detener al agresor y secuestró un arma de fuego que llevaba consigo. La situación se solucionó sin mayores consecuencias gracias a la rápida intervención de las autoridades. ▼</h2></div>
+			<div class="contenido">
+				<p>En un shopping de Rosario, un hombre peleó con un cliente por un trabajo y comenzó a disparar al aire. El suceso provocó pánico entre los transeúntes, pero afortunadamente no hubo heridos. La policía logró detener al agresor y secuestró un arma de fuego que llevaba consigo. La situación se solucionó sin mayores consecuencias gracias a la rápida intervención de las autoridades.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Axel Kicillof: el lío financiero que hay hace un tiempo en Argentina es todo de Milei</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsSaPkrZN5ADFSWQVXaPV2geVgylL4VOWABbGzJNV2HUnhocZMgMkq1gMk_qA&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Axel Kicillof se refirió a la situación financiera en Argentina y atribuyó el conflicto a José Luis Espert y su equipo económico. El actual gobernador de la provincia de Buenos Aires mencionó que el desbarajuste económico se debe a las políticas implementadas por Espert y que la responsabilidad de la crisis recae en ellos. ▼</h2></div>
+			<div class="contenido">
+				<p>Axel Kicillof se refirió a la situación financiera en Argentina y atribuyó el conflicto a José Luis Espert y su equipo económico. El actual gobernador de la provincia de Buenos Aires mencionó que el desbarajuste económico se debe a las políticas implementadas por Espert y que la responsabilidad de la crisis recae en ellos.</p>
+			</div>
+		</div>
+ <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+  <p><strong>Publicidad</strong></p>
+        <a href=''>
+        <img src=' ' 
+        alt='Anuncio Publicitario'  
+        style='max-width: 80%; height: auto;'>
+     </a>
+     <p style='margin-top: 10px; text-align: center;'>
+        <a href=''>
+        
+        </a>
+     </p>
+  </div> 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Entre la novela y la neurociencia: presentaron "Vendrán por ti" en la Feria del Libro de Rawson.</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4o-UYoLCoECXAaGvbBRAFEZ1wL_JhDojUlXHkzy3ImIIpPoXXkx4C_GDcmQw&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>En la Feria del Libro de Rawson se presentó la novela "Vendrán por ti", la cual aborda la temática de la neurociencia. El autor de la obra explica que la trama se centra en un neurocientífico que descubre una manera de detectar a criminales a través del análisis de sus cerebros. Este evento tuvo lugar en el marco de las actividades culturales de la feria, donde se destacó la importancia de la literatura y la ciencia en la sociedad actual. ▼</h2></div>
+			<div class="contenido">
+				<p>En la Feria del Libro de Rawson se presentó la novela "Vendrán por ti", la cual aborda la temática de la neurociencia. El autor de la obra explica que la trama se centra en un neurocientífico que descubre una manera de detectar a criminales a través del análisis de sus cerebros. Este evento tuvo lugar en el marco de las actividades culturales de la feria, donde se destacó la importancia de la literatura y la ciencia en la sociedad actual.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Investigan al presidente de Bolivia Luis Arce por abandono de mujer embarazada</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPszqQjHZfrIBN59Ni5H0yVJ2N8ak_VwowlTJuL0QjtAXbH3VTl3p86YwgGA&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El presidente de Bolivia, Luis Arce, está siendo investigado por presuntamente abandonar a una mujer embarazada. La denuncia fue presentada por la supuesta víctima, quien asegura que el mandatario no le brindó ningún tipo de apoyo durante su embarazo. La fiscalía boliviana ha iniciado las averiguaciones correspondientes para esclarecer los hechos. ▼</h2></div>
+			<div class="contenido">
+				<p>El presidente de Bolivia, Luis Arce, está siendo investigado por presuntamente abandonar a una mujer embarazada. La denuncia fue presentada por la supuesta víctima, quien asegura que el mandatario no le brindó ningún tipo de apoyo durante su embarazo. La fiscalía boliviana ha iniciado las averiguaciones correspondientes para esclarecer los hechos.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>La Argentina con la expectativa de empleo más baja del mundo: ¿Qué sectores muestran señales de repunte y cuáles no?</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSU3zt8fnriF03y71_1hrZNjGOK5sMtNHMpK8q6UYr4IBvU-R-G-yJPmXTT37E&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La Argentina se encuentra con la expectativa de empleo más baja del mundo, con sectores que muestran señales de repunte y otros que no. Esto se debe a la crisis económica que ha afectado al país, provocando la pérdida de puestos de trabajo en varios sectores. Sin embargo, hay indicios de recuperación en áreas como la construcción, la industria manufacturera y el agro, mientras que el comercio, la hotelería y los servicios personales continúan en una situación complicada. ▼</h2></div>
+			<div class="contenido">
+				<p>La Argentina se encuentra con la expectativa de empleo más baja del mundo, con sectores que muestran señales de repunte y otros que no. Esto se debe a la crisis económica que ha afectado al país, provocando la pérdida de puestos de trabajo en varios sectores. Sin embargo, hay indicios de recuperación en áreas como la construcción, la industria manufacturera y el agro, mientras que el comercio, la hotelería y los servicios personales continúan en una situación complicada.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Insólito: El mago sin dientes fue a la Casa Rosada y pidió hablar con Javier Milei</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbIJDY6QUc4QeToxl0ECTN6wFfO4MOQY6HfOU5b0PETsiJGyomuoEfAFWl_AQ&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>En un hecho insólito, el "mago sin dientes" se presentó en la Casa Rosada con la intención de hablar con Javier Milei. El mago expresó su deseo de colaborar con el político en su camino hacia la presidencia, pero no logró ser recibido por Milei. Finalmente, el hombre se retiró del lugar sin poder concretar su objetivo. ▼</h2></div>
+			<div class="contenido">
+				<p>En un hecho insólito, el "mago sin dientes" se presentó en la Casa Rosada con la intención de hablar con Javier Milei. El mago expresó su deseo de colaborar con el político en su camino hacia la presidencia, pero no logró ser recibido por Milei. Finalmente, el hombre se retiró del lugar sin poder concretar su objetivo.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Los lujos de la promesa de Racing que brilla en el Mundial de Clubes juvenil y en Europa comparan con Maradona</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoY5udr_ccVbIsT-uBi381NGxlHibTo8dWwiujy1GBqJAk-I830QUvI1pS7kU&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Un joven jugador de Racing se encuentra brillando en el Mundial de Clubes juvenil y en Europa, siendo comparado con Maradona por sus habilidades en el campo. Este talentoso futbolista ha llamado la atención por su gran desempeño y se destaca por sus lujos en el terreno de juego. ▼</h2></div>
+			<div class="contenido">
+				<p>Un joven jugador de Racing se encuentra brillando en el Mundial de Clubes juvenil y en Europa, siendo comparado con Maradona por sus habilidades en el campo. Este talentoso futbolista ha llamado la atención por su gran desempeño y se destaca por sus lujos en el terreno de juego.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>La ONG Foro Penal informó que el número de presos políticos en Venezuela asciende a 823 personas</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQygddlZoo3KKr0n1WFr8bcvyayXTBveiJnd1W4KE_IvrF9KzmOMisdTc4eNg&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Según la ONG Foro Penal, el número de presos políticos en Venezuela ha llegado a 823 personas. Esta cifra incluye a aquellos detenidos por razones políticas, como opositores al gobierno de Nicolás Maduro. La organización mencionó que esta cantidad ha aumentado en comparación con años anteriores, lo que evidencia la situación de represión en el país. ▼</h2></div>
+			<div class="contenido">
+				<p>Según la ONG Foro Penal, el número de presos políticos en Venezuela ha llegado a 823 personas. Esta cifra incluye a aquellos detenidos por razones políticas, como opositores al gobierno de Nicolás Maduro. La organización mencionó que esta cantidad ha aumentado en comparación con años anteriores, lo que evidencia la situación de represión en el país.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Venezuela recibirá a Colombia con la ilusión de garantizar su lugar en el repechaje de las eliminatorias: hora, TV y formaciones</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlOIovC2Ct_GSSC6OH_8K3w2U-a-D0JT4hbVLIGQjnqa6sdTGuUHADQgqu5g&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>En un partido crucial para ambos equipos, Venezuela se enfrentará a Colombia con la esperanza de asegurar su lugar en el repechaje de las eliminatorias. El encuentro se llevará a cabo en el Estadio Polideportivo de Pueblo Nuevo, en San Cristóbal. Venezuela buscará sumar puntos para avanzar en su camino hacia el Mundial, mientras que Colombia buscará una victoria que le permita acercarse a la clasificación directa. El partido será transmitido por televisión y ya se conocen las formaciones de ambos equipos. ▼</h2></div>
+			<div class="contenido">
+				<p>En un partido crucial para ambos equipos, Venezuela se enfrentará a Colombia con la esperanza de asegurar su lugar en el repechaje de las eliminatorias. El encuentro se llevará a cabo en el Estadio Polideportivo de Pueblo Nuevo, en San Cristóbal. Venezuela buscará sumar puntos para avanzar en su camino hacia el Mundial, mientras que Colombia buscará una victoria que le permita acercarse a la clasificación directa. El partido será transmitido por televisión y ya se conocen las formaciones de ambos equipos.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Cómo saber si tu pasaporte tiene fallas y qué hacer para cambiarlo</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwSIx-SgynqwFaho-m3zKIwzhKMlGSZPJysyE4kOd5mhqixOLmsmLBB9dn8w&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El artículo explica cómo detectar fallas en tu pasaporte y qué hacer en caso de necesitar cambiarlo. Entre los problemas más comunes se encuentran manchas de agua, rasguños, dobleces o deterioro de la información personal. Se recomienda revisar siempre la validez y el estado del documento para evitar contratiempos en futuros viajes. ▼</h2></div>
+			<div class="contenido">
+				<p>El artículo explica cómo detectar fallas en tu pasaporte y qué hacer en caso de necesitar cambiarlo. Entre los problemas más comunes se encuentran manchas de agua, rasguños, dobleces o deterioro de la información personal. Se recomienda revisar siempre la validez y el estado del documento para evitar contratiempos en futuros viajes.</p>
+			</div>
+		</div>
+ <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+  <p><strong>Publicidad</strong></p>
+        <a href=''>
+        <img src=' ' 
+        alt='Anuncio Publicitario'  
+        style='max-width: 80%; height: auto;'>
+     </a>
+     <p style='margin-top: 10px; text-align: center;'>
+        <a href=''>
+        
+        </a>
+     </p>
+  </div> 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>El primer ministro portugués pidió a Xi Jinping que aproveche su estrecha relación con Rusia para lograr la paz en Ucrania</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUDHnRszLewKFhnvGLEkdtmKbeIxH8VZrszpdf3SM4Na9jsCFYMcfUPWR37A&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El Primer Ministro portugués ha pedido al presidente chino Xi Jinping que utilice su cercana relación con Rusia para contribuir a la paz en Ucrania. Este llamado se hizo en el marco de la cumbre del G20, en la que se discutieron diversos temas de política internacional. ▼</h2></div>
+			<div class="contenido">
+				<p>El Primer Ministro portugués ha pedido al presidente chino Xi Jinping que utilice su cercana relación con Rusia para contribuir a la paz en Ucrania. Este llamado se hizo en el marco de la cumbre del G20, en la que se discutieron diversos temas de política internacional.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Cómo eliminar los ácaros de casa fácilmente: lo que hay que saber.</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2w5icC4GrHHWWIYr5SLc2fq238kirB21PRpoAw_qX9NHLlw0Jw3UCUWT3fg&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El artículo ofrece consejos para eliminar los ácaros del hogar de manera efectiva. Entre las recomendaciones se incluye mantener la casa limpia, lavar la ropa de cama con regularidad, controlar la humedad y utilizar fundas anti-ácaros en colchones y almohadas. Además, se sugiere aspirar los muebles y alfombras de forma frecuente, así como ventilar la casa para reducir la presencia de estos microorganismos. ▼</h2></div>
+			<div class="contenido">
+				<p>El artículo ofrece consejos para eliminar los ácaros del hogar de manera efectiva. Entre las recomendaciones se incluye mantener la casa limpia, lavar la ropa de cama con regularidad, controlar la humedad y utilizar fundas anti-ácaros en colchones y almohadas. Además, se sugiere aspirar los muebles y alfombras de forma frecuente, así como ventilar la casa para reducir la presencia de estos microorganismos.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1></h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRg4pc9yAi2R82k6uuDeEwFzomUMO_PWipBE_QI2hL1vP8K2bC-nVsIqzsWzg&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2> ▼</h2></div>
+			<div class="contenido">
+				<p></p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Entronizaron el mosaico de Nuestra Señora de Luján en los Jardines Vaticanos</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2VsPx4Rd4GilaMBzGQEmdBdKFvgCTk8aZc3crFaizCTB79BIgGfQvOemEFoo&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>En los jardines Vaticanos se realizó la entronización del mosaico de Nuestra Señora de Luján. La ceremonia fue presidida por el Secretario de Estado de Su Santidad, cardenal Pietro Parolin, y contó con la presencia de autoridades argentinas. El mosaico fue un regalo de Argentina al papa Francisco y representa a la Virgen María como patrona del país. ▼</h2></div>
+			<div class="contenido">
+				<p>En los jardines Vaticanos se realizó la entronización del mosaico de Nuestra Señora de Luján. La ceremonia fue presidida por el Secretario de Estado de Su Santidad, cardenal Pietro Parolin, y contó con la presencia de autoridades argentinas. El mosaico fue un regalo de Argentina al papa Francisco y representa a la Virgen María como patrona del país.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>El lapidario análisis de una leyenda de la selección alemana: estamos a años luz de poder hablar de ganar la Copa del Mundo</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdUrBp0klmGkEyHfrlE-X09st-PU05On5lRFg5CuwVLXQhxEmJIlmtXZo5mv8&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La leyenda de la selección alemana expresó que el equipo está lejos de poder ganar la Copa del Mundo. Señaló la falta de calidad de los jugadores y la necesidad de cambiar la mentalidad en el fútbol alemán. ▼</h2></div>
+			<div class="contenido">
+				<p>La leyenda de la selección alemana expresó que el equipo está lejos de poder ganar la Copa del Mundo. Señaló la falta de calidad de los jugadores y la necesidad de cambiar la mentalidad en el fútbol alemán.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>iPhone 17 Air en pesos: cuando llegará a la Argentina y cuanto costará el nuevo tanque de Apple</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9k1PWLLQ8_1QT_Z542L2yTt0ZJ2RsOr17N5prL6bwaeSvRsnB7Yz7hrzZIQ&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El iPhone 17 Air de Apple pronto llegará a Argentina y se estima que costará alrededor de 250.000 pesos. Este nuevo modelo se destaca por su diseño delgado y ligero, así como por su potente rendimiento y tecnología avanzada. Se espera que esté disponible en el país en pocas semanas, brindando a los usuarios la oportunidad de disfrutar de lo último en telefonía móvil. ▼</h2></div>
+			<div class="contenido">
+				<p>El iPhone 17 Air de Apple pronto llegará a Argentina y se estima que costará alrededor de 250.000 pesos. Este nuevo modelo se destaca por su diseño delgado y ligero, así como por su potente rendimiento y tecnología avanzada. Se espera que esté disponible en el país en pocas semanas, brindando a los usuarios la oportunidad de disfrutar de lo último en telefonía móvil.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Es día a día: Miguel Russo se ausentó a otra práctica en Boca Juniors y no está confirmado que viaje a Rosario</h1>
+			<img src='' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El técnico de Boca Juniors, Miguel Russo, se ausentó nuevamente de una práctica del equipo, y no está confirmado si viajará a Rosario para el próximo partido. Esta situación ha generado incertidumbre en torno a la continuidad del entrenador en el club. ▼</h2></div>
+			<div class="contenido">
+				<p>El técnico de Boca Juniors, Miguel Russo, se ausentó nuevamente de una práctica del equipo, y no está confirmado si viajará a Rosario para el próximo partido. Esta situación ha generado incertidumbre en torno a la continuidad del entrenador en el club.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Irán y el OIEA firmaron en El Cairo un acuerdo para reanudar la cooperación nuclear</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJrLuEy_zjs348CNjhmf5r4_4KZGr5mwOE0zvnapaPVUHTJzL4h12r_vN4eFU&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>En El Cairo, Irán y el Organismo Internacional de Energía Atómica (OIEA) firmaron un acuerdo para reanudar la cooperación nuclear. Esta decisión busca generar transparencia en relación al programa nuclear iraní y facilitar la labor de inspección por parte del OIEA en las instalaciones nucleares del país. ▼</h2></div>
+			<div class="contenido">
+				<p>En El Cairo, Irán y el Organismo Internacional de Energía Atómica (OIEA) firmaron un acuerdo para reanudar la cooperación nuclear. Esta decisión busca generar transparencia en relación al programa nuclear iraní y facilitar la labor de inspección por parte del OIEA en las instalaciones nucleares del país.</p>
+			</div>
+		</div>
+ <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+  <p><strong>Publicidad</strong></p>
+        <a href=''>
+        <img src=' ' 
+        alt='Anuncio Publicitario'  
+        style='max-width: 80%; height: auto;'>
+     </a>
+     <p style='margin-top: 10px; text-align: center;'>
+        <a href=''>
+        
+        </a>
+     </p>
+  </div> 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>El nuevo desafío del hijo de Ronaldinho tras fichar por un club de Inglaterra: "Nunca intentes ser mi padre"</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLyKYSFXinCo6cm5_2NHkX7u-EVghc73z-1fmnyNLW2WoiPsTnx5dYlYegjg&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El hijo de Ronaldinho asume un nuevo desafío al fichar por un club de Inglaterra. El joven jugador reconoce que nunca intentará ser como su padre, pero aspira a triunfar en su propia carrera futbolística. Ronaldinho apoya y alienta a su hijo en esta nueva etapa. ▼</h2></div>
+			<div class="contenido">
+				<p>El hijo de Ronaldinho asume un nuevo desafío al fichar por un club de Inglaterra. El joven jugador reconoce que nunca intentará ser como su padre, pero aspira a triunfar en su propia carrera futbolística. Ronaldinho apoya y alienta a su hijo en esta nueva etapa.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Reducir el consumo de cafeína modifica la calidad del sueño: ¿cuál es la causa?</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdE7Uv4nDoFGToFoR7imN8dEgRJaF7D447LDYzuLvhmg3PVS6bxLUjQtQbcII&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Un estudio reveló que reducir el consumo de cafeína puede alterar la calidad del sueño. Investigadores descubrieron que las personas que consumen menos cafeína tienden a dormir más tiempo, con un sueño más profundo y menos interrupciones nocturnas. Esto se debe a que la cafeína afecta los ritmos circadianos y la producción de adenosina en el cerebro, lo que puede alterar el ciclo del sueño. ▼</h2></div>
+			<div class="contenido">
+				<p>Un estudio reveló que reducir el consumo de cafeína puede alterar la calidad del sueño. Investigadores descubrieron que las personas que consumen menos cafeína tienden a dormir más tiempo, con un sueño más profundo y menos interrupciones nocturnas. Esto se debe a que la cafeína afecta los ritmos circadianos y la producción de adenosina en el cerebro, lo que puede alterar el ciclo del sueño.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Cuadernos de la corrupción incorporan las declaraciones de los arrepentidos como prueba en el juicio oral</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdGEa-3T94LQ88L-1YAqXTgIEYKpSXcqChOIuJcAr_uj_wrjgRrVASENkxIg&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>En el juicio oral por los Cuadernos de la Corrupción se han incorporado las declaraciones de los arrepentidos como prueba. Esta medida busca fortalecer la evidencia presentada en el caso, donde se investiga una red de corrupción ligada al gobierno anterior. Los testimonios de los arrepentidos serán considerados en el proceso judicial para esclarecer los hechos y determinar las responsabilidades de los implicados. ▼</h2></div>
+			<div class="contenido">
+				<p>En el juicio oral por los Cuadernos de la Corrupción se han incorporado las declaraciones de los arrepentidos como prueba. Esta medida busca fortalecer la evidencia presentada en el caso, donde se investiga una red de corrupción ligada al gobierno anterior. Los testimonios de los arrepentidos serán considerados en el proceso judicial para esclarecer los hechos y determinar las responsabilidades de los implicados.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1></h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0mL6YeIlgc_kNFrP4ZW5KOU6B1prcVioizRLUsVkq-8v4_pHhiAga89QRaQ&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2> ▼</h2></div>
+			<div class="contenido">
+				<p></p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Crisis política en Francia: tras la caída de Bayrou, Macron nombrará a un nuevo primer ministro en los próximos días</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVQO_aGO87p5G8qMGQQaN3tnV1FDP4fMfC1fEyT8_ioVTId6vLwiCqFoyWjQ&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>En Francia, se vive una crisis política tras la renuncia de Francois Bayrou como ministro de Justicia. El presidente Emmanuel Macron deberá nombrar un nuevo primer ministro en los próximos días para hacer frente a esta situación. ▼</h2></div>
+			<div class="contenido">
+				<p>En Francia, se vive una crisis política tras la renuncia de Francois Bayrou como ministro de Justicia. El presidente Emmanuel Macron deberá nombrar un nuevo primer ministro en los próximos días para hacer frente a esta situación.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>El Supremo de Brasil inicia la votación que definirá el futuro de Bolsonaro en el juicio por intento de golpe de estado</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZjVUYYs0xYPJTPz_JfFGDIgDYHlEIUto7DLtk9zicfaN-BaPzjL4NFXcAhfk&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El Supremo de Brasil inicia la votación que definirá el futuro de Bolsonaro en el juicio por intento de golpe de estado. ▼</h2></div>
+			<div class="contenido">
+				<p>El Supremo de Brasil inicia la votación que definirá el futuro de Bolsonaro en el juicio por intento de golpe de estado.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Revolucion en la National Gallery de Londres: por primera vez incluira arte moderno</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAw9SmQAbWd78F7BQm39PC8n0Oxivnr4e_ZGTgIadQ_MfArTqWstMmM9oZVA&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La National Gallery de Londres realizará una revolución en su exposición, al incluir arte moderno por primera vez en su historia. Esta decisión busca atraer a un público más joven y diverso, mostrando obras de artistas contemporáneos junto a las tradicionales de grandes maestros. La iniciativa ha generado tanto críticas como elogios, pero el museo sigue adelante con su objetivo de expandir su colección y atraer a nuevas audiencias. ▼</h2></div>
+			<div class="contenido">
+				<p>La National Gallery de Londres realizará una revolución en su exposición, al incluir arte moderno por primera vez en su historia. Esta decisión busca atraer a un público más joven y diverso, mostrando obras de artistas contemporáneos junto a las tradicionales de grandes maestros. La iniciativa ha generado tanto críticas como elogios, pero el museo sigue adelante con su objetivo de expandir su colección y atraer a nuevas audiencias.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>El presidente polaco alertó que Rusia está lista para invadir otros países: "No confiamos en las buenas intenciones de Putin"</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTIUNHS679unb5WC_WNIObxNczXOAb-WEOqZJyMlTeHTIWdGrab9N-YmlUkrRE&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El presidente de Polonia ha alertado sobre la posibilidad de que Rusia invada otros países, expresando desconfianza en las intenciones de Putin. Se resalta la preocupación por la creciente presencia militar rusa en la región y se enuncia la necesidad de mantener una postura firme ante cualquier amenaza de invasión. ▼</h2></div>
+			<div class="contenido">
+				<p>El presidente de Polonia ha alertado sobre la posibilidad de que Rusia invada otros países, expresando desconfianza en las intenciones de Putin. Se resalta la preocupación por la creciente presencia militar rusa en la región y se enuncia la necesidad de mantener una postura firme ante cualquier amenaza de invasión.</p>
+			</div>
+		</div>
+ <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+  <p><strong>Publicidad</strong></p>
+        <a href=''>
+        <img src=' ' 
+        alt='Anuncio Publicitario'  
+        style='max-width: 80%; height: auto;'>
+     </a>
+     <p style='margin-top: 10px; text-align: center;'>
+        <a href=''>
+        
+        </a>
+     </p>
+  </div> 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>La dura crítica del jefe de Mercedes a Kimi Antonelli por sus malos resultados en la F1 decepcionante</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTWPuMs16Jw-EX_wTNhXvteW4NE75DiTkncJAiQiCSK8_u2gmUN2Rz6BLNeQ&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>En el artículo se menciona que el jefe de Mercedes criticó a Kimi Antonelli por sus malos resultados en la F1, calificándolos como decepcionantes. El piloto no ha tenido un buen desempeño en la temporada y la crítica se basa en su falta de impulsividad y agresividad en las carreras. ▼</h2></div>
+			<div class="contenido">
+				<p>En el artículo se menciona que el jefe de Mercedes criticó a Kimi Antonelli por sus malos resultados en la F1, calificándolos como decepcionantes. El piloto no ha tenido un buen desempeño en la temporada y la crítica se basa en su falta de impulsividad y agresividad en las carreras.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Otra amenaza de Kim Jong Un: Supervisó la prueba de un nuevo motor de cohete para misiles balísticos intercontinentales</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFioI0WeGJiD7Yysre8Z3XpkzFGlUu6zZjg_rq-jxx8b4RaT53oCvJNakYx8Y&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El líder norcoreano Kim Jong-un supervisó la prueba de un nuevo motor de cohete para misiles balísticos intercontinentales, lo que representa una nueva amenaza para la comunidad internacional. El test fue realizado en medio de las tensiones por el programa nuclear de Corea del Norte y las negativas a las propuestas de diálogo por parte de Estados Unidos. ▼</h2></div>
+			<div class="contenido">
+				<p>El líder norcoreano Kim Jong-un supervisó la prueba de un nuevo motor de cohete para misiles balísticos intercontinentales, lo que representa una nueva amenaza para la comunidad internacional. El test fue realizado en medio de las tensiones por el programa nuclear de Corea del Norte y las negativas a las propuestas de diálogo por parte de Estados Unidos.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Los aliados europeos de Kiev se comprometieron a intensificar su apoyo militar</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6TkZmytZWAgVM2RsCEpuIHO9PwQzguVaUKhRWzKAH78Njn3hpVGnD8U1v_w&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Los aliados europeos de Kiev se comprometieron a intensificar su apoyo militar. Esto se da en medio del conflicto con Rusia en Ucrania, donde se acordó aumentar el suministro de armas y el entrenamiento de las fuerzas ucranianas. La declaración conjunta fue emitida por Estados Unidos, Francia, Alemania, Italia, Polonia y Reino Unido, quienes expresaron su apoyo a la soberanía e integridad territorial de Ucrania. ▼</h2></div>
+			<div class="contenido">
+				<p>Los aliados europeos de Kiev se comprometieron a intensificar su apoyo militar. Esto se da en medio del conflicto con Rusia en Ucrania, donde se acordó aumentar el suministro de armas y el entrenamiento de las fuerzas ucranianas. La declaración conjunta fue emitida por Estados Unidos, Francia, Alemania, Italia, Polonia y Reino Unido, quienes expresaron su apoyo a la soberanía e integridad territorial de Ucrania.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Así se inició el incendio en la flotilla humanitaria de Greta Thunberg que va rumbo a Gaza</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRElNeYSmlko5rXhVrKGPvyMFdrAEVOhg1ljMLKarnJshqdvS2m8s3hxbx21L8&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La flotilla humanitaria liderada por Greta Thunberg que se dirigía hacia Gaza se vio afectada por un incendio que empezó en uno de los barcos. Afortunadamente, la tripulación logró controlar la situación y no hubo heridos. El incendio aparentemente fue causado por un desperfecto eléctrico. ▼</h2></div>
+			<div class="contenido">
+				<p>La flotilla humanitaria liderada por Greta Thunberg que se dirigía hacia Gaza se vio afectada por un incendio que empezó en uno de los barcos. Afortunadamente, la tripulación logró controlar la situación y no hubo heridos. El incendio aparentemente fue causado por un desperfecto eléctrico.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>La Unión Europea apuesta por sanciones coordinadas a escala internacional para ponerle límites a Putin.</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNp-JG0FY6D_WNm97dlTHqSOijINJSe2jWA0OEUIVFvz5aYbvDX9LUfa_wMMI&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La Unión Europea planea implementar sanciones coordinadas a nivel internacional para ponerle límites al presidente ruso Vladimir Putin. Esta medida se llevará a cabo debido a la crisis en Ucrania y al envenenamiento del opositor Alexei Navalny. ▼</h2></div>
+			<div class="contenido">
+				<p>La Unión Europea planea implementar sanciones coordinadas a nivel internacional para ponerle límites al presidente ruso Vladimir Putin. Esta medida se llevará a cabo debido a la crisis en Ucrania y al envenenamiento del opositor Alexei Navalny.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Se acerca un fin de semana veraniego con temperaturas de hasta 35 ºC</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6biL38vZCGHaUprg_kKWuO7ULZdQo1GQtZij4VsfmhYkkBD-7mhhufuvEMg&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El fin de semana se espera que las temperaturas alcancen hasta los 35°C en varias regiones, lo que indica un clima veraniego. ▼</h2></div>
+			<div class="contenido">
+				<p>El fin de semana se espera que las temperaturas alcancen hasta los 35°C en varias regiones, lo que indica un clima veraniego.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1></h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4v_-DNavNRebNTq8uQdu3r6-u5l5xb_N4ei2E8SwZbCGP1JurLW6qR7BBdw&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>En Doha, la vivienda donde se encontraba la cúpula de negociadores del grupo terrorista Hamas fue atacada. El incidente dejó graves daños en la propiedad, aunque por suerte no se reportaron heridos. Aunque aún no se ha identificado a los responsables del ataque, se sospecha que podría tratarse de un acto de represalia por parte de algún grupo rival. ▼</h2></div>
+			<div class="contenido">
+				<p>En Doha, la vivienda donde se encontraba la cúpula de negociadores del grupo terrorista Hamas fue atacada. El incidente dejó graves daños en la propiedad, aunque por suerte no se reportaron heridos. Aunque aún no se ha identificado a los responsables del ataque, se sospecha que podría tratarse de un acto de represalia por parte de algún grupo rival.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>El Bambú busca su lugar en el Delta bonaerense</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOvpFxYZllUzPJFtbYdT63JsAg1JaOAZHKS-10rlhuTaOxZsFe1ZMrLPdpJdY&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El bambú está siendo estudiado como una alternativa prometedora para la producción en el Delta del Río Paraná, en la Provincia de Buenos Aires. Esta planta de rápido crecimiento podría ser utilizada para la reforestación de zonas degradadas y la generación de productos como papel, alimentos y bioconstrucción. ▼</h2></div>
+			<div class="contenido">
+				<p>El bambú está siendo estudiado como una alternativa prometedora para la producción en el Delta del Río Paraná, en la Provincia de Buenos Aires. Esta planta de rápido crecimiento podría ser utilizada para la reforestación de zonas degradadas y la generación de productos como papel, alimentos y bioconstrucción.</p>
+			</div>
+		</div>
+ <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+  <p><strong>Publicidad</strong></p>
+        <a href=''>
+        <img src=' ' 
+        alt='Anuncio Publicitario'  
+        style='max-width: 80%; height: auto;'>
+     </a>
+     <p style='margin-top: 10px; text-align: center;'>
+        <a href=''>
+        
+        </a>
+     </p>
+  </div> 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>El fuerte comunicado del plantel de Independiente tras la descalificación de la Copa Sudamericana: dolor e injusticia</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSQSJ11I1NMT_FY-YPGjbRnG1ykYL0N36iIavs-XivDA6JABlOWEJP8HDE8I8&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El plantel de Independiente emitió un comunicado en respuesta a su descalificación de la Copa Sudamericana, expresando su dolor e indignación por lo que consideran una injusticia. El equipo mostró su desacuerdo con la decisión y defendió su integridad y la transparencia de su proceso deportivo. ▼</h2></div>
+			<div class="contenido">
+				<p>El plantel de Independiente emitió un comunicado en respuesta a su descalificación de la Copa Sudamericana, expresando su dolor e indignación por lo que consideran una injusticia. El equipo mostró su desacuerdo con la decisión y defendió su integridad y la transparencia de su proceso deportivo.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Quienes son los bonaerenses que pagarán retenciones de ingresos brutos por sus movimientos con billeteras digitales</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQw5UB_rkL8bIQCU3WE9Ncbl7Jvqxh4Fy9QcB7HKS4tRtXBgIEbDbMfkQJH_lE&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>En la provincia de Buenos Aires, se implementará el cobro de retenciones de ingresos brutos a los usuarios de billeteras digitales que realicen movimientos financieros. Esta medida afectará a aquellos que superen determinados límites de operaciones mensuales, aunque se establecerá un tope máximo para no perjudicar a los pequeños contribuyentes. Esta iniciativa busca aumentar la recaudación de impuestos en la provincia. ▼</h2></div>
+			<div class="contenido">
+				<p>En la provincia de Buenos Aires, se implementará el cobro de retenciones de ingresos brutos a los usuarios de billeteras digitales que realicen movimientos financieros. Esta medida afectará a aquellos que superen determinados límites de operaciones mensuales, aunque se establecerá un tope máximo para no perjudicar a los pequeños contribuyentes. Esta iniciativa busca aumentar la recaudación de impuestos en la provincia.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Etiopía inauguró la mayor represa de África y desató un conflicto con Egipto y Sudán por el agua del Nilo</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuMR5Nz6fAD67PLgEZ2bqxiqtkzAE4YRAw8ylTDoVP97R-W6YSeqQcf0UGDzs&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Etiopía inauguró la mayor represa de África, desatando un conflicto con Egipto y Sudán por el agua del Nilo. La represa, llamada Gran Renacimiento Etíope, ha provocado tensiones entre los tres países debido a las preocupaciones sobre la cantidad de agua que recibirán Egipto y Sudán una vez que la represa esté en pleno funcionamiento. Egipto considera que su suministro de agua podría reducirse significativamente, lo que ha llevado a negociaciones complicadas entre las naciones involucradas. ▼</h2></div>
+			<div class="contenido">
+				<p>Etiopía inauguró la mayor represa de África, desatando un conflicto con Egipto y Sudán por el agua del Nilo. La represa, llamada Gran Renacimiento Etíope, ha provocado tensiones entre los tres países debido a las preocupaciones sobre la cantidad de agua que recibirán Egipto y Sudán una vez que la represa esté en pleno funcionamiento. Egipto considera que su suministro de agua podría reducirse significativamente, lo que ha llevado a negociaciones complicadas entre las naciones involucradas.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>El video del momento del ataque selectivo de Israel contra la cúpula de Hamas en Doha</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3m9MxNzpMQ2inIBQZRUu_-bkUoGsPS3P6TVm5U6tP_TUbFICdDWKgFa23tg&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>En el video del ataque selectivo de Israel contra la cúpula de Hamas en Doha, se muestra el momento en que un misil impacta en un edificio de la ciudad. El ataque fue llevado a cabo como represalia a los recientes lanzamientos de cohetes desde la Franja de Gaza hacia territorio israelí. ▼</h2></div>
+			<div class="contenido">
+				<p>En el video del ataque selectivo de Israel contra la cúpula de Hamas en Doha, se muestra el momento en que un misil impacta en un edificio de la ciudad. El ataque fue llevado a cabo como represalia a los recientes lanzamientos de cohetes desde la Franja de Gaza hacia territorio israelí.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Lituania endurecerá los controles en su frontera durante las maniobras militares ruso-bielorrusas Zapad</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJ99itpoHhHzzrHB_likOtv3vJTnwfKXTyDu3dOferT4MH4jYZitWe3HV-ARM&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Lituania endurecerá los controles en su frontera durante las maniobras militares ruso-bielorrusas Zapad. Esta medida se implementará para prevenir cualquier tipo de provocación o incidente durante las maniobras, que se llevarán a cabo en septiembre. Se espera que participen miles de soldados rusos y bielorrusos en estas prácticas militares en la región. ▼</h2></div>
+			<div class="contenido">
+				<p>Lituania endurecerá los controles en su frontera durante las maniobras militares ruso-bielorrusas Zapad. Esta medida se implementará para prevenir cualquier tipo de provocación o incidente durante las maniobras, que se llevarán a cabo en septiembre. Se espera que participen miles de soldados rusos y bielorrusos en estas prácticas militares en la región.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Dwayne Johnson revela que su cambio de peso se debe a otro papel que está preparando: "Tengo otra oportunidad para transformarme"</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0F5YSTPkM8bsDzza1FwgVQ3ozIGKFMSkCueJkQ1fNBGfAnjoZdU19AmLkTdQ&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Dwayne Johnson reveló que su cambio de peso se debe a un nuevo papel que está preparando. El actor compartió en redes sociales que está trabajando en un proyecto que le ofrece la oportunidad de transformarse físicamente una vez más. Aunque no reveló detalles específicos sobre el personaje o la producción, dejó en claro que se encuentra comprometido con su preparación para este nuevo desafío. ▼</h2></div>
+			<div class="contenido">
+				<p>Dwayne Johnson reveló que su cambio de peso se debe a un nuevo papel que está preparando. El actor compartió en redes sociales que está trabajando en un proyecto que le ofrece la oportunidad de transformarse físicamente una vez más. Aunque no reveló detalles específicos sobre el personaje o la producción, dejó en claro que se encuentra comprometido con su preparación para este nuevo desafío.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1></h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjobmHPtBDahyW3Rwjf4pD1Ga03-jqKxj853u8PKZ4iaL2hXV4sJXg1PsUKTE&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2> ▼</h2></div>
+			<div class="contenido">
+				<p></p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>En medio de la presión militar de EE.UU., el dictador Nicolás Maduro decretó el inicio anticipado de la Navidad en Venezuela</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzPHwRl24-wxlpkYpQXgY8wnD6sFy0f362fDUjvmRrJ-3BM9x7jZhnU500Pg&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El dictador Nicolás Maduro decretó el inicio anticipado de la Navidad en Venezuela en medio de la presión militar de Estados Unidos. Esta medida busca adelantar la temporada navideña para impulsar la economía del país, que enfrenta una severa crisis. ▼</h2></div>
+			<div class="contenido">
+				<p>El dictador Nicolás Maduro decretó el inicio anticipado de la Navidad en Venezuela en medio de la presión militar de Estados Unidos. Esta medida busca adelantar la temporada navideña para impulsar la economía del país, que enfrenta una severa crisis.</p>
+			</div>
+		</div>
+ <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+  <p><strong>Publicidad</strong></p>
+        <a href=''>
+        <img src=' ' 
+        alt='Anuncio Publicitario'  
+        style='max-width: 80%; height: auto;'>
+     </a>
+     <p style='margin-top: 10px; text-align: center;'>
+        <a href=''>
+        
+        </a>
+     </p>
+  </div> 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>El riesgo país se mantiene cerca de los 1100 puntos, su nivel más alto en los últimos once meses</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpI7Bxp14Ez2l0EUWArjF6ByJj6rMXSORVpiD9N0OcnmwA8nyJUFww4QhawA&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El riesgo país se mantiene cerca de los 1100 puntos, alcanzando su nivel más alto en los últimos once meses, según información actualizada. Esta situación genera preocupación en el mercado financiero y refleja la incertidumbre económica que atraviesa el país. ▼</h2></div>
+			<div class="contenido">
+				<p>El riesgo país se mantiene cerca de los 1100 puntos, alcanzando su nivel más alto en los últimos once meses, según información actualizada. Esta situación genera preocupación en el mercado financiero y refleja la incertidumbre económica que atraviesa el país.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Cuánto tiempo se tarda en formar el hábito de ir al gimnasio según la ciencia.</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqs5HN9xsSbnF8Cr4YZjTCGFz2Nq67flfhBdnGuwWm6sD3-RW-RYzu9c8g8Mw&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La ciencia sugiere que se tarda aproximadamente 66 días en formar el hábito de ir al gimnasio de forma consistente. Un estudio mostró que las personas que lograron establecer este hábito reportaron niveles más altos de ejercicio incluso seis meses después. Este hallazgo destaca la importancia de la perseverancia y la consistencia en la adopción de hábitos saludables. ▼</h2></div>
+			<div class="contenido">
+				<p>La ciencia sugiere que se tarda aproximadamente 66 días en formar el hábito de ir al gimnasio de forma consistente. Un estudio mostró que las personas que lograron establecer este hábito reportaron niveles más altos de ejercicio incluso seis meses después. Este hallazgo destaca la importancia de la perseverancia y la consistencia en la adopción de hábitos saludables.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Tras el ataque de Israel, Qatar asegura que continuará con sus intentos de mediación para alcanzar un alto el fuego en Gaza</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSV7tsRCj5L7OeB3iL5zGRvsijsZBRo2COBd1AkzlDrlwY9hQKDZ5IwzvrESX4&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Qatar ha asegurado que continuará con sus intentos de mediación para lograr un alto el fuego en Gaza, luego del ataque de Israel en la región. Esta decisión se toma en medio de tensiones y conflictos en la zona. ▼</h2></div>
+			<div class="contenido">
+				<p>Qatar ha asegurado que continuará con sus intentos de mediación para lograr un alto el fuego en Gaza, luego del ataque de Israel en la región. Esta decisión se toma en medio de tensiones y conflictos en la zona.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Wall Street volvió a cerrar con ganancias y registró nuevos récords</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTs8dfMk9qc_vC9HE-A-XvDAafb24nkdYnn3-5GC8MUDrwyH_OryxNmIBtVqug&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Wall Street cerró con ganancias y alcanzó nuevos récords en las operaciones del día. El índice Dow Jones subió un 0.9%, el S&P 500 un 0.9% y el Nasdaq un 1.2%, debido a un aumento en las acciones de tecnología y salud. Los inversores mostraron optimismo ante la recuperación económica y los avances en la vacunación contra el COVID-19. ▼</h2></div>
+			<div class="contenido">
+				<p>Wall Street cerró con ganancias y alcanzó nuevos récords en las operaciones del día. El índice Dow Jones subió un 0.9%, el S&P 500 un 0.9% y el Nasdaq un 1.2%, debido a un aumento en las acciones de tecnología y salud. Los inversores mostraron optimismo ante la recuperación económica y los avances en la vacunación contra el COVID-19.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Polonia cerrará la frontera con Bielorrusia por maniobras militares rusas que incluirán simulacros nucleares</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQX_K79eV6fBm_AHLBuhYvTV1-KzLJRffHTR8shZX88RfEnupkBG3-NKxFFUxk&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Polonia cerrará la frontera con Bielorrusia debido a maniobras militares rusas que incluirán simulacros nucleares. Esta decisión se da en el marco de tensiones geopolíticas en la región. ▼</h2></div>
+			<div class="contenido">
+				<p>Polonia cerrará la frontera con Bielorrusia debido a maniobras militares rusas que incluirán simulacros nucleares. Esta decisión se da en el marco de tensiones geopolíticas en la región.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Donald Trump no apoyó el ataque de Israel contra Doha: "Qatar es un aliado y amigo de Estados Unidos"</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROVuw_8FZyE-kycjPLH3y9nO4DZjGrKjdHOgeIbPkHqzBovcAbH5G8HsYU4no&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Donald Trump no respaldó el ataque de Israel contra Doha, Qatar, afirmando que es un aliado y amigo de Estados Unidos. La decisión del expresidente generó sorpresa y críticas, ya que el ataque fue en respuesta a un atentado en Tel Aviv. Trump expresó su opinión a través de redes sociales, desmarcándose de la postura de Israel y destacando la importancia de mantener una relación positiva con Qatar. ▼</h2></div>
+			<div class="contenido">
+				<p>Donald Trump no respaldó el ataque de Israel contra Doha, Qatar, afirmando que es un aliado y amigo de Estados Unidos. La decisión del expresidente generó sorpresa y críticas, ya que el ataque fue en respuesta a un atentado en Tel Aviv. Trump expresó su opinión a través de redes sociales, desmarcándose de la postura de Israel y destacando la importancia de mantener una relación positiva con Qatar.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Venezuela y Bolivia luchan por la plaza en el repechaje para ir al Mundial: la tabla de posiciones y todas las combinaciones.</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRj6o_IjFmtWgAd7u32aGZ2qMMwNHKb54TS-plhr_9c1E6XOebMAdd7K-dnPs&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Venezuela y Bolivia se enfrentan en un partido crucial para definir quién ocupará el puesto en el repechaje para el Mundial. Ambos equipos se encuentran en la parte baja de la tabla de posiciones y necesitan ganar para tener una oportunidad de clasificar. Las combinaciones de resultados son clave para determinar quién avanzará a la siguiente etapa de la competencia. ▼</h2></div>
+			<div class="contenido">
+				<p>Venezuela y Bolivia se enfrentan en un partido crucial para definir quién ocupará el puesto en el repechaje para el Mundial. Ambos equipos se encuentran en la parte baja de la tabla de posiciones y necesitan ganar para tener una oportunidad de clasificar. Las combinaciones de resultados son clave para determinar quién avanzará a la siguiente etapa de la competencia.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Loris Zanatta: "Hay muchos argentinos que no quieren a los kirchneristas pero tampoco quieren que la respuesta sea el Milei que vimos hasta ahora"</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgA883ORrPa9iBYK5VpO_LJ8lmVy2YIhrjH2LdWZK6J53ovxojzV5J-FGw1g&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>En una entrevista, el politólogo Loris Zanatta expresó que hay una parte de la sociedad argentina que no simpatiza con el kirchnerismo pero tampoco apoya a figuras como Javier Milei. Se refirió a la necesidad de encontrar una alternativa política que pueda atraer a este sector de la población, sugiriendo que la polarización actual no es beneficiosa para el país. ▼</h2></div>
+			<div class="contenido">
+				<p>En una entrevista, el politólogo Loris Zanatta expresó que hay una parte de la sociedad argentina que no simpatiza con el kirchnerismo pero tampoco apoya a figuras como Javier Milei. Se refirió a la necesidad de encontrar una alternativa política que pueda atraer a este sector de la población, sugiriendo que la polarización actual no es beneficiosa para el país.</p>
+			</div>
+		</div>
+ <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+  <p><strong>Publicidad</strong></p>
+        <a href=''>
+        <img src=' ' 
+        alt='Anuncio Publicitario'  
+        style='max-width: 80%; height: auto;'>
+     </a>
+     <p style='margin-top: 10px; text-align: center;'>
+        <a href=''>
+        
+        </a>
+     </p>
+  </div> 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Dimisión del primer ministro Ishiba desató una carrera por la sucesión en Japón</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMG8mM6pscHrT5PIZk7XhmXsgWdKwi6Y1boefs1FWOKN3aTE5xdlZETGAPYA&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El primer ministro de Japón, Ishiba, presentó su renuncia, desencadenando una competencia por su sucesión. Diversos candidatos se postulan para ocupar el cargo, entre ellos el ministro de Finanzas Taro Aso y el ministro de Relaciones Exteriores Fumio Kishida. Se espera que la decisión final se tome en las próximas semanas. ▼</h2></div>
+			<div class="contenido">
+				<p>El primer ministro de Japón, Ishiba, presentó su renuncia, desencadenando una competencia por su sucesión. Diversos candidatos se postulan para ocupar el cargo, entre ellos el ministro de Finanzas Taro Aso y el ministro de Relaciones Exteriores Fumio Kishida. Se espera que la decisión final se tome en las próximas semanas.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>El violín de Ingres: la foto más cara de la historia se suman a la colección del Met de Nueva York</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRv7grTo_kQj3MU7JMUWHYKxFUUNNsUKJ3NmcZBLEmb5v8N3enWDo2RvSDDrQ&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El famoso violín "El Ingres" se convirtió en la fotografía más cara de la historia al sumarse a la colección del Museo Metropolitano de Arte de Nueva York. La imagen fue adquirida por una suma millonaria en una subasta, consolidando su posición como una de las fotografías más icónicas del mundo del arte. ▼</h2></div>
+			<div class="contenido">
+				<p>El famoso violín "El Ingres" se convirtió en la fotografía más cara de la historia al sumarse a la colección del Museo Metropolitano de Arte de Nueva York. La imagen fue adquirida por una suma millonaria en una subasta, consolidando su posición como una de las fotografías más icónicas del mundo del arte.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1></h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCg5wglmWn1sm_fCMRoJaGK_4PhMBPKrfT1e6PqrtOmQcJe8FD0wA8ofnjhAM&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2> ▼</h2></div>
+			<div class="contenido">
+				<p></p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>La Uruguay de Marcelo Bielsa visitará a Chile en el cierre de las Eliminatorias: hora, TV y formaciones.</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRViIoF8Gya9j2BFRl0mAWTdGZp0fV86FQqlSu-t57B5hopsNs0aw8VDPTNf4A&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La selección de fútbol de Uruguay, dirigida por Marcelo Bielsa, se enfrentará a Chile en el cierre de las eliminatorias. El partido se jugará en Santiago y se podrá ver por televisión. Ambos equipos ya tienen definidas sus formaciones para el encuentro. ▼</h2></div>
+			<div class="contenido">
+				<p>La selección de fútbol de Uruguay, dirigida por Marcelo Bielsa, se enfrentará a Chile en el cierre de las eliminatorias. El partido se jugará en Santiago y se podrá ver por televisión. Ambos equipos ya tienen definidas sus formaciones para el encuentro.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>La nueva obra de Banksy será retirada: surge el dilema entre protección patrimonial y libertad de expresión</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqNZ_DBoVKifDVVjf0tcBUJP-2IL2a_JKo0Ef56YkYbAeM6G5izklL-2D6ZKE&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>En una nueva obra de Banksy se desata un dilema entre la protección patrimonial y la libertad de expresión. La obra en cuestión será retirada por las autoridades, generando debate en torno a si se debe preservar como patrimonio cultural o respetar la expresión artística del artista callejero. ▼</h2></div>
+			<div class="contenido">
+				<p>En una nueva obra de Banksy se desata un dilema entre la protección patrimonial y la libertad de expresión. La obra en cuestión será retirada por las autoridades, generando debate en torno a si se debe preservar como patrimonio cultural o respetar la expresión artística del artista callejero.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Investigación en Brasil revela que un capo del PCC vive en Santa Cruz de la Sierra con una identidad falsa</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6pF_zJ5lzRhCkjANhm-ueumJgl6TXvUdrQxnx3Ix5Cn691R-PaN7PwGsAOw&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Una investigación realizada en Brasil reveló que un capo del PCC (Primer Comando de la Capital) vive en Santa Cruz de la Sierra, Bolivia, bajo una identidad falsa. Se trata de Gilberto Aparecido Dos Santos, alias "Fuminho", uno de los líderes más buscados del grupo criminal en Brasil. Las autoridades bolivianas están colaborando con las autoridades brasileñas para dar con su paradero y proceder con su detención. ▼</h2></div>
+			<div class="contenido">
+				<p>Una investigación realizada en Brasil reveló que un capo del PCC (Primer Comando de la Capital) vive en Santa Cruz de la Sierra, Bolivia, bajo una identidad falsa. Se trata de Gilberto Aparecido Dos Santos, alias "Fuminho", uno de los líderes más buscados del grupo criminal en Brasil. Las autoridades bolivianas están colaborando con las autoridades brasileñas para dar con su paradero y proceder con su detención.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Maní: biotecnología para enfrentar al carbón y acelerar el mejoramiento genético.</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLPCKMreNgW68kga7QsJ-K2iGJqChWK9vjCv25u3mDswo5Yii0rpH6qgFZk94&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El artículo habla sobre el uso de la biotecnología en el cultivo de maní para combatir enfermedades como el carbón, así como para acelerar el proceso de mejoramiento genético de la planta. Esta tecnología ha demostrado ser efectiva en la creación de variedades más resistentes y productivas, lo que beneficia a los agricultores y a la industria en general. ▼</h2></div>
+			<div class="contenido">
+				<p>El artículo habla sobre el uso de la biotecnología en el cultivo de maní para combatir enfermedades como el carbón, así como para acelerar el proceso de mejoramiento genético de la planta. Esta tecnología ha demostrado ser efectiva en la creación de variedades más resistentes y productivas, lo que beneficia a los agricultores y a la industria en general.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Denuncian que el periodismo nicaragüense vive entre la apatridia y la cárcel.</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJLAgRQKwltWAvL8u-TG2ZyWbSJv7F2xIsbtGRk2wZLgS_CYKrtm8Q_7DwPw&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El periodismo nicaragüense se encuentra en una situación precaria, entre la apatridia y la cárcel. Los periodistas enfrentan constantes amenazas y persecuciones por parte del gobierno, lo que les impide desempeñar su labor de manera independiente y objetiva. Esta situación ha generado un clima de inseguridad y temor en el país, afectando la libertad de expresión y el derecho a la información de la sociedad nicaragüense. ▼</h2></div>
+			<div class="contenido">
+				<p>El periodismo nicaragüense se encuentra en una situación precaria, entre la apatridia y la cárcel. Los periodistas enfrentan constantes amenazas y persecuciones por parte del gobierno, lo que les impide desempeñar su labor de manera independiente y objetiva. Esta situación ha generado un clima de inseguridad y temor en el país, afectando la libertad de expresión y el derecho a la información de la sociedad nicaragüense.</p>
+			</div>
+		</div>
+ <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+  <p><strong>Publicidad</strong></p>
+        <a href=''>
+        <img src=' ' 
+        alt='Anuncio Publicitario'  
+        style='max-width: 80%; height: auto;'>
+     </a>
+     <p style='margin-top: 10px; text-align: center;'>
+        <a href=''>
+        
+        </a>
+     </p>
+  </div> 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>El gesto en un partido de béisbol que generó repudio: una fanática se quedó con una pelota que un padre le había regalado a su hijo</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQziLwjYl3JlGu3hpHEb3k5Yiv3KCBqmTCWQvfnT6R6kIkE9uBJSOQPZqx8pQ&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>En un partido de béisbol, una fanática se quedó con una pelota que un padre le había regalado a su hijo. El gesto generó repudio por parte de los espectadores y usuarios en las redes sociales. La mujer decidió quedarse con la pelota a pesar de las súplicas del padre para que se la devolviera. La situación fue captada por las cámaras y se viralizó rápidamente en Internet. ▼</h2></div>
+			<div class="contenido">
+				<p>En un partido de béisbol, una fanática se quedó con una pelota que un padre le había regalado a su hijo. El gesto generó repudio por parte de los espectadores y usuarios en las redes sociales. La mujer decidió quedarse con la pelota a pesar de las súplicas del padre para que se la devolviera. La situación fue captada por las cámaras y se viralizó rápidamente en Internet.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Bolivia deberá ganarle a Brasil y esperar el resultado de Venezuela para llegar al repechaje en las Eliminatorias: hora, TV y formaciones</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6pWvMsNxGxaeD5JmdbFwo0gOF6UNfR72Yue9cbj0IUbnX8HykMoYVc_SIOw&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>En la última jornada de las eliminatorias, Bolivia deberá ganarle a Brasil y esperar el resultado de Venezuela para llegar al repechaje. El partido se llevará a cabo en Brasil y será transmitido por televisión. ▼</h2></div>
+			<div class="contenido">
+				<p>En la última jornada de las eliminatorias, Bolivia deberá ganarle a Brasil y esperar el resultado de Venezuela para llegar al repechaje. El partido se llevará a cabo en Brasil y será transmitido por televisión.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>La líder de las Damas de Blanco denunció un operativo policial en su vivienda en La Habana</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7ZWW9HtkWJh0C-nPf-8APnUQJyhKZ0a-0Tkq65515oWxIKDc2b5fuh-LCU34&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La líder de las Damas de Blanco denunció que su vivienda en La Habana fue sitiada por un operativo policial. La activista mencionó que se encontraban retenidas más de 40 personas en su casa, incluyendo niños. Además, reportó que las fuerzas de seguridad impidieron la entrada y salida de personas a su domicilio. ▼</h2></div>
+			<div class="contenido">
+				<p>La líder de las Damas de Blanco denunció que su vivienda en La Habana fue sitiada por un operativo policial. La activista mencionó que se encontraban retenidas más de 40 personas en su casa, incluyendo niños. Además, reportó que las fuerzas de seguridad impidieron la entrada y salida de personas a su domicilio.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Francia se prepara para un cambio de era tras el Mundial 2026: el efecto Mbappé detrás del posible arribo de Zidane como sucesor de Deschamps</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5J46MOO69yOPn9dfK_L3jqa-1AJ8xE_29tlxjxfxeSYb1HMw9R5od1BrWivc&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Francia se prepara para un cambio de era después del Mundial 2026, con el posible arribo de Zidane como sucesor de Deschamps. El gran desempeño de Mbappé en la selección francesa está generando expectativas en torno a la llegada del exfutbolista como nuevo entrenador del equipo. Este cambio marca una transición importante en el fútbol francés. ▼</h2></div>
+			<div class="contenido">
+				<p>Francia se prepara para un cambio de era después del Mundial 2026, con el posible arribo de Zidane como sucesor de Deschamps. El gran desempeño de Mbappé en la selección francesa está generando expectativas en torno a la llegada del exfutbolista como nuevo entrenador del equipo. Este cambio marca una transición importante en el fútbol francés.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Las primeras imágenes del precario campamento donde Tom Phillips mantuvo escondidos a sus tres hijos durante 4 años</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWg3RL4zInp5UIfzXc8Pfrm351eUa6kALVdY-WRvdykv8RHdrPojzo4k3rSg&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2> ▼</h2></div>
+			<div class="contenido">
+				<p></p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>El Reino Unido descarta rescate financiero del Fondo Monetario Internacional tras debate en el Parlamento</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRk4f6_AJckhinqXk5TIBd27vWagpoLRFbNjX_KBvwM_pu-MfBMhDMZkbUjpw&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El Reino Unido ha decidido rechazar un rescate financiero propuesto por el Fondo Monetario Internacional, luego de un debate en el parlamento. La decisión fue tomada para evitar las condiciones y restricciones que este tipo de rescate implicaría. ▼</h2></div>
+			<div class="contenido">
+				<p>El Reino Unido ha decidido rechazar un rescate financiero propuesto por el Fondo Monetario Internacional, luego de un debate en el parlamento. La decisión fue tomada para evitar las condiciones y restricciones que este tipo de rescate implicaría.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Con el voto del magistrado Flavio Dino, ya son dos los jueces que respaldan la condena contra Bolsonaro</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9C_ojgPab2i3Vvs4sgzVUUihlHNIWy5D-QRQiVOARkur6oIFNT9ZGwyNGZWQ&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>En una decisión unánime, dos jueces respaldaron la condena contra Jair Bolsonaro, presidente de Brasil. El voto del magistrado Flavio Dino se sumó al de otro juez, consolidando la sentencia en su contra. ▼</h2></div>
+			<div class="contenido">
+				<p>En una decisión unánime, dos jueces respaldaron la condena contra Jair Bolsonaro, presidente de Brasil. El voto del magistrado Flavio Dino se sumó al de otro juez, consolidando la sentencia en su contra.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Bayer Leverkusen despide a su peor entrenador tras tres partidos y pagará millonaria indemnización</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLUfW9dCKUKMzFo6j1qmW0gUg-UC50wqHoZOj8sCmXDcmgaa7RmQEB_OorSA&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El Bayer Leverkusen despidió a su peor entrenador después de tres partidos y deberá pagar una millonaria indemnización. El club alemán decidió prescindir de los servicios del técnico tras los malos resultados obtenidos en el inicio de la temporada. ▼</h2></div>
+			<div class="contenido">
+				<p>El Bayer Leverkusen despidió a su peor entrenador después de tres partidos y deberá pagar una millonaria indemnización. El club alemán decidió prescindir de los servicios del técnico tras los malos resultados obtenidos en el inicio de la temporada.</p>
+			</div>
+		</div>
+ <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+  <p><strong>Publicidad</strong></p>
+        <a href=''>
+        <img src=' ' 
+        alt='Anuncio Publicitario'  
+        style='max-width: 80%; height: auto;'>
+     </a>
+     <p style='margin-top: 10px; text-align: center;'>
+        <a href=''>
+        
+        </a>
+     </p>
+  </div> 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Alexandre de Moraes afirmó que Jair Bolsonaro lideró un complot para perpetuarse en el poder</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjQXkSrZh89k53ZW87270dHc2RhwVb6Bh0eJN-m2UG3DeP6gLZUF7Z7tvgT9M&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El ministro de la Corte Suprema de Brasil, Alexandre de Moraes, afirmó que el presidente Jair Bolsonaro lideró un complot para perpetuarse en el poder. Moraes responsabilizó a Bolsonaro de atacar la democracia y amenazar la independencia de los poderes del Estado. Además, mencionó que el mandatario promovió protestas antidemocráticas y ejerció presión sobre el Tribunal Supremo. ▼</h2></div>
+			<div class="contenido">
+				<p>El ministro de la Corte Suprema de Brasil, Alexandre de Moraes, afirmó que el presidente Jair Bolsonaro lideró un complot para perpetuarse en el poder. Moraes responsabilizó a Bolsonaro de atacar la democracia y amenazar la independencia de los poderes del Estado. Además, mencionó que el mandatario promovió protestas antidemocráticas y ejerció presión sobre el Tribunal Supremo.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>La increíble historia del piloto fantasma de Ferrari: el misterio de seis años que enloqueció a la policía</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkyZfoS3XP0xWPuQ5Cikdrsewn-eeZYrPTnWtjhqIlMFAXCAO_o2yPhBKT6gQ&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La historia trata sobre el "Piloto Fantasma" de Ferrari, un sujeto desconocido que utilizó el nombre de un famoso corredor de Fórmula 1 para engañar a la policía durante seis años. El individuo se apropió de automóviles de lujo, relojes caros y hasta de una lancha, generando una serie de investigaciones que mantuvieron a las autoridades desconcertadas. Finalmente, fue capturado y se descubrió su verdadera identidad, revelando un entramado de mentiras y estafas. ▼</h2></div>
+			<div class="contenido">
+				<p>La historia trata sobre el "Piloto Fantasma" de Ferrari, un sujeto desconocido que utilizó el nombre de un famoso corredor de Fórmula 1 para engañar a la policía durante seis años. El individuo se apropió de automóviles de lujo, relojes caros y hasta de una lancha, generando una serie de investigaciones que mantuvieron a las autoridades desconcertadas. Finalmente, fue capturado y se descubrió su verdadera identidad, revelando un entramado de mentiras y estafas.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Francia lanzó un premio para los libros de bebés</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9VGyFele_LC-m-PN7w5gZqFRhWnQFxwif-oj1UOMLxir2BPtC6ir_5uXDoA&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Francia ha lanzado un premio inédito para los libros de bebés, con el objetivo de promover la literatura destinada a los más pequeños y reconocer la labor de los autores y editoriales que se dedican a este género. El premio será otorgado por un jurado de expertos en literatura infantil y se espera que contribuya a aumentar la calidad y diversidad de los libros para bebés en el país. ▼</h2></div>
+			<div class="contenido">
+				<p>Francia ha lanzado un premio inédito para los libros de bebés, con el objetivo de promover la literatura destinada a los más pequeños y reconocer la labor de los autores y editoriales que se dedican a este género. El premio será otorgado por un jurado de expertos en literatura infantil y se espera que contribuya a aumentar la calidad y diversidad de los libros para bebés en el país.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Siete nombres para tres butacas: la pelea en Red Bull que mantendrá abierto el mapa de pilotos en la F1 para 2026</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-p-toIHTARyyba0wAJQAKoVl-D3v52lzs0KtUQxBTrQCsL59ObKrJLTfTaQ&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>En Red Bull Racing se encuentra en la difícil tarea de elegir a sus pilotos para la temporada de Fórmula 1 del 2026. Actualmente hay siete nombres en consideración para ocupar tres butacas disponibles en el equipo. Esta decisión mantendrá abierta la competencia en el mapa de pilotos en la F1 para el próximo año. ▼</h2></div>
+			<div class="contenido">
+				<p>En Red Bull Racing se encuentra en la difícil tarea de elegir a sus pilotos para la temporada de Fórmula 1 del 2026. Actualmente hay siete nombres en consideración para ocupar tres butacas disponibles en el equipo. Esta decisión mantendrá abierta la competencia en el mapa de pilotos en la F1 para el próximo año.</p>
+			</div>
+		</div>
+ <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1894152981922395"
+     crossorigin="anonymous"></script>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-1894152981922395"
+     data-ad-slot="4289209070"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ </div> 
+<p style='font-size: 12px; color: #666; text-align: center;'>
+    © 2025 VIA ONLINE. Todos los derechos reservados.  
+    Queda prohibida la reproducción total o parcial de los contenidos de este sitio sin autorización previa y por escrito.  
+    Las marcas, logotipos y contenidos pertenecen a sus respectivos propietarios.  
+    Este sitio web puede contener enlaces a sitios externos sobre los cuales VIA ONLINE no tiene responsabilidad alguna.  
+    El uso de este sitio implica la aceptación de nuestros <a href='https://viaonline.com.ar/TerminosyCondiciones.html'>Términos y Condiciones</a> y nuestra <a href='https://viaonline.com.ar/privacidad.html'>Política de Privacidad</a>.
+</p>
+
+</body>
+</html>
