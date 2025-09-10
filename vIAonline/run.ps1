@@ -940,8 +940,8 @@ $news += "
         if ($csvIndex -lt $csvData.Count) {
             $registro = $csvData[$csvIndex]
             Write-Output "Registro del CSV en salto $counter : $($registro | Out-String)"
-            $ImgAdsLink = $registro.Imagen
-            $LinkAdsLink = $registro.Link
+            $ImgAdsLink = "https://viaonline.com.ar/ads/publicite.png" #$registro.Imagen
+            $LinkAdsLink = "https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header" #$registro.Link
             $TextoAdsLink = $registro.Texto
             $news += $ViaADS
             <#
