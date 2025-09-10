@@ -1115,7 +1115,7 @@ Write-Host $indexfile -ForegroundColor Cyan
 # ==== CONFIGURACIÓN ====
 $owner = "ddennisviaonline"
 $repo = "vIAonline-Prod"
-$filePath = "index.html"       # Ruta exacta dentro del repo (case-sensitive)
+$filePath = $IndexAmbiente    # Ruta exacta dentro del repo (case-sensitive)
 $branch = "master"              # Rama donde está el archivo
 
 # ==== 1. Obtener el SHA del archivo ====
