@@ -719,8 +719,9 @@ $head = "
 
 .noticia img {
     width: 100%;
-    display: block;
-    margin-bottom: 10px;
+    height: 200px; /* Altura fija */
+    object-fit: cover; /* Recorta para mantener proporción */
+    border-radius: 8px; /* opcional */
 }
 
 /* Desplegable contenido */
