@@ -420,7 +420,42 @@ Write-Host "Sensación térmica: $($response.current.feelslike_c) °C"
 Write-Host "Condición: $($response.current.condition.text)"
 Write-Host "Última actualización: $($response.current.last_updated)"
 
-$clima = " CABA" + ", " + $($response.current.temp_c) + "º " + $($response.current.condition.text)
+$condicionClimatica = $($response.current.condition.text)
+
+# Asignamos el ícono según la condición
+if ($condicionClimatica -eq "Despejado") {
+    $IconCondicion = "☀️"
+}
+elseif ($condicionClimatica -eq "Algo nublado" -or $condicionClimatica -eq "Parcialmente nublado") {
+    $IconCondicion = "🌤️"
+}
+elseif ($condicionClimatica -eq "Nublado") {
+    $IconCondicion = "☁️"
+}
+elseif ($condicionClimatica -eq "Lluvias aisladas" -or $condicionClimatica -eq "Lluvia ligera") {
+    $IconCondicion = "🌦️"
+}
+elseif ($condicionClimatica -eq "Lluvia moderada") {
+    $IconCondicion = "🌧️"
+}
+elseif ($condicionClimatica -eq "Lluvia fuerte" -or $condicionClimatica -eq "Tormenta intensa") {
+    $IconCondicion = "⛈️"
+}
+elseif ($condicionClimatica -eq "Tormenta severa" -or $condicionClimatica -eq "Granizo") {
+    $IconCondicion = "🌩️"
+}
+elseif ($condicionClimatica -eq "Nieve") {
+    $IconCondicion = "❄️"
+}
+elseif ($condicionClimatica -eq "Niebla" -or $condicionClimatica -eq "Neblina") {
+    $IconCondicion = "🌫️"
+}
+else {
+    $IconCondicion = "🌬️"  # Por si no coincide con ninguna condición dejo ventoso en vez de poner una X
+}
+
+$clima = " CABA" + ", " + $($response.current.temp_c) + "º " + $IconCondicion + ' ' + $condicionClimatica
+#$clima = " CABA" + ", " + $($response.current.temp_c) + "º " + $($response.current.condition.text)
 <#
 #####
 $apiKey = $env:WeatherAPI
