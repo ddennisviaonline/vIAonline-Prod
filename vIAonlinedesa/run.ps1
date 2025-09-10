@@ -1008,11 +1008,11 @@ $efentoP = $null
 $Nac = $null
 $fall = $null
 $EfemerideEvento = $AgendaCompleta | Where-Object { $_.Tipo -eq "EfemerideEvento" } | ForEach-Object { "$($_.Fecha) - $($_.Descripcion)" }
-foreach ($EfemerideEvent in $EfemerideEvento ) {$efentoP += '<p>' + '$EfemerideEvent' + '</p>'}
+foreach ($EfemerideEvent in $EfemerideEvento ) {$efentoP += '<p>' + $EfemerideEvent + '</p>'}
 $EfemerideNacimientos = $AgendaCompleta | Where-Object { $_.Tipo -eq "EfemerideNacimientos" } | ForEach-Object { "$($_.Fecha) - $($_.Descripcion)" }
-foreach ($EfemerideNac in $EfemerideNacimientos ) {$Nac += '<p>' + '$EfemerideNacimientos' + '</p>'}
+foreach ($EfemerideNac in $EfemerideNacimientos ) {$Nac += '<p>' + $EfemerideNac + '</p>'}
 $EfemerideFallecimientos = $AgendaCompleta | Where-Object { $_.Tipo -eq "EfemerideFallecimientos" }  | ForEach-Object { "$($_.Fecha) - $($_.Descripcion)" }
-foreach ($EfemerideFall in $EfemerideFallecimientos ) {Fall += '<p>' + '$EfemerideFallecimientos' + '</p>'}
+foreach ($EfemerideFall in $EfemerideFallecimientos ) {$Fall += '<p>' + $EfemerideFall + '</p>'}
 $news += "
 		<div class='noticia' onclick='this.classList.toggle(""abierto"")'>
 			<h1>Efemérides</h1>
