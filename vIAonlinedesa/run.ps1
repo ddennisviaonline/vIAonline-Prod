@@ -3,8 +3,8 @@
 # ==============================================
 #            AMBIENTE DE Desarrollo
 # Cambiar 
-param($Request, $TriggerMetadata)
-#param($Timer)
+#param($Request, $TriggerMetadata)
+param($Timer)
 $token = $env:GitHubToken
 
 #Clave y endpoint de Azure OpenAI
