@@ -708,7 +708,17 @@ $head = "
     .logo img {
         width: 400px;
     }
-
+        .Efemeride {
+            background-color: #FEFBF4;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .Efemeride h2 {
+            color: #333;
+            font-size: 1.3em;
+        }
 /* Cada noticia */
 .noticia {
     border: 1px solid #ccc;
@@ -994,19 +1004,25 @@ Invoke-RestMethod -Uri "https://api.github.com/repos/$usuario/$repo/contents/$ar
 }
 
 ### agrega al html las efemerides
+$efentoP = $null
+$Nac = $null
+$fall = $null
 $EfemerideEvento = $AgendaCompleta | Where-Object { $_.Tipo -eq "EfemerideEvento" } | ForEach-Object { "$($_.Fecha) - $($_.Descripcion)" }
+foreach ($EfemerideEvent in $EfemerideEvento ) {$efentoP += '<p>' + '$EfemerideEvent' + '</p>'}
 $EfemerideNacimientos = $AgendaCompleta | Where-Object { $_.Tipo -eq "EfemerideNacimientos" } | ForEach-Object { "$($_.Fecha) - $($_.Descripcion)" }
+foreach ($EfemerideNac in $EfemerideNacimientos ) {$Nac += '<p>' + '$EfemerideNacimientos' + '</p>'}
 $EfemerideFallecimientos = $AgendaCompleta | Where-Object { $_.Tipo -eq "EfemerideFallecimientos" }  | ForEach-Object { "$($_.Fecha) - $($_.Descripcion)" }
+foreach ($EfemerideFall in $EfemerideFallecimientos ) {Fall += '<p>' + '$EfemerideFallecimientos' + '</p>'}
 $news += "
-		<div class='noticia' onclick='this.classList.toggle(""abierto"")'>
+		<div class='Efemeride' onclick='this.classList.toggle(""abierto"")'>
 			<h1>Efemérides</h1>
 			<img src='https://viaonline.com.ar/Imagenes/LogoEfemerides.png' alt='Imagen Efemerides'>
-			<div class=""desplegable""><h2>Efemérides: los hechos que marcaron la historia
+			<div class=""desplegable""><h2>Los hechos que marcaron la historia
 En esta sección encontrarás un recorrido por los acontecimientos más importantes que ocurrieron en esta misma fecha, a lo largo de distintos años. Desde hitos históricos y culturales hasta nacimientos y fallecimientos de personalidades destacadas, un repaso diario para mantener viva la memoria y comprender mejor nuestro presente. ▼</h2></div>
 			<div class=""contenido"">
-				<p>$EfemerideEvento</p>
-                <p>$EfemerideNacimientos</p>
-                <p>$EfemerideFallecimientos</p>
+				$efentoP
+                $Nac
+                $fall
 			</div>
 		</div>
 "
