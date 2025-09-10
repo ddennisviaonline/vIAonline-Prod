@@ -73,22 +73,6 @@ $googleADS = "<script async src=""https://pagead2.googlesyndication.com/pagead/j
 #################################################################################################
 
 
-################################# IMPORT AVISOS PUBLICITARIOS####################################
-#$links = Import-Csv -Path "C:\bats\vIA ONLINE\ads\ads.csv" #PUBLICIDAD
-### reemplazar el import csv on-prem por gitjhub
-
-# ==== 1. DESCARGAR ads.CSV DESDE GITHUB ====
-# URL raw del CSV
-$csvUrl = "https://raw.githubusercontent.com/ddennisviaonline/vIAonline-Prod/main/vIAonline/ads/ads.csv"
-
-
-# Importar el CSV directamente
-$links = Invoke-WebRequest -Uri $csvUrl | Select-Object -ExpandProperty Content | ConvertFrom-Csv
-
-# Mostrar contenido
-$links
-
-##################################################################################################
 
 ################################# LOGO PAGINA CREAR VINCULO FUERA DE GITHUB#######################
 $logo = "https://viaonline.com.ar/Imagenes/Logocorto.png"
@@ -766,6 +750,23 @@ $head = "
 #Solo traigo de la lista los que no tiene autor
 #$textos = $Articulos
 #$links= get-content -Path C:\inetpub\wwwroot\Publicidad\publicidad.txt
+################################# IMPORT AVISOS PUBLICITARIOS####################################
+#$links = Import-Csv -Path "C:\bats\vIA ONLINE\ads\ads.csv" #PUBLICIDAD
+### reemplazar el import csv on-prem por gitjhub
+
+# ==== 1. DESCARGAR ads.CSV DESDE GITHUB ====
+# URL raw del CSV
+$csvUrl = "https://raw.githubusercontent.com/ddennisviaonline/vIAonline-Prod/main/vIAonline/ads/ads.csv"
+
+
+# Importar el CSV directamente
+$links = Invoke-WebRequest -Uri $csvUrl | Select-Object -ExpandProperty Content | ConvertFrom-Csv
+
+# Mostrar contenido
+$links
+
+##################################################################################################
+
 
 $textossinAutores = $Articulos | Where-Object { [string]::IsNullOrWhiteSpace($_.Autor) } 
 $news = @()
