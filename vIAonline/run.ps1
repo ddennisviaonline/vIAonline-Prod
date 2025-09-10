@@ -423,7 +423,7 @@ Write-Host "Última actualización: $($response.current.last_updated)"
 $condicionClimatica = $($response.current.condition.text)
 
 # Asignamos el ícono según la condición
-if ($condicionClimatica -eq "Despejado") {
+if ($condicionClimatica -eq "Despejado" -or $condicionClimatica -eq "Soleado") {
     $IconCondicion = "☀️"
 }
 elseif ($condicionClimatica -eq "Algo nublado" -or $condicionClimatica -eq "Parcialmente nublado") {
