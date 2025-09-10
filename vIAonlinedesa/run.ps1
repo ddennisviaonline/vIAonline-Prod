@@ -1014,9 +1014,9 @@ foreach ($EfemerideNac in $EfemerideNacimientos ) {$Nac += '<p>' + '$EfemerideNa
 $EfemerideFallecimientos = $AgendaCompleta | Where-Object { $_.Tipo -eq "EfemerideFallecimientos" }  | ForEach-Object { "$($_.Fecha) - $($_.Descripcion)" }
 foreach ($EfemerideFall in $EfemerideFallecimientos ) {Fall += '<p>' + '$EfemerideFallecimientos' + '</p>'}
 $news += "
-		<div class='Efemeride' onclick='this.classList.toggle(""abierto"")'>
+		<div class='noticia' onclick='this.classList.toggle(""abierto"")'>
 			<h1>Efemérides</h1>
-			<img src='https://viaonline.com.ar/Imagenes/LogoEfemerides.png' alt='Imagen Efemerides'>
+			<img src='https://viaonline.com.ar/Imagenes/LogoEfemeridesmargen.png' alt='Imagen Efemerides'>
 			<div class=""desplegable""><h2>Los hechos que marcaron la historia
 En esta sección encontrarás un recorrido por los acontecimientos más importantes que ocurrieron en esta misma fecha, a lo largo de distintos años. Desde hitos históricos y culturales hasta nacimientos y fallecimientos de personalidades destacadas, un repaso diario para mantener viva la memoria y comprender mejor nuestro presente. ▼</h2></div>
 			<div class=""contenido"">
