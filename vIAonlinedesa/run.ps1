@@ -923,13 +923,13 @@ $ArrayFallecimientos = $Fallecimientos.deaths | Select-Object year, description
 
 # Mostramos resultados (los primeros 5 de cada uno, ordenados por año descendente)
 Write-Host "=== Eventos ==="
-$ArrayEventos = $ArrayEventos | Sort-Object year -Descending | Select-Object -Last 5 
+$ArrayEventos = $ArrayEventos | Sort-Object year -Descending | Select-Object -Last 3 
 
 Write-Host "`n=== Nacimientos ==="
-$ArrayNacimientos = $ArrayNacimientos | Sort-Object year -Descending | Select-Object -First 5
+$ArrayNacimientos = $ArrayNacimientos | Sort-Object year -Descending | Select-Object -First 3
 
 Write-Host "`n=== Fallecimientos ==="
-$ArrayFallecimientos = $ArrayFallecimientos | Sort-Object year -Descending | Select-Object -First 5 
+$ArrayFallecimientos = $ArrayFallecimientos | Sort-Object year -Descending | Select-Object -First 3
 
 Foreach ($event in $ArrayEventos){
 $eventyear = $($event.year)
@@ -1005,8 +1005,11 @@ Invoke-RestMethod -Uri "https://api.github.com/repos/$usuario/$repo/contents/$ar
 
 ### agrega al html las efemerides
 $efentoP = $null
+$efentoP += "<h2>📖 Eventos</h2>"
 $Nac = $null
+$Nac += "<h2>🎂 Nacimientos</h2>"
 $fall = $null
+$fall += "<h2>✝️ Fallecimientos</h2>"
 $EfemerideEvento = $AgendaCompleta | Where-Object { $_.Tipo -eq "EfemerideEvento" } | ForEach-Object { "$($_.Fecha) - $($_.Descripcion)" }
 foreach ($EfemerideEvent in $EfemerideEvento ) {$efentoP += '<p>' + $EfemerideEvent + '</p>'}
 $EfemerideNacimientos = $AgendaCompleta | Where-Object { $_.Tipo -eq "EfemerideNacimientos" } | ForEach-Object { "$($_.Fecha) - $($_.Descripcion)" }
@@ -1017,8 +1020,7 @@ $news += "
 		<div class='noticia' onclick='this.classList.toggle(""abierto"")'>
 			<h1>Efemérides</h1>
 			<img src='https://viaonline.com.ar/Imagenes/LogoEfemeridesmargen.png' alt='Imagen Efemerides'>
-			<div class=""desplegable""><h2>Los hechos que marcaron la historia
-En esta sección encontrarás un recorrido por los acontecimientos más importantes que ocurrieron en esta misma fecha, a lo largo de distintos años. Desde hitos históricos y culturales hasta nacimientos y fallecimientos de personalidades destacadas, un repaso diario para mantener viva la memoria y comprender mejor nuestro presente. ▼</h2></div>
+			<div class=""desplegable""><h2>Los hechos que marcaron la historia. ▼</h2></div>
 			<div class=""contenido"">
 				$efentoP
                 $Nac
