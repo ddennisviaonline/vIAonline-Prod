@@ -923,13 +923,13 @@ $ArrayFallecimientos = $Fallecimientos.deaths | Select-Object year, description
 
 # Mostramos resultados (los primeros 5 de cada uno, ordenados por año descendente)
 Write-Host "=== Eventos ==="
-$ArrayEventos = $ArrayEventos | Sort-Object year | Select-Object -Last 3 
+$ArrayEventos = $ArrayEventos | Sort-Object year -Descending | Select-Object -Last 3 
 
 Write-Host "`n=== Nacimientos ==="
-$ArrayNacimientos = $ArrayNacimientos | Sort-Object year | Select-Object -First 3
+$ArrayNacimientos = $ArrayNacimientos | Sort-Object year -Descending | Select-Object -First 3
 
 Write-Host "`n=== Fallecimientos ==="
-$ArrayFallecimientos = $ArrayFallecimientos | Sort-Object year | Select-Object -First 3
+$ArrayFallecimientos = $ArrayFallecimientos | Sort-Object year -Descending | Select-Object -First 3
 
 Foreach ($event in $ArrayEventos){
 $eventyear = $($event.year)
