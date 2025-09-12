@@ -1,4 +1,4 @@
-# Version 10 | Cotización dolar, iconos Clima, feriados
+﻿# Version 10 | Cotización dolar, iconos Clima, feriados
 # Cambios, se agregaron iconos de clima, se corrigio publicidad vIA y se migróa GPT4oTurbo
 # ==============================================
 #            AMBIENTE DE PROD
