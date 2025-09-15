@@ -9,12 +9,16 @@ $token = $env:GitHubToken
 #Clave y endpoint de Azure OpenAI
 $AZURE_OPENAI_API_KEY = $env:AZURE_OPENAI_API_KEY_AzureOpenAI4oTurbo                                 
 $AZURE_OPENAI_ENDPOINT = $env:AZURE_OPENAI_ENDPOINT_AzureOpenAI4oTurbo
-# $filePath = "desa/index.html"       # Ruta exacta dentro del repo (case-sensitive)
+$IndexAmbiente = "index.html"       # Ruta INDEX DESARROLLO
+#$IndexAmbiente = "index.html"       # Ruta INDEX PRODUCCION
 # ==============================================
 
 # Get-PackageProvider -Name NuGet -ForceBootstrap 
 # Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force
 # REQUIERE Install-Package HtmlAgilityPack 
+
+# Cantidad de publicidades propias
+$vianoti = 1
 
 ################################# variables github ojo con token #################################
 
@@ -166,7 +170,7 @@ function consulta-IA {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory)]
-        [ValidateSet("Titulo", "Intro", "Nota", "Datos")]
+        [ValidateSet("Titulo", "Intro", "Nota", "Datos", "Traducir")]
         [string]$tipo,
 
         [Parameter(Mandatory)]
@@ -183,6 +187,18 @@ function consulta-IA {
 
         $ResultIAtitle = Invoke-OpenAIChatGPT4omini -question $DescriptionTitiulo
         return $ResultIAtitle.content
+            
+        }
+        "Traducir" {
+        $DescriptionTraducir = @"
+        Eres un traductor de texto y necesito que me traduzcas en español el siguiente texto: $linkFuente
+        Si contiene menciones a violencia, terrorismo, muertes, sexo u otros temas sensibles que puedan activar filtros, por favor reinterpretaloomite esas palabras, manten el sentido histórico y cronológico del evento.
+        Necesito que no contenga agregados de " ni *.
+        No pidas más detalles ni finalices con recomendaciones adicionales.
+"@
+
+        $ResultIATraducir = Invoke-OpenAIChatGPT4omini -question $DescriptionTraducir
+        return $ResultIATraducir.content
             
         }
         "Intro" {
@@ -226,6 +242,49 @@ function consulta-IA {
     }
     
 }
+
+function Translate-Text-Free {
+    param(
+        [string]$Text,
+        [string]$TargetLang = "es",
+        [string]$SourceLang = "en"
+    )
+
+    $encoded = [System.Web.HttpUtility]::UrlEncode($Text)
+    $url = "https://translate.googleapis.com/translate_a/single?client=gtx&sl=$SourceLang&tl=$TargetLang&dt=t&q=$encoded"
+
+    $response = Invoke-RestMethod -Uri $url -Method Get
+
+    return ($response[0] | ForEach-Object { $_[0] }) -join ""
+}
+
+function Get-YouTubeVideo {
+    param(
+        [Parameter(Mandatory=$true)]
+        [string]$Titulo
+    )
+
+    # Escapar el texto para búsqueda en URL
+    $busqueda = [uri]::EscapeDataString($Titulo)
+    $urlBusqueda = "https://www.youtube.com/results?search_query=$busqueda"
+
+    try {
+        $htmlBusqueda = Invoke-WebRequest -Uri $urlBusqueda -UseBasicParsing
+
+        if ($htmlBusqueda.Content -match '\/watch\?v=(.{11})') {
+            $videoId = $matches[1]
+            $videoURL = "https://www.youtube.com/watch?v=$videoId"
+            return $videoURL
+        } else {
+            return $null
+        }
+    }
+    catch {
+        Write-Error "Error al buscar en YouTube: $_"
+        return $null
+    }
+}
+
 
 # Crea csv el cual va a guardar el historico de los ultmos 100 links el resto deberia estar en los index.html publicados como historicos
 
@@ -447,7 +506,7 @@ elseif ($condicionClimatica -eq "Tormenta severa" -or $condicionClimatica -eq "G
 elseif ($condicionClimatica -eq "Nieve") {
     $IconCondicion = "❄️"
 }
-elseif ($condicionClimatica -eq "Niebla" -or $condicionClimatica -eq "Neblina") {
+elseif ($condicionClimatica -eq "Niebla" -or $condicionClimatica -eq "Neblina" -or $condicionClimatica -eq "Niebla moderada") {
     $IconCondicion = "🌫️"
 }
 elseif ($condicionClimatica -eq "Ventoso" -or $condicionClimatica -eq "Viento fuerte") {
@@ -457,7 +516,7 @@ else {
     $IconCondicion = "🌬️☁️"  # Por si no coincide con ninguna condición
 }
 
-$clima = " CABA" + ", " + $($response.current.temp_c) + "º " + $IconCondicion + ' ' + $condicionClimatica
+$clima = "$($response.current.temp_c)" + "º " + $IconCondicion + ' ' + $condicionClimatica
 #$clima = " CABA" + ", " + $($response.current.temp_c) + "º " + $($response.current.condition.text)
 <#
 #####
@@ -564,10 +623,14 @@ catch {
     
     
     $dolaroficial = $response | Where-Object { $_.casa -eq "oficial" }
-    $oficial = "💵 Dólar oficial - Compra: $($dolaroficial.compra) | Venta: $($dolaroficial.venta)"
+    $oficial = "Compra: $($dolaroficial.compra) | Venta: $($dolaroficial.venta)"
     
     $dolarBlue = $response | Where-Object { $_.casa -eq "blue" }
-    $blue = "💵 Dólar Blue - Compra: $($dolarBlue.compra) | Venta: $($dolarBlue.venta)"
+    $blue = "Compra: $($dolarBlue.compra) | Venta: $($dolarBlue.venta)"
+
+    $dolarTarjeta = $response | Where-Object { $_.casa -eq "Tarjeta" }
+    $Tarjeta = "Compra: $($dolarTarjeta.compra) | Venta: $($dolarTarjeta.venta)"
+    
 
 ### Obtengo fecha de feriado
 # Definir el año
@@ -585,7 +648,7 @@ $Url = "https://www.argentina.gob.ar/interior/feriados-nacionales-$anio"
 $array = $pagina.Content -split "`r?`n"
 
 # Ahora sí $array es un array donde cada elemento es una línea
-$lineas476a479 = $array[393..424]
+$lineas476a479 = $array[393..423]
 $lineas476a479
 function Clasificar-Feriados {
     param (
@@ -657,7 +720,7 @@ $fechaFormateada = $fechaDateTime.ToString("dddd dd 'de' MMMM 'de' yyyy", [Syste
 
 $fechaFormateada
 
- $ProximoFeriado = "📆 Próximo feriado: " + $proximoFeriadoSinBC.label + ' ' + $fechaFormateada
+ $ProximoFeriado = $proximoFeriadoSinBC.label + ' ' + $fechaFormateada
 ###
 
 $head = "
@@ -670,35 +733,29 @@ $head = "
     <link rel='icon' type='image/png' sizes='512x512' href='https://viaonline.com.ar/Imagenes/favicon.ico'>
       <!-- Script global de AdSense (va una sola vez en toda la web) -->
     <meta name='google-adsense-account' content='ca-pub-1894152981922395'>
-    <style>
-/* Contenedor principal de noticias */
 
-.contenedor-noticias {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 columnas en PC */
-    gap: 20px;
-    margin: 20px;
+    <style>
+/* ======== Configuración general ======== */
+body {
+    background-color: #FEFBF4;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
 }
 
-    body {
-        background-color: #FEFBF4;
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 20px;
-    }
+/* ======== Logo ======== */
+.logo {
+    text-align: center;
+    margin-bottom: 10px;
+}
+.logo img {
+    max-width: 300px;
+    width: 100%;
+    height: auto;
+}
 
-    /* Logo centrado */
-    .logo {
-        text-align: center;
-        margin-bottom: 10px;
-    }
-
-    .logo img {
-        width: 400px;
-    }
-
-/* Cada noticia */
-.noticia {
+/* Cada efeméride */
+.Efemeride {
     border: 1px solid #ccc;
     border-radius: 8px;
     padding: 10px;
@@ -707,61 +764,124 @@ $head = "
     transition: box-shadow 0.3s;
 }
 
-.noticia:hover {
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+.Efemeride img {
+    width: 100%;
+    height: 200px; /* Altura fija */
+    border-radius: 1px; /* opcional */
 }
 
-.noticia h1, .noticia h2 {
+.Efemeride h1,
+.Efemeride h2 {
     margin: 0 0 10px 0;
     font-size: 16px;
     text-align: center;
 }
 
-.noticia img {
-    width: 100%;
-    height: 200px; /* Altura fija */
-    object-fit: cover; /* Recorta para mantener proporción */
-    border-radius: 8px; /* opcional */
+.Efemeride.abierto .contenido {
+    display: block;
 }
 
-/* Desplegable contenido */
+/* ======== Encabezado (fecha, clima, dólar, feriado) ======== */
+.encabezado-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; /* permite que los items pasen a otra línea */
+    gap: 10px;       /* espacio entre bloques */
+    margin: 20px auto;   /* centrado horizontal */
+    padding: 0 10px;     /* espacio interno */
+    max-width: 1200px;   /* igual que el contenedor de noticias */
+}
+
+/* Resaltar etiquetas en negrita */
+.encabezado-info .resaltado {
+    font-weight: bold;
+}
+
+/* Versión móvil: apilado */
+@media (max-width: 768px) {
+    .encabezado-info {
+        flex-direction: column; /* apila en vertical */
+        align-items: flex-start; /* alinea a la izquierda */
+    }
+    .encabezado-info > div {
+        width: 100%; /* cada bloque ocupa todo el ancho */
+    }
+}
+
+/* ======== Contenedor de noticias ======== */
+.contenedor-noticias {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 columnas en PC */
+    gap: 20px;
+    margin: 20px auto;
+    max-width: 1200px; /* ancho máximo centrado */
+    width: 100%;
+    padding: 0 25px; /* margen lateral amplio */
+}
+
+/* Responsive: tablet (2 columnas) */
+@media (max-width: 992px) {
+    .contenedor-noticias {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 0 20px;
+    }
+}
+
+/* Responsive: celular (1 columna) */
+@media (max-width: 576px) {
+    .contenedor-noticias {
+        grid-template-columns: 1fr;
+        padding: 0 20px;
+    }
+}
+
+/* ======== Cada noticia ======== */
+.noticia {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    cursor: pointer;
+    background-color: #FEFBF4;
+    transition: box-shadow 0.3s;
+}
+.noticia:hover {
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+.noticia h1, .noticia h2 {
+    margin: 0 0 10px 0;
+    font-size: 16px;
+    text-align: center;
+}
+.noticia img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* ======== Desplegable contenido ======== */
 .contenido {
     display: none;
     margin-top: 10px;
     font-size: 14px;
     line-height: 1.4;
 }
-
 .noticia.abierto .contenido {
     display: block;
 }
 
-/* Fila de publicidad */
+/* ======== Publicidad ======== */
 .publicidad {
-    grid-column: 1 / -1; /* ocupa todo el ancho */
+    grid-column: 1 / -1;
     text-align: center;
     padding: 20px;
     background-color: #f0f0f0;
     font-weight: bold;
     border-radius: 8px;
 }
+</style>
 
-/* Contenedor fecha y clima */
-.encabezado-info {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-    padding: 0 10px;
-}
-
-/* Adaptación a celulares */
-@media (max-width: 768px) {
-    .contenedor-noticias {
-        grid-template-columns: 1fr; /* una columna */
-    }
-}
-    </style>
 </head>
 <body>
 
@@ -774,11 +894,13 @@ $head = "
 
     <!-- Fecha y clima -->
     <div class='encabezado-info'>
-        <div class='fecha'>$fechaActual</div>
-        <div class='clima'>Clima:$clima</div>
-        <div class='clima'>$oficial</div>
-        <div class='clima'>$blue</div>
-        <div class='clima'>$ProximoFeriado</div>        
+        <div class='fecha'><span class='resaltado'>$fechaActual</span></div>
+        <div class='clima'><span class='resaltado'>🌡️ Clima:</span> $clima</div>
+        <div class='clima'><span class='resaltado'>📆 Próximo feriado:</span>$ProximoFeriado</div>
+        <div class='clima'><span class='resaltado'>💵 Dólar oficial </span>$oficial</div>
+        <div class='clima'><span class='resaltado'>💵 Dólar blue </span>$blue</div>
+        <div class='clima'><span class='resaltado'>💵 Dólar tarjeta </span>$tarjeta</div>
+                
     </div>
 <div class='contenedor-noticias'>
 "
@@ -816,10 +938,14 @@ $linkIndex = 0
 
 # Cargar la lista del CSV
 $csvData = $links
+
 # Contador para el foreach
-$counter = 0
+$counter = $vianoti
+# Contador Notas propias
+$countervia = $vianoti
 # Índice para el CSV
 $csvIndex = 0
+
 
 #### compara contra $CSVcache a ver si existe. si no existe busca en la ia si no lo pasa por alto
 $ids1 = $textossinAutores.url
@@ -849,6 +975,176 @@ if ($TodosLosRegistros.Count -gt 100) {
 #$LinksCache | Export-Csv -Path $RutaLinkCache -Encoding UTF8 -NoTypeInformation
 #$LinksCache =@()
 #alterna publicidad con el contador
+### AGENDA
+### CONSULTO SI EXISTE EL ARCHIVO SI NO EXISTE LO CREO LA AGENDA
+$fechaformatfile = Get-Date -Format "ddMMyyyy"
+$FileNameAgenda = "agenda" + $fechaformatfile + ".csv"
+
+# URL API
+#$urlAPI = "https://raw.githubusercontent.com/ddennisviaonline/vIAonline-Prod/main/vIAonline/agenda/" + $FileNameAgenda
+$urlevent = "https://raw.githubusercontent.com/ddennisviaonline/vIAonline-Prod/main/vIAonline/agenda/" + $FileNameAgenda
+try {
+    $response = Invoke-RestMethod -Uri $urlevent -UseBasicParsing -ErrorAction Stop
+    $agenda = $true
+    Write-Host "El archivo existe. Tamaño: $($response.size) bytes"
+} catch {
+    $agenda = $false
+    Write-Host "El archivo NO existe."
+}
+
+if ($agenda) {
+    $AgendaCompleta = Invoke-WebRequest -Uri $urlevent | Select-Object -ExpandProperty Content | ConvertFrom-Csv
+    # Mostrar contenido
+    $AgendaCompleta
+    Write-Host "Está activo"
+} else {
+    Write-Host "No está activo"
+$data = @()
+
+    # ME TRAIGO LAS EFEMERIDES DEL DIA
+   
+### efemerides
+
+# Fecha de hoy
+$hoy = Get-Date
+$mes = $hoy.Month
+$dia = $hoy.Day
+$fechacsvreg = Get-Date -Format "yyyy-MM-dd"
+
+# URLs API
+$UrlEventos = "https://byabbe.se/on-this-day/$mes/$dia/events.json"
+$UrlNacimientos = "https://byabbe.se/on-this-day/$mes/$dia/births.json"
+$UrlFallecimientos = "https://byabbe.se/on-this-day/$mes/$dia/deaths.json"
+
+# Descarga de datos
+$Eventos = Invoke-RestMethod -Uri $UrlEventos
+$Nacimientos = Invoke-RestMethod -Uri $UrlNacimientos
+$Fallecimientos = Invoke-RestMethod -Uri $UrlFallecimientos
+
+# Creamos arrays
+$ArrayEventos = $Eventos.events | Select-Object year, description
+$ArrayNacimientos = $Nacimientos.births | Select-Object year, description
+$ArrayFallecimientos = $Fallecimientos.deaths | Select-Object year, description
+
+# Mostramos resultados (los primeros 5 de cada uno, ordenados por año descendente)
+Write-Host "=== Eventos ==="
+$ArrayEventos = $ArrayEventos | Sort-Object year | Select-Object -Last 8 
+
+Write-Host "`n=== Nacimientos ==="
+$ArrayNacimientos = $ArrayNacimientos | Sort-Object year | Select-Object -First 1
+
+Write-Host "`n=== Fallecimientos ==="
+$ArrayFallecimientos = $ArrayFallecimientos | Sort-Object year | Select-Object -First 1
+
+Foreach ($event in $ArrayEventos){
+$eventyear = $($event.year)
+$eventdescription = $($event.description)
+$Traducido = consulta-IA -tipo Traducir -linkFuente $eventdescription
+# si la IA no lo puede traducir por politicas de contenido lo traduce google
+if (-not $Traducido) {$Traducido = Translate-Text-Free -Text $eventdescription -TargetLang "es"}
+    $data += [PSCustomObject]@{
+        Fecha       = $eventyear
+        Tipo        = "EfemerideEvento"
+        Descripcion = $Traducido
+    }
+}
+
+Foreach ($event in $ArrayNacimientos){
+$eventyear = $($event.year)
+$eventdescription = $($event.description)
+$Traducido = consulta-IA -tipo Traducir -linkFuente $eventdescription
+# si la IA no lo puede traducir por politicas de contenido lo traduce google
+if (-not $Traducido) {$Traducido = Translate-Text-Free -Text $eventdescription -TargetLang "es"}
+    $data += [PSCustomObject]@{
+        Fecha       = $eventyear
+        Tipo        = "EfemerideNacimientos"
+        Descripcion = $Traducido
+    }
+}
+
+Foreach ($event in $ArrayFallecimientos){
+$eventyear = $($event.year)
+$eventdescription = $($event.description)
+$Traducido = consulta-IA -tipo Traducir -linkFuente $eventdescription
+# si la IA no lo puede traducir por politicas de contenido lo traduce google
+if (-not $Traducido) {$Traducido = Translate-Text-Free -Text $eventdescription -TargetLang "es"}
+    $data += [PSCustomObject]@{
+        Fecha       = $eventyear
+        Tipo        = "EfemerideFallecimientos"
+        Descripcion = $Traducido
+    }
+}
+
+# Convertir objetos a CSV en memoria
+$agendacsv = $data | ConvertTo-Csv -NoTypeInformation
+
+# Unir las líneas en un solo string
+$agendaCompleta = $agendacsv -join "`n"
+
+    #crea CSV en 
+    # Datos de ejemplo
+
+
+
+    ### desde aca borra el file vIAcache.csv
+
+# ==== CONFIGURACIÓN ====
+$usuario = "ddennisviaonline"
+$repo = "vIAonline-Prod"
+$archivo = "vIAonline/agenda/" + $FileNameAgenda # "agenda.csv"       # Ruta exacta dentro del repo (case-sensitive)
+$rama = "main"              # Rama donde está el archivo
+# Convertir a Base64
+$bytes  = [System.Text.Encoding]::UTF8.GetBytes($agendaCompleta)
+$base64 = [System.Convert]::ToBase64String($bytes)
+
+# Crear body para la API
+$body = @{
+    message = "Agrego agenda_eventos.csv"
+    branch  = $rama
+    content = $base64
+} | ConvertTo-Json -Depth 10
+
+# Headers con token
+$headers = @{ Authorization = "token $token" }
+
+# Subir a GitHub
+Invoke-RestMethod -Uri "https://api.github.com/repos/$usuario/$repo/contents/$archivo" `
+                  -Method Put `
+                  -Headers $headers `
+                 -Body $body
+$AgendaCompleta = Invoke-WebRequest -Uri $urlevent | Select-Object -ExpandProperty Content | ConvertFrom-Csv
+}
+
+### agrega al html las efemerides
+$efentoP = $null
+$efentoP += "<h2>📖 Eventos</h2>"
+$Nac = $null
+$Nac += "<h2>🎂 Nacimientos</h2>"
+$fall = $null
+$fall += "<h2>✝️ Fallecimientos</h2>"
+$EfemerideEvento = $AgendaCompleta | Where-Object { $_.Tipo -eq "EfemerideEvento" } | ForEach-Object { "$($_.Fecha) - $($_.Descripcion)" }
+foreach ($EfemerideEvent in $EfemerideEvento ) {$efentoP += '<p>' + $EfemerideEvent + '</p>'}
+$EfemerideNacimientos = $AgendaCompleta | Where-Object { $_.Tipo -eq "EfemerideNacimientos" } | ForEach-Object { "$($_.Fecha) - $($_.Descripcion)" }
+foreach ($EfemerideNac in $EfemerideNacimientos ) {$Nac += '<p>' + $EfemerideNac + '</p>'}
+$EfemerideFallecimientos = $AgendaCompleta | Where-Object { $_.Tipo -eq "EfemerideFallecimientos" }  | ForEach-Object { "$($_.Fecha) - $($_.Descripcion)" }
+foreach ($EfemerideFall in $EfemerideFallecimientos ) {$Fall += '<p>' + $EfemerideFall + '</p>'}
+$news += "
+		<div class='Efemeride' onclick='this.classList.toggle(""abierto"")'>
+			<h1>Efemérides</h1>
+			<img src='https://viaonline.com.ar/Imagenes/LogoEfemerides.png' alt='Imagen Efemerides'>
+			<div class=""desplegable""><h2>Los hechos que marcaron la historia. ▼</h2></div>
+			<div class=""contenido"">
+				$efentoP
+                $Nac
+                $fall
+			</div>
+		</div>
+"
+
+###
+###
+
+
 $adscnt = 0
 foreach ($noticia in $TodosLosRegistros){
 $LinkOrigen = $noticia.LinkOrigen #$URLOrigen + $noticia.URL
@@ -974,8 +1270,10 @@ $news += "
     Write-Output "Procesando item: $item"
 
     $counter++
+    
+    $numDeNotas = 8 - $countervia
 
-    if ($counter % 8 -eq 0) {
+    if ($counter % $numDeNotas -eq 0) {
         if ($csvIndex -lt $csvData.Count) {
             $registro = $csvData[$csvIndex]
             Write-Output "Registro del CSV en salto $counter : $($registro | Out-String)"
@@ -1003,6 +1301,8 @@ $news += "
             Write-Warning "No hay más registros en el CSV."
         }
     }
+
+    $countervia = 0
 }
 $news += $googleADS
 $news += "</div>"
@@ -1114,7 +1414,7 @@ Write-Host $indexfile -ForegroundColor Cyan
 # ==== CONFIGURACIÓN ====
 $owner = "ddennisviaonline"
 $repo = "vIAonline-Prod"
-$filePath = "index.html"       # Ruta exacta dentro del repo (case-sensitive)
+$filePath = $IndexAmbiente    # Ruta exacta dentro del repo (case-sensitive)
 $branch = "master"              # Rama donde está el archivo
 
 # ==== 1. Obtener el SHA del archivo ====
