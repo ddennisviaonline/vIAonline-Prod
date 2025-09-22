@@ -1,0 +1,1293 @@
+
+<!DOCTYPE html>
+<html lang='es'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>vIA online</title>
+    <link rel='icon' type='image/png' sizes='512x512' href='https://viaonline.com.ar/Imagenes/favicon.ico'>
+      <!-- Script global de AdSense (va una sola vez en toda la web) -->
+    <meta name='google-adsense-account' content='ca-pub-1894152981922395'>
+
+    <style>
+/* ======== Configuración general ======== */
+body {
+    background-color: #FEFBF4;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+}
+
+/* ======== Logo ======== */
+.logo {
+    text-align: center;
+    margin-bottom: 10px;
+}
+.logo img {
+    max-width: 300px;
+    width: 100%;
+    height: auto;
+}
+
+/* Cada efeméride */
+.Efemeride {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    cursor: pointer;
+    background-color: #FEFBF4;
+    transition: box-shadow 0.3s;
+}
+
+.Efemeride img {
+    width: 100%;
+    height: 200px; /* Altura fija */
+    border-radius: 1px; /* opcional */
+}
+
+.Efemeride h1,
+.Efemeride h2 {
+    margin: 0 0 10px 0;
+    font-size: 16px;
+    text-align: center;
+}
+
+.Efemeride.abierto .contenido {
+    display: block;
+}
+
+/* ======== Encabezado (fecha, clima, dólar, feriado) ======== */
+.encabezado-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; /* permite que los items pasen a otra línea */
+    gap: 10px;       /* espacio entre bloques */
+    margin: 20px auto;   /* centrado horizontal */
+    padding: 0 10px;     /* espacio interno */
+    max-width: 1200px;   /* igual que el contenedor de noticias */
+}
+
+/* Resaltar etiquetas en negrita */
+.encabezado-info .resaltado {
+    font-weight: bold;
+}
+
+/* Versión móvil: apilado */
+@media (max-width: 768px) {
+    .encabezado-info {
+        flex-direction: column; /* apila en vertical */
+        align-items: flex-start; /* alinea a la izquierda */
+    }
+    .encabezado-info > div {
+        width: 100%; /* cada bloque ocupa todo el ancho */
+    }
+}
+
+/* ======== Contenedor de noticias ======== */
+.contenedor-noticias {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 columnas en PC */
+    gap: 20px;
+    margin: 20px auto;
+    max-width: 1200px; /* ancho máximo centrado */
+    width: 100%;
+    padding: 0 25px; /* margen lateral amplio */
+}
+
+/* Responsive: tablet (2 columnas) */
+@media (max-width: 992px) {
+    .contenedor-noticias {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 0 20px;
+    }
+}
+
+/* Responsive: celular (1 columna) */
+@media (max-width: 576px) {
+    .contenedor-noticias {
+        grid-template-columns: 1fr;
+        padding: 0 20px;
+    }
+}
+
+/* ======== Cada noticia ======== */
+.noticia {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    cursor: pointer;
+    background-color: #FEFBF4;
+    transition: box-shadow 0.3s;
+}
+.noticia:hover {
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+.noticia h1, .noticia h2 {
+    margin: 0 0 10px 0;
+    font-size: 16px;
+    text-align: center;
+}
+.noticia img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* ======== Desplegable contenido ======== */
+.contenido {
+    display: none;
+    margin-top: 10px;
+    font-size: 14px;
+    line-height: 1.4;
+}
+.noticia.abierto .contenido {
+    display: block;
+}
+
+/* ======== Publicidad ======== */
+.publicidad {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 20px;
+    background-color: #f0f0f0;
+    font-weight: bold;
+    border-radius: 8px;
+}
+</style>
+
+</head>
+<body>
+
+    <!-- Logo -->
+    <div class='logo'>
+        <a href='https://viaonline.com.ar/'>
+            <img src='https://viaonline.com.ar/Imagenes/Logocorto.png' alt='Imagen centrada'>
+        </a>
+    </div>
+
+    <!-- Fecha y clima -->
+    <div class='encabezado-info'>
+        <div class='fecha'><span class='resaltado'>📆 22 de septiembre de 2025</span></div>
+        <div class='clima'><span class='resaltado'>🌡️ Clima:</span> 15.3º ☀️ Soleado</div>
+        <div class='clima'><span class='resaltado'>📆 Próximo feriado:</span>Día de la  Raza (12/10) viernes 10 de octubre de 2025</div>
+        <div class='clima'><span class='resaltado'>💵 Dólar oficial </span>Compra: 1465 | Venta: 1515</div>
+        <div class='clima'><span class='resaltado'>💵 Dólar blue </span>Compra: 1500 | Venta: 1520</div>
+        <div class='clima'><span class='resaltado'>💵 Dólar tarjeta </span>Compra: 1904.5 | Venta: 1969.5</div>
+                
+    </div>
+<div class='contenedor-noticias'>
+ 
+		<div class='Efemeride' onclick='this.classList.toggle("abierto")'>
+			<h1>Efemérides</h1>
+			<img src='https://viaonline.com.ar/Imagenes/LogoEfemerides.png' alt='Imagen Efemerides'>
+			<div class="desplegable"><h2>Los hechos que marcaron la historia. ▼</h2></div>
+			<div class="contenido">
+				<h2>📖 Eventos</h2><p>1980 - Irak invade Irán.</p><p>1991 - Los Rollos del Mar Muerto son puestos a disposición del público por primera vez por la Biblioteca Huntington.</p><p>1993 - Un avión Tu-154 de Transair Georgian Airlines es derribado por un misil en Sukhumi, Georgia.</p><p>1993 - Una barcaza choca contra un puente de ferrocarril cerca de Mobile, Alabama, provocando el accidente ferroviario más mortífero en la historia de Amtrak. Cuarenta y siete pasajeros pierden la vida.</p><p>1995 - El bombardeo de la escuela de Nagerkovil fue llevado a cabo por la Fuerza Aérea de Sri Lanka, en el que al menos 34 personas fallecieron, la mayoría de ellos estudiantes de etnia tamil.</p><p>1995 - Un E-3B AWACS se estrella fuera de la Base Aérea de Elmendorf, Alaska, tras múltiples impactos de aves en dos de los cuatro motores poco después del despegue; las 24 personas a bordo fallecen.</p><p>2013 - Al menos 75 personas pierden la vida en un atentado suicida en una iglesia cristiana en Peshawar, Pakistán.</p><p>904 - El caudillo Zhu Quanzhong acaba con la vida del emperador Zhaozong, el penúltimo emperador de la dinastía Tang, tras hacerse con el control del gobierno imperial.</p>
+                <h2>🎂 Nacimientos</h2><p>1013 - Richeza de Polonia, Reina de Hungría (fallecida en 1075)</p>
+                <h2>✝️ Fallecimientos</h2><p>1072 - Ouyang Xiu, historiador, poeta y político chino (nacido en 1007).</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Una misión de la ONU presentará informe sobre represión y violaciones de derechos humanos en Venezuela</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpAvUKpiB5rV4isheiHzW8vZ6Z4a4JykdcTYE906fWcw1SK4F4RzpTW1fLhOw&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Una misión de la ONU presentará un informe en Ginebra, documentando la represión, asesinatos y torturas en Venezuela. ▼</h2></div>
+			<div class="contenido">
+				<p>Una misión de la ONU presentó un informe en Ginebra que documenta graves violaciones de derechos humanos en Venezuela, incluyendo represión, asesinatos y torturas. El documento señala la responsabilidad del gobierno en estos actos y especifica cómo se han llevado a cabo diversas formas de abuso sistemático. La presentación se enmarca en un contexto de creciente preocupación internacional por la situación en el país. Las organizaciones de derechos humanos han resaltado la urgencia de abordar estos problemas y la necesidad de justicia para las víctimas.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>La ONU acusó a Rusia de traslado forzoso de población ucraniana durante la invasión</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyew-dYD11ROReBPx4sV1scxvM6xsSMC_3tW0-nCC0vtNaMIrNrQ9M-MUjiXpaSGV3Z3Q&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La ONU acusó a Rusia de cometer crimen de lesa humanidad por el traslado forzoso de población ucraniana durante la invasión en curso. ▼</h2></div>
+			<div class="contenido">
+				<p></p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>EEUU muestra su imponente despliegue militar en Puerto Rico y el Caribe para combatir el narcoterrorismo</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs-nihRV97r4421YkK7f7Ii5WiHzKl4eARXSliBW9TgvZ0t3i5flcbXnu7RQ&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Estados Unidos ha mostrado imágenes de un significativo despliegue militar en Puerto Rico y en la región del Caribe, en un esfuerzo por combatir el narcoterrorismo. Este operativo incluye la participación de diversas agencias y unidades militares, con el objetivo de intensificar las acciones contra el tráfico de drogas y las organizaciones criminales. Las autoridades han enfatizado la importancia de estas medidas para garantizar la seguridad en la región y fortalecer la colaboración con los países vecinos en la lucha contra el narcotráfico. ▼</h2></div>
+			<div class="contenido">
+				<p>Estados Unidos ha mostrado imágenes de un significativo despliegue militar en Puerto Rico y en la región del Caribe, en un esfuerzo por combatir el narcoterrorismo. Este operativo incluye la participación de diversas agencias y unidades militares, con el objetivo de intensificar las acciones contra el tráfico de drogas y las organizaciones criminales. Las autoridades han enfatizado la importancia de estas medidas para garantizar la seguridad en la región y fortalecer la colaboración con los países vecinos en la lucha contra el narcotráfico.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Países que reconocen al Estado de Palestina</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLKNsUlS-FHjriBSpkF-PB3iE-RuqVTeZZuKR3YYitxtx1CanaUPIPA-_3_g&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La noticia aborda el reconocimiento internacional del Estado de Palestina, destacando que más de 140 países han formalizado su apoyo a este estado soberano. Este reconocimiento se ha intensificado desde la declaración de independencia de Palestina en 1988. La mayoría de las naciones que reconocen a Palestina se encuentran en África y América Latina, mientras que en Europa y América del Norte el apoyo es más limitado, con algunos países como Suecia siendo notables por su reconocimiento. La situación es compleja y está influenciada por factores políticos y diplomáticos, lo que refleja la realidad del conflicto entre Israel y Palestina. La noticia también menciona la oposición de Israel, respaldada por países como Estados Unidos, que afectan el proceso de reconocimiento y avance del estado palestino en el contexto internacional. ▼</h2></div>
+			<div class="contenido">
+				<p>La noticia aborda el reconocimiento internacional del Estado de Palestina, destacando que más de 140 países han formalizado su apoyo a este estado soberano. Este reconocimiento se ha intensificado desde la declaración de independencia de Palestina en 1988. La mayoría de las naciones que reconocen a Palestina se encuentran en África y América Latina, mientras que en Europa y América del Norte el apoyo es más limitado, con algunos países como Suecia siendo notables por su reconocimiento. La situación es compleja y está influenciada por factores políticos y diplomáticos, lo que refleja la realidad del conflicto entre Israel y Palestina. La noticia también menciona la oposición de Israel, respaldada por países como Estados Unidos, que afectan el proceso de reconocimiento y avance del estado palestino en el contexto internacional.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Ucrania negocia garantías de seguridad con aliados y promete aumentar ataques contra la energía rusa</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVs-DiTV6waqmQpu0-mrg6aApu-ll6oyRt54tlxMkBjL6PG3hdBKXCE1iW2fc&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Ucrania está en diálogo con sus aliados para establecer garantías de seguridad en medio del conflicto con Rusia. El gobierno ucraniano ha prometido intensificar sus ataques contra la infraestructura energética rusa como parte de sus esfuerzos para debilitar la capacidad de respuesta del ejército invasor. Estas negociaciones y acciones tienen como objetivo fortalecer la posición de Ucrania en el contexto de la guerra en curso. ▼</h2></div>
+			<div class="contenido">
+				<p>Ucrania está en diálogo con sus aliados para establecer garantías de seguridad en medio del conflicto con Rusia. El gobierno ucraniano ha prometido intensificar sus ataques contra la infraestructura energética rusa como parte de sus esfuerzos para debilitar la capacidad de respuesta del ejército invasor. Estas negociaciones y acciones tienen como objetivo fortalecer la posición de Ucrania en el contexto de la guerra en curso.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Lamine Yamal y Nicki Nicole generan revuelo con publicación en redes sociales</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZxEacD_VPRIxPwa-dvBJoTZFRgGnOi2m-tt7-dhNrV0FoIFk-gqbKm9aolTA&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La reciente publicación de Lamine Yamal en redes sociales ha generado revuelo, ya que el futbolista compartió una foto con la cantante Nicki Nicole. Junto a la imagen, el joven futbolista incluyó un texto provocador que menciona que solo Dios puede juzgarlo. Este mensaje ha suscitado opiniones diversas entre sus seguidores en las redes sociales, destacando la conexión entre dos figuras destacadas de sus respectivos campos: el deporte y la música. Lamine Yamal es conocido por su talento en el fútbol, y su relación con la artista ha llamado la atención de los medios y fanáticos. ▼</h2></div>
+			<div class="contenido">
+				<p>La reciente publicación de Lamine Yamal en redes sociales ha generado revuelo, ya que el futbolista compartió una foto con la cantante Nicki Nicole. Junto a la imagen, el joven futbolista incluyó un texto provocador que menciona que solo Dios puede juzgarlo. Este mensaje ha suscitado opiniones diversas entre sus seguidores en las redes sociales, destacando la conexión entre dos figuras destacadas de sus respectivos campos: el deporte y la música. Lamine Yamal es conocido por su talento en el fútbol, y su relación con la artista ha llamado la atención de los medios y fanáticos.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Finlandia condena la violación rusa del espacio aéreo de Estonia</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQB9MeyEylt1-gFSb_CEYfsD5P9rlCCN1f_gxPLMz1SdIh2uA6FkYDmhPEH_w&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Finlandia ha expresado su firme condena ante la reciente violación del espacio aéreo de Estonia por parte de Rusia, calificando esta acción de imprudente y totalmente inaceptable. El incidente ha generado preocupaciones sobre la seguridad en la región y refuerza la necesidad de una respuesta unida frente a acciones que amenazan la soberanía de los países bálticos. La declaración subraya la importancia de la cooperación entre los países europeos para hacer frente a estas provocaciones. ▼</h2></div>
+			<div class="contenido">
+				<p>Finlandia ha expresado su firme condena ante la reciente violación del espacio aéreo de Estonia por parte de Rusia, calificando esta acción de imprudente y totalmente inaceptable. El incidente ha generado preocupaciones sobre la seguridad en la región y refuerza la necesidad de una respuesta unida frente a acciones que amenazan la soberanía de los países bálticos. La declaración subraya la importancia de la cooperación entre los países europeos para hacer frente a estas provocaciones.</p>
+			</div>
+		</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publiciteLite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Donald Trump nomina a Lindsey Halligan como fiscal federal en el distrito este de Virginia</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWMo8i-mBB5TXo8_-OCHCzuS4YcAFduu2IE8SZxaK8D2921qucFn8qUgkrUQ&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Donald Trump ha nominado a Lindsey Halligan como fiscal federal para el distrito este de Virginia. Halligan, quien ha sido abogada defensora, se ha destacado en casos de alto perfil y cuenta con el respaldo de figuras clave del Partido Republicano. Su nominación se produce en un contexto político marcado por las elecciones presidenciales y podría influir en la dinámica legal en esa región. La decisión de Trump refleja su continuo apoyo a la selección de candidatos afines a sus posturas en el sistema judicial. ▼</h2></div>
+			<div class="contenido">
+				<p>Donald Trump ha nominado a Lindsey Halligan como fiscal federal para el distrito este de Virginia. Halligan, quien ha sido abogada defensora, se ha destacado en casos de alto perfil y cuenta con el respaldo de figuras clave del Partido Republicano. Su nominación se produce en un contexto político marcado por las elecciones presidenciales y podría influir en la dinámica legal en esa región. La decisión de Trump refleja su continuo apoyo a la selección de candidatos afines a sus posturas en el sistema judicial.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>La fiscalía de Bolivia ordena la captura de un hijo del presidente Luis Arce por violencia de género</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPwfe3ZTNwZ_XixlBOeag9eFIDQGYerVwRQldW2K2tpm_V_m9FsJZAil1Cl6A&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La Fiscalía de Bolivia ha ordenado la captura de un hijo del presidente Luis Arce por un caso de violencia de género. La decisión se produce tras una denuncia presentada por una mujer, quien asegura haber sido víctima de agresiones. El hijo del mandatario no ha hecho declaraciones públicas sobre los hechos. La situación ha generado controversia en el país, destacando la importancia de abordar casos de violencia contra las mujeres. La investigación avanza mientras la fiscalía intenta hacer cumplir la orden de captura. ▼</h2></div>
+			<div class="contenido">
+				<p>La Fiscalía de Bolivia ha ordenado la captura de un hijo del presidente Luis Arce por un caso de violencia de género. La decisión se produce tras una denuncia presentada por una mujer, quien asegura haber sido víctima de agresiones. El hijo del mandatario no ha hecho declaraciones públicas sobre los hechos. La situación ha generado controversia en el país, destacando la importancia de abordar casos de violencia contra las mujeres. La investigación avanza mientras la fiscalía intenta hacer cumplir la orden de captura.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Ataque ruso en Zaporizhzhia deja al menos tres muertos y varios heridos tras impacto de cinco bombas guiadas</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXEu9tEs8uZ0xIThunmf6OncAlup_BUAo_05NyjaeJ-fwGS_TFf2OPs8vIsw&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Un ataque aéreo ruso en la ciudad de Zaporizhzhia ha dejado al menos tres muertos y varios heridos, luego de que cinco bombas guiadas impactaran en la zona. Las autoridades locales informaron sobre la gravedad de la situación y las labores de emergencia en respuesta al ataque. La ofensiva se produce en medio de un intensificado conflicto en Ucrania, aumentando la preocupación por la seguridad de los civiles en las áreas afectadas. ▼</h2></div>
+			<div class="contenido">
+				<p>Un ataque aéreo ruso en la ciudad de Zaporizhzhia ha dejado al menos tres muertos y varios heridos, luego de que cinco bombas guiadas impactaran en la zona. Las autoridades locales informaron sobre la gravedad de la situación y las labores de emergencia en respuesta al ataque. La ofensiva se produce en medio de un intensificado conflicto en Ucrania, aumentando la preocupación por la seguridad de los civiles en las áreas afectadas.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Defensa de Jeanine Áñez solicitará absolución tras rechazo del Supremo a su apelación</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGscQe624UB30CHd9N7pmu__PyBCgTFdM_Oo0txkiyXoIxE4cQ-3nEZ7nsuw&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El abogado de Jeanine Áñez, ex presidenta interina de Bolivia, anunció que solicitará su absolución tras el rechazo de la Corte Suprema a su primera apelación. Áñez cumple una condena de diez años por el caso de la "autoproclamación" y su defensa argumenta que el juicio fue irregular y careció de garantías. El equipo legal está preparando una nueva apelación que será presentada ante la misma corte. La situación ha generado un debate sobre la judicialización de la política en el país y se han expresado posturas tanto a favor como en contra de la detención de Áñez. ▼</h2></div>
+			<div class="contenido">
+				<p>El abogado de Jeanine Áñez, ex presidenta interina de Bolivia, anunció que solicitará su absolución tras el rechazo de la Corte Suprema a su primera apelación. Áñez cumple una condena de diez años por el caso de la "autoproclamación" y su defensa argumenta que el juicio fue irregular y careció de garantías. El equipo legal está preparando una nueva apelación que será presentada ante la misma corte. La situación ha generado un debate sobre la judicialización de la política en el país y se han expresado posturas tanto a favor como en contra de la detención de Áñez.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Piastri y su actitud tras el abandono en Baku: cómo siguió la carrera desde la pista</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTv2wC25j8ka58mxi2dn1Z8Z3utCeGtxwKBoavGeEY8fIedXbMkJpgAXeK8hMY&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Oscar Piastri, piloto de Fórmula 1, tuvo una desafortunada carrera en Baku, donde se retiró en la primera vuelta debido a un accidente. A pesar de la frustración, Piastri mostró una actitud positiva al decidir seguir la carrera desde los pits, donde se acomodó para observar el evento. Su comportamiento ha sido destacado por transmitir una mentalidad profesional y resiliente, a pesar del revés en su participación. ▼</h2></div>
+			<div class="contenido">
+				<p>Oscar Piastri, piloto de Fórmula 1, tuvo una desafortunada carrera en Baku, donde se retiró en la primera vuelta debido a un accidente. A pesar de la frustración, Piastri mostró una actitud positiva al decidir seguir la carrera desde los pits, donde se acomodó para observar el evento. Su comportamiento ha sido destacado por transmitir una mentalidad profesional y resiliente, a pesar del revés en su participación.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Estonia acusa a Rusia de escalar la tensión regional y global tras violación de su espacio aéreo</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4iFFB_hnJ4z3nrpydKnoLZOOEW7MfGimIueXa1T0b0gHZMuPZthl3Gfgi_W0&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Estonia ha acusado a Rusia de aumentar las tensiones en la región y en el ámbito global tras la violación de su espacio aéreo. Según las autoridades estonias, un dron ruso ingresó sin autorización en su territorio, lo que ha generado preocupaciones sobre la seguridad y la estabilidad en la región. Este incidente se produce en un contexto de creciente tensión entre Rusia y los países de la OTAN, lo que ha llevado a Estonia a solicitar un mayor apoyo y vigilancia militar por parte de la Alianza. ▼</h2></div>
+			<div class="contenido">
+				<p>Estonia ha acusado a Rusia de aumentar las tensiones en la región y en el ámbito global tras la violación de su espacio aéreo. Según las autoridades estonias, un dron ruso ingresó sin autorización en su territorio, lo que ha generado preocupaciones sobre la seguridad y la estabilidad en la región. Este incidente se produce en un contexto de creciente tensión entre Rusia y los países de la OTAN, lo que ha llevado a Estonia a solicitar un mayor apoyo y vigilancia militar por parte de la Alianza.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Líderes mundiales se reúnen en Nueva York para impulsar el reconocimiento del estado palestino</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqxLFeIsC-phBfM76XO7flDuukOg2-kdyG3djaR3V4w0bL8w3pjL0BaVCYng&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Líderes globales se reunirán en Nueva York para promover el reconocimiento del estado palestino. Este encuentro se llevará a cabo en un contexto de creciente apoyo internacional hacia la causa palestina. Funcionarios de diversas naciones discutirán estrategias y medidas para impulsar el reconocimiento formal de Palestina en el ámbito internacional, destacando la importancia de la cooperación y el diálogo en la búsqueda de una solución pacífica al conflicto en la región. La reunión es parte de un esfuerzo continuo para elevar la visibilidad y legitimidad del estado palestino en la arena mundial. ▼</h2></div>
+			<div class="contenido">
+				<p>Líderes globales se reunirán en Nueva York para promover el reconocimiento del estado palestino. Este encuentro se llevará a cabo en un contexto de creciente apoyo internacional hacia la causa palestina. Funcionarios de diversas naciones discutirán estrategias y medidas para impulsar el reconocimiento formal de Palestina en el ámbito internacional, destacando la importancia de la cooperación y el diálogo en la búsqueda de una solución pacífica al conflicto en la región. La reunión es parte de un esfuerzo continuo para elevar la visibilidad y legitimidad del estado palestino en la arena mundial.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Trump pidió a la OTAN que detenga compras de petróleo ruso antes de nuevas sanciones de EE.UU.</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7JDm3pXonbMveMwPw_Zz8AU7RPeURC1sgm7dMJSqaGDG3Y-Wh8N-4KQnno6g&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Donald Trump instó a las naciones de la OTAN a cesar la compra de petróleo ruso antes de que Estados Unidos implemente nuevas sanciones contra Moscú. Esta medida busca aumentar la presión sobre Rusia debido a su agresión en Ucrania. La propuesta de Trump se enmarca en un esfuerzo más amplio por parte de Estados Unidos y sus aliados para reducir la dependencia energética de Rusia y al mismo tiempo debilitar su economía. ▼</h2></div>
+			<div class="contenido">
+				<p>Donald Trump instó a las naciones de la OTAN a cesar la compra de petróleo ruso antes de que Estados Unidos implemente nuevas sanciones contra Moscú. Esta medida busca aumentar la presión sobre Rusia debido a su agresión en Ucrania. La propuesta de Trump se enmarca en un esfuerzo más amplio por parte de Estados Unidos y sus aliados para reducir la dependencia energética de Rusia y al mismo tiempo debilitar su economía.</p>
+			</div>
+		</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publiciteLite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>La última disputa entre Lionel Messi y Cristiano Ronaldo por el Super Balón de Oro</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgZ45xtET5hAHZgn8gfFH0zvUplV__yzyypfIv0oPxFlVFh9mwHFhsGBvx4fI&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Lionel Messi y Cristiano Ronaldo están en medio de una nueva controversia relacionada con el Super Balón de Oro, premio que se entregará en octubre de 2025. Este galardón es exclusivo para aquellos jugadores que hayan ganado el Balón de Oro en al menos tres ocasiones, y en esta edición se revelará al futbolista con mayor trayectoria y éxito en la última década. Messi, quien ha ganado el Balón de Oro en siete ocasiones, es considerado el favorito para recibir este reconocimiento. La entrega del Super Balón de Oro está generando un gran interés y especulación en el mundo del fútbol, especialmente en la posible comparación entre ambos jugadores, que han dominado la escena futbolística durante años. ▼</h2></div>
+			<div class="contenido">
+				<p>Lionel Messi y Cristiano Ronaldo están en medio de una nueva controversia relacionada con el Super Balón de Oro, premio que se entregará en octubre de 2025. Este galardón es exclusivo para aquellos jugadores que hayan ganado el Balón de Oro en al menos tres ocasiones, y en esta edición se revelará al futbolista con mayor trayectoria y éxito en la última década. Messi, quien ha ganado el Balón de Oro en siete ocasiones, es considerado el favorito para recibir este reconocimiento. La entrega del Super Balón de Oro está generando un gran interés y especulación en el mundo del fútbol, especialmente en la posible comparación entre ambos jugadores, que han dominado la escena futbolística durante años.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>El Papa León XIV llamó a reflexionar sobre el hambre y sed de justicia en el mundo</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTTwzXfqZ1rT1U1CmPjhm2EAhxxf_LYxfDwzwmQp2Pbcm6pNetlE8NS7wYR14&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El Papa León XIV hizo un llamado a la reflexión sobre la situación de los países que enfrentan hambre y una falta de justicia. En su mensaje, el pontífice destacó la urgencia de abordar estas problemáticas, subrayando la necesidad de actuar para garantizar derechos fundamentales y promover el bienestar de todas las personas. Además, hizo hincapié en la importancia de la solidaridad y la responsabilidad compartida de la comunidad internacional para combatir estas injusticias. ▼</h2></div>
+			<div class="contenido">
+				<p>El Papa León XIV hizo un llamado a la reflexión sobre la situación de los países que enfrentan hambre y una falta de justicia. En su mensaje, el pontífice destacó la urgencia de abordar estas problemáticas, subrayando la necesidad de actuar para garantizar derechos fundamentales y promover el bienestar de todas las personas. Además, hizo hincapié en la importancia de la solidaridad y la responsabilidad compartida de la comunidad internacional para combatir estas injusticias.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1></h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUubF69NM2IF9U1SwPI76mGwrKFdXNxNT98ez1ox_Pt6lu9797CyOb45-_pSA&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Una mujer que trabajaba como contadora fue arrestada por su intento fallido de disparar contra un presidente. Se reveló que había actuado como informante del FBI, con la esperanza de que el asesinato pudiera provocar una revolución. La historia destaca sus motivaciones y el contexto en el que se produjo el incidente. La mujer enfrentó cargos graves y su caso ha despertado inquietudes sobre la seguridad presidencial y las implicaciones de sus acciones. ▼</h2></div>
+			<div class="contenido">
+				<p>Una mujer que trabajaba como contadora fue arrestada por su intento fallido de disparar contra un presidente. Se reveló que había actuado como informante del FBI, con la esperanza de que el asesinato pudiera provocar una revolución. La historia destaca sus motivaciones y el contexto en el que se produjo el incidente. La mujer enfrentó cargos graves y su caso ha despertado inquietudes sobre la seguridad presidencial y las implicaciones de sus acciones.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Informe de la misión internacional de la ONU revela represión y crímenes de lesa humanidad en Venezuela</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3ZKYlNCbO640ozmkuKsjjMocBCW9Dsqbou1sUldcUInMRHbr0WUcsBk_vHA&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2> ▼</h2></div>
+			<div class="contenido">
+				<p></p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Defensa de Luigi Mangione solicita desestimación de la pena de muerte</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlOtExoKDry8sh2P58pU2gpfyvzLM3hx0WKUEWupJ6iaf0z4znspr7Q0hFPA&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La defensa de Luigi Mangione ha presentado una moción para desestimar la pena de muerte en su caso, argumentando que no se han cumplido con ciertos requisitos legales y constitucionales. Mangione enfrenta cargos graves que podrían llevar a la ejecución, pero sus abogados sostienen que hay fundamentos suficientes para cuestionar el proceso penal. La audiencia sobre esta moción se programará en las próximas semanas, lo que podría influir significativamente en el rumbo del juicio. ▼</h2></div>
+			<div class="contenido">
+				<p>La defensa de Luigi Mangione ha presentado una moción para desestimar la pena de muerte en su caso, argumentando que no se han cumplido con ciertos requisitos legales y constitucionales. Mangione enfrenta cargos graves que podrían llevar a la ejecución, pero sus abogados sostienen que hay fundamentos suficientes para cuestionar el proceso penal. La audiencia sobre esta moción se programará en las próximas semanas, lo que podría influir significativamente en el rumbo del juicio.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1></h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDqiSycOkAnVEGr2NdEVLIJB9roSk4uVXZ9lSFbanNkCZjwsj7C9KkYxksOY0&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El artículo analiza la historia de Ted Kaczynski, conocido como Unabomber, quien fue capturado por una serie de atentados con bomba que llevó a cabo entre 1978 y 1995. Se destaca que su arresto se debió en gran parte a un manifiesto que escribió, el cual fue publicado en varios medios y ayudó a las autoridades a identificarlo. Además, se menciona la relación de Kaczynski con su hermano, quien lo reconoció a partir del contenido del manifiesto y alertó al FBI. Esta historia refleja temas de aislamiento y radicalización, así como el impacto de su ideología antitecnológica en su vida y acciones. El artículo también examina cómo estos eventos han influido en las discusiones sobre la violencia y el terrorismo doméstico en la sociedad contemporánea. ▼</h2></div>
+			<div class="contenido">
+				<p>El artículo analiza la historia de Ted Kaczynski, conocido como Unabomber, quien fue capturado por una serie de atentados con bomba que llevó a cabo entre 1978 y 1995. Se destaca que su arresto se debió en gran parte a un manifiesto que escribió, el cual fue publicado en varios medios y ayudó a las autoridades a identificarlo. Además, se menciona la relación de Kaczynski con su hermano, quien lo reconoció a partir del contenido del manifiesto y alertó al FBI. Esta historia refleja temas de aislamiento y radicalización, así como el impacto de su ideología antitecnológica en su vida y acciones. El artículo también examina cómo estos eventos han influido en las discusiones sobre la violencia y el terrorismo doméstico en la sociedad contemporánea.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Supertifón Ragasa avanza en el Pacífico y provoca alertas en Taiwán y evacuaciones en Filipinas</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxN2DDCxSYsNJpnjzNTD6S8Zfy8M6AR2GHsRiZJolDalDe-LhYopTyomCvrGE&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El supertifón Ragasa se desplaza por el océano Pacífico, lo que ha llevado a Taiwán a emitir una alerta marítima. En Filipinas, se han ordenado evacuaciones preventivas en las áreas que podrían verse afectadas por el fenómeno meteorológico. Las autoridades están tomando medidas debido a la magnitud y la trayectoria del tifón, que presenta un alto riesgo para la región. ▼</h2></div>
+			<div class="contenido">
+				<p>El supertifón Ragasa se desplaza por el océano Pacífico, lo que ha llevado a Taiwán a emitir una alerta marítima. En Filipinas, se han ordenado evacuaciones preventivas en las áreas que podrían verse afectadas por el fenómeno meteorológico. Las autoridades están tomando medidas debido a la magnitud y la trayectoria del tifón, que presenta un alto riesgo para la región.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Zelensky anunciará reunión con Trump en la ONU la próxima semana</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQE5UJi7qm-5nkNwfIwYAABFCMBaofvrUVyIjk8dlC2g4nST3tLkpkw7wIBrNQ&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El presidente de Ucrania, Volodímir Zelensky, anunció que se reunirá con el expresidente de Estados Unidos, Donald Trump, durante su asistencia a la Asamblea General de la ONU la próxima semana. Zelensky espera discutir temas relacionados con la cooperación entre Ucrania y EE.UU., así como la situación de seguridad en su país frente a la invasión rusa. Esta reunión se produce en un contexto de creciente interés internacional por el conflicto y la participación de Estados Unidos en el apoyo a Ucrania. ▼</h2></div>
+			<div class="contenido">
+				<p>El presidente de Ucrania, Volodímir Zelensky, anunció que se reunirá con el expresidente de Estados Unidos, Donald Trump, durante su asistencia a la Asamblea General de la ONU la próxima semana. Zelensky espera discutir temas relacionados con la cooperación entre Ucrania y EE.UU., así como la situación de seguridad en su país frente a la invasión rusa. Esta reunión se produce en un contexto de creciente interés internacional por el conflicto y la participación de Estados Unidos en el apoyo a Ucrania.</p>
+			</div>
+		</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publiciteLite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Maduro envía carta a Trump rechazando acusaciones de narcotráfico y proponiendo diálogo</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFUMbE1ZfgmAIZNcBzc8MHLjxziscmydM48D7c8-Lg6LKtK1c20fYX3ftNZ8Y&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El presidente de Venezuela, Nicolás Maduro, envió una carta al expresidente Donald Trump en medio de tensiones diplomáticas entre ambos países. En la misiva, Maduro rechazó las acusaciones de narcotráfico que han sido dirigidas contra él y su gobierno. Además, propuso la posibilidad de abrir un canal de diálogo para mejorar las relaciones. Esta comunicación ocurre en un contexto de crisis política y social en Venezuela y un fuerte enfrentamiento con Estados Unidos. ▼</h2></div>
+			<div class="contenido">
+				<p>El presidente de Venezuela, Nicolás Maduro, envió una carta al expresidente Donald Trump en medio de tensiones diplomáticas entre ambos países. En la misiva, Maduro rechazó las acusaciones de narcotráfico que han sido dirigidas contra él y su gobierno. Además, propuso la posibilidad de abrir un canal de diálogo para mejorar las relaciones. Esta comunicación ocurre en un contexto de crisis política y social en Venezuela y un fuerte enfrentamiento con Estados Unidos.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Reino Unido, Canadá y Australia reconocen formalmente al Estado palestino</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQc41886EscEzqEJrkcqjuhy92P7sakWzx4QtSIGxcKmp2MAQRaKw_0VbD1-A&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El Reino Unido, Canadá y Australia han reconocido formalmente al Estado de Palestina ante la comunidad internacional. Esta decisión marca un cambio significativo en la postura de estos países respecto al reconocimiento palestino. La medida se produce en un contexto de tensiones en el Medio Oriente y refleja un creciente apoyo a la causa palestina en la arena global. Las autoridades palestinas han expresado su satisfacción por esta acción, interpretándola como un respaldo a sus aspiraciones nacionales. ▼</h2></div>
+			<div class="contenido">
+				<p>El Reino Unido, Canadá y Australia han reconocido formalmente al Estado de Palestina ante la comunidad internacional. Esta decisión marca un cambio significativo en la postura de estos países respecto al reconocimiento palestino. La medida se produce en un contexto de tensiones en el Medio Oriente y refleja un creciente apoyo a la causa palestina en la arena global. Las autoridades palestinas han expresado su satisfacción por esta acción, interpretándola como un respaldo a sus aspiraciones nacionales.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Arquero expulsado en Paraguay por conducta antideportiva</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSI0kjxbpqeefLUgC5RTqeSNvGNvMGcyKRBkn7jvCznhw7Ri04Os6YRKx3JbAo&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>En un reciente partido de la liga paraguaya, un arquero fue expulsado por una actitud considerada extremadamente poco profesional. Durante el encuentro, el jugador reaccionó de manera desmesurada y fuera de lugar, lo que llevó al árbitro a tomar la decisión de retirarlo del campo. Este acto ha generado polémica y ha sido criticado por aficionados y analistas, quienes destacan la importancia de mantener la deportividad en el deporte. ▼</h2></div>
+			<div class="contenido">
+				<p>En un reciente partido de la liga paraguaya, un arquero fue expulsado por una actitud considerada extremadamente poco profesional. Durante el encuentro, el jugador reaccionó de manera desmesurada y fuera de lugar, lo que llevó al árbitro a tomar la decisión de retirarlo del campo. Este acto ha generado polémica y ha sido criticado por aficionados y analistas, quienes destacan la importancia de mantener la deportividad en el deporte.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>La UE y países latinoamericanos condenan la represión en Venezuela tras informe de la ONU</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRL2JlukrLy3ZIbGuCo1w1CEuSAQC6nFBbfft1wkbZC-oK8QrnXXwheolJNFs&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La Unión Europea y varios países de América Latina han expresado su condena ante la creciente represión en Venezuela, a raíz de un informe reciente de la ONU que documenta violaciones a los derechos humanos en el país. La comunidad internacional ha instado a las autoridades venezolanas a cesar las detenciones arbitrarias y la violencia contra opositores políticos. Este informe detalla casos de torturas, desapariciones forzadas y otras formas de abusos cometidos por el régimen venezolano. La condena se produce en un contexto de crisis política y económica que afecta a la población venezolana. ▼</h2></div>
+			<div class="contenido">
+				<p>La Unión Europea y varios países de América Latina han expresado su condena ante la creciente represión en Venezuela, a raíz de un informe reciente de la ONU que documenta violaciones a los derechos humanos en el país. La comunidad internacional ha instado a las autoridades venezolanas a cesar las detenciones arbitrarias y la violencia contra opositores políticos. Este informe detalla casos de torturas, desapariciones forzadas y otras formas de abusos cometidos por el régimen venezolano. La condena se produce en un contexto de crisis política y económica que afecta a la población venezolana.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>La ONU denuncia un patrón sistemático de detenciones a familiares de opositores en Venezuela</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmWE3Wnh8FiVqxe-X40WefW3IBTcSP5QtuI82NHkx8WouNYCwEEk-oeUB1_Q&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La Misión de la ONU en Venezuela ha denunciado un patrón sistemático de detenciones de familiares de opositores al gobierno. Este enfoque busca crear un clima de miedo y ejercer control social sobre la población. La situación refleja una intensificación de la represión en el país, donde las acciones del gobierno están dirigidas a silenciar a la disidencia y afectar a sus allegados. La ONU resalta la necesidad de tomar medidas para proteger los derechos humanos y frenar estas prácticas abusivas. ▼</h2></div>
+			<div class="contenido">
+				<p>La Misión de la ONU en Venezuela ha denunciado un patrón sistemático de detenciones de familiares de opositores al gobierno. Este enfoque busca crear un clima de miedo y ejercer control social sobre la población. La situación refleja una intensificación de la represión en el país, donde las acciones del gobierno están dirigidas a silenciar a la disidencia y afectar a sus allegados. La ONU resalta la necesidad de tomar medidas para proteger los derechos humanos y frenar estas prácticas abusivas.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1></h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1kc2fYug6yocSS-Px9X6jGVBw6p6Ife32OSxiPrlPsZyG3Gexg8T6z1Wxzvg&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>En una reciente carrera de Fórmula 2, se produjo un grave accidente tras un despiste de un piloto que, al regresar al circuito sin percatarse de otro competidor en la pista, colisionó de manera violenta. Este incidente ha generado inquietud entre los aficionados y los organizadores del evento, quienes expresaron su sorpresa por la gravedad de la situación. Los involucrados en el accidente recibieron atención médica, aunque se destacó que no hubo consecuencias fatales. La carrera reavivó el debate sobre la seguridad en las competiciones de automovilismo. ▼</h2></div>
+			<div class="contenido">
+				<p>En una reciente carrera de Fórmula 2, se produjo un grave accidente tras un despiste de un piloto que, al regresar al circuito sin percatarse de otro competidor en la pista, colisionó de manera violenta. Este incidente ha generado inquietud entre los aficionados y los organizadores del evento, quienes expresaron su sorpresa por la gravedad de la situación. Los involucrados en el accidente recibieron atención médica, aunque se destacó que no hubo consecuencias fatales. La carrera reavivó el debate sobre la seguridad en las competiciones de automovilismo.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Polémica por filtración de supuesta lista de ganadores del Balón de Oro y respuesta de la organización</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVpxAIuD8qITqapaDssCvtn2UDEgwzaEVeSMYlqatS2as6gSKuJlQsKlLVlB4&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La noticia aborda la controversia surgida a raíz de la filtración de una supuesta lista de ganadores del Balón de Oro. La organización del galardón ha respondido a estas filtraciones asegurando que la información no es oficial y que el anuncio de los ganadores se realizará de manera formal en la fecha estipulada. La situación ha generado debate entre los aficionados y expertos del fútbol, quienes especulan sobre la veracidad de la lista y los posibles ganadores. La filtración ha puesto en el centro de la atención la integridad del proceso de selección del Balón de Oro. ▼</h2></div>
+			<div class="contenido">
+				<p>La noticia aborda la controversia surgida a raíz de la filtración de una supuesta lista de ganadores del Balón de Oro. La organización del galardón ha respondido a estas filtraciones asegurando que la información no es oficial y que el anuncio de los ganadores se realizará de manera formal en la fecha estipulada. La situación ha generado debate entre los aficionados y expertos del fútbol, quienes especulan sobre la veracidad de la lista y los posibles ganadores. La filtración ha puesto en el centro de la atención la integridad del proceso de selección del Balón de Oro.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>OCP Tech inauguró sus oficinas en Paraguay con la presencia del presidente Santiago Peña</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFa8woO-LrFTRzOBnX8MRtgPS7wMk8027iwLRm5X3JBzcreUSem0ZuZzRtvQ&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El presidente de Paraguay, Santiago Peña, estuvo presente en la inauguración de las nuevas oficinas de OCP Tech en el país. La empresa, dedicada a la tecnología de la información, busca fortalecer su presencia en el mercado local y potenciar la digitalización en diversas industrias. Durante el evento, se destacó la importancia de la inversión en tecnología para el desarrollo económico y social de Paraguay. Además, se mencionó que OCP Tech tiene planes de expansión y colaboración con otras empresas para impulsar la innovación en el sector. ▼</h2></div>
+			<div class="contenido">
+				<p>El presidente de Paraguay, Santiago Peña, estuvo presente en la inauguración de las nuevas oficinas de OCP Tech en el país. La empresa, dedicada a la tecnología de la información, busca fortalecer su presencia en el mercado local y potenciar la digitalización en diversas industrias. Durante el evento, se destacó la importancia de la inversión en tecnología para el desarrollo económico y social de Paraguay. Además, se mencionó que OCP Tech tiene planes de expansión y colaboración con otras empresas para impulsar la innovación en el sector.</p>
+			</div>
+		</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publiciteLite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Estados Unidos y Reino Unido firman histórica alianza nuclear y tecnológica con inversión de 205 mil millones de dólares</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGtQ1R66WtgnRGXuv1bphQNUC83RCge3wfdXgOAH0h53tQn1-br4GGISkStYM&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Estados Unidos y el Reino Unido han establecido una nueva colaboración significativa centrada en tecnologías nucleares y de defensa, la cual incluye una inversión de 205 mil millones de dólares. Esta alianza busca fortalecer las capacidades militares y reforzar la seguridad en un contexto internacional cada vez más complejo. Los líderes de ambos países han resaltado la importancia de esta asociación a largo plazo, que también se extiende a áreas como la inteligencia y la investigación tecnológica. La cooperación tiene como objetivo enfrentar desafíos globales y consolidar la influencia de ambos países en el ámbito geopolítico. ▼</h2></div>
+			<div class="contenido">
+				<p>Estados Unidos y el Reino Unido han establecido una nueva colaboración significativa centrada en tecnologías nucleares y de defensa, la cual incluye una inversión de 205 mil millones de dólares. Esta alianza busca fortalecer las capacidades militares y reforzar la seguridad en un contexto internacional cada vez más complejo. Los líderes de ambos países han resaltado la importancia de esta asociación a largo plazo, que también se extiende a áreas como la inteligencia y la investigación tecnológica. La cooperación tiene como objetivo enfrentar desafíos globales y consolidar la influencia de ambos países en el ámbito geopolítico.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Emiratos Árabes Unidos recibe a 119 heridos y enfermos de Gaza para tratamiento médico</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmLiJUh9CtkQiwle0yeIvbxtLvnY1Y6i7HrZJVCC4rFApDaMvUMnRJk18llj0&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Emiratos Árabes Unidos ha recibido a 119 heridos y enfermos de Gaza con el objetivo de ofrecerles atención médica. Este grupo incluye a personas con diversas lesiones y condiciones de salud afectadas por el conflicto en la región. La iniciativa forma parte de los esfuerzos del país para brindar asistencia humanitaria y se realiza en colaboración con organizaciones internacionales que operan en la zona. Los pacientes han sido trasladados a hospitales en emiratos, donde recibirán tratamiento especializado. ▼</h2></div>
+			<div class="contenido">
+				<p>Emiratos Árabes Unidos ha recibido a 119 heridos y enfermos de Gaza con el objetivo de ofrecerles atención médica. Este grupo incluye a personas con diversas lesiones y condiciones de salud afectadas por el conflicto en la región. La iniciativa forma parte de los esfuerzos del país para brindar asistencia humanitaria y se realiza en colaboración con organizaciones internacionales que operan en la zona. Los pacientes han sido trasladados a hospitales en emiratos, donde recibirán tratamiento especializado.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Inter Miami de Messi busca avanzar hacia los playoffs de la MLS ante DC United</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8_YWyQPISZ8diVijnqQXLvuUus-_vm0qthuKg0rbcJxnIcnp4nvuJAGtzLg0&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El Inter Miami, equipo en el que juega Lionel Messi, se enfrenta a DC United con el objetivo de acercarse a los playoffs de la MLS. El partido se llevará a cabo en el DRV PNK Stadium y es crucial para las aspiraciones del equipo en la liga. Messi y sus compañeros buscan sumar puntos importantes en la recta final de la temporada. La transmisión del encuentro se realizará por televisión, y se espera una gran asistencia de aficionados. Las alineaciones de ambos equipos son un aspecto a tener en cuenta antes del inicio del juego. ▼</h2></div>
+			<div class="contenido">
+				<p>El Inter Miami, equipo en el que juega Lionel Messi, se enfrenta a DC United con el objetivo de acercarse a los playoffs de la MLS. El partido se llevará a cabo en el DRV PNK Stadium y es crucial para las aspiraciones del equipo en la liga. Messi y sus compañeros buscan sumar puntos importantes en la recta final de la temporada. La transmisión del encuentro se realizará por televisión, y se espera una gran asistencia de aficionados. Las alineaciones de ambos equipos son un aspecto a tener en cuenta antes del inicio del juego.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Bomba de la Segunda Guerra Mundial causa desalojo masivo en el centro de Berlín</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5raqLW3ZniAoVpXsAjY-poqRMYzTEXqr72YLKq-h0a5nqjgUINPFrlkqKRw&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Una bomba de la Segunda Guerra Mundial fue descubierta en el centro de Berlín, lo que condujo a un desalojo masivo de residentes y turistas en la zona. Las autoridades locales evacuaron a aproximadamente 2,000 personas del área circundante debido al riesgo de explosión. La operación de desactivación de la bomba se llevó a cabo con personal especializado. Este tipo de descubrimientos no son infrecuentes en Alemania, donde muchas bombas del conflicto aún permanecen sin desactivar. Las autoridades informaron que se esperan interrupciones en el tráfico y la actividad comercial mientras continúan las labores de desactivación. ▼</h2></div>
+			<div class="contenido">
+				<p>Una bomba de la Segunda Guerra Mundial fue descubierta en el centro de Berlín, lo que condujo a un desalojo masivo de residentes y turistas en la zona. Las autoridades locales evacuaron a aproximadamente 2,000 personas del área circundante debido al riesgo de explosión. La operación de desactivación de la bomba se llevó a cabo con personal especializado. Este tipo de descubrimientos no son infrecuentes en Alemania, donde muchas bombas del conflicto aún permanecen sin desactivar. Las autoridades informaron que se esperan interrupciones en el tráfico y la actividad comercial mientras continúan las labores de desactivación.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Mahmud Abbas destaca que el reconocimiento del Reino Unido al Estado de Palestina conducirá a una paz duradera en la región</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnmv0juMSF2Vio6t5kOAmdYqEJEBBB2fhe1LxQ8ZWRMtsmpkaPUSnKPCfLJw&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Mahmoud Abbas, presidente de la Autoridad Nacional Palestina, expresó que el reconocimiento del Reino Unido al Estado de Palestina es un paso significativo hacia una paz duradera en la región. Abbas destacó la importancia de este reconocimiento para fomentar la estabilidad y la convivencia entre israelíes y palestinos. Asimismo, hizo un llamado a otros países para que sigan el ejemplo del Reino Unido y reconozcan a Palestina como estado. Este pronunciamiento llega en un contexto de creciente atención internacional hacia el conflicto en Medio Oriente y las aspiraciones de los palestinos. ▼</h2></div>
+			<div class="contenido">
+				<p>Mahmoud Abbas, presidente de la Autoridad Nacional Palestina, expresó que el reconocimiento del Reino Unido al Estado de Palestina es un paso significativo hacia una paz duradera en la región. Abbas destacó la importancia de este reconocimiento para fomentar la estabilidad y la convivencia entre israelíes y palestinos. Asimismo, hizo un llamado a otros países para que sigan el ejemplo del Reino Unido y reconozcan a Palestina como estado. Este pronunciamiento llega en un contexto de creciente atención internacional hacia el conflicto en Medio Oriente y las aspiraciones de los palestinos.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>California prohíbe que la mayoría de las fuerzas de seguridad se cubran el rostro durante operativos</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0MoFyxXVRxatTK_rIEeAU9vuVWq4KgWv1_2GB4363EoQ-5KfgA5uZT7t38Q&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>California ha implementado una nueva normativa que prohíbe a la mayoría de las fuerzas de seguridad cubrirse el rostro durante las operaciones. Esta medida busca aumentar la transparencia y la rendición de cuentas en la actuación policial. Sin embargo, algunas excepciones se mantienen para situaciones que involucren amenazas inminentes o cuando la protección de la identidad de los agentes sea necesaria. Esta decisión refleja un esfuerzo por mejorar la confianza entre la comunidad y las autoridades. ▼</h2></div>
+			<div class="contenido">
+				<p>California ha implementado una nueva normativa que prohíbe a la mayoría de las fuerzas de seguridad cubrirse el rostro durante las operaciones. Esta medida busca aumentar la transparencia y la rendición de cuentas en la actuación policial. Sin embargo, algunas excepciones se mantienen para situaciones que involucren amenazas inminentes o cuando la protección de la identidad de los agentes sea necesaria. Esta decisión refleja un esfuerzo por mejorar la confianza entre la comunidad y las autoridades.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Portugal reconoció formalmente al Estado de Palestina</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbV0Vv6XPAhQTG4r-_7SsrkF643PCDVM1hD8xHxoF9bLfDmMpJe4zI0fh0ew&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Portugal ha formalizado su reconocimiento del Estado de Palestina, convirtiéndose en el primer país de la Unión Europea en dar este paso. La decisión fue anunciada por el gobierno portugués, que sostiene que el reconocimiento busca contribuir a un proceso de paz duradero en el conflicto israelo-palestino. La medida también se enmarca en el compromiso de Portugal con la defensa de los derechos humanos y la autodeterminación de los pueblos. Además, se destaca que este reconocimiento se realiza con la esperanza de impulsar las negociaciones hacia una solución justa y viable para ambas partes. ▼</h2></div>
+			<div class="contenido">
+				<p>Portugal ha formalizado su reconocimiento del Estado de Palestina, convirtiéndose en el primer país de la Unión Europea en dar este paso. La decisión fue anunciada por el gobierno portugués, que sostiene que el reconocimiento busca contribuir a un proceso de paz duradero en el conflicto israelo-palestino. La medida también se enmarca en el compromiso de Portugal con la defensa de los derechos humanos y la autodeterminación de los pueblos. Además, se destaca que este reconocimiento se realiza con la esperanza de impulsar las negociaciones hacia una solución justa y viable para ambas partes.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Trump y Musk se reencontraron en el funeral de Charlie Kirk</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4JuDSLdgHVRbNC3WTjJ9eC3SyghaWXbCUnTIF2hAXXRaxXlJKO-V2B8lHUw&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Donald Trump y Elon Musk se encontraron recientemente en el funeral de Charlie Kirk. Durante el evento, ambos líderes se saludaron con un apretón de manos y mantuvieron una conversación. Este encuentro ha generado atención dada la relevancia de ambos personajes en el ámbito político y tecnológico. ▼</h2></div>
+			<div class="contenido">
+				<p>Donald Trump y Elon Musk se encontraron recientemente en el funeral de Charlie Kirk. Durante el evento, ambos líderes se saludaron con un apretón de manos y mantuvieron una conversación. Este encuentro ha generado atención dada la relevancia de ambos personajes en el ámbito político y tecnológico.</p>
+			</div>
+		</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publiciteLite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Recuperan dos pinturas robadas por los nazis tras 80 años</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJWRhAsG1nszAi3budx4FPKgWg6UeTg276NoGsAzuWZHX59qZMYl7uPnEACGI&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Dos pinturas que habían sido robadas por los nazis durante la Segunda Guerra Mundial han sido recuperadas tras más de 80 años. Las obras, que pertenecen a un coleccionista judío, fueron localizadas en Alemania y devolverán a la familia de su propietario original. Las pinturas forman parte de una mayor investigación sobre la restitución de bienes culturales que fueron saqueados durante el conflicto. Este caso resalta el continuo esfuerzo por restituir el arte robado y recuperar el patrimonio cultural afectado por la guerra. ▼</h2></div>
+			<div class="contenido">
+				<p>Dos pinturas que habían sido robadas por los nazis durante la Segunda Guerra Mundial han sido recuperadas tras más de 80 años. Las obras, que pertenecen a un coleccionista judío, fueron localizadas en Alemania y devolverán a la familia de su propietario original. Las pinturas forman parte de una mayor investigación sobre la restitución de bienes culturales que fueron saqueados durante el conflicto. Este caso resalta el continuo esfuerzo por restituir el arte robado y recuperar el patrimonio cultural afectado por la guerra.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>El régimen talibán prohíbe libros escritos por mujeres en universidades de Afganistán</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYEGAlCl0k2L0061bVUYTcXtA5LxV-mj8IMh-kKo7gC8aQcW7i27DXGT3RCA&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El régimen talibán ha impuesto una nueva prohibición en Afganistán al ordenar que no se utilicen libros escritos por mujeres en las universidades. Esta medida forma parte de una serie de restricciones que han afectado la educación y los derechos de las mujeres en el país desde que los talibanes retomaron el poder en agosto de 2021. La decisión ha suscitado condenas tanto a nivel nacional como internacional, destacando la creciente discriminación hacia las mujeres en diversos ámbitos, incluido el acceso a una educación superior. ▼</h2></div>
+			<div class="contenido">
+				<p>El régimen talibán ha impuesto una nueva prohibición en Afganistán al ordenar que no se utilicen libros escritos por mujeres en las universidades. Esta medida forma parte de una serie de restricciones que han afectado la educación y los derechos de las mujeres en el país desde que los talibanes retomaron el poder en agosto de 2021. La decisión ha suscitado condenas tanto a nivel nacional como internacional, destacando la creciente discriminación hacia las mujeres en diversos ámbitos, incluido el acceso a una educación superior.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Ucrania sancionará a funcionarios y figuras de Moldavia por ser propagandistas del Kremlin</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHp2BuTFuTN5xFhOrdbrj6b9zlgfzXH0w18MC6NCIDwvkjecbRH7wwirnLIqo&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Ucrania ha decidido imponer sanciones a varios funcionarios y figuras de Moldavia, a quienes considera propagandistas del Kremlin. Esta medida responde a la percepción de que estas personas están promoviendo los intereses de Rusia en la región. Las sanciones forman parte de una estrategia más amplia de Ucrania para contrarrestar la influencia rusa y proteger su soberanía. ▼</h2></div>
+			<div class="contenido">
+				<p>Ucrania ha decidido imponer sanciones a varios funcionarios y figuras de Moldavia, a quienes considera propagandistas del Kremlin. Esta medida responde a la percepción de que estas personas están promoviendo los intereses de Rusia en la región. Las sanciones forman parte de una estrategia más amplia de Ucrania para contrarrestar la influencia rusa y proteger su soberanía.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Corte Constitucional de Ecuador evaluará referendo impulsado por Noboa para convocar una asamblea constituyente</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTefbm1qb76wQfbjSybIuoS5NelsTZ6zkERl9dj7mSsA7PyLF1QaYTtjscbMN0&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La Corte Constitucional de Ecuador comenzará a analizar un referendo promovido por el presidente Daniel Noboa, que busca la convocatoria de una asamblea constituyente. Esta iniciativa tiene como objetivo reformar la Constitución, y la Corte debe determinar la legalidad del referendo antes de que sea sometido a votación. Noboa ha manifestado su deseo de realizar cambios significativos en el país, lo que ha generado diversas opiniones entre la ciudadanía y los distintos sectores políticos. La decisión de la Corte es crucial para avanzar con la propuesta. ▼</h2></div>
+			<div class="contenido">
+				<p>La Corte Constitucional de Ecuador comenzará a analizar un referendo promovido por el presidente Daniel Noboa, que busca la convocatoria de una asamblea constituyente. Esta iniciativa tiene como objetivo reformar la Constitución, y la Corte debe determinar la legalidad del referendo antes de que sea sometido a votación. Noboa ha manifestado su deseo de realizar cambios significativos en el país, lo que ha generado diversas opiniones entre la ciudadanía y los distintos sectores políticos. La decisión de la Corte es crucial para avanzar con la propuesta.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Así quedaron las tablas de la F1 tras el GP de Azerbaiyán: se pospuso el título de McLaren y Verstappen sueña con dar pelea</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTogsy0yQGgSRWgzdM6MVkdVlsI26MHELySjRAFM1-Jbm9GwF5IMSHqQK1c&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El Gran Premio de Azerbaiyán ha dejado un impacto significativo en las clasificaciones de la Fórmula 1. Tras la carrera, las posiciones en las tablas de pilotos y constructores reflejan un emocionante cierre de temporada, donde McLaren tuvo que postergar la posibilidad de conseguir el campeonato. Max Verstappen, por su parte, se muestra optimista y busca competir fuertemente en los próximos eventos. A medida que avanza la temporada, la lucha por el título se intensifica, con varias escuderías en la contienda. ▼</h2></div>
+			<div class="contenido">
+				<p>El Gran Premio de Azerbaiyán ha dejado un impacto significativo en las clasificaciones de la Fórmula 1. Tras la carrera, las posiciones en las tablas de pilotos y constructores reflejan un emocionante cierre de temporada, donde McLaren tuvo que postergar la posibilidad de conseguir el campeonato. Max Verstappen, por su parte, se muestra optimista y busca competir fuertemente en los próximos eventos. A medida que avanza la temporada, la lucha por el título se intensifica, con varias escuderías en la contienda.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>La maldición de los ganadores del Balón de Oro antes de la Copa del Mundo</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFBdJBAq6gIjDyEqd6RQAF7beUGcPR45sV7UB9h8CeRDsRTiwNNPQDcbBRTA&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La noticia aborda la supuesta "maldición" que afecta a los ganadores del Balón de Oro en el año previo a una Copa del Mundo. A lo largo de la historia, varios jugadores que han sido reconocidos con este prestigioso premio han enfrentado decepciones o han tenido actuaciones por debajo de las expectativas en los torneos mundiales de fútbol. Se presentan ejemplos de futbolistas como Fabio Cannavaro, que tras recibir el Balón de Oro en 2006 tuvo dificultades en la Copa de ese año, así como otros casos que refuerzan esta narrativa. La noticia sugiere que este patrón podría influir en la preparación y rendimiento de los galardonados en la competición más importante del fútbol. ▼</h2></div>
+			<div class="contenido">
+				<p>La noticia aborda la supuesta "maldición" que afecta a los ganadores del Balón de Oro en el año previo a una Copa del Mundo. A lo largo de la historia, varios jugadores que han sido reconocidos con este prestigioso premio han enfrentado decepciones o han tenido actuaciones por debajo de las expectativas en los torneos mundiales de fútbol. Se presentan ejemplos de futbolistas como Fabio Cannavaro, que tras recibir el Balón de Oro en 2006 tuvo dificultades en la Copa de ese año, así como otros casos que refuerzan esta narrativa. La noticia sugiere que este patrón podría influir en la preparación y rendimiento de los galardonados en la competición más importante del fútbol.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>La viuda de Charlie Kirk perdona al hombre acusado de asesinarlo</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQf74lQF9q61aPK-J8U22B5YjqG40ormi-M1Dy73uC9EYOla2aJjQ8Kz2Soug&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La viuda de Charlie Kirk, un hombre asesinado recientemente, emitió un conmovedor mensaje dirigido al acusado del crimen, en el que expresó su perdón. En su declaración, manifestó su duelo y el dolor por la pérdida de su esposo, destacando la importancia del amor y el perdón en momentos difíciles. La noticia resalta la carga emocional que enfrenta la viuda, así como su decisión de optar por la compasión a pesar de la tragedia. La situación ha conmocionado a la comunidad y ha generado un amplio debate sobre la violencia y el perdón en situaciones de pérdida. ▼</h2></div>
+			<div class="contenido">
+				<p>La viuda de Charlie Kirk, un hombre asesinado recientemente, emitió un conmovedor mensaje dirigido al acusado del crimen, en el que expresó su perdón. En su declaración, manifestó su duelo y el dolor por la pérdida de su esposo, destacando la importancia del amor y el perdón en momentos difíciles. La noticia resalta la carga emocional que enfrenta la viuda, así como su decisión de optar por la compasión a pesar de la tragedia. La situación ha conmocionado a la comunidad y ha generado un amplio debate sobre la violencia y el perdón en situaciones de pérdida.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Impacto en el Inter Miami de Messi: una de sus figuras se retiraría a fin de año</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhNdCUrWpKd3iH8j0S3ySotO16iecX-LRXQXUxeubhXQ61S8WxmbZMikts2ZU&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Un jugador del Inter Miami, equipo donde milita Lionel Messi, planea retirarse a finales de este año. Esta decisión impactaría al club, que ha experimentado un aumento en su popularidad y rendimiento desde la llegada de la estrella argentina. La salida del futbolista es una preocupación para el equipo, que está en proceso de adaptación y crecimiento en la liga estadounidense. El futuro del Inter Miami se ve afectado por la posible partida de una de sus figuras clave, en medio de la euforia que ha generado la llegada de Messi. ▼</h2></div>
+			<div class="contenido">
+				<p>Un jugador del Inter Miami, equipo donde milita Lionel Messi, planea retirarse a finales de este año. Esta decisión impactaría al club, que ha experimentado un aumento en su popularidad y rendimiento desde la llegada de la estrella argentina. La salida del futbolista es una preocupación para el equipo, que está en proceso de adaptación y crecimiento en la liga estadounidense. El futuro del Inter Miami se ve afectado por la posible partida de una de sus figuras clave, en medio de la euforia que ha generado la llegada de Messi.</p>
+			</div>
+		</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publiciteLite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1></h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSknzPnxXMm2-r0GdYeukkGkn4pkUH9SipOo2ysiTeefFsoqFEnK3188ccGT6Y&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>YouTube ha eliminado la cuenta del presidente venezolano Nicolás Maduro. La decisión se debe a la violación de las políticas de la plataforma relacionadas con la desinformación, especialmente en lo que se refiere a la pandemia de COVID-19. La eliminación de la cuenta impide que Maduro utilice esta plataforma para difundir contenido que promueva teorías infundadas sobre la enfermedad. Esta medida se suma a acciones anteriores de otras redes sociales que también han restringido o eliminado cuentas asociadas al líder venezolano por razones similares. ▼</h2></div>
+			<div class="contenido">
+				<p>YouTube ha eliminado la cuenta del presidente venezolano Nicolás Maduro. La decisión se debe a la violación de las políticas de la plataforma relacionadas con la desinformación, especialmente en lo que se refiere a la pandemia de COVID-19. La eliminación de la cuenta impide que Maduro utilice esta plataforma para difundir contenido que promueva teorías infundadas sobre la enfermedad. Esta medida se suma a acciones anteriores de otras redes sociales que también han restringido o eliminado cuentas asociadas al líder venezolano por razones similares.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Reflexión del DT de Real Madrid tras el ataque de furia de Simeone a los hinchas de Liverpool en la Champions</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQF7ALR3cgmeE460NWuulJ2t60qAHkd8avIItBXrx19ijIAZjbC7QXZ7rEQHPs&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El director técnico del Real Madrid reflexionó sobre el reciente incidente protagonizado por Diego Simeone, quien mostró un enfático descontento hacia los hinchas del Liverpool tras la eliminación del Atlético de Madrid en la fase de grupos de la Champions League. El entrenador del Real Madrid destacó la importancia de mantener la calma y el respeto en situaciones de alta tensión. Este episodio ha suscitado debates sobre la relación entre los entrenadores, los aficionados y el manejo del estrés en competiciones importantes. ▼</h2></div>
+			<div class="contenido">
+				<p>El director técnico del Real Madrid reflexionó sobre el reciente incidente protagonizado por Diego Simeone, quien mostró un enfático descontento hacia los hinchas del Liverpool tras la eliminación del Atlético de Madrid en la fase de grupos de la Champions League. El entrenador del Real Madrid destacó la importancia de mantener la calma y el respeto en situaciones de alta tensión. Este episodio ha suscitado debates sobre la relación entre los entrenadores, los aficionados y el manejo del estrés en competiciones importantes.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Brigitte Macron mostrará fotografías para reafirmar su compromiso y claridad en sus decisiones.</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQm_vpQAVUWFx6_n9Q2c9I7GN7BIE2mOZWWuq0fq4QQ7UtLws99fvHN7fnMWQ&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Brigitte Macron, esposa del presidente francés Emmanuel Macron, ha decidido presentar fotografías que respaldan su papel y compromiso en la vida pública. Esta presentación busca aclarar los rumores sobre su figura y su influencia en la política francesa. Brigitte ha mostrado firmeza y determinación al abordar las críticas que han surgido en torno a su persona. Las imágenes se utilizarán como parte de una estrategia para demostrar su rol activo y su voluntad de contribuir a la sociedad. ▼</h2></div>
+			<div class="contenido">
+				<p>Brigitte Macron, esposa del presidente francés Emmanuel Macron, ha decidido presentar fotografías que respaldan su papel y compromiso en la vida pública. Esta presentación busca aclarar los rumores sobre su figura y su influencia en la política francesa. Brigitte ha mostrado firmeza y determinación al abordar las críticas que han surgido en torno a su persona. Las imágenes se utilizarán como parte de una estrategia para demostrar su rol activo y su voluntad de contribuir a la sociedad.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Estados Unidos destruye una tercera lancha narco proveniente de Venezuela, según Donald Trump</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSs3QOOAv_eUZqb2soluC2oDGt1k_FdWRs5TXaCnOJilpbpcVArB6mmHtXFgJM&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Donald Trump anunció la destrucción de una tercera embarcación vinculada al tráfico de drogas que provenía de Venezuela. Durante un evento, el expresidente de Estados Unidos destacó las acciones de la Guardia Costera, enfatizando que el país no tolerará el envío de drogas desde Venezuela. Trump instó a las autoridades venezolanas a cesar estas actividades ilícitas, resaltando la importancia de la colaboración internacional para combatir el narcotráfico. ▼</h2></div>
+			<div class="contenido">
+				<p>Donald Trump anunció la destrucción de una tercera embarcación vinculada al tráfico de drogas que provenía de Venezuela. Durante un evento, el expresidente de Estados Unidos destacó las acciones de la Guardia Costera, enfatizando que el país no tolerará el envío de drogas desde Venezuela. Trump instó a las autoridades venezolanas a cesar estas actividades ilícitas, resaltando la importancia de la colaboración internacional para combatir el narcotráfico.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>República Dominicana incautó 377 paquetes de cocaína de la lancha narco bombardeada por Estados Unidos</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0J9vMSrgUI16jaOsuIdDxspVM1LMsffU1GDRJOCDviOAHY7-zUYBcfsFqzl4&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Las autoridades de República Dominicana incautaron 377 paquetes de cocaína tras el derribo de una lancha narcotraficante por parte de Estados Unidos en aguas del Caribe. La operación se llevó a cabo en colaboración con la Guardia Costera de EE. UU. El embarcación fue interceptada en momentos en que intentaba escapar tras ser detectada. Los paquetes de droga, que se encontraban acondicionados para su tráfico, fueron confiscados y se están llevando a cabo investigaciones para identificar a los responsables del intento de contrabando. Esta acción forma parte de los esfuerzos regionales para combatir el narcotráfico. ▼</h2></div>
+			<div class="contenido">
+				<p>Las autoridades de República Dominicana incautaron 377 paquetes de cocaína tras el derribo de una lancha narcotraficante por parte de Estados Unidos en aguas del Caribe. La operación se llevó a cabo en colaboración con la Guardia Costera de EE. UU. El embarcación fue interceptada en momentos en que intentaba escapar tras ser detectada. Los paquetes de droga, que se encontraban acondicionados para su tráfico, fueron confiscados y se están llevando a cabo investigaciones para identificar a los responsables del intento de contrabando. Esta acción forma parte de los esfuerzos regionales para combatir el narcotráfico.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Europa advierte sobre una posible parálisis industrial por controles de China a la exportación de tierras raras</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYjU_r_rfNelB29vkCujrOZLy-zPmhyfWpRibd2dFjvclduGSjYzWT45oJSqc&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Las autoridades europeas han emitido una advertencia sobre el riesgo de una paralización industrial en la región, debido a las nuevas restricciones impuestas por el régimen chino sobre la exportación de tierras raras. Estos minerales son esenciales para la producción de numerosos productos tecnológicos y electrónicos. Las medidas restrictivas de China generan preocupación entre los países europeos, que dependen en gran medida de estas materias primas para su industria. La situación podría agravar la crisis de suministro y afectar gravemente a sectores clave, como la automoción y la energía renovable. ▼</h2></div>
+			<div class="contenido">
+				<p>Las autoridades europeas han emitido una advertencia sobre el riesgo de una paralización industrial en la región, debido a las nuevas restricciones impuestas por el régimen chino sobre la exportación de tierras raras. Estos minerales son esenciales para la producción de numerosos productos tecnológicos y electrónicos. Las medidas restrictivas de China generan preocupación entre los países europeos, que dependen en gran medida de estas materias primas para su industria. La situación podría agravar la crisis de suministro y afectar gravemente a sectores clave, como la automoción y la energía renovable.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>El acuerdo comercial Mercosur-Unión Europea depende de la aprobación del Consejo Europeo</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTla0xp1O4c8MIYNak1vWu8QTSoRXJxalCoykafTJrSIUGZAIcIjFgpl_cvy4A&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El acuerdo comercial entre Mercosur y la Unión Europea se encuentra en una fase crucial, ya que ahora depende de la aprobación del Consejo Europeo. Este pacto, alcanzado hace varios años, promete beneficios significativos para ambas partes, pero su implementación se ha visto demorada por cuestiones políticas y comerciales. La aprobación del Consejo es esencial para avanzar, y las negociaciones continúan en un ambiente de desafíos y expectativas entre las naciones involucradas. ▼</h2></div>
+			<div class="contenido">
+				<p>El acuerdo comercial entre Mercosur y la Unión Europea se encuentra en una fase crucial, ya que ahora depende de la aprobación del Consejo Europeo. Este pacto, alcanzado hace varios años, promete beneficios significativos para ambas partes, pero su implementación se ha visto demorada por cuestiones políticas y comerciales. La aprobación del Consejo es esencial para avanzar, y las negociaciones continúan en un ambiente de desafíos y expectativas entre las naciones involucradas.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Trump se ofrece a garantizar la paz en Ucrania y lamenta la falta de avances con Putin</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1gNb8e_I3zy0dxXpEF7VV4Igss9ENbG-B_E7cOO2O9Tfl8iwTQ3RWnVe_XR8&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Donald Trump se ofreció a mediar para garantizar la paz en Ucrania, expresando su decepción por la falta de progreso en las negociaciones con el presidente ruso, Vladimir Putin. Durante un evento en Iowa, el ex presidente estadounidense destacó su capacidad para establecer un acuerdo entre ambas naciones y criticó la gestión actual del conflicto. Además, Trump afirmó que la guerra entre Rusia y Ucrania podría haberse evitado si él hubiera sido presidente. Su postura refleja un enfoque firme sobre el conflicto, buscando posicionarse como un líder competente en temas internacionales. ▼</h2></div>
+			<div class="contenido">
+				<p>Donald Trump se ofreció a mediar para garantizar la paz en Ucrania, expresando su decepción por la falta de progreso en las negociaciones con el presidente ruso, Vladimir Putin. Durante un evento en Iowa, el ex presidente estadounidense destacó su capacidad para establecer un acuerdo entre ambas naciones y criticó la gestión actual del conflicto. Además, Trump afirmó que la guerra entre Rusia y Ucrania podría haberse evitado si él hubiera sido presidente. Su postura refleja un enfoque firme sobre el conflicto, buscando posicionarse como un líder competente en temas internacionales.</p>
+			</div>
+		</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publiciteLite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Consejo de Seguridad de la ONU reimpone sanciones contra el régimen de Irán por su programa nuclear</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_QvtiF-rYNsz1jN9xXZE1X4ei24qSNHIdr3SoII-u9xXvEICvXOKNIFOn_g&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El Consejo de Seguridad de la ONU ha reimplantado sanciones contra Irán debido a su programa nuclear. Esta decisión se basa en preocupaciones por el avance del país en sus actividades nucleares, las cuales se consideran una amenaza para la seguridad internacional. Las sanciones apuntan a limitar el acceso de Irán a materiales y tecnología que podrían facilitar su programa nuclear. La resolución ha sido objeto de debate entre los miembros del Consejo, pero finalmente se logró un consenso sobre la necesidad de medidas más estrictas para asegurar el cumplimiento. ▼</h2></div>
+			<div class="contenido">
+				<p>El Consejo de Seguridad de la ONU ha reimplantado sanciones contra Irán debido a su programa nuclear. Esta decisión se basa en preocupaciones por el avance del país en sus actividades nucleares, las cuales se consideran una amenaza para la seguridad internacional. Las sanciones apuntan a limitar el acceso de Irán a materiales y tecnología que podrían facilitar su programa nuclear. La resolución ha sido objeto de debate entre los miembros del Consejo, pero finalmente se logró un consenso sobre la necesidad de medidas más estrictas para asegurar el cumplimiento.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Cazas británicos llevan a cabo primera misión de defensa aérea de la OTAN tras incursión de drones rusos en Polonia</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSx7h6x1ohoJXw0B7AHNXO9DHshEZuuat8yEgJZ_MQNf7rFDxRfmAKcU_2w-g&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Cazas británicos llevaron a cabo la primera misión de defensa aérea de la OTAN tras la reciente incursión de drones rusos en Polonia. Esta operación se enmarca en el contexto de aumentada tensión entre Rusia y los países de la alianza militar. La intervención se realizó con el objetivo de reforzar la seguridad en la región, destacando la importancia de la cooperación entre las naciones aliadas en respuesta a las amenazas externas. La misión fue una respuesta directa a las actividades aéreas rusas que han generado preocupación entre los miembros de la OTAN. ▼</h2></div>
+			<div class="contenido">
+				<p>Cazas británicos llevaron a cabo la primera misión de defensa aérea de la OTAN tras la reciente incursión de drones rusos en Polonia. Esta operación se enmarca en el contexto de aumentada tensión entre Rusia y los países de la alianza militar. La intervención se realizó con el objetivo de reforzar la seguridad en la región, destacando la importancia de la cooperación entre las naciones aliadas en respuesta a las amenazas externas. La misión fue una respuesta directa a las actividades aéreas rusas que han generado preocupación entre los miembros de la OTAN.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Furia en Flamengo por la expulsión de Gonzalo Plata ante Estudiantes en la Copa Libertadores</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiHMa56sDPw1mE2xQYBoumoSVjRONq0a7zE3jzCVWqeWuSF44Wyrz2dqmU2_g&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El Flamengo ha expresado su indignación tras la expulsión del jugador Gonzalo Plata durante un partido contra Estudiantes en la Copa Libertadores. La situación se ha vuelto polémica debido a las decisiones tomadas por el VAR, que no se alinearon con las expectativas del club brasileño. Se ha difundido el audio de la revisión de VAR, donde se puede escuchar el diálogo sobre la situación que llevó a la tarjeta roja, generando aún más debate entre los aficionados y analistas del fútbol. La controversia ha avivado los ánimos de los seguidores de Flamengo, quienes cuestionan la justicia de la decisión arbitral en un torneo tan relevante. ▼</h2></div>
+			<div class="contenido">
+				<p>El Flamengo ha expresado su indignación tras la expulsión del jugador Gonzalo Plata durante un partido contra Estudiantes en la Copa Libertadores. La situación se ha vuelto polémica debido a las decisiones tomadas por el VAR, que no se alinearon con las expectativas del club brasileño. Se ha difundido el audio de la revisión de VAR, donde se puede escuchar el diálogo sobre la situación que llevó a la tarjeta roja, generando aún más debate entre los aficionados y analistas del fútbol. La controversia ha avivado los ánimos de los seguidores de Flamengo, quienes cuestionan la justicia de la decisión arbitral en un torneo tan relevante.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Alemania despliega cazas para interceptar avión ruso cerca del espacio aéreo de la OTAN</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvsagl4q9fJt5wPIYhBEa0y8xS6AGNys4lFFE2QItCUweMjpX1iYxo1qi1S40&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Alemania envió dos aviones de combate para interceptar un avión ruso que se acercaba al espacio aéreo de la OTAN. Esta acción forma parte de las medidas de vigilancia y defensa en respuesta a la creciente actividad militar rusa en la región. La situación se enmarca en un contexto de tensiones entre occidente y Moscú, donde las aeronaves rusas suelen realizar vuelos cerca de las fronteras de la Alianza Atlántica, lo que genera alerta en los países miembros. ▼</h2></div>
+			<div class="contenido">
+				<p>Alemania envió dos aviones de combate para interceptar un avión ruso que se acercaba al espacio aéreo de la OTAN. Esta acción forma parte de las medidas de vigilancia y defensa en respuesta a la creciente actividad militar rusa en la región. La situación se enmarca en un contexto de tensiones entre occidente y Moscú, donde las aeronaves rusas suelen realizar vuelos cerca de las fronteras de la Alianza Atlántica, lo que genera alerta en los países miembros.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Macron exige liberación de rehenes israelíes en Gaza antes de considerar apertura de embajada en Palestina</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfd0HJaFUSIJOXvPSw59dYWrS4K_HQ0X0ENSyXmo3ZDQ4rSaXdN6FJhgIkX5w&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Emmanuel Macron solicitó la liberación de los rehenes israelíes en Gaza como condición previa para considerar la apertura de una embajada en Palestina. Durante un encuentro con el presidente palestino Mahmoud Abbas, el mandatario francés subrayó la importancia de avanzar en el proceso de paz y destacó la necesidad de establecer condiciones favorables para el diálogo. La situación en la región sigue siendo tensa, y la postura de Francia refleja un enfoque en la estabilidad y la seguridad en el conflicto israelí-palestino. ▼</h2></div>
+			<div class="contenido">
+				<p>Emmanuel Macron solicitó la liberación de los rehenes israelíes en Gaza como condición previa para considerar la apertura de una embajada en Palestina. Durante un encuentro con el presidente palestino Mahmoud Abbas, el mandatario francés subrayó la importancia de avanzar en el proceso de paz y destacó la necesidad de establecer condiciones favorables para el diálogo. La situación en la región sigue siendo tensa, y la postura de Francia refleja un enfoque en la estabilidad y la seguridad en el conflicto israelí-palestino.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Trump asegura que EE. UU. defenderá a Polonia y a los países bálticos ante posibles agresiones de Rusia</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJn2tk58aSB_2rj4yFsGJNZ8AMLLOL9_Ei77M5778Gjw_aokUVQj_UsttimQ&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>En una reciente declaración, el expresidente de Estados Unidos, Donald Trump, aseguró que el país defendería a Polonia y a los estados bálticos en caso de que Rusia incrementara sus hostilidades. Esta afirmación se enmarca en el contexto de las tensiones actuales entre Occidente y Moscú. Trump enfatizó su compromiso con la defensa de aliados en Europa, sugiriendo que la seguridad de estas naciones es crucial frente a posibles agresiones rusas. ▼</h2></div>
+			<div class="contenido">
+				<p>En una reciente declaración, el expresidente de Estados Unidos, Donald Trump, aseguró que el país defendería a Polonia y a los estados bálticos en caso de que Rusia incrementara sus hostilidades. Esta afirmación se enmarca en el contexto de las tensiones actuales entre Occidente y Moscú. Trump enfatizó su compromiso con la defensa de aliados en Europa, sugiriendo que la seguridad de estas naciones es crucial frente a posibles agresiones rusas.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>El Partido Republicano del Pueblo elige a Ozgur Ozel como su nuevo líder en Turquía</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQC3Qlbcz2z3b7J6ep_k1UvT4Y58bbzba-B77rg6RzepLVuD87lBsvDvQnN6Q&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El Partido Republicano del Pueblo de Turquía ha elegido a Özgür Özel como su nuevo líder. Esta decisión se tomó durante una asamblea extraordinaria donde Özel, quien ya había sido el presidente del grupo parlamentario del partido, obtuvo el respaldo de la mayoría de los miembros. Su elección se produce en un contexto político complejo, con el partido enfrentando desafíos significativos tras las elecciones de 2023, donde no logró alcanzar la presidencia. Özel ha prometido trabajar para fortalecer la posición del partido y consolidar su base de apoyo en el país. ▼</h2></div>
+			<div class="contenido">
+				<p>El Partido Republicano del Pueblo de Turquía ha elegido a Özgür Özel como su nuevo líder. Esta decisión se tomó durante una asamblea extraordinaria donde Özel, quien ya había sido el presidente del grupo parlamentario del partido, obtuvo el respaldo de la mayoría de los miembros. Su elección se produce en un contexto político complejo, con el partido enfrentando desafíos significativos tras las elecciones de 2023, donde no logró alcanzar la presidencia. Özel ha prometido trabajar para fortalecer la posición del partido y consolidar su base de apoyo en el país.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>La reflexión de Pierre Gasly sobre su situación en Alpine tras el GP de Azerbaiyán de F1</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVQxJABofNkLc7gAAgRMSq767sLhQOsjwyR7TBNdvILSp91oZaKyM0HfnNA58&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Pierre Gasly compartió sus inquietudes sobre su situación actual en el equipo Alpine de Fórmula 1 tras la reciente carrera en el GP de Azerbaiyán. El piloto francés expresó que no se siente cómodo con su rendimiento y que ha enfrentado dificultades para adaptarse al coche. Gasly enfatizó la importancia de entender y mejorar su desempeño en el equipo, al mismo tiempo que indicó que trabajar en una mejor conexión con el auto es crucial. A pesar de los desafíos, se mantiene optimista sobre poder revertir la situación en las próximas carreras. ▼</h2></div>
+			<div class="contenido">
+				<p>Pierre Gasly compartió sus inquietudes sobre su situación actual en el equipo Alpine de Fórmula 1 tras la reciente carrera en el GP de Azerbaiyán. El piloto francés expresó que no se siente cómodo con su rendimiento y que ha enfrentado dificultades para adaptarse al coche. Gasly enfatizó la importancia de entender y mejorar su desempeño en el equipo, al mismo tiempo que indicó que trabajar en una mejor conexión con el auto es crucial. A pesar de los desafíos, se mantiene optimista sobre poder revertir la situación en las próximas carreras.</p>
+			</div>
+		</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publiciteLite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Congresistas de EE.UU. critican a países que reconocen al Estado de Palestina por sienta un precedente peligroso</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFYxlfywWTABBcmvue2M2SfibWhnv9hyEmCrVnohSkLBJ5d21A-B_OLX8QsHE&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Legisladores estadounidenses expresaron su rechazo hacia los países que han decidido reconocer al Estado de Palestina, considerando que tal acción podría establecer un precedente peligroso en el contexto del conflicto israelí-palestino. Los congresistas argumentaron que este tipo de reconocimiento puede socavar los esfuerzos de paz y el proceso de negociación para lograr dos estados, instando a las naciones a reconsiderar sus posturas y a evitar acciones que puedan desestabilizar la región. ▼</h2></div>
+			<div class="contenido">
+				<p>Legisladores estadounidenses expresaron su rechazo hacia los países que han decidido reconocer al Estado de Palestina, considerando que tal acción podría establecer un precedente peligroso en el contexto del conflicto israelí-palestino. Los congresistas argumentaron que este tipo de reconocimiento puede socavar los esfuerzos de paz y el proceso de negociación para lograr dos estados, instando a las naciones a reconsiderar sus posturas y a evitar acciones que puedan desestabilizar la región.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Zelensky denuncia que el ejército ruso lanzó más de 2780 drones y bombas guiadas contra Ucrania en la última semana</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8gK2mhF-3HBdeGRMH-OOEMYeuoRHIm7VCkhpSu9GHrr02aFdi1ZE3kTz4AA&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>En la última semana, el presidente ucraniano Volodímir Zelensky reportó que el ejército ruso ha lanzado más de 2,780 drones y bombas guiadas en ataques contra Ucrania. Esta intensa ofensiva ha sido parte de una escala creciente de hostilidades en el conflicto, y Zelensky destacó la persistente amenaza que representan estos ataques para la población y la infraestructura del país. Las autoridades ucranianas continúan trabajando en la defensa y protección de sus territorios ante esta agresión. ▼</h2></div>
+			<div class="contenido">
+				<p>En la última semana, el presidente ucraniano Volodímir Zelensky reportó que el ejército ruso ha lanzado más de 2,780 drones y bombas guiadas en ataques contra Ucrania. Esta intensa ofensiva ha sido parte de una escala creciente de hostilidades en el conflicto, y Zelensky destacó la persistente amenaza que representan estos ataques para la población y la infraestructura del país. Las autoridades ucranianas continúan trabajando en la defensa y protección de sus territorios ante esta agresión.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Rusia lanza ataque masivo con 580 drones y 40 misiles contra Ucrania dejando al menos tres muertos y decenas de heridos</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiwgNzJI7j_ewWWqnwxLHz2S9Y-dx-C2fXKtqakL081tgpyNbJ_mhf2-NPKPY&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Rusia llevó a cabo un ataque masivo contra Ucrania, utilizando 580 drones y 40 misiles. Este ataque ha resultado en al menos tres muertes y decenas de heridos. Las autoridades ucranianas informaron sobre la intensidad de los bombardeos y su impacto en varias regiones del país, lo que destaca la escalada del conflicto entre ambas naciones. La situación continúa siendo crítica en las áreas afectadas. ▼</h2></div>
+			<div class="contenido">
+				<p>Rusia llevó a cabo un ataque masivo contra Ucrania, utilizando 580 drones y 40 misiles. Este ataque ha resultado en al menos tres muertes y decenas de heridos. Las autoridades ucranianas informaron sobre la intensidad de los bombardeos y su impacto en varias regiones del país, lo que destaca la escalada del conflicto entre ambas naciones. La situación continúa siendo crítica en las áreas afectadas.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Estados Unidos veta resolución del Consejo de Seguridad de la ONU sobre tregua inmediata en Gaza</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaZvR1s1lPzh1s6iSFv4bHEa1VQ3pTdCTh46OC86VflhRrkVIE0P2XdaxZMw&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Estados Unidos bloqueó una resolución del Consejo de Seguridad de la ONU que pedía una tregua inmediata en Gaza. La decisión del país se produjo en medio de un contexto de creciente violencia y conflicto en la región. La administración estadounidense justificó su veto al señalar que la resolución no abordaba adecuadamente las inquietudes relacionadas con la seguridad de Israel y la defensa de sus derechos. Este veto ha generado críticas a nivel internacional, aumentando las tensiones ya presentes en el debate sobre la situación en Gaza. ▼</h2></div>
+			<div class="contenido">
+				<p>Estados Unidos bloqueó una resolución del Consejo de Seguridad de la ONU que pedía una tregua inmediata en Gaza. La decisión del país se produjo en medio de un contexto de creciente violencia y conflicto en la región. La administración estadounidense justificó su veto al señalar que la resolución no abordaba adecuadamente las inquietudes relacionadas con la seguridad de Israel y la defensa de sus derechos. Este veto ha generado críticas a nivel internacional, aumentando las tensiones ya presentes en el debate sobre la situación en Gaza.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Seis choques y caos en la clasificación del GP de Azerbaiyán de Fórmula 1</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgxjVreSpoxGH_G97M0qrYWo80eR6CFu4ikvMRIu3xhX4F-u8tZiqcNqvlkA&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>En el Gran Premio de Azerbaiyán de Fórmula 1, la clasificación se vio marcada por una serie de incidentes que incluyeron seis accidentes, lo que llevó a un récord de banderas rojas. Este caos generó sorpresas en la parrilla de salida, con resultados inesperados en el rendimiento de varios pilotos. La acumulación de interrupciones afectó el tiempo y la estrategia de muchos equipos, destacando la tensión y la imprevisibilidad de la carrera. Las actuaciones destacadas y las decepciones comenzaron a perfilarse, generando expectativas para la competencia. ▼</h2></div>
+			<div class="contenido">
+				<p>En el Gran Premio de Azerbaiyán de Fórmula 1, la clasificación se vio marcada por una serie de incidentes que incluyeron seis accidentes, lo que llevó a un récord de banderas rojas. Este caos generó sorpresas en la parrilla de salida, con resultados inesperados en el rendimiento de varios pilotos. La acumulación de interrupciones afectó el tiempo y la estrategia de muchos equipos, destacando la tensión y la imprevisibilidad de la carrera. Las actuaciones destacadas y las decepciones comenzaron a perfilarse, generando expectativas para la competencia.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Israel critica reconocimiento británico del estado palestino como recompensa a Hamas</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDbjCsoWh2aq1Ehh9Wrw5KgAPa_zQ_yxv4j-d24qDlw1mBk8YobO4mlJBIBNc&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El gobierno de Israel reaccionó de manera negativa al reconocimiento del estado palestino por parte del Reino Unido, calificándolo como un gesto que favorece a los terroristas de Hamas. Según las autoridades israelíes, esta decisión no contribuye a la paz en la región, sino que legitima a grupos que promueven la violencia. El portavoz del Ministerio de Relaciones Exteriores de Israel expresó que este reconocimiento no conduce a un entendimiento duradero entre ambas partes. ▼</h2></div>
+			<div class="contenido">
+				<p>El gobierno de Israel reaccionó de manera negativa al reconocimiento del estado palestino por parte del Reino Unido, calificándolo como un gesto que favorece a los terroristas de Hamas. Según las autoridades israelíes, esta decisión no contribuye a la paz en la región, sino que legitima a grupos que promueven la violencia. El portavoz del Ministerio de Relaciones Exteriores de Israel expresó que este reconocimiento no conduce a un entendimiento duradero entre ambas partes.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Wall Street cerró la semana en máximos históricos</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlV3j_yJbY0dB51YMmqymh5LfIYJNLSe2lnhBf0SEXIULhathUeXZiJAgjTg&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Wall Street cerró la semana alcanzando máximos históricos, impulsado por el optimismo en torno a la economía estadounidense y el desempeño positivo de varias grandes empresas. Los índices Dow Jones, S&P 500 y Nasdaq registraron ganancias significativas, reflejando la confianza de los inversores en la recuperación económica. Las acciones de tecnología lideraron el crecimiento, mientras que los analistas resaltaron que un entorno de tasas de interés estables favorece el clima de inversión. La combinación de resultados empresariales sólidos y expectativas de políticas económicas favorables contribuyó a este récord en el mercado. ▼</h2></div>
+			<div class="contenido">
+				<p>Wall Street cerró la semana alcanzando máximos históricos, impulsado por el optimismo en torno a la economía estadounidense y el desempeño positivo de varias grandes empresas. Los índices Dow Jones, S&P 500 y Nasdaq registraron ganancias significativas, reflejando la confianza de los inversores en la recuperación económica. Las acciones de tecnología lideraron el crecimiento, mientras que los analistas resaltaron que un entorno de tasas de interés estables favorece el clima de inversión. La combinación de resultados empresariales sólidos y expectativas de políticas económicas favorables contribuyó a este récord en el mercado.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Cómo se eligieron a los 30 candidatos al Balón de Oro 2025 y quiénes son los 100 jurados encargados de votar al ganador</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiH3hBLjYQBwNirgfJmUsX1VI3AQ-EmJYfXxruKw6nnKAQGqXZVO1O0MIVJA&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La selección de los 30 candidatos al Balón de Oro 2025 se basa en el rendimiento de los jugadores en las competiciones internacionales y nacionales durante la temporada pasada. Un jurado compuesto por 100 expertos, incluidos periodistas y exfutbolistas, es el encargado de elegir al ganador. Cada miembro del jurado tiene la responsabilidad de votar por sus cinco jugadores favoritos, otorgando puntos a cada uno según su posición. Este proceso busca reflejar de manera justa el desempeño individual de los futbolistas a lo largo del año. ▼</h2></div>
+			<div class="contenido">
+				<p>La selección de los 30 candidatos al Balón de Oro 2025 se basa en el rendimiento de los jugadores en las competiciones internacionales y nacionales durante la temporada pasada. Un jurado compuesto por 100 expertos, incluidos periodistas y exfutbolistas, es el encargado de elegir al ganador. Cada miembro del jurado tiene la responsabilidad de votar por sus cinco jugadores favoritos, otorgando puntos a cada uno según su posición. Este proceso busca reflejar de manera justa el desempeño individual de los futbolistas a lo largo del año.</p>
+			</div>
+		</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publiciteLite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Militarización de las calles de Caracas ante la tensión con Estados Unidos</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdWsA6HyBYKmbaWrcTm1-ajCqVMosySmJFWM7SgEBRh3_SPgmQw2t6KY01oEI&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La administración de Nicolás Maduro ha intensificado la presencia militar en las calles de Caracas en respuesta a la creciente tensión con Estados Unidos. La situación se ha agudizado tras la imposición de nuevas sanciones por parte de Washington, lo que ha llevado al gobierno venezolano a adoptar medidas de seguridad adicionales. Esta militarización busca controlar posibles disturbios y manifestaciones que puedan surgir en el contexto de estas tensiones diplomáticas. ▼</h2></div>
+			<div class="contenido">
+				<p>La administración de Nicolás Maduro ha intensificado la presencia militar en las calles de Caracas en respuesta a la creciente tensión con Estados Unidos. La situación se ha agudizado tras la imposición de nuevas sanciones por parte de Washington, lo que ha llevado al gobierno venezolano a adoptar medidas de seguridad adicionales. Esta militarización busca controlar posibles disturbios y manifestaciones que puedan surgir en el contexto de estas tensiones diplomáticas.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>El Papa León XIV habló sobre Gaza: no hay futuro en la violencia, el exilio forzado y la venganza</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTakQ5RWA2V5uGTYjvCtOoksgyc_k3YIkPdI2xhq1wUXxborkC1rmiDnfXN3A&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El Papa León XIV se pronunció sobre la situación en Gaza, destacando que la violencia, el exilio forzado y la venganza no pueden ser la clave para un futuro en la región. El Papa enfatizó la necesidad de buscar alternativas pacíficas y una solución justa al conflicto, instando a las partes involucradas a renunciar a la violencia y trabajar hacia la reconciliación. Su discurso resalta la importancia de la paz y el entendimiento mutuo en medio de la crisis humanitaria que afecta a los habitantes de Gaza. ▼</h2></div>
+			<div class="contenido">
+				<p>El Papa León XIV se pronunció sobre la situación en Gaza, destacando que la violencia, el exilio forzado y la venganza no pueden ser la clave para un futuro en la región. El Papa enfatizó la necesidad de buscar alternativas pacíficas y una solución justa al conflicto, instando a las partes involucradas a renunciar a la violencia y trabajar hacia la reconciliación. Su discurso resalta la importancia de la paz y el entendimiento mutuo en medio de la crisis humanitaria que afecta a los habitantes de Gaza.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Donald Trump lidera el funeral de Charlie Kirk en Arizona convirtiéndolo en un mártir de la libertad en Estados Unidos</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfQ3CWkmUh5skLwp0xXfM1g4Fxvl9Lg7l-qrW2q-oCbIoOw9v63L3CYPNUEhw&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Donald Trump presidió el funeral de Charlie Kirk en Arizona, quien fue aclamado como un mártir de la libertad en Estados Unidos. Trump elogió a Kirk, un conocido activista conservador y fundador de Turning Point USA, destacando su impacto en la lucha por los valores republicanos. La ceremonia reunió a numerosos seguidores y figuras de la política conservadora, quienes rendieron homenaje a Kirk y su defensa de la libertad y la democracia. ▼</h2></div>
+			<div class="contenido">
+				<p>Donald Trump presidió el funeral de Charlie Kirk en Arizona, quien fue aclamado como un mártir de la libertad en Estados Unidos. Trump elogió a Kirk, un conocido activista conservador y fundador de Turning Point USA, destacando su impacto en la lucha por los valores republicanos. La ceremonia reunió a numerosos seguidores y figuras de la política conservadora, quienes rendieron homenaje a Kirk y su defensa de la libertad y la democracia.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>CIDH exige acceso a Venezuela para verificar denuncias de violaciones a los derechos humanos</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZnZ8k8nmtxejirGTwKKJ_8TUeWSOWP2GZDWr-2BUDMpHrGgDEUfsZZYbhag&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La Comisión Interamericana de Derechos Humanos (CIDH) ha demandado acceso a Venezuela para investigar denuncias de violaciones a los derechos humanos. La comisionada Antonia Urrejola destacó la necesidad de verificar las condiciones en las que se encuentran los detenidos, especialmente en lugares como El Helicoide, donde se reportan casos de tortura y maltratos. La CIDH subrayó la importancia de seguir de cerca la situación de derechos humanos en el país y la urgencia de que se permita su ingreso a la nación para cumplir con su mandato de protección a los derechos fundamentales. ▼</h2></div>
+			<div class="contenido">
+				<p>La Comisión Interamericana de Derechos Humanos (CIDH) ha demandado acceso a Venezuela para investigar denuncias de violaciones a los derechos humanos. La comisionada Antonia Urrejola destacó la necesidad de verificar las condiciones en las que se encuentran los detenidos, especialmente en lugares como El Helicoide, donde se reportan casos de tortura y maltratos. La CIDH subrayó la importancia de seguir de cerca la situación de derechos humanos en el país y la urgencia de que se permita su ingreso a la nación para cumplir con su mandato de protección a los derechos fundamentales.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Netanyahu afirma que un estado palestino amenazaría la existencia de Israel y lo califica de absurdo premio al terrorismo</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzA5WCxqac97rqYZl_idiKOFNyVC-1YG8z93HVh6EQ0E9Vp7jTh6bTsnl9C2w&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El primer ministro de Israel, Benjamin Netanyahu, afirmó que la creación de un estado palestino representaría un riesgo para la existencia de su país, calificando esta idea como absurda y como un reconocimiento al terrorismo. Netanyahu sostuvo que un estado palestino no garantizaría la paz, y en su lugar, insistió en que la seguridad de Israel debe ser prioritaria en cualquier discusión sobre el futuro político de la región. Su declaración se da en un contexto de tensiones continuas en el Medio Oriente y plantea desafíos para el proceso de paz que ha sido históricamente complicado. ▼</h2></div>
+			<div class="contenido">
+				<p>El primer ministro de Israel, Benjamin Netanyahu, afirmó que la creación de un estado palestino representaría un riesgo para la existencia de su país, calificando esta idea como absurda y como un reconocimiento al terrorismo. Netanyahu sostuvo que un estado palestino no garantizaría la paz, y en su lugar, insistió en que la seguridad de Israel debe ser prioritaria en cualquier discusión sobre el futuro político de la región. Su declaración se da en un contexto de tensiones continuas en el Medio Oriente y plantea desafíos para el proceso de paz que ha sido históricamente complicado.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Lando Norris confirma su relación con la modelo Magui Corceiro</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuZElS435C2ywytEdp6QY0RfkX1IdBuGOTBryNc4ouoSmgO-UDFU62Z5f6uW4&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Lando Norris, piloto de Fórmula 1, ha confirmado su relación con la modelo Magui Corceiro. En una entrevista, Norris describió a Corceiro como alguien con quien se siente cómodo siendo él mismo. La pareja ha generado atención mediática, y el piloto también mencionó la importancia de su apoyo en su vida personal y profesional. ▼</h2></div>
+			<div class="contenido">
+				<p>Lando Norris, piloto de Fórmula 1, ha confirmado su relación con la modelo Magui Corceiro. En una entrevista, Norris describió a Corceiro como alguien con quien se siente cómodo siendo él mismo. La pareja ha generado atención mediática, y el piloto también mencionó la importancia de su apoyo en su vida personal y profesional.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Felipe González se dirigió a Hamas y pidió la liberación de rehenes en Gaza</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIfXT9iCMLFAlKy0ZfVqUcmOizD15P-17zv2QcNpxXOHXHF_0YOTJgxkIQZ2M&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Felipe González, expresidente del Gobierno español, hizo un llamado a Hamas para que liberen a los rehenes y eviten la muerte de civiles, especialmente niños y mujeres, en Gaza. González expresó su preocupación por la situación humanitaria en la región y subrayó la necesidad de proteger a la población no combatiente. Su mensaje enfatiza la urgencia de encontrar una solución pacífica y humanitaria al conflicto. ▼</h2></div>
+			<div class="contenido">
+				<p>Felipe González, expresidente del Gobierno español, hizo un llamado a Hamas para que liberen a los rehenes y eviten la muerte de civiles, especialmente niños y mujeres, en Gaza. González expresó su preocupación por la situación humanitaria en la región y subrayó la necesidad de proteger a la población no combatiente. Su mensaje enfatiza la urgencia de encontrar una solución pacífica y humanitaria al conflicto.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>El régimen venezolano publica la carta que Maduro envió a Trump en medio de las tensiones</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-dGTRuh-UjjYBU9VAZyzN02wK3bRNVkrw0m8WkMKsj8wFaUzQnSy-eu4QrAM&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El régimen de Venezuela publicó una carta que Nicolás Maduro envió al expresidente Donald Trump durante un período de tensiones diplomáticas. En el documento, Maduro expresa su deseo de mantener un diálogo y mejorar las relaciones entre ambos países. La carta refleja la postura del gobierno venezolano de buscar un entendimiento, a pesar de las diferencias políticas y las sanciones impuestas por Estados Unidos. Esta publicación se considera un intento de mostrar apertura al diálogo en un contexto de creciente presión internacional sobre el régimen. ▼</h2></div>
+			<div class="contenido">
+				<p>El régimen de Venezuela publicó una carta que Nicolás Maduro envió al expresidente Donald Trump durante un período de tensiones diplomáticas. En el documento, Maduro expresa su deseo de mantener un diálogo y mejorar las relaciones entre ambos países. La carta refleja la postura del gobierno venezolano de buscar un entendimiento, a pesar de las diferencias políticas y las sanciones impuestas por Estados Unidos. Esta publicación se considera un intento de mostrar apertura al diálogo en un contexto de creciente presión internacional sobre el régimen.</p>
+			</div>
+		</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publiciteLite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Diaz-Balart celebró el apoyo latinoamericano a la ofensiva contra el Cartel de los Soles</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_LVp0CDlblhlwr3Vbw_dxVnKkS6IQ4PFGrGAzrHs31SaYWHki0e1GX6Pu534&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El congresista Mario Díaz-Balart destacó el respaldo de varios países latinoamericanos en la lucha contra el Cartel de los Soles, un grupo vinculado al narcotráfico en Venezuela. En su intervención, subrayó que esta organización ha tomado el control del país, actuando como un "narcoterrorista", lo que representa un peligro tanto para la nación como para la región. Díaz-Balart enfatizó la importancia de la colaboración internacional en la ofensiva contra este cartel y la necesidad de enfrentar la crisis humanitaria y de seguridad que origina. ▼</h2></div>
+			<div class="contenido">
+				<p>El congresista Mario Díaz-Balart destacó el respaldo de varios países latinoamericanos en la lucha contra el Cartel de los Soles, un grupo vinculado al narcotráfico en Venezuela. En su intervención, subrayó que esta organización ha tomado el control del país, actuando como un "narcoterrorista", lo que representa un peligro tanto para la nación como para la región. Díaz-Balart enfatizó la importancia de la colaboración internacional en la ofensiva contra este cartel y la necesidad de enfrentar la crisis humanitaria y de seguridad que origina.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Donald Trump instó a Afganistán a devolver la base aérea de Bagram a Estados Unidos</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsckG8THhwrhAvAbyXFprb3j2_rbUphe9HWgap3TdMEN5V_7NQugU709JXuw&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Donald Trump instó a Afganistán a devolver a Estados Unidos el control de la base aérea de Bagram, un lugar estratégico que fue utilizado por las fuerzas estadounidenses antes de su retirada del país. Durante un evento en un mitin, el expresidente argumentó que la base debería ser entregada nuevamente a Estados Unidos, señalando que su recuperación podría ser beneficiosa para el país. Esta afirmación se produce en un contexto donde el enfoque de Trump está en resaltar su administración y la decisión anterior de retirar tropas de Afganistán, la cual fue criticada por varios sectores. ▼</h2></div>
+			<div class="contenido">
+				<p>Donald Trump instó a Afganistán a devolver a Estados Unidos el control de la base aérea de Bagram, un lugar estratégico que fue utilizado por las fuerzas estadounidenses antes de su retirada del país. Durante un evento en un mitin, el expresidente argumentó que la base debería ser entregada nuevamente a Estados Unidos, señalando que su recuperación podría ser beneficiosa para el país. Esta afirmación se produce en un contexto donde el enfoque de Trump está en resaltar su administración y la decisión anterior de retirar tropas de Afganistán, la cual fue criticada por varios sectores.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Trump y Jinping dialogan para cerrar acuerdo sobre el futuro de TikTok</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSL8jbLTx-i5MQMBgyvZIEwQcqWAMpdQSgxljWbGFYnjkjh-yaP-qSEGGg_bg&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Donald Trump y Xi Jinping mantuvieron una conversación telefónica con el objetivo de alcanzar un acuerdo sobre el futuro de TikTok. Esta comunicación se da en un contexto de creciente tensión entre Estados Unidos y China, especialmente en torno a temas de tecnología y seguridad nacional. Ambos líderes buscan resolver las preocupaciones sobre la protección de datos de los usuarios de la aplicación, que ha enfrentado un escrutinio significativo en Estados Unidos. La discusión se enfoca en encontrar una solución que permita a TikTok operar en el país mientras se garantiza la seguridad de la información. ▼</h2></div>
+			<div class="contenido">
+				<p>Donald Trump y Xi Jinping mantuvieron una conversación telefónica con el objetivo de alcanzar un acuerdo sobre el futuro de TikTok. Esta comunicación se da en un contexto de creciente tensión entre Estados Unidos y China, especialmente en torno a temas de tecnología y seguridad nacional. Ambos líderes buscan resolver las preocupaciones sobre la protección de datos de los usuarios de la aplicación, que ha enfrentado un escrutinio significativo en Estados Unidos. La discusión se enfoca en encontrar una solución que permita a TikTok operar en el país mientras se garantiza la seguridad de la información.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Iron Beam, el láser que ya usa Israel y cambiará la economía de la guerra</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRV2pFPIyzQSLD3VzbmuGYjC9t2GZHIsg9yFQtTKK9FJ3kiHKzxauShNIN3fpI&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Israel ha comenzado a utilizar un sistema láser de defensa llamado Iron Beam, diseñado para interceptar amenazas aéreas como cohetes y drones a un costo significativamente menor que los sistemas de defensa tradicionales. Este sistema, que complementa las defensas existentes como el Iron Dome, permite a las fuerzas israelíes neutralizar ataques de manera más eficiente y económica. Iron Beam es capaz de destruir objetivos en pleno vuelo, marcando un cambio importante en la estrategia militar del país. La adopción de esta tecnología no solo tiene repercusiones en la seguridad nacional, sino que también podría influir en la economía de la guerra, dado su potencial para reducir costos operativos y aumentar la eficacia en el campo de batalla. ▼</h2></div>
+			<div class="contenido">
+				<p>Israel ha comenzado a utilizar un sistema láser de defensa llamado Iron Beam, diseñado para interceptar amenazas aéreas como cohetes y drones a un costo significativamente menor que los sistemas de defensa tradicionales. Este sistema, que complementa las defensas existentes como el Iron Dome, permite a las fuerzas israelíes neutralizar ataques de manera más eficiente y económica. Iron Beam es capaz de destruir objetivos en pleno vuelo, marcando un cambio importante en la estrategia militar del país. La adopción de esta tecnología no solo tiene repercusiones en la seguridad nacional, sino que también podría influir en la economía de la guerra, dado su potencial para reducir costos operativos y aumentar la eficacia en el campo de batalla.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Historico triunfo de un país africano ante Estados Unidos en el Mundial de Atletismo bajo la lluvia</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScw85PYAjuqtcgx78HN7viIpfY5qN9fXt7sUa-k39VK_E7MgNOo1CSSp8WNg&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>En una emocionante y difícil competencia bajo la lluvia en el Mundial de Atletismo, un equipo africano logró una victoria histórica sobre Estados Unidos. Este triunfo representa un hito importante para el deporte en esa región, destacando el creciente nivel de competitividad a nivel internacional. La carrera se llevó a cabo en condiciones adversas, lo que hizo que el logro fuera aún más impresionante. La victoria se celebra como un símbolo de progreso y un impulso para los atletas africanos en el escenario global. ▼</h2></div>
+			<div class="contenido">
+				<p>En una emocionante y difícil competencia bajo la lluvia en el Mundial de Atletismo, un equipo africano logró una victoria histórica sobre Estados Unidos. Este triunfo representa un hito importante para el deporte en esa región, destacando el creciente nivel de competitividad a nivel internacional. La carrera se llevó a cabo en condiciones adversas, lo que hizo que el logro fuera aún más impresionante. La victoria se celebra como un símbolo de progreso y un impulso para los atletas africanos en el escenario global.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Trump advierte a la dictadura de Maduro sobre las consecuencias por la negativa a aceptar el retorno de los presos venezolanos en EE.UU.</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5CFuAXJ_FtY4-PtPtCuPQ0znTnPbBF-iZRBIxlF-alx5dfU2URQmouCPF-g&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El expresidente de Estados Unidos, Donald Trump, advirtió al gobierno de Nicolás Maduro sobre las consecuencias que enfrentará si no acepta el regreso de los venezolanos presos en EE.UU. Esta declaración se da en un contexto de tensiones políticas entre ambos países, donde Trump destacó que el costo de rechazar dicha propuesta sería elevado e indefinido para el régimen venezolano. La advertencia se produce en un momento crítico de la relación entre Venezuela y Estados Unidos, marcada por sanciones y la situación de derechos humanos en el país sudamericano. ▼</h2></div>
+			<div class="contenido">
+				<p>El expresidente de Estados Unidos, Donald Trump, advirtió al gobierno de Nicolás Maduro sobre las consecuencias que enfrentará si no acepta el regreso de los venezolanos presos en EE.UU. Esta declaración se da en un contexto de tensiones políticas entre ambos países, donde Trump destacó que el costo de rechazar dicha propuesta sería elevado e indefinido para el régimen venezolano. La advertencia se produce en un momento crítico de la relación entre Venezuela y Estados Unidos, marcada por sanciones y la situación de derechos humanos en el país sudamericano.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>María Corina Machado: Venezuela será libre, ya está pasando</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_NY8BjFZmJHXc1gw_sTj_Qknta16haIXeDCR6mvYLVf6M3o7tY2R64c7csQ&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>María Corina Machado, líder opositora en Venezuela, afirmó que el país está en un proceso de cambio hacia la libertad. Durante un evento en el que se presentaron las propuestas de su candidatura presidencial para 2025, destacó la necesidad de un nuevo liderazgo que impulse el verdadero progreso. Machado criticó el actual gobierno y enfatizó que los venezolanos anhelan un futuro en libertad, refiriéndose a la situación política y social del país. Resaltó que la participación ciudadana será clave para lograr una transformación en Venezuela. ▼</h2></div>
+			<div class="contenido">
+				<p>María Corina Machado, líder opositora en Venezuela, afirmó que el país está en un proceso de cambio hacia la libertad. Durante un evento en el que se presentaron las propuestas de su candidatura presidencial para 2025, destacó la necesidad de un nuevo liderazgo que impulse el verdadero progreso. Machado criticó el actual gobierno y enfatizó que los venezolanos anhelan un futuro en libertad, refiriéndose a la situación política y social del país. Resaltó que la participación ciudadana será clave para lograr una transformación en Venezuela.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Messi brilla con dos goles y una asistencia en el triunfo de Inter Miami</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSn8Bc29cqDWgVT1_t677e9NPLhGCmGItmOd5EN-_zRPl549m2gIXBf-VqXDM&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Lionel Messi tuvo una destacada actuación en el partido de Inter Miami, donde contribuyó con dos goles y una asistencia. Su rendimiento fue fundamental para el triunfo del equipo, destacándose por un gesto de liderazgo al mostrar apoyo a un compañero. El encuentro se caracterizó por un juego intenso y dinámico, donde Messi demostró su calidad y habilidad en el campo, logrando establecer un récord personal en esta temporada. ▼</h2></div>
+			<div class="contenido">
+				<p>Lionel Messi tuvo una destacada actuación en el partido de Inter Miami, donde contribuyó con dos goles y una asistencia. Su rendimiento fue fundamental para el triunfo del equipo, destacándose por un gesto de liderazgo al mostrar apoyo a un compañero. El encuentro se caracterizó por un juego intenso y dinámico, donde Messi demostró su calidad y habilidad en el campo, logrando establecer un récord personal en esta temporada.</p>
+			</div>
+		</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publiciteLite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Acuerdo entre Estados Unidos y China por TikTok está prácticamente cerrado, solo falta la firma</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQA_F7R3HQJiCgeqk4o7-Qg7PRFwVhnlbLSIJpU01W0ShqnDFdFzB2_dI8aQ_Y&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Estados Unidos ha anunciado que el acuerdo con China respecto a TikTok está casi completado, con solo la firma pendiente para su formalización. Este desarrollo implica que se han alcanzado consensos significativos entre ambas naciones, aunque todavía se requiere el paso final para su implementación. El acuerdo busca abordar preocupaciones sobre la seguridad de datos y la influencia de la aplicación en el mercado estadounidense. ▼</h2></div>
+			<div class="contenido">
+				<p>Estados Unidos ha anunciado que el acuerdo con China respecto a TikTok está casi completado, con solo la firma pendiente para su formalización. Este desarrollo implica que se han alcanzado consensos significativos entre ambas naciones, aunque todavía se requiere el paso final para su implementación. El acuerdo busca abordar preocupaciones sobre la seguridad de datos y la influencia de la aplicación en el mercado estadounidense.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>CIDH otorga medidas cautelares a cinco opositores detenidos en Nicaragua</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmEGZBqeZALMhZriW7CcmdP9P0YugLZjpTngcanH2as4CM4c0cQJirqHVFYQ&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La Comisión Interamericana de Derechos Humanos (CIDH) ha otorgado medidas cautelares a favor de cinco opositores nicaragüenses detenidos por el gobierno de Daniel Ortega. La CIDH evaluó que sus vidas están en peligro debido a las condiciones de detención y el contexto de represión en Nicaragua. Los detenidos son figuras destacadas de la oposición política y su arresto se enmarca en una serie de acciones del régimen que limitan las libertades democráticas y la oposición. La CIDH instó al gobierno nicaragüense a garantizar la integridad física y psicológica de los opositores. ▼</h2></div>
+			<div class="contenido">
+				<p>La Comisión Interamericana de Derechos Humanos (CIDH) ha otorgado medidas cautelares a favor de cinco opositores nicaragüenses detenidos por el gobierno de Daniel Ortega. La CIDH evaluó que sus vidas están en peligro debido a las condiciones de detención y el contexto de represión en Nicaragua. Los detenidos son figuras destacadas de la oposición política y su arresto se enmarca en una serie de acciones del régimen que limitan las libertades democráticas y la oposición. La CIDH instó al gobierno nicaragüense a garantizar la integridad física y psicológica de los opositores.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Revolución, violencia y familia en la nueva epopeya de Paul Thomas Anderson</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzSnfKnaDG5UELKJgIEBUS_aqb1rI8YTKXLIjVfn2f6weFgEsZfdW-sytzoA&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Paul Thomas Anderson presenta su nueva película, que se adentra en temas de revolución, violencia y familia. En esta obra, el director explora las complejas relaciones humanas y los conflictos inherentes a la sociedad, combinando elementos de drama y comedia. La narrativa se desarrolla en un contexto histórico que refleja tensiones sociales y la lucha por la identidad. La película ha generado expectativas entre críticos y cineastas, lo que reafirma la posición de Anderson como un innovador en el cine contemporáneo. ▼</h2></div>
+			<div class="contenido">
+				<p>Paul Thomas Anderson presenta su nueva película, que se adentra en temas de revolución, violencia y familia. En esta obra, el director explora las complejas relaciones humanas y los conflictos inherentes a la sociedad, combinando elementos de drama y comedia. La narrativa se desarrolla en un contexto histórico que refleja tensiones sociales y la lucha por la identidad. La película ha generado expectativas entre críticos y cineastas, lo que reafirma la posición de Anderson como un innovador en el cine contemporáneo.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Leer es salud y combate la ansiedad brindando equilibrio mental según expertos</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_cqezm13fiBjk3k4PwAAbbs6jsEylht7uZy6CN5Ofwyh6P7GuFB0z55MwSHc&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La lectura se presenta como una herramienta eficaz para combatir la ansiedad y promover el equilibrio mental. Expertos explican que sumergirse en un buen libro puede no solo ofrecer distracción, sino también fomentar la empatía y la comprensión emocional. A través de la lectura, las personas pueden evadir la realidad, lo que les permite reducir el estrés y mejorar su bienestar general. Además, leer regularmente fortalece la capacidad de concentración y memoria, contribuyendo así a un estado mental más saludable. ▼</h2></div>
+			<div class="contenido">
+				<p>La lectura se presenta como una herramienta eficaz para combatir la ansiedad y promover el equilibrio mental. Expertos explican que sumergirse en un buen libro puede no solo ofrecer distracción, sino también fomentar la empatía y la comprensión emocional. A través de la lectura, las personas pueden evadir la realidad, lo que les permite reducir el estrés y mejorar su bienestar general. Además, leer regularmente fortalece la capacidad de concentración y memoria, contribuyendo así a un estado mental más saludable.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Fuerte caída en el Mundial de Atletismo termina en lágrimas para la atleta</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStm8P-MXQI2nPsG-uUKFBQlfAxFVuqjOr3eTTr3ebKCF_9ReJCxWZn3z-xplM&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Una atleta sufrió una caída severa durante su competencia en el Mundial de Atletismo, lo que resultó en una situación dramática que la llevó a llorar. La caída fue tan impactante que la atleta no pudo continuar con la prueba y tuvo que ser asistida por los servicios médicos. Este incidente generó una gran preocupación entre los espectadores y los colegas en el evento. La noticia resalta la violencia del accidente y la emoción que causó en el ambiente deportivo. ▼</h2></div>
+			<div class="contenido">
+				<p>Una atleta sufrió una caída severa durante su competencia en el Mundial de Atletismo, lo que resultó en una situación dramática que la llevó a llorar. La caída fue tan impactante que la atleta no pudo continuar con la prueba y tuvo que ser asistida por los servicios médicos. Este incidente generó una gran preocupación entre los espectadores y los colegas en el evento. La noticia resalta la violencia del accidente y la emoción que causó en el ambiente deportivo.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Cristiano Ronaldo marcó dos goles y aumenta la lucha por los 1000 anotaciones</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTeh7iPQ4YdEKfL5Y22s7fyE3V86D0Ncw63bLWBtPX6fcXpCJSdMGNCZdcy794&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Cristiano Ronaldo anotó dos goles en un reciente partido, intensificando la competencia por alcanzar los 1,000 goles en su carrera. Con este resultado, Ronaldo incrementa su total y se acerca a la marca, manteniendo una ventaja significativa sobre Lionel Messi en el conteo de goles. La noticia destaca el rendimiento del jugador portugués y su trayectoria hacia este hito en el fútbol. ▼</h2></div>
+			<div class="contenido">
+				<p>Cristiano Ronaldo anotó dos goles en un reciente partido, intensificando la competencia por alcanzar los 1,000 goles en su carrera. Con este resultado, Ronaldo incrementa su total y se acerca a la marca, manteniendo una ventaja significativa sobre Lionel Messi en el conteo de goles. La noticia destaca el rendimiento del jugador portugués y su trayectoria hacia este hito en el fútbol.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Israel cierra dos pasos fronterizos con Jordania tras ataque terrorista que dejó dos militares muertos</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQTLyN_ZAcueMcxvcx5hDCYSJmRFAe8dube__ESJTgGTlB7jqhXSATD06nUA&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Israel cerró dos pasos fronterizos con Jordania tras un ataque terrorista que resultó en la muerte de dos militares israelíes. Las autoridades israelíes tomaron esta medida como parte de las respuestas a la escalada de la violencia en la región. Se intensificaron las medidas de seguridad en la frontera y se realizó una revisión de las políticas relacionadas con los cruces fronterizos. Este incidente forma parte de un contexto más amplio de tensión entre Israel y sus vecinos. ▼</h2></div>
+			<div class="contenido">
+				<p>Israel cerró dos pasos fronterizos con Jordania tras un ataque terrorista que resultó en la muerte de dos militares israelíes. Las autoridades israelíes tomaron esta medida como parte de las respuestas a la escalada de la violencia en la región. Se intensificaron las medidas de seguridad en la frontera y se realizó una revisión de las políticas relacionadas con los cruces fronterizos. Este incidente forma parte de un contexto más amplio de tensión entre Israel y sus vecinos.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Más de medio millón de gazatíes huyen de la capital tras la ofensiva militar de Israel contra Hamas</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6GohMA7gI0sSyuCfL9r6HGXH1Zz1j5n2h0IBTZV51uvBFqofmbrEtZF8Gum0&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Israel ha informado que más de 500,000 habitantes de Gaza han abandonado la capital debido a la ofensiva militar lanzada contra grupos terroristas como Hamas. Las autoridades israelíes han intensificado sus ataques en respuesta a los recientes enfrentamientos, lo que ha llevado a una crisis humanitaria en la región. La situación ha provocado un aumento significativo en el número de personas desplazadas que buscan refugio en áreas consideradas más seguras. ▼</h2></div>
+			<div class="contenido">
+				<p>Israel ha informado que más de 500,000 habitantes de Gaza han abandonado la capital debido a la ofensiva militar lanzada contra grupos terroristas como Hamas. Las autoridades israelíes han intensificado sus ataques en respuesta a los recientes enfrentamientos, lo que ha llevado a una crisis humanitaria en la región. La situación ha provocado un aumento significativo en el número de personas desplazadas que buscan refugio en áreas consideradas más seguras.</p>
+			</div>
+		</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publiciteLite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Bad Bunny ofrece emotivo último show en Puerto Rico antes de su gira mundial</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS24_X6m18IAlUkCjdYjLYmrO8IF0jfRNggoKFnTjVrdh9aGCgmHSNjcKPPiA&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Bad Bunny ofreció su último concierto en Puerto Rico antes de iniciar su gira mundial, en un evento que tuvo lugar en el Estadio Hiram Bithorn de San Juan. Durante el espectáculo, el cantante expresó su deseo de permanecer en la isla y se mostró emocional al dirigirse a su público. La presentación incluyó una variada selección de sus éxitos y fue recibida con entusiasmo por los fanáticos, quienes corearon sus canciones. Este show marca un momento significativo para el artista, que ha manifestado su amor por Puerto Rico en múltiples ocasiones. ▼</h2></div>
+			<div class="contenido">
+				<p>Bad Bunny ofreció su último concierto en Puerto Rico antes de iniciar su gira mundial, en un evento que tuvo lugar en el Estadio Hiram Bithorn de San Juan. Durante el espectáculo, el cantante expresó su deseo de permanecer en la isla y se mostró emocional al dirigirse a su público. La presentación incluyó una variada selección de sus éxitos y fue recibida con entusiasmo por los fanáticos, quienes corearon sus canciones. Este show marca un momento significativo para el artista, que ha manifestado su amor por Puerto Rico en múltiples ocasiones.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>La CONMEBOL anula la expulsión de Gonzalo Plata y podrá jugar la revancha entre Estudiantes y Flamengo</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTl0pnofjuYv9iG5uUOSXhQ__h-NckJCPbjVABJ0bGguvmslcWOp4Bm45BA7g&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Gonzalo Plata, jugador de Estudiantes de La Plata, fue expulsado en un partido anterior, lo que generó controversia. Sin embargo, la Conmebol decidió anular la tarjeta roja que le fue mostrada, lo que permitirá que el futbolista participe en el próximo encuentro entre su equipo y Flamengo. La determinación de la Conmebol se basó en el análisis del incidente ocurrido durante el partido, provocando reacciones diversas entre los aficionados y los analistas deportivos. ▼</h2></div>
+			<div class="contenido">
+				<p>Gonzalo Plata, jugador de Estudiantes de La Plata, fue expulsado en un partido anterior, lo que generó controversia. Sin embargo, la Conmebol decidió anular la tarjeta roja que le fue mostrada, lo que permitirá que el futbolista participe en el próximo encuentro entre su equipo y Flamengo. La determinación de la Conmebol se basó en el análisis del incidente ocurrido durante el partido, provocando reacciones diversas entre los aficionados y los analistas deportivos.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Estonia solicita reunión de emergencia de la OTAN tras invasión de cazas rusos en su espacio aéreo</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTMwSSrxkyptKZd2nkjpCBomWYfqd0NT8iSxuFbeWoGi-5qIgDZabqCu5IPw&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Estonia ha solicitado una reunión extraordinaria de la OTAN tras la incursión de cazas rusos en su espacio aéreo. El país báltico considera que este acto puede suponer una amenaza a la seguridad regional y justifica la necesidad de una respuesta colectiva. La situación se enmarca en un contexto de tensiones crecientes entre Rusia y los países occidentales. La petición de Estonia busca abordar la violación de su soberanía y resaltar la importancia de la defensa colectiva entre los aliados de la organización. ▼</h2></div>
+			<div class="contenido">
+				<p>Estonia ha solicitado una reunión extraordinaria de la OTAN tras la incursión de cazas rusos en su espacio aéreo. El país báltico considera que este acto puede suponer una amenaza a la seguridad regional y justifica la necesidad de una respuesta colectiva. La situación se enmarca en un contexto de tensiones crecientes entre Rusia y los países occidentales. La petición de Estonia busca abordar la violación de su soberanía y resaltar la importancia de la defensa colectiva entre los aliados de la organización.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1></h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUzBB-asJEbgLTsgBdF0FOB3QKS75GXJkomln8NUuuz-4pbPvYlwaMvCMo6A&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Un video inédito de Nirvana grabado en 1989 durante un concierto en Tijuana ha salido a la luz después de 35 años y será subastado. La grabación fue realizada por un espectador en el evento, donde la banda desempeñó un papel en la escena musical emergente. La subasta está programada para llevarse a cabo en noviembre y se espera generar un gran interés por parte de coleccionistas y fanáticos de la música. La aparición de esta grabación destaca la importancia histórica de Nirvana en el rock y la cultura musical de su época. ▼</h2></div>
+			<div class="contenido">
+				<p>Un video inédito de Nirvana grabado en 1989 durante un concierto en Tijuana ha salido a la luz después de 35 años y será subastado. La grabación fue realizada por un espectador en el evento, donde la banda desempeñó un papel en la escena musical emergente. La subasta está programada para llevarse a cabo en noviembre y se espera generar un gran interés por parte de coleccionistas y fanáticos de la música. La aparición de esta grabación destaca la importancia histórica de Nirvana en el rock y la cultura musical de su época.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Voluntad Popular apoya acciones militares de Estados Unidos contra el Cartel de los Soles</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSf37XqdeV46hvI9nTHKT7ZU34zaQEBUTwMRpCeDntBUOr_fHcLw6FFlgPL8w&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El partido venezolano Voluntad Popular manifestó su apoyo a las acciones militares de Estados Unidos contra el denominado Cartel de los Soles, un grupo vinculado con la corrupción y el narcotráfico dentro de las fuerzas militares venezolanas. Esta declaración se produce en un contexto de creciente preocupación por la influencia del narcotráfico en el país. El partido resaltó la necesidad de enfrentar a este cartel, que consideran una amenaza a la seguridad y a la democracia en Venezuela. ▼</h2></div>
+			<div class="contenido">
+				<p>El partido venezolano Voluntad Popular manifestó su apoyo a las acciones militares de Estados Unidos contra el denominado Cartel de los Soles, un grupo vinculado con la corrupción y el narcotráfico dentro de las fuerzas militares venezolanas. Esta declaración se produce en un contexto de creciente preocupación por la influencia del narcotráfico en el país. El partido resaltó la necesidad de enfrentar a este cartel, que consideran una amenaza a la seguridad y a la democracia en Venezuela.</p>
+			</div>
+		</div>
+ <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1894152981922395"
+     crossorigin="anonymous"></script>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-1894152981922395"
+     data-ad-slot="4289209070"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ </div> 
+<p style='font-size: 12px; color: #666; text-align: center;'>
+    © 2025 VIA ONLINE. Todos los derechos reservados.  
+    Queda prohibida la reproducción total o parcial de los contenidos de este sitio sin autorización previa y por escrito.  
+    Las marcas, logotipos y contenidos pertenecen a sus respectivos propietarios.  
+    Este sitio web puede contener enlaces a sitios externos sobre los cuales VIA ONLINE no tiene responsabilidad alguna.  
+    El uso de este sitio implica la aceptación de nuestros <a href='https://viaonline.com.ar/TerminosyCondiciones.html'>Términos y Condiciones</a> y nuestra <a href='https://viaonline.com.ar/privacidad.html'>Política de Privacidad</a>.
+</p>
+
+</body>
+</html>
