@@ -1,0 +1,1293 @@
+
+<!DOCTYPE html>
+<html lang='es'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>vIA online</title>
+    <link rel='icon' type='image/png' sizes='512x512' href='https://viaonline.com.ar/Imagenes/favicon.ico'>
+      <!-- Script global de AdSense (va una sola vez en toda la web) -->
+    <meta name='google-adsense-account' content='ca-pub-1894152981922395'>
+
+    <style>
+/* ======== Configuración general ======== */
+body {
+    background-color: #FEFBF4;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+}
+
+/* ======== Logo ======== */
+.logo {
+    text-align: center;
+    margin-bottom: 10px;
+}
+.logo img {
+    max-width: 300px;
+    width: 100%;
+    height: auto;
+}
+
+/* Cada efeméride */
+.Efemeride {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    cursor: pointer;
+    background-color: #FEFBF4;
+    transition: box-shadow 0.3s;
+}
+
+.Efemeride img {
+    width: 100%;
+    height: 200px; /* Altura fija */
+    border-radius: 1px; /* opcional */
+}
+
+.Efemeride h1,
+.Efemeride h2 {
+    margin: 0 0 10px 0;
+    font-size: 16px;
+    text-align: center;
+}
+
+.Efemeride.abierto .contenido {
+    display: block;
+}
+
+/* ======== Encabezado (fecha, clima, dólar, feriado) ======== */
+.encabezado-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; /* permite que los items pasen a otra línea */
+    gap: 10px;       /* espacio entre bloques */
+    margin: 20px auto;   /* centrado horizontal */
+    padding: 0 10px;     /* espacio interno */
+    max-width: 1200px;   /* igual que el contenedor de noticias */
+}
+
+/* Resaltar etiquetas en negrita */
+.encabezado-info .resaltado {
+    font-weight: bold;
+}
+
+/* Versión móvil: apilado */
+@media (max-width: 768px) {
+    .encabezado-info {
+        flex-direction: column; /* apila en vertical */
+        align-items: flex-start; /* alinea a la izquierda */
+    }
+    .encabezado-info > div {
+        width: 100%; /* cada bloque ocupa todo el ancho */
+    }
+}
+
+/* ======== Contenedor de noticias ======== */
+.contenedor-noticias {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 columnas en PC */
+    gap: 20px;
+    margin: 20px auto;
+    max-width: 1200px; /* ancho máximo centrado */
+    width: 100%;
+    padding: 0 25px; /* margen lateral amplio */
+}
+
+/* Responsive: tablet (2 columnas) */
+@media (max-width: 992px) {
+    .contenedor-noticias {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 0 20px;
+    }
+}
+
+/* Responsive: celular (1 columna) */
+@media (max-width: 576px) {
+    .contenedor-noticias {
+        grid-template-columns: 1fr;
+        padding: 0 20px;
+    }
+}
+
+/* ======== Cada noticia ======== */
+.noticia {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    cursor: pointer;
+    background-color: #FEFBF4;
+    transition: box-shadow 0.3s;
+}
+.noticia:hover {
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+.noticia h1, .noticia h2 {
+    margin: 0 0 10px 0;
+    font-size: 16px;
+    text-align: center;
+}
+.noticia img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* ======== Desplegable contenido ======== */
+.contenido {
+    display: none;
+    margin-top: 10px;
+    font-size: 14px;
+    line-height: 1.4;
+}
+.noticia.abierto .contenido {
+    display: block;
+}
+
+/* ======== Publicidad ======== */
+.publicidad {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 20px;
+    background-color: #f0f0f0;
+    font-weight: bold;
+    border-radius: 8px;
+}
+</style>
+
+</head>
+<body>
+
+    <!-- Logo -->
+    <div class='logo'>
+        <a href='https://viaonline.com.ar/'>
+            <img src='https://viaonline.com.ar/Imagenes/Logocorto.png' alt='Imagen centrada'>
+        </a>
+    </div>
+
+    <!-- Fecha y clima -->
+    <div class='encabezado-info'>
+        <div class='fecha'><span class='resaltado'>📆 25 de septiembre de 2025</span></div>
+        <div class='clima'><span class='resaltado'>🌡️ Clima:</span> 15.2º 🌤️ Parcialmente nublado</div>
+        <div class='clima'><span class='resaltado'>📆 Próximo feriado:</span>Día de la  Raza (12/10) viernes 10 de octubre de 2025</div>
+        <div class='clima'><span class='resaltado'>💵 Dólar oficial </span>Compra: 1295 | Venta: 1345</div>
+        <div class='clima'><span class='resaltado'>💵 Dólar blue </span>Compra: 1375 | Venta: 1395</div>
+        <div class='clima'><span class='resaltado'>💵 Dólar tarjeta </span>Compra: 1683.5 | Venta: 1748.5</div>
+                
+    </div>
+<div class='contenedor-noticias'>
+ 
+		<div class='Efemeride' onclick='this.classList.toggle("abierto")'>
+			<h1>Efemérides</h1>
+			<img src='https://viaonline.com.ar/Imagenes/LogoEfemerides.png' alt='Imagen Efemerides'>
+			<div class="desplegable"><h2>Los hechos que marcaron la historia. ▼</h2></div>
+			<div class="contenido">
+				<h2>📖 Eventos</h2><p>1977 - Aproximadamente 4,200 personas participan en la primera edición del Maratón de Chicago.</p><p>1978 - El vuelo PSA 182, un Boeing 727, colisiona en el aire con un Cessna 172 y se estrella en San Diego, con un saldo de 144 personas fallecidas.</p><p>1981 - Belice se une a las Naciones Unidas.</p><p>1983 - Escape de la prisión de Maze: Treinta y ocho prisioneros del IRA, armados con seis armas de fuego, secuestran un camión de comidas de la prisión y rompen las barreras para salir de la prisión de Maze.</p><p>1992 - La NASA lanza el Mars Observer, una sonda de 511 millones de dólares hacia Marte, en la primera misión de EE. UU. al planeta en 17 años. Once meses después, la sonda falla.</p><p>2003 - El terremoto de 8.3 Mw en Hokkaidō sucede justo frente a la costa de Hokkaidō, Japón.</p><p>275 - En Roma (después del asesinato de Aureliano), el Senado proclama a Marco Claudio Tácito emperador.</p><p>762 - Dirigida por Muhammad al-Nafs al-Zakiyya, la rama hasaní de los Alíes inicia la revuelta alí contra el califato abasí.</p>
+                <h2>🎂 Nacimientos</h2><p>1358 - Ashikaga Yoshimitsu, shogun japonés (fallecido en 1408).</p>
+                <h2>✝️ Fallecimientos</h2><p>1066 - Harald Hardrada, rey noruego (nacido en 1015)</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>La justicia de Ecuador aprobó el referéndum impulsado por Noboa para convocar una asamblea constituyente</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQN_ranqnAeBkE4VRWEDNFCW3NR4odDR2zjzXRMWaKa1slcF89ty2yxWvxdPQ&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La justicia en Ecuador ha aprobado el referéndum propuesto por el presidente Daniel Noboa, que busca convocar a una asamblea constituyente. Esta decisión permite que los ciudadanos se pronuncien sobre la creación de una nueva constitución, en un contexto de crisis política y social en el país. Noboa ha argumentado que esta asamblea es necesaria para abordar problemas fundamentales y mejorar el bienestar de los ecuatorianos. La consulta popular se llevará a cabo en un marco legal que busca fortalecer la democracia en el país. ▼</h2></div>
+			<div class="contenido">
+				<p>La justicia en Ecuador ha aprobado el referéndum propuesto por el presidente Daniel Noboa, que busca convocar a una asamblea constituyente. Esta decisión permite que los ciudadanos se pronuncien sobre la creación de una nueva constitución, en un contexto de crisis política y social en el país. Noboa ha argumentado que esta asamblea es necesaria para abordar problemas fundamentales y mejorar el bienestar de los ecuatorianos. La consulta popular se llevará a cabo en un marco legal que busca fortalecer la democracia en el país.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1></h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuOWjd6xB-Cbnf8qBuh2mif8OysqLdXZRZtecWGwcgYA6GZo_ngxL6VQ8Abg&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Un estudiante en Francia atacó a una maestra con un arma blanca, lo que generó una gran conmoción en la comunidad educativa. El joven, de 16 años, estaba bajo la influencia de ideologías extremistas y parecía ser un admirador de Adolf Hitler y las armas. Las autoridades escolares y locales han condenado el incidente, resaltando la importancia de la seguridad en las aulas y la necesidad de abordar la radicalización entre los jóvenes. La escuela fue evacuada y se llevan a cabo investigaciones para entender mejor las circunstancias que llevaron al ataque. ▼</h2></div>
+			<div class="contenido">
+				<p>Un estudiante en Francia atacó a una maestra con un arma blanca, lo que generó una gran conmoción en la comunidad educativa. El joven, de 16 años, estaba bajo la influencia de ideologías extremistas y parecía ser un admirador de Adolf Hitler y las armas. Las autoridades escolares y locales han condenado el incidente, resaltando la importancia de la seguridad en las aulas y la necesidad de abordar la radicalización entre los jóvenes. La escuela fue evacuada y se llevan a cabo investigaciones para entender mejor las circunstancias que llevaron al ataque.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Netanyahu denunciará ante la ONU la capitulación de países que reconocen al Estado Palestino</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgtlacHJ-yGqq5U2LQO0FalT1hB_yblt-U-SS_0u0jtZTaaJ5q2K0ioRt68A&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El primer ministro de Israel, Benjamin Netanyahu, anunció su intención de presentar una queja ante la ONU sobre lo que considera una "capitulación vergonzosa" de los países que han reconocido al Estado palestino. Netanyahu argumenta que este reconocimiento perjudica las negociaciones de paz y fomenta la violencia en la región. La declaración se produce en un momento de creciente tensión entre Israel y Palestina, con Netanyahu reafirmando su postura de que cualquier acuerdo con los palestinos debe garantizar la seguridad de Israel. Además, expresó su rechazo a la idea de un Estado palestino independiente. ▼</h2></div>
+			<div class="contenido">
+				<p>El primer ministro de Israel, Benjamin Netanyahu, anunció su intención de presentar una queja ante la ONU sobre lo que considera una "capitulación vergonzosa" de los países que han reconocido al Estado palestino. Netanyahu argumenta que este reconocimiento perjudica las negociaciones de paz y fomenta la violencia en la región. La declaración se produce en un momento de creciente tensión entre Israel y Palestina, con Netanyahu reafirmando su postura de que cualquier acuerdo con los palestinos debe garantizar la seguridad de Israel. Además, expresó su rechazo a la idea de un Estado palestino independiente.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Rusia insiste en bloquear cualquier avance de Ucrania y descarta que Kiev recupere los territorios invadidos</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7Wu8JG4__cM_H2ygRQASDGHzqOHIoj1FroN2iDxCxJOU-bxlletuQK0i6EQI&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Rusia reafirmó su intención de obstaculizar cualquier avance de Ucrania en la recuperación de los territorios ocupados tras la invasión iniciada en 2022. Un alto funcionario del Kremlin afirmó que no considera posible que Ucrania logre recuperar esos territorios, reiterando la postura de Moscú ante las acciones militares y políticas del país invadido. La declaración se produce en un contexto de esfuerzos continuos de Ucrania por retomar el control de las áreas ocupadas. ▼</h2></div>
+			<div class="contenido">
+				<p>Rusia reafirmó su intención de obstaculizar cualquier avance de Ucrania en la recuperación de los territorios ocupados tras la invasión iniciada en 2022. Un alto funcionario del Kremlin afirmó que no considera posible que Ucrania logre recuperar esos territorios, reiterando la postura de Moscú ante las acciones militares y políticas del país invadido. La declaración se produce en un contexto de esfuerzos continuos de Ucrania por retomar el control de las áreas ocupadas.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Trump propone un plan de 21 puntos para resolver el conflicto en Gaza y solicita apoyo de líderes árabes y musulmanes</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRr1I4LuIv2camTMhO7-n839UwxDYyNdMY099k3XP6N10ij7a7rpyZd5I-UeA&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Donald Trump presentó un plan de 21 puntos destinado a terminar con el conflicto en Gaza. Este plan incluye la participación de líderes árabes y musulmanes, a quienes hizo un llamado para que apoyen sus propuestas. Trump busca establecer un marco que impulse la paz en la región, destacando la importancia de la unidad entre las naciones musulmanas para abordar la crisis. El ex presidente enfatizó su compromiso de trabajar hacia una solución duradera al conflicto, proponiendo acciones concretas que podrían guiar el proceso. ▼</h2></div>
+			<div class="contenido">
+				<p>Donald Trump presentó un plan de 21 puntos destinado a terminar con el conflicto en Gaza. Este plan incluye la participación de líderes árabes y musulmanes, a quienes hizo un llamado para que apoyen sus propuestas. Trump busca establecer un marco que impulse la paz en la región, destacando la importancia de la unidad entre las naciones musulmanas para abordar la crisis. El ex presidente enfatizó su compromiso de trabajar hacia una solución duradera al conflicto, proponiendo acciones concretas que podrían guiar el proceso.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Alemania denuncia sobrevuelo de avión ruso sobre fragatas en el Báltico</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4zX9ygAx3sjErLPHluCK_3IaKwKXA_PGz7QNgVJZZo0y1rDIMm_jJLIBA-ok&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Alemania ha denunciado que un avión ruso sobrevoló una de sus fragatas en el mar Báltico. Este incidente se enmarca en el contexto de tensiones crecientes entre Rusia y la OTAN. Las autoridades alemanas consideran que este acto representa una provocación por parte del Kremlin y una violación de las normas internacionales. Ante la situación, se están evaluando posibles respuestas y medidas de seguridad para proteger a las fuerzas armadas en la región. ▼</h2></div>
+			<div class="contenido">
+				<p>Alemania ha denunciado que un avión ruso sobrevoló una de sus fragatas en el mar Báltico. Este incidente se enmarca en el contexto de tensiones crecientes entre Rusia y la OTAN. Las autoridades alemanas consideran que este acto representa una provocación por parte del Kremlin y una violación de las normas internacionales. Ante la situación, se están evaluando posibles respuestas y medidas de seguridad para proteger a las fuerzas armadas en la región.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Nuevo sismo de magnitud 6.5 sacude el occidente de Venezuela</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNfxk9Kj94x4z3ONen8N5jZO6VV2eBhhzPR1vV2IFYOracf7rbXbrwX8WW7A&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Un sismo de 6.5 grados de magnitud se registró en el occidente de Venezuela, afectando principalmente los estados de Mérida y Táchira. El movimiento telúrico se sintió con fuerza en varias zonas, generando alarma entre la población. Hasta el momento, no se reportan víctimas fatales, pero las autoridades se encuentran realizando evaluaciones para determinar posibles daños materiales. La situación ha llevado a las autoridades a activar protocolos de seguridad. ▼</h2></div>
+			<div class="contenido">
+				<p>Un sismo de 6.5 grados de magnitud se registró en el occidente de Venezuela, afectando principalmente los estados de Mérida y Táchira. El movimiento telúrico se sintió con fuerza en varias zonas, generando alarma entre la población. Hasta el momento, no se reportan víctimas fatales, pero las autoridades se encuentran realizando evaluaciones para determinar posibles daños materiales. La situación ha llevado a las autoridades a activar protocolos de seguridad.</p>
+			</div>
+		</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publiciteLite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Wall Street cerró la semana en máximos históricos</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlV3j_yJbY0dB51YMmqymh5LfIYJNLSe2lnhBf0SEXIULhathUeXZiJAgjTg&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Wall Street cerró la semana alcanzando máximos históricos, impulsado por el optimismo en torno a la economía estadounidense y el desempeño positivo de varias grandes empresas. Los índices Dow Jones, S&P 500 y Nasdaq registraron ganancias significativas, reflejando la confianza de los inversores en la recuperación económica. Las acciones de tecnología lideraron el crecimiento, mientras que los analistas resaltaron que un entorno de tasas de interés estables favorece el clima de inversión. La combinación de resultados empresariales sólidos y expectativas de políticas económicas favorables contribuyó a este récord en el mercado. ▼</h2></div>
+			<div class="contenido">
+				<p>Wall Street cerró la semana alcanzando máximos históricos, impulsado por el optimismo en torno a la economía estadounidense y el desempeño positivo de varias grandes empresas. Los índices Dow Jones, S&P 500 y Nasdaq registraron ganancias significativas, reflejando la confianza de los inversores en la recuperación económica. Las acciones de tecnología lideraron el crecimiento, mientras que los analistas resaltaron que un entorno de tasas de interés estables favorece el clima de inversión. La combinación de resultados empresariales sólidos y expectativas de políticas económicas favorables contribuyó a este récord en el mercado.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>La justicia francesa decidirá sobre el futuro de Nicolás Sarkozy por presunta recepción de fondos ilícitos</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPZ3Lx3RuBwssPb9sgwzbYqGgfM_PSL1LDtYf1yUIEMTW3nkdk-JNcf-epIVM&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La justicia francesa debe decidir sobre el futuro de Nicolas Sarkozy, quien está acusado de recibir fondos ilegales durante su campaña presidencial de 2007. Este martes se llevará a cabo una audiencia que podría determinar si el ex presidente enfrenta prisión por estos cargos. La investigación se centra en la presunta financiación de su campaña por parte de la mandataria libia Muamar Gadafi, lo que ha generado un gran interés mediático y repercusiones políticas en el país. La sentencia podría tener un impacto significativo en la carrera política de Sarkozy y en el panorama electoral francés. ▼</h2></div>
+			<div class="contenido">
+				<p>La justicia francesa debe decidir sobre el futuro de Nicolas Sarkozy, quien está acusado de recibir fondos ilegales durante su campaña presidencial de 2007. Este martes se llevará a cabo una audiencia que podría determinar si el ex presidente enfrenta prisión por estos cargos. La investigación se centra en la presunta financiación de su campaña por parte de la mandataria libia Muamar Gadafi, lo que ha generado un gran interés mediático y repercusiones políticas en el país. La sentencia podría tener un impacto significativo en la carrera política de Sarkozy y en el panorama electoral francés.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Costa Rica solicita a la comunidad internacional intervenir ante la crisis humanitaria en Venezuela, Haití y Nicaragua</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRh8p_bt2SDe1XmYKok2Mk-BZbNLkRdjJUXQexrpVRCJSbeoDEPu06nll_XDhw&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Costa Rica ha solicitado a la comunidad internacional que tome medidas ante la crisis humanitaria que afecta a Venezuela, Haití y Nicaragua. Esta petición se realizó durante la Asamblea General de la Organización de las Naciones Unidas, donde representantes costarricenses expresaron su preocupación por las condiciones de vida y el aumento de migrantes provenientes de estos países. El llamado a la acción se centra en la necesidad de un enfoque coordinado que aborde las causas subyacentes de estas crisis y garantice la protección de los derechos humanos de las personas afectadas. ▼</h2></div>
+			<div class="contenido">
+				<p>Costa Rica ha solicitado a la comunidad internacional que tome medidas ante la crisis humanitaria que afecta a Venezuela, Haití y Nicaragua. Esta petición se realizó durante la Asamblea General de la Organización de las Naciones Unidas, donde representantes costarricenses expresaron su preocupación por las condiciones de vida y el aumento de migrantes provenientes de estos países. El llamado a la acción se centra en la necesidad de un enfoque coordinado que aborde las causas subyacentes de estas crisis y garantice la protección de los derechos humanos de las personas afectadas.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Bessent confirma entrevistas a 11 candidatos para presidir la Reserva Federal</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqi5lr7_HF8LeUZk7msmF4SXWRl2Beewv750tVvZneN-vyg_SrbQ1P7gGjSWo&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El secretario del Tesoro, Bessent, ha anunciado que está en proceso de entrevistar a 11 candidatos para el cargo de presidente de la Reserva Federal. Esta búsqueda responde a la necesidad de encontrar un nuevo líder que pueda manejar los desafíos económicos actuales y dirigir la política monetaria del país. La selección del nuevo presidente es crucial, ya que el puesto desempeña un papel fundamental en la estabilidad económica. Bessent no ha revelado los nombres de los candidatos ni un plazo específico para tomar una decisión. ▼</h2></div>
+			<div class="contenido">
+				<p>El secretario del Tesoro, Bessent, ha anunciado que está en proceso de entrevistar a 11 candidatos para el cargo de presidente de la Reserva Federal. Esta búsqueda responde a la necesidad de encontrar un nuevo líder que pueda manejar los desafíos económicos actuales y dirigir la política monetaria del país. La selección del nuevo presidente es crucial, ya que el puesto desempeña un papel fundamental en la estabilidad económica. Bessent no ha revelado los nombres de los candidatos ni un plazo específico para tomar una decisión.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>La contundente frase de Scottie Pippen sobre su relación con Michael Jordan</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQz3eLLNMwlcZWQnXuhNFQHQnrPbs09lJnn3Dr0TQFtAaQdnSGMD6RzE89NVA&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Scottie Pippen habló sobre su relación con Michael Jordan en una reciente entrevista, donde destacó que no tiene resentimientos hacia él, pero sí cuestionó su carácter. Pippen recordó que, a pesar de los éxitos que tuvieron juntos en los Chicago Bulls, las dinámicas de su vínculo no fueron perfectas. Además, hizo énfasis en sus diferencias y en cómo la percepción del público a menudo ha simplificado su relación, lo que ha llevado a malentendidos sobre sus interacciones. ▼</h2></div>
+			<div class="contenido">
+				<p>Scottie Pippen habló sobre su relación con Michael Jordan en una reciente entrevista, donde destacó que no tiene resentimientos hacia él, pero sí cuestionó su carácter. Pippen recordó que, a pesar de los éxitos que tuvieron juntos en los Chicago Bulls, las dinámicas de su vínculo no fueron perfectas. Además, hizo énfasis en sus diferencias y en cómo la percepción del público a menudo ha simplificado su relación, lo que ha llevado a malentendidos sobre sus interacciones.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>El padre de Lamine Yamal lanza dardos tras la gala del Balón de Oro: algo muy raro ha sucedido</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1IeoLSyjvDWBYMZbwHNBSiibOxs0-P1yL3FHVs5dZ7-OzpNdHDIsZEHgGCw&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>En una reciente gala del Balón de Oro, el padre de Lamine Yamal expresó su descontento con los resultados, insinuando que hubo irregularidades en la selección de los ganadores. Yamal destacó que la actuación de su hijo, quien es un joven talento del fútbol, merece un reconocimiento más acorde con su desempeño. La crítica se centra en que ciertos jugadores no fueron considerados de manera justa, lo que ha generado controversia en el ámbito deportivo y ha suscitado reacciones en redes sociales. ▼</h2></div>
+			<div class="contenido">
+				<p>En una reciente gala del Balón de Oro, el padre de Lamine Yamal expresó su descontento con los resultados, insinuando que hubo irregularidades en la selección de los ganadores. Yamal destacó que la actuación de su hijo, quien es un joven talento del fútbol, merece un reconocimiento más acorde con su desempeño. La crítica se centra en que ciertos jugadores no fueron considerados de manera justa, lo que ha generado controversia en el ámbito deportivo y ha suscitado reacciones en redes sociales.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Trump denuncia sabotaje y exige arrestos por fallas en su participación en la ONU</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjvA86cxd6iABJgnQPPMBstxQqbwb56YwXMOtl0G4Vv8Pl15KRVzdhQFjfYg&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Donald Trump denunció lo que calificó como un sabotaje en su participación en la Asamblea General de la ONU, señalando que hubo tres incidentes que afectaron su intervención. Exigió que se investiguen y se realicen arrestos relacionados con lo que considera un intento de boicotear su discurso. Trump hizo estas declaraciones durante una reunión en la que abordó su descontento con el tratamiento que recibió en el evento internacional y la manera en que fueron gestionadas las diligencias relacionadas con su asistencia. ▼</h2></div>
+			<div class="contenido">
+				<p>Donald Trump denunció lo que calificó como un sabotaje en su participación en la Asamblea General de la ONU, señalando que hubo tres incidentes que afectaron su intervención. Exigió que se investiguen y se realicen arrestos relacionados con lo que considera un intento de boicotear su discurso. Trump hizo estas declaraciones durante una reunión en la que abordó su descontento con el tratamiento que recibió en el evento internacional y la manera en que fueron gestionadas las diligencias relacionadas con su asistencia.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Messi brilla con dos goles y una asistencia en la victoria del Inter Miami sobre New York City</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqPC__D-PesPsNEMOhN_HVii_R-dPtVNNdhl8g59kEMmweXmbX9kJBi3NmBwA&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Lionel Messi brilló en el partido entre el Inter Miami y el New York City, donde contribuyó de manera significativa al triunfo de su equipo. El jugador argentino anotó dos goles de gran calidad y además proporcionó una asistencia, destacándose una vez más como el jugador clave del encuentro. Con esta victoria, el Inter Miami continúa su camino hacia la clasificación en la liga, evidenciando el impacto positivo de Messi desde su llegada al club. ▼</h2></div>
+			<div class="contenido">
+				<p>Lionel Messi brilló en el partido entre el Inter Miami y el New York City, donde contribuyó de manera significativa al triunfo de su equipo. El jugador argentino anotó dos goles de gran calidad y además proporcionó una asistencia, destacándose una vez más como el jugador clave del encuentro. Con esta victoria, el Inter Miami continúa su camino hacia la clasificación en la liga, evidenciando el impacto positivo de Messi desde su llegada al club.</p>
+			</div>
+		</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publiciteLite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Protestas por Gaza en Italia con huelga general, disturbios y detenidos</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRt-GyTjTWRnGbo7gkxnixvnc_UHI24hY7n7PdMKqRVUDP8WsvdLD2714Ij57w&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>En Italia, se llevaron a cabo protestas masivas en apoyo a Gaza, que resultaron en disturbios y enfrentamientos con la policía. Las manifestaciones comenzaron en varias ciudades y llevaron a la convocatoria de una huelga general. Las autoridades informaron sobre varios detenidos y daños en la propiedad pública. Los organizadores de las protestas exigieron un alto al fuego y el fin de las hostilidades en la región, mientras que las fuerzas del orden intentaron controlar la situación. Las tensiones se intensificaron a medida que la población se manifestaba enérgicamente contra la situación en Gaza. ▼</h2></div>
+			<div class="contenido">
+				<p>En Italia, se llevaron a cabo protestas masivas en apoyo a Gaza, que resultaron en disturbios y enfrentamientos con la policía. Las manifestaciones comenzaron en varias ciudades y llevaron a la convocatoria de una huelga general. Las autoridades informaron sobre varios detenidos y daños en la propiedad pública. Los organizadores de las protestas exigieron un alto al fuego y el fin de las hostilidades en la región, mientras que las fuerzas del orden intentaron controlar la situación. Las tensiones se intensificaron a medida que la población se manifestaba enérgicamente contra la situación en Gaza.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Contaminación del aire afecta la salud ocular de los niños, advierten científicos.</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqbuphFp46_7Efs-9l0Ep3poCbcNcfBep8hWozUYLa4LZltGga_Lyl7zbgVmA&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Investigadores han advertido que la contaminación del aire puede tener efectos perjudiciales en la salud ocular de los niños. Estudios recientes indican que la exposición a altos niveles de partículas nocivas en el aire está relacionada con un aumento en problemas visuales en esta población. Los científicos subrayan la importancia de abordar el deterioro de la calidad del aire para proteger la salud infantil y sugieren que se requiere más investigación para comprender completamente las implicaciones de la contaminación en la visión de los más jóvenes. ▼</h2></div>
+			<div class="contenido">
+				<p>Investigadores han advertido que la contaminación del aire puede tener efectos perjudiciales en la salud ocular de los niños. Estudios recientes indican que la exposición a altos niveles de partículas nocivas en el aire está relacionada con un aumento en problemas visuales en esta población. Los científicos subrayan la importancia de abordar el deterioro de la calidad del aire para proteger la salud infantil y sugieren que se requiere más investigación para comprender completamente las implicaciones de la contaminación en la visión de los más jóvenes.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>María Corina Machado alerta sobre el grave deterioro de salud de un activista de Vente Venezuela detenido hace 9 meses</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQx-K3BcKcsSr5pF73T0gp5aOBkH149EzM-sc1Aw6Pg4_K_TiCQnsbZQrVIxA&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>María Corina Machado, líder del partido Vente Venezuela, alertó sobre el deterioro de la salud de un activista de su organización, quien ha estado detenido por nueve meses. Denunció que el prisionero, quien enfrenta un juicio por razones políticas, sufre problemas de salud graves que no han sido atendidos adecuadamente durante su encarcelamiento. La situación ha sido vista como un ejemplo del mal estado de los derechos humanos en Venezuela, donde se ha intensificado la represión contra opositores al gobierno. Machado hizo un llamado a la comunidad internacional para que tome acciones en defensa de los derechos de los prisioneros políticos en el país. ▼</h2></div>
+			<div class="contenido">
+				<p>María Corina Machado, líder del partido Vente Venezuela, alertó sobre el deterioro de la salud de un activista de su organización, quien ha estado detenido por nueve meses. Denunció que el prisionero, quien enfrenta un juicio por razones políticas, sufre problemas de salud graves que no han sido atendidos adecuadamente durante su encarcelamiento. La situación ha sido vista como un ejemplo del mal estado de los derechos humanos en Venezuela, donde se ha intensificado la represión contra opositores al gobierno. Machado hizo un llamado a la comunidad internacional para que tome acciones en defensa de los derechos de los prisioneros políticos en el país.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Wall Street cerró nuevamente en números rojos</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3k-8AspDNM35hV5EO70I1UoEdPXviJhijQTbfpuTUoK6CsPEGj3__eJCg-G4&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Wall Street cerró nuevamente en baja, continuando la tendencia de la semana. La presión de los rendimientos de los bonos del Tesoro y la preocupación por el aumento de las tasas de interés influyeron en el desempeño del mercado. Los índices Dow Jones, S&P 500 y Nasdaq experimentaron caídas significativas, afectando la confianza de los inversores. Esta situación se da en un contexto de incertidumbre económica y expectativas sobre las decisiones de la Reserva Federal. ▼</h2></div>
+			<div class="contenido">
+				<p>Wall Street cerró nuevamente en baja, continuando la tendencia de la semana. La presión de los rendimientos de los bonos del Tesoro y la preocupación por el aumento de las tasas de interés influyeron en el desempeño del mercado. Los índices Dow Jones, S&P 500 y Nasdaq experimentaron caídas significativas, afectando la confianza de los inversores. Esta situación se da en un contexto de incertidumbre económica y expectativas sobre las decisiones de la Reserva Federal.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Netanyahu promete derrotar a Hamas y critica la rendición de líderes internacionales ante el terrorismo</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDVyk8KFoVrNef1Q9dQF7Au9m816eYfp6wYqhXQiYbzrDiMOc8TQwGbcTqZg&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El primer ministro de Israel, Benjamin Netanyahu, afirmó su compromiso de derrotar a Hamas y expresó su descontento con ciertos líderes internacionales que, según él, han mostrado una actitud de rendición frente al terrorismo. En un discurso, Netanyahu subrayó la importancia de fortalecer la lucha contra los grupos terroristas y defendió la postura de su gobierno ante la situación actual en la región. Reiteró que la seguridad de Israel es una prioridad y condenó cualquier forma de alineación con movimientos que fomentan el extremismo. ▼</h2></div>
+			<div class="contenido">
+				<p>El primer ministro de Israel, Benjamin Netanyahu, afirmó su compromiso de derrotar a Hamas y expresó su descontento con ciertos líderes internacionales que, según él, han mostrado una actitud de rendición frente al terrorismo. En un discurso, Netanyahu subrayó la importancia de fortalecer la lucha contra los grupos terroristas y defendió la postura de su gobierno ante la situación actual en la región. Reiteró que la seguridad de Israel es una prioridad y condenó cualquier forma de alineación con movimientos que fomentan el extremismo.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Expertos en drones chinos asesoraron a fabricante de armas en Rusia para la invasión a Ucrania</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSPInIn9l_s3pM58B1oM9Mz4ZjSHWahh9m49faphIdHQZ_-TBttXi-8m3jUw&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Expertos en drones de China han brindado asesoramiento a un fabricante de armamento en Rusia, el cual suministra armas a las tropas de Vladimir Putin en el conflicto de Ucrania. Esta colaboración se enmarca en el uso de tecnología avanzada para mejorar las capacidades militares rusas en la guerra en curso. La implicación de China en la producción y desarrollo de tales herramientas bélicas refleja una creciente cooperación entre ambos países en el ámbito militar. ▼</h2></div>
+			<div class="contenido">
+				<p>Expertos en drones de China han brindado asesoramiento a un fabricante de armamento en Rusia, el cual suministra armas a las tropas de Vladimir Putin en el conflicto de Ucrania. Esta colaboración se enmarca en el uso de tecnología avanzada para mejorar las capacidades militares rusas en la guerra en curso. La implicación de China en la producción y desarrollo de tales herramientas bélicas refleja una creciente cooperación entre ambos países en el ámbito militar.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>EEUU divulgó nuevas imágenes del entrenamiento de su grupo anfibio en el Caribe para operaciones contra el narcotráfico</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNV9G6APxIfUTcz8dPjHFgsrNlHaHLe8q_CGPsxpVL4gediHbX9u5zajvmhJg&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Estados Unidos ha publicado nuevas imágenes del entrenamiento de su grupo anfibio en el Caribe, enfocado en operaciones contra el narcotráfico. Este ejercicio militar tiene como objetivo mejorar las capacidades de intervención en situaciones de tráfico de drogas, y se enmarca dentro de los esfuerzos de la administración estadounidense para combatir el narcotráfico en la región. Las imágenes muestran a los efectivos en diversas actividades de entrenamiento que simulan escenarios de operaciones en el mar. ▼</h2></div>
+			<div class="contenido">
+				<p>Estados Unidos ha publicado nuevas imágenes del entrenamiento de su grupo anfibio en el Caribe, enfocado en operaciones contra el narcotráfico. Este ejercicio militar tiene como objetivo mejorar las capacidades de intervención en situaciones de tráfico de drogas, y se enmarca dentro de los esfuerzos de la administración estadounidense para combatir el narcotráfico en la región. Las imágenes muestran a los efectivos en diversas actividades de entrenamiento que simulan escenarios de operaciones en el mar.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>CIDH exige acceso a Venezuela para verificar denuncias de violaciones a los derechos humanos</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZnZ8k8nmtxejirGTwKKJ_8TUeWSOWP2GZDWr-2BUDMpHrGgDEUfsZZYbhag&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La Comisión Interamericana de Derechos Humanos (CIDH) ha demandado acceso a Venezuela para investigar denuncias de violaciones a los derechos humanos. La comisionada Antonia Urrejola destacó la necesidad de verificar las condiciones en las que se encuentran los detenidos, especialmente en lugares como El Helicoide, donde se reportan casos de tortura y maltratos. La CIDH subrayó la importancia de seguir de cerca la situación de derechos humanos en el país y la urgencia de que se permita su ingreso a la nación para cumplir con su mandato de protección a los derechos fundamentales. ▼</h2></div>
+			<div class="contenido">
+				<p>La Comisión Interamericana de Derechos Humanos (CIDH) ha demandado acceso a Venezuela para investigar denuncias de violaciones a los derechos humanos. La comisionada Antonia Urrejola destacó la necesidad de verificar las condiciones en las que se encuentran los detenidos, especialmente en lugares como El Helicoide, donde se reportan casos de tortura y maltratos. La CIDH subrayó la importancia de seguir de cerca la situación de derechos humanos en el país y la urgencia de que se permita su ingreso a la nación para cumplir con su mandato de protección a los derechos fundamentales.</p>
+			</div>
+		</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publiciteLite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Impactantes imágenes desde el espacio del supertifón Ragasa que sacude Filipinas y el sur de China</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR72SQiJP67lzu19j89GLVraImWMYeUG_h1tjR18svMjddDM1ZF8F8p80Wb5eM&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Un potente supertifón llamado Ragasa está afectando Filipinas y el sur de China, provocando vientos intensos y lluvias torrenciales. Las imágenes satelitales muestran la magnitud del fenómeno, que ha generado advertencias de evacuación y ha dejado a miles de personas en riesgo. Las autoridades están en alerta máxima para mitigar los daños y garantizar la seguridad de la población en las áreas impactadas. Se espera que el tifón continúe su trayectoria, lo que podría intensificar aún más sus efectos destructivos en la región. ▼</h2></div>
+			<div class="contenido">
+				<p>Un potente supertifón llamado Ragasa está afectando Filipinas y el sur de China, provocando vientos intensos y lluvias torrenciales. Las imágenes satelitales muestran la magnitud del fenómeno, que ha generado advertencias de evacuación y ha dejado a miles de personas en riesgo. Las autoridades están en alerta máxima para mitigar los daños y garantizar la seguridad de la población en las áreas impactadas. Se espera que el tifón continúe su trayectoria, lo que podría intensificar aún más sus efectos destructivos en la región.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Dinamarca declara estado de alerta por incursión de drones en aeropuertos y advierte sobre ataque híbrido</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSn_jpGoeMS65_4okrgw380pNN5ySrsJcBRxI4EvLkf1fdPseWUxQYIE3BfZlg&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Dinamarca ha declarado el estado de alerta tras la incursión de drones en sus aeropuertos, lo que ha generado preocupaciones sobre posibles ataques híbridos. Las autoridades han intensificado las medidas de seguridad en los espacios aéreos y las instalaciones aeroportuarias, destacando la necesidad de estar preparadas ante amenazas no convencionales. El gobierno danés advierte que estas actividades pueden estar relacionadas con un aumento en la tensión geopolítica en la región. Además, se están llevando a cabo investigaciones para determinar los responsables de estas acciones que han perturbado la normalidad en el tráfico aéreo. ▼</h2></div>
+			<div class="contenido">
+				<p>Dinamarca ha declarado el estado de alerta tras la incursión de drones en sus aeropuertos, lo que ha generado preocupaciones sobre posibles ataques híbridos. Las autoridades han intensificado las medidas de seguridad en los espacios aéreos y las instalaciones aeroportuarias, destacando la necesidad de estar preparadas ante amenazas no convencionales. El gobierno danés advierte que estas actividades pueden estar relacionadas con un aumento en la tensión geopolítica en la región. Además, se están llevando a cabo investigaciones para determinar los responsables de estas acciones que han perturbado la normalidad en el tráfico aéreo.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Wall Street cerró a la baja tras marcar varios récords</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTH2-olzVDHI1MRu0MZcvbmDi1_anq-NU-y2poX2XH_iwah4Mwrz9FQ6TCkJg&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Wall Street experimentó una caída después de alcanzar varios récords en días recientes. Los índices bursátiles principales, como el Dow Jones, el S&P 500 y el Nasdaq, sufrieron descensos significativos. Los expertos atribuyen esta baja a preocupaciones sobre la política monetaria de la Reserva Federal y la posible continuación de un aumento en las tasas de interés. Además, se mencionó la incertidumbre económica global y su efecto en el mercado. Los inversores reaccionaron ante estos factores, lo que provocó una venta masiva de acciones en diversas industrias. ▼</h2></div>
+			<div class="contenido">
+				<p>Wall Street experimentó una caída después de alcanzar varios récords en días recientes. Los índices bursátiles principales, como el Dow Jones, el S&P 500 y el Nasdaq, sufrieron descensos significativos. Los expertos atribuyen esta baja a preocupaciones sobre la política monetaria de la Reserva Federal y la posible continuación de un aumento en las tasas de interés. Además, se mencionó la incertidumbre económica global y su efecto en el mercado. Los inversores reaccionaron ante estos factores, lo que provocó una venta masiva de acciones en diversas industrias.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Los mejores memes del Balón de Oro que Dembélé le ganó a Lamine Yamal</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQUYw9A9VqbmbkVPH-VlodyjVcZNZ5qqQqesTRIR8tO4d_572MIemRkJJNeL8&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El artículo destaca las reacciones y los mejores memes generados tras la entrega del Balón de Oro, en la que Ousmane Dembélé se llevó el premio a mejor jugador, superando a Lamine Yamal. Las reacciones en redes sociales fueron diversas, incluyendo las de celebridades como Nicki Nicole, y futbolistas como Lionel Messi y Kylian Mbappé. El evento generó una ola de creatividad y humor en la comunidad en línea, que se reflejó en los memes que circulaban junto a las reacciones de los involucrados. ▼</h2></div>
+			<div class="contenido">
+				<p>El artículo destaca las reacciones y los mejores memes generados tras la entrega del Balón de Oro, en la que Ousmane Dembélé se llevó el premio a mejor jugador, superando a Lamine Yamal. Las reacciones en redes sociales fueron diversas, incluyendo las de celebridades como Nicki Nicole, y futbolistas como Lionel Messi y Kylian Mbappé. El evento generó una ola de creatividad y humor en la comunidad en línea, que se reflejó en los memes que circulaban junto a las reacciones de los involucrados.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Gabriel Boric presenta oficialmente la candidatura de Michelle Bachelet a secretaria general de la ONU</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSe4GqPm44q1Pesvb5k7iI5mcrYxMd-D_sAe1Aea0f7J0n1PtZzAw0esTE5pFE&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Gabriel Boric, presidente de Chile, anunció oficialmente la candidatura de Michelle Bachelet para convertirse en la nueva secretaria general de la ONU. En la presentación de su postulación, Boric destacó el liderazgo y la experiencia de Bachelet, enfatizando su capacidad para abordar los desafíos globales actuales. La nominación busca fortalecer la representación de América Latina en organismos internacionales. Bachelet fue presidenta de Chile en dos ocasiones y tiene un amplio currículum en derechos humanos a nivel internacional, lo que la califica para el cargo en la ONU. ▼</h2></div>
+			<div class="contenido">
+				<p>Gabriel Boric, presidente de Chile, anunció oficialmente la candidatura de Michelle Bachelet para convertirse en la nueva secretaria general de la ONU. En la presentación de su postulación, Boric destacó el liderazgo y la experiencia de Bachelet, enfatizando su capacidad para abordar los desafíos globales actuales. La nominación busca fortalecer la representación de América Latina en organismos internacionales. Bachelet fue presidenta de Chile en dos ocasiones y tiene un amplio currículum en derechos humanos a nivel internacional, lo que la califica para el cargo en la ONU.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Maduro amenaza con imponer estado de conmoción en Venezuela ante cerco naval de EE.UU.</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_o9e1NGsuB5UaV5C7G_hIRqV4xLeLbhI9Lg_26uQrHKm4tFPxjS-3R28FRYI&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El presidente de Venezuela, Nicolás Maduro, advirtió sobre la posibilidad de instaurar un estado de conmoción nacional debido a la presión provocada por un cerco naval impuesto por Estados Unidos. Esta medida militar estadounidense, según Maduro, afecta la soberanía del país y causa un estado de alerta. El líder venezolano también destacó que el gobierno está preparado para defenderse ante cualquier amenaza externa. La tensión entre Venezuela y EE.UU. ha aumentado en medio de críticas al régimen venezolano y la situación económica del país. ▼</h2></div>
+			<div class="contenido">
+				<p>El presidente de Venezuela, Nicolás Maduro, advirtió sobre la posibilidad de instaurar un estado de conmoción nacional debido a la presión provocada por un cerco naval impuesto por Estados Unidos. Esta medida militar estadounidense, según Maduro, afecta la soberanía del país y causa un estado de alerta. El líder venezolano también destacó que el gobierno está preparado para defenderse ante cualquier amenaza externa. La tensión entre Venezuela y EE.UU. ha aumentado en medio de críticas al régimen venezolano y la situación económica del país.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Luis Enrique reacciona efusivamente al ver a Ousmane Dembélé con el Balón de Oro</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSb_gCQ2Z6ocZpFpyEahXsMtcexeOgP51j_Yy7_k0BEf4oX0nF1bC1tJTNDw&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Luis Enrique mostró una reacción entusiasta al ver a Ousmane Dembélé con el Balón de Oro. Durante una ceremonia en la que se presentó el premio, el entrenador del París Saint-Germain expresó su alegría y sorpresa al reconocer el logro del jugador. La imagen se volvió viral, reflejando la conexión entre ambos y la importancia del reconocimiento individual en el fútbol. Dembélé ha tenido un impacto significativo en su equipo, y este galardón subraya su evolución como futbolista. ▼</h2></div>
+			<div class="contenido">
+				<p>Luis Enrique mostró una reacción entusiasta al ver a Ousmane Dembélé con el Balón de Oro. Durante una ceremonia en la que se presentó el premio, el entrenador del París Saint-Germain expresó su alegría y sorpresa al reconocer el logro del jugador. La imagen se volvió viral, reflejando la conexión entre ambos y la importancia del reconocimiento individual en el fútbol. Dembélé ha tenido un impacto significativo en su equipo, y este galardón subraya su evolución como futbolista.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Una tribu africana funda un país independiente en territorio de Escocia: el reino de Kubala</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbdGF5IGH3nzBE3m5dySrtnv0-npy2IJC57Vd_cOQrIKQoeLSqeDtBIUX0rsQ&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Una tribu africana ha proclamado la creación de un nuevo país llamado Reino de Kubala en un territorio ubicado en Escocia. El movimiento, impulsado por la búsqueda de autogobierno y la preservación de su identidad cultural, ha generado un debate sobre la legalidad y las implicaciones de establecer una nación en un territorio ya soberano. La comunidad de la tribu, quienes se han asentado en la zona, sostiene que su lucha se centra en la reivindicación de sus derechos y la dignidad como pueblo. Este acontecimiento ha despertado el interés de la opinión pública y de analistas que consideran su relevancia en el contexto de las autodeterminaciones en el mundo contemporáneo. ▼</h2></div>
+			<div class="contenido">
+				<p>Una tribu africana ha proclamado la creación de un nuevo país llamado Reino de Kubala en un territorio ubicado en Escocia. El movimiento, impulsado por la búsqueda de autogobierno y la preservación de su identidad cultural, ha generado un debate sobre la legalidad y las implicaciones de establecer una nación en un territorio ya soberano. La comunidad de la tribu, quienes se han asentado en la zona, sostiene que su lucha se centra en la reivindicación de sus derechos y la dignidad como pueblo. Este acontecimiento ha despertado el interés de la opinión pública y de analistas que consideran su relevancia en el contexto de las autodeterminaciones en el mundo contemporáneo.</p>
+			</div>
+		</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publiciteLite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>La OMS afirmó que no hay evidencia científica que relacione el uso de paracetamol en embarazadas con el autismo</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQwnp19ntD-FwVowZjhiV7B3DxPOZk4VixybqXCWZpruSzorfPZYO3KuPquA&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La Organización Mundial de la Salud (OMS) declaró que actualmente no existen pruebas científicas que demuestren una relación entre el uso de paracetamol por mujeres embarazadas y un aumento en el riesgo de autismo en sus hijos. Esta afirmación surge tras un incremento en la preocupación pública sobre los efectos del paracetamol en el desarrollo infantil. La OMS destacó la necesidad de más investigaciones, pero afirmó que los datos disponibles no respaldan la idea de que su uso durante el embarazo sea perjudicial en este contexto. ▼</h2></div>
+			<div class="contenido">
+				<p>La Organización Mundial de la Salud (OMS) declaró que actualmente no existen pruebas científicas que demuestren una relación entre el uso de paracetamol por mujeres embarazadas y un aumento en el riesgo de autismo en sus hijos. Esta afirmación surge tras un incremento en la preocupación pública sobre los efectos del paracetamol en el desarrollo infantil. La OMS destacó la necesidad de más investigaciones, pero afirmó que los datos disponibles no respaldan la idea de que su uso durante el embarazo sea perjudicial en este contexto.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Régimen de Corea del Norte dispone de hasta dos toneladas de uranio enriquecido para fabricar múltiples armas atómicas</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKj9071G2TyVkwSRD9FdH4UFf9h3bJ742wIlomPukneALYFfGinz9bpafC6w&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El régimen de Corea del Norte cuenta con una cantidad significativa de uranio enriquecido, estimándose entre 1.000 y 2.000 kilogramos. Esta reserva podría permitirle desarrollar múltiples armas nucleares. La información proviene de un informe que analiza las capacidades nucleares y el potencial militar del país, así como las implicaciones que esto tiene para la seguridad en la región. Las autoridades han expresado preocupación no solo por la cantidad de uranio disponible, sino también por la continuidad y avance de los programas nucleares de Corea del Norte, a pesar de las sanciones internacionales. ▼</h2></div>
+			<div class="contenido">
+				<p>El régimen de Corea del Norte cuenta con una cantidad significativa de uranio enriquecido, estimándose entre 1.000 y 2.000 kilogramos. Esta reserva podría permitirle desarrollar múltiples armas nucleares. La información proviene de un informe que analiza las capacidades nucleares y el potencial militar del país, así como las implicaciones que esto tiene para la seguridad en la región. Las autoridades han expresado preocupación no solo por la cantidad de uranio disponible, sino también por la continuidad y avance de los programas nucleares de Corea del Norte, a pesar de las sanciones internacionales.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Nvidia invertirá 100 mil millones de dólares en OpenAI para desarrollar centro de datos</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRumNUBP3muU5qO8D6M3YMiWE_E6gfYpIpGZ3MBeUpZbn9BCY9vfl6yX3TMNAg&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>NVIDIA anunció su intención de invertir 100,000 millones de dólares en OpenAI para el desarrollo de un centro de datos avanzado. Este proyecto busca fortalecer la infraestructura tecnológica necesaria para el avance de la inteligencia artificial. La inversión refleja el creciente interés de NVIDIA en el sector de la IA, así como su compromiso de apoyar a OpenAI en la expansión de sus capacidades y recursos. La colaboración entre ambas empresas podría acelerar la investigación y el desarrollo de nuevas aplicaciones en el campo de la inteligencia artificial. ▼</h2></div>
+			<div class="contenido">
+				<p>NVIDIA anunció su intención de invertir 100,000 millones de dólares en OpenAI para el desarrollo de un centro de datos avanzado. Este proyecto busca fortalecer la infraestructura tecnológica necesaria para el avance de la inteligencia artificial. La inversión refleja el creciente interés de NVIDIA en el sector de la IA, así como su compromiso de apoyar a OpenAI en la expansión de sus capacidades y recursos. La colaboración entre ambas empresas podría acelerar la investigación y el desarrollo de nuevas aplicaciones en el campo de la inteligencia artificial.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>La maldición de los ganadores del Balón de Oro antes de la Copa del Mundo</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFBdJBAq6gIjDyEqd6RQAF7beUGcPR45sV7UB9h8CeRDsRTiwNNPQDcbBRTA&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La noticia aborda la supuesta "maldición" que afecta a los ganadores del Balón de Oro en el año previo a una Copa del Mundo. A lo largo de la historia, varios jugadores que han sido reconocidos con este prestigioso premio han enfrentado decepciones o han tenido actuaciones por debajo de las expectativas en los torneos mundiales de fútbol. Se presentan ejemplos de futbolistas como Fabio Cannavaro, que tras recibir el Balón de Oro en 2006 tuvo dificultades en la Copa de ese año, así como otros casos que refuerzan esta narrativa. La noticia sugiere que este patrón podría influir en la preparación y rendimiento de los galardonados en la competición más importante del fútbol. ▼</h2></div>
+			<div class="contenido">
+				<p>La noticia aborda la supuesta "maldición" que afecta a los ganadores del Balón de Oro en el año previo a una Copa del Mundo. A lo largo de la historia, varios jugadores que han sido reconocidos con este prestigioso premio han enfrentado decepciones o han tenido actuaciones por debajo de las expectativas en los torneos mundiales de fútbol. Se presentan ejemplos de futbolistas como Fabio Cannavaro, que tras recibir el Balón de Oro en 2006 tuvo dificultades en la Copa de ese año, así como otros casos que refuerzan esta narrativa. La noticia sugiere que este patrón podría influir en la preparación y rendimiento de los galardonados en la competición más importante del fútbol.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Vicepresidente de Brasil destaca buena química entre Lula y Trump para resolver conflicto arancelario con Estados Unidos</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSNRgjlu4IMaAtdjkzh5SHUZKAe93OSBd_NMke8QClwKBaE9sG05DFfzBO_w&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El vicepresidente de Brasil afirmó que la relación positiva entre el presidente Lula da Silva y el presidente Trump contribuirá a la resolución de un conflicto arancelario entre Brasil y Estados Unidos. La declaración se produce en el contexto de las expectativas de una mejora en las relaciones comerciales bilaterales. Ambos líderes han mostrado interés en fortalecer la cooperación y abordar las diferencias existentes, lo que podría facilitar el diálogo sobre aranceles y comercio. ▼</h2></div>
+			<div class="contenido">
+				<p>El vicepresidente de Brasil afirmó que la relación positiva entre el presidente Lula da Silva y el presidente Trump contribuirá a la resolución de un conflicto arancelario entre Brasil y Estados Unidos. La declaración se produce en el contexto de las expectativas de una mejora en las relaciones comerciales bilaterales. Ambos líderes han mostrado interés en fortalecer la cooperación y abordar las diferencias existentes, lo que podría facilitar el diálogo sobre aranceles y comercio.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Polonia y Corea del Sur acuerdan nueva cooperación bilateral para fortalecer defensas ante posibles ataques rusos</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIWvG7O7OgLLqC5LT0LOZeCsvAWGnPHHW6bMa_cAbfLJo62PSaYI5AFVh_wQ&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Polonia y Corea del Sur han firmado un acuerdo para fortalecer su cooperación bilateral con el objetivo de mejorar sus defensas en respuesta a posibles amenazas rusas. Este pacto incluye el intercambio de tecnologías y armamento, así como la realización de ejercicios militares conjuntos. La colaboración se enmarca en un contexto de creciente tensión en Europa del Este debido a las acciones de Rusia. Ambas naciones buscan asegurar su seguridad y potenciar sus capacidades defensivas en un entorno geopolítico cambiante. ▼</h2></div>
+			<div class="contenido">
+				<p>Polonia y Corea del Sur han firmado un acuerdo para fortalecer su cooperación bilateral con el objetivo de mejorar sus defensas en respuesta a posibles amenazas rusas. Este pacto incluye el intercambio de tecnologías y armamento, así como la realización de ejercicios militares conjuntos. La colaboración se enmarca en un contexto de creciente tensión en Europa del Este debido a las acciones de Rusia. Ambas naciones buscan asegurar su seguridad y potenciar sus capacidades defensivas en un entorno geopolítico cambiante.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Mahmoud Abbas exigió a Hamas la entrega de armas y aseguró que no tendrá papel en un futuro estado palestino.</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyJ8p4MzJ8n4U3pwLMHYQ7Aa9EEp8U4_36TDLGp6y4d6ujaV89tZ1M0pEC01g&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Mahmoud Abbas, presidente de la Autoridad Nacional Palestina, hizo un llamado a Hamas para que entregue sus armas y se desmilitarice, advirtiendo que el grupo no tendrá un papel en un futuro Estado palestino. Abbas enfatizó la necesidad de alcanzar la unidad nacional y abordó la importancia de un enfoque pacífico y legislativo para la solución del conflicto palestino. Su discurso se centra en la búsqueda de un reconocimiento internacional y en la creación de un Estado que garantice derechos y seguridad a todos los palestinos. ▼</h2></div>
+			<div class="contenido">
+				<p>Mahmoud Abbas, presidente de la Autoridad Nacional Palestina, hizo un llamado a Hamas para que entregue sus armas y se desmilitarice, advirtiendo que el grupo no tendrá un papel en un futuro Estado palestino. Abbas enfatizó la necesidad de alcanzar la unidad nacional y abordó la importancia de un enfoque pacífico y legislativo para la solución del conflicto palestino. Su discurso se centra en la búsqueda de un reconocimiento internacional y en la creación de un Estado que garantice derechos y seguridad a todos los palestinos.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Lando Norris confirma su relación con la modelo Magui Corceiro</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuZElS435C2ywytEdp6QY0RfkX1IdBuGOTBryNc4ouoSmgO-UDFU62Z5f6uW4&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Lando Norris, piloto de Fórmula 1, ha confirmado su relación con la modelo Magui Corceiro. En una entrevista, Norris describió a Corceiro como alguien con quien se siente cómodo siendo él mismo. La pareja ha generado atención mediática, y el piloto también mencionó la importancia de su apoyo en su vida personal y profesional. ▼</h2></div>
+			<div class="contenido">
+				<p>Lando Norris, piloto de Fórmula 1, ha confirmado su relación con la modelo Magui Corceiro. En una entrevista, Norris describió a Corceiro como alguien con quien se siente cómodo siendo él mismo. La pareja ha generado atención mediática, y el piloto también mencionó la importancia de su apoyo en su vida personal y profesional.</p>
+			</div>
+		</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publiciteLite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Legisladores de Costa Rica discuten la posibilidad de quitar la inmunidad al presidente Rodrigo Chaves implicado en un caso de corrupción</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlCXrO_nWXbBpuDnl1IDWI0hIjJqkbqq8RyGQYndDvHZIUZhoFmtlMBz2i1SA&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Legisladores de Costa Rica están considerando la posibilidad de retirar la inmunidad al presidente Rodrigo Chaves debido a su implicación en un caso de corrupción. Las discusiones han surgido en el contexto de una investigación que involucra irregularidades en la gestión pública. La decisión de levantar la inmunidad podría abrir la puerta a un mayor escrutinio legal hacia el mandatario. La situación ha generado divisiones entre los diferentes partidos políticos en el país, quienes han manifestado sus opiniones tanto a favor como en contra de esta medida. ▼</h2></div>
+			<div class="contenido">
+				<p>Legisladores de Costa Rica están considerando la posibilidad de retirar la inmunidad al presidente Rodrigo Chaves debido a su implicación en un caso de corrupción. Las discusiones han surgido en el contexto de una investigación que involucra irregularidades en la gestión pública. La decisión de levantar la inmunidad podría abrir la puerta a un mayor escrutinio legal hacia el mandatario. La situación ha generado divisiones entre los diferentes partidos políticos en el país, quienes han manifestado sus opiniones tanto a favor como en contra de esta medida.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>La Casa Blanca rechaza el llamado al diálogo de Nicolás Maduro plagado de mentiras</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdWmWoFSwEFOJQZOdfKbR8GKGSopHFCwcxIKzgWAdeOBfKnE-fS0Nomz7fJQ&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La Casa Blanca desestimó recientemente la propuesta de diálogo hecha por Nicolás Maduro, a la que calificó como llena de falsedades. La administración estadounidense reiteró su postura de que el gobierno venezolano no es un interlocutor creíble, señalando que las acciones de Maduro no han fomentado un entorno propicio para el diálogo. Además, enfatizó su apoyo a los esfuerzos de la oposición venezolana y a la búsqueda de una solución pacífica y democrática para la crisis en el país. ▼</h2></div>
+			<div class="contenido">
+				<p>La Casa Blanca desestimó recientemente la propuesta de diálogo hecha por Nicolás Maduro, a la que calificó como llena de falsedades. La administración estadounidense reiteró su postura de que el gobierno venezolano no es un interlocutor creíble, señalando que las acciones de Maduro no han fomentado un entorno propicio para el diálogo. Además, enfatizó su apoyo a los esfuerzos de la oposición venezolana y a la búsqueda de una solución pacífica y democrática para la crisis en el país.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>El futuro de la guerra y la falta de preparación de Europa ante las incursiones de drones rusos</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSENvwImLo4wIb6LD0LxBNadfwA2RHCZkThYsE-Vr0IYsU0acu9dobU92lYIg&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Un experto ha emitido una advertencia sobre el uso creciente de drones en conflictos bélicos, especialmente en el contexto del conflicto en Ucrania. Según el especialista, este tipo de tecnología está transformando la forma en que se lleva a cabo la guerra, evidenciando que Europa no está completamente preparada para enfrentar estos desafíos. Las incursiones de drones rusos destacan la necesidad de una mayor preparación y adaptación por parte de los países europeos ante las nuevas tácticas militares. El experto subraya que lo que se está observando ahora podría dar forma a futuros conflictos, y es esencial que las naciones europeas reconozcan la seriedad de esta evolución en la guerra moderna. ▼</h2></div>
+			<div class="contenido">
+				<p>Un experto ha emitido una advertencia sobre el uso creciente de drones en conflictos bélicos, especialmente en el contexto del conflicto en Ucrania. Según el especialista, este tipo de tecnología está transformando la forma en que se lleva a cabo la guerra, evidenciando que Europa no está completamente preparada para enfrentar estos desafíos. Las incursiones de drones rusos destacan la necesidad de una mayor preparación y adaptación por parte de los países europeos ante las nuevas tácticas militares. El experto subraya que lo que se está observando ahora podría dar forma a futuros conflictos, y es esencial que las naciones europeas reconozcan la seriedad de esta evolución en la guerra moderna.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Cuatro síntomas de cáncer que no se deben ignorar y señales de alerta según un oncólogo</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzMhvF2Y01Wv5pU1AnginL9xlbxq-MKY2xkpUZdQ9TEgATOjB33kKRZjhqB6c&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Un oncólogo ha identificado cuatro síntomas del cáncer que no deben ser ignorados. Estos síntomas son la pérdida de peso inexplicada, cambios en los hábitos intestinales o urinarios, fatiga persistente y la aparición de bultos o masas anormales. El especialista enfatiza la importancia de estar atentos a estas señales y de realizarse chequeos médicos regulares, pues pueden ser indicativos de procesos más graves. Además, se menciona que la detección temprana es crucial para mejorar el pronóstico y el tratamiento de la enfermedad. ▼</h2></div>
+			<div class="contenido">
+				<p>Un oncólogo ha identificado cuatro síntomas del cáncer que no deben ser ignorados. Estos síntomas son la pérdida de peso inexplicada, cambios en los hábitos intestinales o urinarios, fatiga persistente y la aparición de bultos o masas anormales. El especialista enfatiza la importancia de estar atentos a estas señales y de realizarse chequeos médicos regulares, pues pueden ser indicativos de procesos más graves. Además, se menciona que la detección temprana es crucial para mejorar el pronóstico y el tratamiento de la enfermedad.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Rusia amenaza a Ucrania con un escenario militar más grave si Kiev sigue sin negociar</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1MtwRS1ijIT0cS7ceFW3sn-wkgUBI4N1KbTLiOxOKAfPh5lnxV97bzGJZYg0&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Rusia advirtió a Ucrania que enfrentará un deterioro en la situación militar si continúa rechazando las negociaciones. Esta declaración se produjo en el contexto del conflicto en curso, donde las tensiones entre ambos países permanecen elevadas. Moscú enfatizó que su postura se mantendrá firme si Kiev no muestra disposición para dialogar y buscar una resolución al conflicto. ▼</h2></div>
+			<div class="contenido">
+				<p>Rusia advirtió a Ucrania que enfrentará un deterioro en la situación militar si continúa rechazando las negociaciones. Esta declaración se produjo en el contexto del conflicto en curso, donde las tensiones entre ambos países permanecen elevadas. Moscú enfatizó que su postura se mantendrá firme si Kiev no muestra disposición para dialogar y buscar una resolución al conflicto.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Temblores impactan barrios, iglesias y hospitales en Venezuela</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzENiFaiA9j8isUeUz7N94SoNouhlsSIkDHqoIofu-ts7aCYjP8u2LOSv99A&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Un fuerte sismo sacudió Venezuela, afectando diversos sectores como barrios, iglesias y hospitales. Los movimientos telúricos provocaron daños visibles en la infraestructura, generando preocupación entre la población. La situación ha llevado a las autoridades a evaluar las consecuencias y proporcionar asistencia a los afectados. Se han reportado varios videos que muestran el impacto de los temblores en diferentes áreas del país. ▼</h2></div>
+			<div class="contenido">
+				<p>Un fuerte sismo sacudió Venezuela, afectando diversos sectores como barrios, iglesias y hospitales. Los movimientos telúricos provocaron daños visibles en la infraestructura, generando preocupación entre la población. La situación ha llevado a las autoridades a evaluar las consecuencias y proporcionar asistencia a los afectados. Se han reportado varios videos que muestran el impacto de los temblores en diferentes áreas del país.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Zelensky pidió a la ONU condenar a Rusia por el secuestro de menores y anunció la repatriación de 1625 niños ucranianos</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSog-jyTLpcCLil5nMGr_TGoX2OT0NDKYutkk8QadvzipG5mrxv4zPqfaMoKDc&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El presidente de Ucrania, Volodymyr Zelensky, dirigió un llamado a la ONU para que condene a Rusia por el secuestro de menores durante el conflicto en su país. En su intervención, Zelensky informó sobre la repatriación de 1,625 niños ucranianos que habían sido trasladados a territorio ruso. Además, subrayó la importancia de responsabilizar a Rusia por las violaciones de derechos humanos cometidas en Ucrania, haciendo énfasis en la situación de los menores. ▼</h2></div>
+			<div class="contenido">
+				<p>El presidente de Ucrania, Volodymyr Zelensky, dirigió un llamado a la ONU para que condene a Rusia por el secuestro de menores durante el conflicto en su país. En su intervención, Zelensky informó sobre la repatriación de 1,625 niños ucranianos que habían sido trasladados a territorio ruso. Además, subrayó la importancia de responsabilizar a Rusia por las violaciones de derechos humanos cometidas en Ucrania, haciendo énfasis en la situación de los menores.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Investigan en España al ex viceministro de energía venezolano Nervis Villalobos por delitos de blanqueo</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCA_k-vgo73P6cruXwlJ8AF7sFxtJkn_g_yZzDyYcIlSd6T2ueImNyIzQBKNI&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Las autoridades españolas han iniciado una investigación contra Nervis Villalobos, exviceministro de Energía de Venezuela, por presuntos delitos de blanqueo de capitales. Villalobos, quien se encuentra en el centro de un caso relacionado con el manejo de fondos públicos, enfrenta acusaciones por su implicación en transacciones sospechosas y el uso de empresas offshore. La investigación se busca esclarecer cómo se habrían canalizado ingresos relacionados con la corrupción y si estos fondos fueron utilizados para actividades ilícitas en el territorio español. ▼</h2></div>
+			<div class="contenido">
+				<p>Las autoridades españolas han iniciado una investigación contra Nervis Villalobos, exviceministro de Energía de Venezuela, por presuntos delitos de blanqueo de capitales. Villalobos, quien se encuentra en el centro de un caso relacionado con el manejo de fondos públicos, enfrenta acusaciones por su implicación en transacciones sospechosas y el uso de empresas offshore. La investigación se busca esclarecer cómo se habrían canalizado ingresos relacionados con la corrupción y si estos fondos fueron utilizados para actividades ilícitas en el territorio español.</p>
+			</div>
+		</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publiciteLite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>La fiscalía de Bolivia ordena la captura de un hijo del presidente Luis Arce por violencia de género</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPwfe3ZTNwZ_XixlBOeag9eFIDQGYerVwRQldW2K2tpm_V_m9FsJZAil1Cl6A&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La Fiscalía de Bolivia ha ordenado la captura de un hijo del presidente Luis Arce por un caso de violencia de género. La decisión se produce tras una denuncia presentada por una mujer, quien asegura haber sido víctima de agresiones. El hijo del mandatario no ha hecho declaraciones públicas sobre los hechos. La situación ha generado controversia en el país, destacando la importancia de abordar casos de violencia contra las mujeres. La investigación avanza mientras la fiscalía intenta hacer cumplir la orden de captura. ▼</h2></div>
+			<div class="contenido">
+				<p>La Fiscalía de Bolivia ha ordenado la captura de un hijo del presidente Luis Arce por un caso de violencia de género. La decisión se produce tras una denuncia presentada por una mujer, quien asegura haber sido víctima de agresiones. El hijo del mandatario no ha hecho declaraciones públicas sobre los hechos. La situación ha generado controversia en el país, destacando la importancia de abordar casos de violencia contra las mujeres. La investigación avanza mientras la fiscalía intenta hacer cumplir la orden de captura.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Donald Trump advierte en la ONU sobre redes de narcotráfico dirigidas por Nicolás Maduro</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5QhOTUeRuxKp-cF522a4o4vr0jROsQKzOHmI-ODACYHJ6QPAT8a2bs3LzVuM&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>En un reciente discurso ante la Asamblea General de la ONU, Donald Trump alertó sobre las redes de narcotráfico vinculadas al gobierno de Nicolás Maduro en Venezuela. El ex presidente de Estados Unidos afirmó que estas organizaciones representan una amenaza significativa y expresó su disposición a tomar medidas drásticas, incluyendo ataques aéreos, si es necesario. Su intervención subrayó la preocupación de su administración por la influencia del narcotráfico en la región y el impacto que tiene en la seguridad global. ▼</h2></div>
+			<div class="contenido">
+				<p>En un reciente discurso ante la Asamblea General de la ONU, Donald Trump alertó sobre las redes de narcotráfico vinculadas al gobierno de Nicolás Maduro en Venezuela. El ex presidente de Estados Unidos afirmó que estas organizaciones representan una amenaza significativa y expresó su disposición a tomar medidas drásticas, incluyendo ataques aéreos, si es necesario. Su intervención subrayó la preocupación de su administración por la influencia del narcotráfico en la región y el impacto que tiene en la seguridad global.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Los dos equipos de la F1 que podrían contratar a Christian Horner tras su indemnización de Red Bull</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5mBvQDT2HL9cWmQ5-d3fFsSbdLvFRnt2QkJ7GLMkfK9JpNyNGEt69Q6df1w&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Christian Horner, actual director de Red Bull Racing en la Fórmula 1, podría estar en la mira de dos equipos importantes tras la posibilidad de recibir una significativa indemnización por su salida del equipo. Se especula que tanto Ferrari como Mercedes son opciones viables, considerando su historial de éxito y necesidad de un liderazgo estratégico. Horner ha sido fundamental en el crecimiento y los logros de Red Bull, lo que incrementa su valor en el mercado. La situación genera un gran interés en el entorno de la F1, donde los cambios de directorios suelen tener un impacto considerable en el rendimiento de los equipos. ▼</h2></div>
+			<div class="contenido">
+				<p>Christian Horner, actual director de Red Bull Racing en la Fórmula 1, podría estar en la mira de dos equipos importantes tras la posibilidad de recibir una significativa indemnización por su salida del equipo. Se especula que tanto Ferrari como Mercedes son opciones viables, considerando su historial de éxito y necesidad de un liderazgo estratégico. Horner ha sido fundamental en el crecimiento y los logros de Red Bull, lo que incrementa su valor en el mercado. La situación genera un gran interés en el entorno de la F1, donde los cambios de directorios suelen tener un impacto considerable en el rendimiento de los equipos.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Un disparo fallido y una contadora informante del FBI en un intento de derrocar al presidente</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUubF69NM2IF9U1SwPI76mGwrKFdXNxNT98ez1ox_Pt6lu9797CyOb45-_pSA&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Una contadora que actuó como informante del FBI relata su experiencia tras un intento fallido de asesinato del presidente. En su declaración, menciona que había considerado que un acto tan radical podría provocar un levantamiento popular. A lo largo de su relato, describe el contexto en el que se produjeron estos incidentes y las emociones que la impulsaron a involucrarse en tales acciones. La noticia destaca su papel como informante y las repercusiones de sus decisiones en la sociedad y en su vida personal. ▼</h2></div>
+			<div class="contenido">
+				<p>Una contadora que actuó como informante del FBI relata su experiencia tras un intento fallido de asesinato del presidente. En su declaración, menciona que había considerado que un acto tan radical podría provocar un levantamiento popular. A lo largo de su relato, describe el contexto en el que se produjeron estos incidentes y las emociones que la impulsaron a involucrarse en tales acciones. La noticia destaca su papel como informante y las repercusiones de sus decisiones en la sociedad y en su vida personal.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Donald Trump lidera el funeral de Charlie Kirk en Arizona convirtiéndolo en un mártir de la libertad en Estados Unidos</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfQ3CWkmUh5skLwp0xXfM1g4Fxvl9Lg7l-qrW2q-oCbIoOw9v63L3CYPNUEhw&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Donald Trump presidió el funeral de Charlie Kirk en Arizona, quien fue aclamado como un mártir de la libertad en Estados Unidos. Trump elogió a Kirk, un conocido activista conservador y fundador de Turning Point USA, destacando su impacto en la lucha por los valores republicanos. La ceremonia reunió a numerosos seguidores y figuras de la política conservadora, quienes rendieron homenaje a Kirk y su defensa de la libertad y la democracia. ▼</h2></div>
+			<div class="contenido">
+				<p>Donald Trump presidió el funeral de Charlie Kirk en Arizona, quien fue aclamado como un mártir de la libertad en Estados Unidos. Trump elogió a Kirk, un conocido activista conservador y fundador de Turning Point USA, destacando su impacto en la lucha por los valores republicanos. La ceremonia reunió a numerosos seguidores y figuras de la política conservadora, quienes rendieron homenaje a Kirk y su defensa de la libertad y la democracia.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Estados Unidos se compromete a defender cada centímetro de la OTAN ante las incursiones rusas</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfffH47ZrzCfPlImEoBQIo2UF7eZOLN8_UrC0GRuE3uCAvm2-AY1kGFlfhHew&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Estados Unidos reafirmó su compromiso de defender cada parte de la OTAN en respuesta a un aumento de las incursiones rusas. En una reciente reunión de altos funcionarios en Bruselas, se hizo hincapié en la importancia de la unidad entre los aliados ante las amenazas percibidas. El secretario de Defensa de Estados Unidos subrayó que cualquier ataque contra un miembro de la OTAN sería considerado como un ataque contra todos, lo que demuestra la determinación de Washington de garantizar la seguridad colectiva. Esta declaración busca disuadir a Rusia y reafirmar la fortaleza de la alianza en medio de crecientes tensiones en Europa. ▼</h2></div>
+			<div class="contenido">
+				<p>Estados Unidos reafirmó su compromiso de defender cada parte de la OTAN en respuesta a un aumento de las incursiones rusas. En una reciente reunión de altos funcionarios en Bruselas, se hizo hincapié en la importancia de la unidad entre los aliados ante las amenazas percibidas. El secretario de Defensa de Estados Unidos subrayó que cualquier ataque contra un miembro de la OTAN sería considerado como un ataque contra todos, lo que demuestra la determinación de Washington de garantizar la seguridad colectiva. Esta declaración busca disuadir a Rusia y reafirmar la fortaleza de la alianza en medio de crecientes tensiones en Europa.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Trump reúne a líderes árabes y musulmanes en Nueva York para impulsar alto el fuego en Gaza</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRr1I4LuIv2camTMhO7-n839UwxDYyNdMY099k3XP6N10ij7a7rpyZd5I-UeA&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Donald Trump organizó una reunión en Nueva York con líderes árabes y musulmanes con el objetivo de promover un alto el fuego en Gaza. En el encuentro, se discutió la situación actual del conflicto y se buscaron vías para facilitar un proceso de paz en la región. Los participantes acordaron la necesidad urgente de una solución que permita mitigar el sufrimiento de los civiles afectados por la violencia. ▼</h2></div>
+			<div class="contenido">
+				<p>Donald Trump organizó una reunión en Nueva York con líderes árabes y musulmanes con el objetivo de promover un alto el fuego en Gaza. En el encuentro, se discutió la situación actual del conflicto y se buscaron vías para facilitar un proceso de paz en la región. Los participantes acordaron la necesidad urgente de una solución que permita mitigar el sufrimiento de los civiles afectados por la violencia.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Reunión en Sudamérica para discutir la expansión del Mundial 2030 con 64 equipos y más partidos</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWWZXJmclhIinTA9-5PvapgkSuGiKsdskgXwyem7eZeUZNiy9KHAZzfDAy3g&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El artículo aborda una reunión clave celebrada por la Conmebol, en la que se discutió la expansión del Mundial 2030. Se plantea la inclusión de 64 equipos y la posibilidad de aumentar el número de partidos, lo que podría cambiar significativamente la estructura del torneo. A pesar de que este plan aún está en fase de consideración, los organizadores consideran que una mayor participación de selecciones podría enriquecer la competencia y fomentar el interés regional. La propuesta genera tanto expectativa como debate sobre las implicaciones que tendría para el desarrollo del fútbol en Sudamérica. ▼</h2></div>
+			<div class="contenido">
+				<p>El artículo aborda una reunión clave celebrada por la Conmebol, en la que se discutió la expansión del Mundial 2030. Se plantea la inclusión de 64 equipos y la posibilidad de aumentar el número de partidos, lo que podría cambiar significativamente la estructura del torneo. A pesar de que este plan aún está en fase de consideración, los organizadores consideran que una mayor participación de selecciones podría enriquecer la competencia y fomentar el interés regional. La propuesta genera tanto expectativa como debate sobre las implicaciones que tendría para el desarrollo del fútbol en Sudamérica.</p>
+			</div>
+		</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publiciteLite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Al menos 22 heridos en Israel por ataque con dron de rebeldes hutíes desde Yemen</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoAYW222su0YmR61bo0KoeFl35ieNVwM3E_zoYp9ic7AcHvYk15mywesZIUsM&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Un ataque con dron lanzado por los rebeldes hutíes desde Yemen dejó al menos 22 heridos en Israel. El incidente ocurrió en un área cercana a la frontera con Gaza y se reportaron daños también en viviendas. Las Fuerzas de Defensa de Israel respondieron atacando posiciones hutíes, intensificando el conflicto en la región. Este ataque se produce en medio de crecientes tensiones en el Medio Oriente. ▼</h2></div>
+			<div class="contenido">
+				<p>Un ataque con dron lanzado por los rebeldes hutíes desde Yemen dejó al menos 22 heridos en Israel. El incidente ocurrió en un área cercana a la frontera con Gaza y se reportaron daños también en viviendas. Las Fuerzas de Defensa de Israel respondieron atacando posiciones hutíes, intensificando el conflicto en la región. Este ataque se produce en medio de crecientes tensiones en el Medio Oriente.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Europa dio a Irán horas para cooperar con inspectores nucleares y evitar sanciones de la ONU</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkYvhiT8EDQiOJsw1y08ZBUlmvFnB6q71oLzTJxeChSluJPZmNdV7kCs_G24c&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Las potencias europeas dieron un ultimátum a Irán, instándolo a cooperar con los inspectores nucleares de la Agencia Internacional de Energía Atómica en un plazo de horas. Este anuncio se produce en un contexto de creciente preocupación sobre las actividades nucleares de Irán, que podrían llevar a la reinstauración de sanciones de la ONU. Europa busca asegurar que Irán cumpla con los acuerdos nucleares y evite un aumento en las tensiones internacionales. ▼</h2></div>
+			<div class="contenido">
+				<p>Las potencias europeas dieron un ultimátum a Irán, instándolo a cooperar con los inspectores nucleares de la Agencia Internacional de Energía Atómica en un plazo de horas. Este anuncio se produce en un contexto de creciente preocupación sobre las actividades nucleares de Irán, que podrían llevar a la reinstauración de sanciones de la ONU. Europa busca asegurar que Irán cumpla con los acuerdos nucleares y evite un aumento en las tensiones internacionales.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Protestas en Ecuador: Daniel Noboa acusa a líderes indígenas de terrorismo tras eliminación del subsidio al diésel</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1zoqhYs7koiIpPxxDa5p8HmP3LG9ViztugPIyx0QzBeEylIe00PYbw1sxKhk&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El presidente de Ecuador, Daniel Noboa, acusó a líderes indígenas de terrorismo debido a las protestas que surgieron tras la eliminación del subsidio al diésel. Estas manifestaciones han tenido un impacto notable en varias provincias del país, con bloqueos de carreteras y acciones de desobediencia civil. Noboa defendió la medida adoptada por su gobierno, argumentando que era necesaria para mejorar la economía del país y reducir el déficit fiscal. A pesar de las tensiones, el presidente instó al diálogo y a la paz, mientras las fuerzas de seguridad intentan restablecer el orden en las zonas afectadas por las protestas. ▼</h2></div>
+			<div class="contenido">
+				<p>El presidente de Ecuador, Daniel Noboa, acusó a líderes indígenas de terrorismo debido a las protestas que surgieron tras la eliminación del subsidio al diésel. Estas manifestaciones han tenido un impacto notable en varias provincias del país, con bloqueos de carreteras y acciones de desobediencia civil. Noboa defendió la medida adoptada por su gobierno, argumentando que era necesaria para mejorar la economía del país y reducir el déficit fiscal. A pesar de las tensiones, el presidente instó al diálogo y a la paz, mientras las fuerzas de seguridad intentan restablecer el orden en las zonas afectadas por las protestas.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Dinamarca pidió perdón por la colocación de anticonceptivos sin consentimiento a niñas y adolescentes de Groenlandia</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTC5CHvhzFFXv-mViV6MORuYpxWdrn0wfzOSfk8aS2pgsKaXRX_U3h9Q-0QOz0&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El gobierno de Dinamarca ha solicitado perdón por la colocación de anticonceptivos sin consentimiento a niñas y adolescentes en Groenlandia entre 1960 y 1970. Este procedimiento se enmarca en una serie de políticas de control poblacional impulsadas en esa época. La medida fue dirigida especialmente a la población indígena de Groenlandia y ha dejado secuelas psicológicas en las víctimas y sus familias. El perdón se produce tras una investigación que evidenció estas prácticas coercitivas y discriminatorias, generando un debate sobre la ética de las acciones pasadas del Estado danés en el territorio. ▼</h2></div>
+			<div class="contenido">
+				<p>El gobierno de Dinamarca ha solicitado perdón por la colocación de anticonceptivos sin consentimiento a niñas y adolescentes en Groenlandia entre 1960 y 1970. Este procedimiento se enmarca en una serie de políticas de control poblacional impulsadas en esa época. La medida fue dirigida especialmente a la población indígena de Groenlandia y ha dejado secuelas psicológicas en las víctimas y sus familias. El perdón se produce tras una investigación que evidenció estas prácticas coercitivas y discriminatorias, generando un debate sobre la ética de las acciones pasadas del Estado danés en el territorio.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Partido de María Corina Machado denuncia arresto de dos colaboradores en región fronteriza con Colombia</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdpPInnyVDKWFPn0rtZJUQA4UticR7RM-MaLLdOP4s9Ey0MqF_Og-29aWeqg&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El partido de María Corina Machado, Movimiento Venezolano por el Cambio, informó sobre la detención de dos de sus colaboradores en una región fronteriza con Colombia. Según el partido, estas detenciones se producen en un contexto de represión política en Venezuela. Los arrestos han suscitado preocupación sobre el ambiente de seguridad y la libertad política en el país. La organización política exigió la liberación inmediata de los detenidos y denunció el uso de tácticas coercitivas por parte del gobierno. ▼</h2></div>
+			<div class="contenido">
+				<p>El partido de María Corina Machado, Movimiento Venezolano por el Cambio, informó sobre la detención de dos de sus colaboradores en una región fronteriza con Colombia. Según el partido, estas detenciones se producen en un contexto de represión política en Venezuela. Los arrestos han suscitado preocupación sobre el ambiente de seguridad y la libertad política en el país. La organización política exigió la liberación inmediata de los detenidos y denunció el uso de tácticas coercitivas por parte del gobierno.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Italia envió un segundo buque para escoltar a la flotilla de ayuda humanitaria a Gaza</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSO-PvhJSzSBRe1kiQ6m7Wn1ZgR7qbKkQtJUhZQZZknvcY2yPlk1qZ1ndVdUQ&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Italia ha enviado un segundo buque para acompañar a la flotilla de ayuda humanitaria destinada a Gaza. Este nuevo navío cuenta con capacidades adicionales que podrían ser utilizadas si fuera necesario. La decisión de enviar este buque se da en un contexto de creciente tensión en la región y refleja el compromiso de Italia con la asistencia humanitaria en medio de la crisis. ▼</h2></div>
+			<div class="contenido">
+				<p>Italia ha enviado un segundo buque para acompañar a la flotilla de ayuda humanitaria destinada a Gaza. Este nuevo navío cuenta con capacidades adicionales que podrían ser utilizadas si fuera necesario. La decisión de enviar este buque se da en un contexto de creciente tensión en la región y refleja el compromiso de Italia con la asistencia humanitaria en medio de la crisis.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Vectis el drone furtivo de Lockheed Martin que podría redefinir el combate aéreo</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWkLl4zXTONeiIegikAeUqTzXYvlOD17itTAecX195szxs0sHs6wfX5ppm_Z4&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Lockheed Martin ha desarrollado un dron furtivo llamado Vectis, diseñado para operar en el combate aéreo moderno. Este vehículo aéreo no tripulado promete mejorar las capacidades de las fuerzas armadas al ser capaz de llevar a cabo misiones de reconocimiento y ataque sin ser detectado por los sistemas de radar enemigos. El Vectis combina tecnología avanzada en sigilo y agilidad, lo que le permite operar en entornos altamente contestados. Su lanzamiento marca un hito en la evolución de los drones militares, dado que se espera que redefina las estrategias de combate aéreo en el futuro. ▼</h2></div>
+			<div class="contenido">
+				<p>Lockheed Martin ha desarrollado un dron furtivo llamado Vectis, diseñado para operar en el combate aéreo moderno. Este vehículo aéreo no tripulado promete mejorar las capacidades de las fuerzas armadas al ser capaz de llevar a cabo misiones de reconocimiento y ataque sin ser detectado por los sistemas de radar enemigos. El Vectis combina tecnología avanzada en sigilo y agilidad, lo que le permite operar en entornos altamente contestados. Su lanzamiento marca un hito en la evolución de los drones militares, dado que se espera que redefina las estrategias de combate aéreo en el futuro.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Zelensky celebra el cambio en la postura de Trump al reconocer posible victoria de Ucrania sobre Rusia</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTUVr_jDl09xU8MsSG1PIFihbvNjcHdKRkkAOXC64aoB_mx5j8Ca-mPV7Ue9o&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El presidente de Ucrania, Volodymyr Zelensky, expresó su satisfacción por el cambio en la postura del ex presidente estadounidense Donald Trump, quien ahora reconoce la posibilidad de que Ucrania logre una victoria sobre Rusia en el conflicto actual. Zelensky interpretó este giro como un signo positivo para el apoyo internacional que su país recibe en su lucha. Esta declaración se produce en el contexto de las tensiones continuas entre Ucrania y Rusia, donde la comunidad internacional observa de cerca los desarrollos relacionados con el conflicto. ▼</h2></div>
+			<div class="contenido">
+				<p>El presidente de Ucrania, Volodymyr Zelensky, expresó su satisfacción por el cambio en la postura del ex presidente estadounidense Donald Trump, quien ahora reconoce la posibilidad de que Ucrania logre una victoria sobre Rusia en el conflicto actual. Zelensky interpretó este giro como un signo positivo para el apoyo internacional que su país recibe en su lucha. Esta declaración se produce en el contexto de las tensiones continuas entre Ucrania y Rusia, donde la comunidad internacional observa de cerca los desarrollos relacionados con el conflicto.</p>
+			</div>
+		</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publiciteLite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Paraguay respalda a Guyana en la disputa por la dirección del IICA</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIRRUeu4xJwPrh-gm2dwAuSv8bspeNkn_UUJxdIIenXzrUxzzfHh1OMlFKeA&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Paraguay ha expresado su apoyo a Guyana en la controversia sobre la dirección del Instituto Interamericano de Cooperación para la Agricultura (IICA). Este respaldo se enmarca en un contexto regional importante y destaca la colaboración entre países latinoamericanos. La disputa refleja tensiones sobre la gestión y el liderazgo del IICA, institución clave en la agricultura de la región. La posición paraguaya busca fortalecer la cooperación y la integración en el ámbito agrícola. ▼</h2></div>
+			<div class="contenido">
+				<p>Paraguay ha expresado su apoyo a Guyana en la controversia sobre la dirección del Instituto Interamericano de Cooperación para la Agricultura (IICA). Este respaldo se enmarca en un contexto regional importante y destaca la colaboración entre países latinoamericanos. La disputa refleja tensiones sobre la gestión y el liderazgo del IICA, institución clave en la agricultura de la región. La posición paraguaya busca fortalecer la cooperación y la integración en el ámbito agrícola.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Iron Beam, el láser que ya usa Israel y cambiará la economía de la guerra</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRV2pFPIyzQSLD3VzbmuGYjC9t2GZHIsg9yFQtTKK9FJ3kiHKzxauShNIN3fpI&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Israel ha comenzado a utilizar un sistema láser de defensa llamado Iron Beam, diseñado para interceptar amenazas aéreas como cohetes y drones a un costo significativamente menor que los sistemas de defensa tradicionales. Este sistema, que complementa las defensas existentes como el Iron Dome, permite a las fuerzas israelíes neutralizar ataques de manera más eficiente y económica. Iron Beam es capaz de destruir objetivos en pleno vuelo, marcando un cambio importante en la estrategia militar del país. La adopción de esta tecnología no solo tiene repercusiones en la seguridad nacional, sino que también podría influir en la economía de la guerra, dado su potencial para reducir costos operativos y aumentar la eficacia en el campo de batalla. ▼</h2></div>
+			<div class="contenido">
+				<p>Israel ha comenzado a utilizar un sistema láser de defensa llamado Iron Beam, diseñado para interceptar amenazas aéreas como cohetes y drones a un costo significativamente menor que los sistemas de defensa tradicionales. Este sistema, que complementa las defensas existentes como el Iron Dome, permite a las fuerzas israelíes neutralizar ataques de manera más eficiente y económica. Iron Beam es capaz de destruir objetivos en pleno vuelo, marcando un cambio importante en la estrategia militar del país. La adopción de esta tecnología no solo tiene repercusiones en la seguridad nacional, sino que también podría influir en la economía de la guerra, dado su potencial para reducir costos operativos y aumentar la eficacia en el campo de batalla.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Angustia e incapacidad: la migraña como enfermedad subestimada que trasciende el dolor</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkZ_vTPGu02qmUZNwJYWg7qucwflPXQKs5J6omSgEQk1t3MGK87NX2vF6xKA&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La migraña es una enfermedad neurológica que afecta a millones de personas en todo el mundo, pero a menudo es subestimada en su impacto. No se trata solo de un dolor de cabeza intenso, ya que puede provocar una serie de síntomas que afectan la calidad de vida, incluyendo náuseas, sensibilidad a la luz y al sonido. A pesar de ser común, muchos pacientes enfrentan un diagnóstico tardío y escasa comprensión de su condición. La migraña también se asocia con problemas emocionales como la ansiedad y la depresión, lo que contribuye a una sensación de incapacidad. La falta de conocimiento adecuado y de recursos para el tratamiento sigue siendo un desafío para quienes la padecen. ▼</h2></div>
+			<div class="contenido">
+				<p>La migraña es una enfermedad neurológica que afecta a millones de personas en todo el mundo, pero a menudo es subestimada en su impacto. No se trata solo de un dolor de cabeza intenso, ya que puede provocar una serie de síntomas que afectan la calidad de vida, incluyendo náuseas, sensibilidad a la luz y al sonido. A pesar de ser común, muchos pacientes enfrentan un diagnóstico tardío y escasa comprensión de su condición. La migraña también se asocia con problemas emocionales como la ansiedad y la depresión, lo que contribuye a una sensación de incapacidad. La falta de conocimiento adecuado y de recursos para el tratamiento sigue siendo un desafío para quienes la padecen.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Von der Leyen pidió a China presionar a Moscú para negociar el fin de la guerra en Ucrania</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlP-gAZ-IX1EMKW0qge-Z6qLhCVcs129KzV1hMCGnHfa74ZV4fXB9P8TL5wg&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La presidenta de la Comisión Europea, Ursula von der Leyen, instó a China a exertar su influencia sobre Rusia para facilitar el fin del conflicto en Ucrania. Durante una conferencia en Nueva York, enfatizó la importancia de que Pekín impulse negociaciones entre las partes involucradas. Von der Leyen también destacó que Europa está dispuesta a colaborar en la reconstrucción de Ucrania una vez que se logre la paz. La mandataria expresó su preocupación por el apoyo militar que Rusia recibe de China y subrayó que el futuro de la seguridad mundial dependerá de cómo se resuelva esta crisis. ▼</h2></div>
+			<div class="contenido">
+				<p>La presidenta de la Comisión Europea, Ursula von der Leyen, instó a China a exertar su influencia sobre Rusia para facilitar el fin del conflicto en Ucrania. Durante una conferencia en Nueva York, enfatizó la importancia de que Pekín impulse negociaciones entre las partes involucradas. Von der Leyen también destacó que Europa está dispuesta a colaborar en la reconstrucción de Ucrania una vez que se logre la paz. La mandataria expresó su preocupación por el apoyo militar que Rusia recibe de China y subrayó que el futuro de la seguridad mundial dependerá de cómo se resuelva esta crisis.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Reaparece en público el sospechoso del caso de Madeleine McCann y asegura tener información especial</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgFGmoLWeQ9_PL5B864S-2YNs0OsLMfgEgMbBfW0ZqnC2vgrzcL8-xdwrThQ&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El principal sospechoso en el caso de Madeleine McCann ha sido visto en público, donde afirmó tener información crucial sobre la desaparición de la niña británica. Este individuo, quien ha estado en el centro de la investigación desde hace años, realizó declaraciones que han reavivado el interés por el caso que sigue sin resolverse. La desaparición de McCann en 2007 ha mantenido la atención mediática y policial durante más de una década, y el testimonio del sospechoso podría ofrecer nuevas pistas en la búsqueda de respuestas. ▼</h2></div>
+			<div class="contenido">
+				<p>El principal sospechoso en el caso de Madeleine McCann ha sido visto en público, donde afirmó tener información crucial sobre la desaparición de la niña británica. Este individuo, quien ha estado en el centro de la investigación desde hace años, realizó declaraciones que han reavivado el interés por el caso que sigue sin resolverse. La desaparición de McCann en 2007 ha mantenido la atención mediática y policial durante más de una década, y el testimonio del sospechoso podría ofrecer nuevas pistas en la búsqueda de respuestas.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Marco Rubio y Sergei Lavrov se reunirán en Nueva York tras el respaldo de Trump a Ucrania</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwE-0Hpz3fnsiizbD-i_rSuishLLn_sd1Du_nzcRpK0iD1Y0s5w8CYIDFugNA&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Marco Rubio y Sergei Lavrov se reunirán en Nueva York en el marco de actividades relacionadas con la Asamblea General de la ONU. Este encuentro se produce después de que el expresidente Donald Trump expresara su firme apoyo a Ucrania en el contexto del conflicto con Rusia. La reunión es relevante dado el actual clima político y militar, y refleja el interés de los Estados Unidos por mantener un diálogo con figuras clave en la política exterior rusa. ▼</h2></div>
+			<div class="contenido">
+				<p>Marco Rubio y Sergei Lavrov se reunirán en Nueva York en el marco de actividades relacionadas con la Asamblea General de la ONU. Este encuentro se produce después de que el expresidente Donald Trump expresara su firme apoyo a Ucrania en el contexto del conflicto con Rusia. La reunión es relevante dado el actual clima político y militar, y refleja el interés de los Estados Unidos por mantener un diálogo con figuras clave en la política exterior rusa.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>El ejército israelí anunció que 700,000 palestinos huyeron de la ciudad de Gaza.</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBla0Hpl5ii8djmvvheBn7cv7ub2WkBh7UPP6zuunhhZNA2D4ET4sMQ4Bk1w&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El ejército israelí informó que aproximadamente 700,000 palestinos han abandonado la ciudad de Gaza, en medio de un aumento en las tensiones y el conflicto en la región. Esta migración de personas ha sido impulsada por los recientes ataques y la violencia que ha afectado a la zona. Las autoridades locales y organizaciones humanitarias expresan preocupación por la situación de los desplazados y la necesidad de asistencia humanitaria en medio de la crisis. ▼</h2></div>
+			<div class="contenido">
+				<p>El ejército israelí informó que aproximadamente 700,000 palestinos han abandonado la ciudad de Gaza, en medio de un aumento en las tensiones y el conflicto en la región. Esta migración de personas ha sido impulsada por los recientes ataques y la violencia que ha afectado a la zona. Las autoridades locales y organizaciones humanitarias expresan preocupación por la situación de los desplazados y la necesidad de asistencia humanitaria en medio de la crisis.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Irán niega querer tener armas nucleares pero reconstruye sitios de misiles atacados por Israel</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSisT36r9z7Wi1_Hj80ZSws1JUecQiWPcvNKzNsM7tNNsi7kmr_5kNoYI30Gw&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Irán ha rechazado las acusaciones de que busca desarrollar armas nucleares, a pesar de haber comenzado la reconstrucción de las instalaciones de misiles que fueron atacadas por Israel. Estas afirmaciones surgen en un contexto de creciente tensión entre ambos países, donde Irán refuerza su capacidad militar a pesar de las presiones internacionales. Las autoridades iraníes insistieron en que su programa nuclear tiene fines pacíficos y denunciaron las acciones de Israel como provocaciones. En este escenario, la comunidad internacional sigue de cerca los movimientos militares de Irán y sus implicaciones para la estabilidad en la región. ▼</h2></div>
+			<div class="contenido">
+				<p>Irán ha rechazado las acusaciones de que busca desarrollar armas nucleares, a pesar de haber comenzado la reconstrucción de las instalaciones de misiles que fueron atacadas por Israel. Estas afirmaciones surgen en un contexto de creciente tensión entre ambos países, donde Irán refuerza su capacidad militar a pesar de las presiones internacionales. Las autoridades iraníes insistieron en que su programa nuclear tiene fines pacíficos y denunciaron las acciones de Israel como provocaciones. En este escenario, la comunidad internacional sigue de cerca los movimientos militares de Irán y sus implicaciones para la estabilidad en la región.</p>
+			</div>
+		</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publiciteLite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>La historia de amor de Lothar Matthäus y su pareja modelo 38 años menor que se robó la atención en el Balón de Oro</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrJjkV8u9OHNErbJYFVr1IWRkMDeJgYlpNQjb05hd4KBRxZdfigiZfCzt4-Q&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Lothar Matthäus, legendario futbolista alemán, ha captado la atención mediática por su relación con una modelo que es 38 años más joven que él. Su pareja se destacó en la reciente ceremonia del Balón de Oro, lo que ha generado un gran interés en su historia de amor. Matthäus, quien tiene una trayectoria destacada en el fútbol, ha sido noticia no solo por su carrera, sino también por su vida personal, especialmente en lo que respecta a su relación con su joven pareja. ▼</h2></div>
+			<div class="contenido">
+				<p>Lothar Matthäus, legendario futbolista alemán, ha captado la atención mediática por su relación con una modelo que es 38 años más joven que él. Su pareja se destacó en la reciente ceremonia del Balón de Oro, lo que ha generado un gran interés en su historia de amor. Matthäus, quien tiene una trayectoria destacada en el fútbol, ha sido noticia no solo por su carrera, sino también por su vida personal, especialmente en lo que respecta a su relación con su joven pareja.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Reunión entre Marco Rubio y Sergei Lavrov en Nueva York</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9iS5OtiUwVQvQE-RFQxo_QcH6eeCJEHvbIRMURNUSCHjO4VWpotpiN-uGDJk&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El secretario de Estado de EE. UU., Marco Rubio, se reunió en Nueva York con el canciller ruso, Serguéi Lavrov, en el marco de la Asamblea General de la ONU. Durante el encuentro, ambos diplomáticos abordaron temas clave en la relación bilateral y cuestiones de seguridad global. Esta conversación se produce en un contexto de tensiones políticas y desacuerdos entre ambas naciones, enfatizando la importancia del diálogo en medio de las diferencias. ▼</h2></div>
+			<div class="contenido">
+				<p>El secretario de Estado de EE. UU., Marco Rubio, se reunió en Nueva York con el canciller ruso, Serguéi Lavrov, en el marco de la Asamblea General de la ONU. Durante el encuentro, ambos diplomáticos abordaron temas clave en la relación bilateral y cuestiones de seguridad global. Esta conversación se produce en un contexto de tensiones políticas y desacuerdos entre ambas naciones, enfatizando la importancia del diálogo en medio de las diferencias.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>La ONU acusó a Rusia de traslado forzoso de población ucraniana durante la invasión</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyew-dYD11ROReBPx4sV1scxvM6xsSMC_3tW0-nCC0vtNaMIrNrQ9M-MUjiXpaSGV3Z3Q&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2> ▼</h2></div>
+			<div class="contenido">
+				<p></p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>El puente que desapareció por el supertifón Ragasa en Taiwán</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyzZfIpkCadFildRfnz9x__E89juoGG6vEyke_mDSeInjSxsBgaGSLzN5s6Ys&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Un puente en Taiwán fue arrastrado por el supertifón Ragasa, lo que dejó un impacto visual impresionante. Las autoridades captaron el momento en que la estructura de concreto desapareció debido a la fuerza del agua y los vientos intensos del tifón. Ragasa causó severos daños en varias áreas de la isla, provocando inundaciones y la evacuación de miles de personas. Las imágenes del puente que desapareció se han viralizado, evidenciando la magnitud de la tormenta y sus efectos devastadores en la infraestructura. ▼</h2></div>
+			<div class="contenido">
+				<p>Un puente en Taiwán fue arrastrado por el supertifón Ragasa, lo que dejó un impacto visual impresionante. Las autoridades captaron el momento en que la estructura de concreto desapareció debido a la fuerza del agua y los vientos intensos del tifón. Ragasa causó severos daños en varias áreas de la isla, provocando inundaciones y la evacuación de miles de personas. Las imágenes del puente que desapareció se han viralizado, evidenciando la magnitud de la tormenta y sus efectos devastadores en la infraestructura.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Estados Unidos reduce aranceles a vehículos de la Unión Europea</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbo82-JYUwDqaFyV4l2FNCjxtc6FuLlt3CO6e2oXB9rnKdTt6UqortVqNqVdQ&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Estados Unidos ha decidido reducir los aranceles a los vehículos importados desde la Unión Europea. Esta medida es parte de un esfuerzo por mejorar las relaciones comerciales entre ambas regiones. La reducción de aranceles busca también aliviar las tensiones que surgieron en años anteriores debido a disputas comerciales. Las autoridades estadounidenses ven esta acción como un paso hacia la colaboración y la eliminación de obstáculos comerciales. ▼</h2></div>
+			<div class="contenido">
+				<p>Estados Unidos ha decidido reducir los aranceles a los vehículos importados desde la Unión Europea. Esta medida es parte de un esfuerzo por mejorar las relaciones comerciales entre ambas regiones. La reducción de aranceles busca también aliviar las tensiones que surgieron en años anteriores debido a disputas comerciales. Las autoridades estadounidenses ven esta acción como un paso hacia la colaboración y la eliminación de obstáculos comerciales.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>La OCDE informó que los aranceles de EEUU subieron 41 puntos en tres meses y alcanzaron su techo desde 1934</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTw0bM2yCRBqzJtaHjso17ZXPwG0ULkWmjJLVtAEuh20cN8nU5-CpTi2YZDiws&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La OCDE reportó que los aranceles impuestos por Estados Unidos han aumentado 41 puntos en un periodo de tres meses, alcanzando su nivel más alto desde 1934. Este incremento se enmarca en un contexto de tensión comercial y protección de la industria local, lo que ha generado preocupaciones sobre sus posibles efectos negativos en la economía global y en las relaciones comerciales del país. ▼</h2></div>
+			<div class="contenido">
+				<p>La OCDE reportó que los aranceles impuestos por Estados Unidos han aumentado 41 puntos en un periodo de tres meses, alcanzando su nivel más alto desde 1934. Este incremento se enmarca en un contexto de tensión comercial y protección de la industria local, lo que ha generado preocupaciones sobre sus posibles efectos negativos en la economía global y en las relaciones comerciales del país.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Margaret Atwood recibe el Premio Internacional Joan Margarit de Poesía</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9Hc2JXgAkIlrwy2iVc8OShlj23RLIxLfYNdrcSp5Q-H8a6_ip_roJnNtHUw&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Margaret Atwood ha sido galardonada con el Premio Internacional Joan Margarit de Poesía, un reconocimiento que destaca su trayectoria literaria y su contribución al género poético. La ceremonia de premiación se llevó a cabo en Córdoba, Argentina, y contó con la participación de destacados escritores y poetas. Atwood, conocida por su vasta obra literaria que incluye novelas, ensayos y poesía, es aclamada internacionalmente y ha recibido numerosos premios a lo largo de su carrera. Este premio en particular subraya su influencia en la literatura contemporánea y su capacidad para abordar temas relevantes en sus obras. ▼</h2></div>
+			<div class="contenido">
+				<p>Margaret Atwood ha sido galardonada con el Premio Internacional Joan Margarit de Poesía, un reconocimiento que destaca su trayectoria literaria y su contribución al género poético. La ceremonia de premiación se llevó a cabo en Córdoba, Argentina, y contó con la participación de destacados escritores y poetas. Atwood, conocida por su vasta obra literaria que incluye novelas, ensayos y poesía, es aclamada internacionalmente y ha recibido numerosos premios a lo largo de su carrera. Este premio en particular subraya su influencia en la literatura contemporánea y su capacidad para abordar temas relevantes en sus obras.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Guyana y Estados Unidos refuerzan su alianza estratégica antinarcóticos en medio de tensiones con Venezuela</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRye67cr9KiLF2WPoHXhwft2RBp8uAzYPKzxSMl-euWnlU7eaVGq-4HWCaSlYU&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Guyana y Estados Unidos han fortalecido su colaboración en la lucha contra el narcotráfico, en el contexto de las tensiones regionales con Venezuela. Esta alianza se manifiesta a través de diversas iniciativas y operaciones conjuntas destinadas a combatir el crimen organizado y el tráfico de drogas. Las autoridades de ambos países enfatizan la importancia de esta cooperación para garantizar la seguridad en la región y abordan preocupaciones sobre el incremento de actividades ilegales, motivadas por la inestabilidad en países vecinos. La relación se enmarca en un esfuerzo más amplio para promover la paz y la seguridad en América Latina. ▼</h2></div>
+			<div class="contenido">
+				<p>Guyana y Estados Unidos han fortalecido su colaboración en la lucha contra el narcotráfico, en el contexto de las tensiones regionales con Venezuela. Esta alianza se manifiesta a través de diversas iniciativas y operaciones conjuntas destinadas a combatir el crimen organizado y el tráfico de drogas. Las autoridades de ambos países enfatizan la importancia de esta cooperación para garantizar la seguridad en la región y abordan preocupaciones sobre el incremento de actividades ilegales, motivadas por la inestabilidad en países vecinos. La relación se enmarca en un esfuerzo más amplio para promover la paz y la seguridad en América Latina.</p>
+			</div>
+		</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publiciteLite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Senado de Brasil archiva proyecto controvertido que buscaba garantizar impunidad a legisladores</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3X-yccvoziSKDLib43RaV-BBbUSNlrTsRY0A4ueRxKKOIGdXGQhAOVPaDnlM&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El Senado de Brasil decidió archivar un proyecto de ley que proponía otorgar inmunidad a los legisladores en casos de corrupción y otros delitos. La iniciativa generó un intenso debate y rechazo, tanto en el ámbito político como en la sociedad civil, al considerarse que favorecía la impunidad de los funcionarios electos. La decisión de archivar el proyecto fue tomada por una amplia mayoría, reflejando la resistencia a facilitar un marco legal que pudiera proteger a los legisladores de acciones judiciales. ▼</h2></div>
+			<div class="contenido">
+				<p>El Senado de Brasil decidió archivar un proyecto de ley que proponía otorgar inmunidad a los legisladores en casos de corrupción y otros delitos. La iniciativa generó un intenso debate y rechazo, tanto en el ámbito político como en la sociedad civil, al considerarse que favorecía la impunidad de los funcionarios electos. La decisión de archivar el proyecto fue tomada por una amplia mayoría, reflejando la resistencia a facilitar un marco legal que pudiera proteger a los legisladores de acciones judiciales.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Zelensky ante la ONU: Las armas deciden quien sobrevive en medio de la invasión rusa</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQ22urnOf4k5yOuPuOQGMrUHZ0FChjuT5S3U7xmvOJpWfDaG0N4uriusHvPg&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El presidente de Ucrania, Volodímir Zelenski, abordó a la Asamblea General de la ONU en un momento crítico de la guerra con Rusia. Durante su discurso, enfatizó que la resolución de conflictos no depende de normas legales, sino del poder militar. Zelenski instó a la comunidad internacional a apoyar a Ucrania, destacando la necesidad de un esfuerzo conjunto para restaurar la paz y la justicia en su país, que enfrenta una invasión. Resaltó el impacto devastador que la guerra ha tenido sobre los ucranianos y la urgencia de unir fuerzas contra la agresión. ▼</h2></div>
+			<div class="contenido">
+				<p>El presidente de Ucrania, Volodímir Zelenski, abordó a la Asamblea General de la ONU en un momento crítico de la guerra con Rusia. Durante su discurso, enfatizó que la resolución de conflictos no depende de normas legales, sino del poder militar. Zelenski instó a la comunidad internacional a apoyar a Ucrania, destacando la necesidad de un esfuerzo conjunto para restaurar la paz y la justicia en su país, que enfrenta una invasión. Resaltó el impacto devastador que la guerra ha tenido sobre los ucranianos y la urgencia de unir fuerzas contra la agresión.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Drones Shahed, fábricas secretas y la guerra que cruza fronteras: la nueva ofensiva rusa en Europa</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5XDzdr9GQ2H3lM_CJpkAB6gExMRFdJb_72FGEeHBKmHj0sueRf4oAS4oiVw&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Un informe reciente destaca la intensificación de la ofensiva rusa en Europa, haciendo hincapié en el uso de drones Shahed y fábricas clandestinas que producen estos aparatos. La noticia explica cómo Rusia ha estado aumentando sus operaciones en la región, alimentando tensiones y desestabilizando la seguridad. Además, señala que estos drones de fabricación iraní se han convertido en herramientas clave en el conflicto, utilizados para llevar a cabo ataques en territorio europeo. La creciente actividad militar de Rusia se observa en varios frentes, lo que sugiere una estrategia más agresiva y un enfoque renovado en su capacidad de guerra. ▼</h2></div>
+			<div class="contenido">
+				<p>Un informe reciente destaca la intensificación de la ofensiva rusa en Europa, haciendo hincapié en el uso de drones Shahed y fábricas clandestinas que producen estos aparatos. La noticia explica cómo Rusia ha estado aumentando sus operaciones en la región, alimentando tensiones y desestabilizando la seguridad. Además, señala que estos drones de fabricación iraní se han convertido en herramientas clave en el conflicto, utilizados para llevar a cabo ataques en territorio europeo. La creciente actividad militar de Rusia se observa en varios frentes, lo que sugiere una estrategia más agresiva y un enfoque renovado en su capacidad de guerra.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>La Unión Europea destina 50 millones de euros en ayuda a Gaza ante la crítica situación humanitaria</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMARKvJCS78fl7JskMAnFP2Oab_iPX97eA8LJmW5O0pCfMacV9FMlMLHdZKFY&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La Unión Europea ha destinado 50 millones de euros para ayudar a Gaza, en respuesta a la grave situación humanitaria que enfrenta la región. Este apoyo económico se destinará a proporcionar asistencia alimentaria, servicios médicos y atención básica a la población afectada. La crisis en Gaza se ha intensificado debido a diversos factores, incluyendo bloqueos y conflictos, que han deteriorado las condiciones de vida de sus habitantes. La medida busca mitigar el sufrimiento de los civiles y contribuir a la estabilidad en la zona. ▼</h2></div>
+			<div class="contenido">
+				<p>La Unión Europea ha destinado 50 millones de euros para ayudar a Gaza, en respuesta a la grave situación humanitaria que enfrenta la región. Este apoyo económico se destinará a proporcionar asistencia alimentaria, servicios médicos y atención básica a la población afectada. La crisis en Gaza se ha intensificado debido a diversos factores, incluyendo bloqueos y conflictos, que han deteriorado las condiciones de vida de sus habitantes. La medida busca mitigar el sufrimiento de los civiles y contribuir a la estabilidad en la zona.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Accidente de avión en el aeropuerto internacional Simón Bolívar de Maiquetía</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfdr-yjwM4jZcPcUdMobUopG20OIYyXssTGOULI4vJrNyh-DCYNEOLrt5adeI&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Un avión sufrió un accidente en el Aeropuerto Internacional Simón Bolívar de Maiquetía. El incidente no dejó víctimas fatales, aunque se reportaron algunos heridos. Las autoridades locales iniciaron una investigación para determinar las causas del accidente. Se activa el protocolo de seguridad y se están tomando medidas para garantizar la operatividad del aeropuerto. ▼</h2></div>
+			<div class="contenido">
+				<p>Un avión sufrió un accidente en el Aeropuerto Internacional Simón Bolívar de Maiquetía. El incidente no dejó víctimas fatales, aunque se reportaron algunos heridos. Las autoridades locales iniciaron una investigación para determinar las causas del accidente. Se activa el protocolo de seguridad y se están tomando medidas para garantizar la operatividad del aeropuerto.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Super tifón Ragasa arrasa un restaurante en Hong Kong</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJ4tih9kIqpmOKN6YKpJD6HxGKUwrHaj4dPcHTU7TkkPKx3BzS2uDNART-Qw&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El supertifón Ragasa ha causado estragos en Hong Kong, donde se ha registrado un fuerte impacto en un restaurante. Las imágenes muestran el momento en que el fenómeno meteorológico arrasa el establecimiento, lo que resalta la ferocidad del temporal. Las autoridades han emitido alertas y recomendaciones para garantizar la seguridad de la población, mientras el tifón sigue avanzando por la región, dejando a su paso vientos destructivos y fuertes lluvias. ▼</h2></div>
+			<div class="contenido">
+				<p>El supertifón Ragasa ha causado estragos en Hong Kong, donde se ha registrado un fuerte impacto en un restaurante. Las imágenes muestran el momento en que el fenómeno meteorológico arrasa el establecimiento, lo que resalta la ferocidad del temporal. Las autoridades han emitido alertas y recomendaciones para garantizar la seguridad de la población, mientras el tifón sigue avanzando por la región, dejando a su paso vientos destructivos y fuertes lluvias.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Nuevo líder sirio promete justicia para responsables del derramamiento de sangre inocente</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnaWidF3cvK29uoO2mqBZZolBNeE-8wbFfZ16HfNAhxGJ9X9fwxg1Vy8nd4A&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El nuevo líder de Siria anunció su compromiso de llevar ante la justicia a quienes son responsables del derramamiento de sangre inocente en el país. Durante su discurso, enfatizó la importancia de la rendición de cuentas y la justicia para las víctimas del conflicto sirio, destacando su intención de establecer un entorno en el que se priorice la seguridad y la paz. Esta declaración ocurre en un contexto donde Siria continúa enfrentando las secuelas de una larga guerra civil que ha dejado miles de muertos y un gran número de desplazados. ▼</h2></div>
+			<div class="contenido">
+				<p>El nuevo líder de Siria anunció su compromiso de llevar ante la justicia a quienes son responsables del derramamiento de sangre inocente en el país. Durante su discurso, enfatizó la importancia de la rendición de cuentas y la justicia para las víctimas del conflicto sirio, destacando su intención de establecer un entorno en el que se priorice la seguridad y la paz. Esta declaración ocurre en un contexto donde Siria continúa enfrentando las secuelas de una larga guerra civil que ha dejado miles de muertos y un gran número de desplazados.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Apple solicita a la UE derogar la ley de competencia digital por riesgos de seguridad para los usuarios</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIdZtiZjJuggYIt9rfZw7W29RcFebf49JxHBuRQRcCDYTYw0iKOk7ixJOeIQ&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Apple ha solicitado a la Unión Europea la derogación de la Ley de Competencia Digital, argumentando que esta normativa podría poner en riesgo la seguridad de los usuarios. La empresa sostiene que las disposiciones de la ley obligarían a la apertura de sus plataformas a aplicaciones no verificadas, lo que aumentaría la vulnerabilidad a amenazas cibernéticas. Apple plantea que estas medidas no solo afectan su modelo de negocio, sino que también podrían comprometer la protección de los datos de los usuarios. La compañía está preocupada por las implicaciones de esta ley en la experiencia y seguridad de sus clientes. ▼</h2></div>
+			<div class="contenido">
+				<p>Apple ha solicitado a la Unión Europea la derogación de la Ley de Competencia Digital, argumentando que esta normativa podría poner en riesgo la seguridad de los usuarios. La empresa sostiene que las disposiciones de la ley obligarían a la apertura de sus plataformas a aplicaciones no verificadas, lo que aumentaría la vulnerabilidad a amenazas cibernéticas. Apple plantea que estas medidas no solo afectan su modelo de negocio, sino que también podrían comprometer la protección de los datos de los usuarios. La compañía está preocupada por las implicaciones de esta ley en la experiencia y seguridad de sus clientes.</p>
+			</div>
+		</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publiciteLite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>La ONU denuncia al menos 16 casos de tortura y 31 desaparecidos en Nicaragua durante la primera mitad de 2025</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6cWW0Lza3A2zqFzPMizVzT6JA7AsFC1MQlrj9vk6fgjEIWDY29ryN8BBwn6I&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La ONU ha denunciado en un informe que durante la primera mitad de 2025 se reportaron al menos 16 casos de tortura y 31 personas desaparecidas en Nicaragua. Estas violaciones de derechos humanos se producen en un contexto de represión creciente en el país, donde las autoridades han intensificado su control sobre la oposición y la sociedad civil. La organización internacional instó al gobierno nicaragüense a respetar los derechos humanos y a llevar a cabo investigaciones adecuadas sobre estos incidentes. ▼</h2></div>
+			<div class="contenido">
+				<p>La ONU ha denunciado en un informe que durante la primera mitad de 2025 se reportaron al menos 16 casos de tortura y 31 personas desaparecidas en Nicaragua. Estas violaciones de derechos humanos se producen en un contexto de represión creciente en el país, donde las autoridades han intensificado su control sobre la oposición y la sociedad civil. La organización internacional instó al gobierno nicaragüense a respetar los derechos humanos y a llevar a cabo investigaciones adecuadas sobre estos incidentes.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Al menos 14 muertos y 18 heridos tras el paso del supertifón Ragasa en el este de Taiwán</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTp_J6SzLMvIWQ1QHr84xkadLSnbvX8ZJautzImd62TqYDUJwAbfY3IbQGm9Q&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El supertifón Ragasa ha causado al menos 14 muertes, 18 heridos y más de 30 personas desaparecidas en el este de Taiwán. Las autoridades informaron que la tormenta trajo consigo vientos extremadamente fuertes y lluvias intensas, lo que provocó deslizamientos de tierra y grandes inundaciones en varias áreas. Los equipos de rescate están trabajando para localizar a los desaparecidos y proporcionar asistencia a los afectados, mientras las condiciones climáticas continúan complicando las labores de respuesta. ▼</h2></div>
+			<div class="contenido">
+				<p>El supertifón Ragasa ha causado al menos 14 muertes, 18 heridos y más de 30 personas desaparecidas en el este de Taiwán. Las autoridades informaron que la tormenta trajo consigo vientos extremadamente fuertes y lluvias intensas, lo que provocó deslizamientos de tierra y grandes inundaciones en varias áreas. Los equipos de rescate están trabajando para localizar a los desaparecidos y proporcionar asistencia a los afectados, mientras las condiciones climáticas continúan complicando las labores de respuesta.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Messi deslumbra en la MLS y genera rumores sobre su futuro en el Inter Miami</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4A7j32Jdt3eWTww63QUubLUTR0c8-tnbIJp4_SEYHibsp0wy6MerXn_r-8A&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Lionel Messi volvió a deslumbrar con su actuación en un partido de la MLS, donde su equipo, el Inter Miami, logró una contundente victoria. Esta destacada actuación ha generado una serie de comentarios y especulaciones sobre su futuro en el fútbol estadounidense, especialmente en la ciudad de Nueva York. La presencia de Messi está elevando el perfil de la liga y atrayendo la atención de los aficionados. Además, los directivos de la MLS han expresado su interés en mantenerlo en el país, evidenciando el impacto que tiene su presencia tanto dentro como fuera del campo. ▼</h2></div>
+			<div class="contenido">
+				<p>Lionel Messi volvió a deslumbrar con su actuación en un partido de la MLS, donde su equipo, el Inter Miami, logró una contundente victoria. Esta destacada actuación ha generado una serie de comentarios y especulaciones sobre su futuro en el fútbol estadounidense, especialmente en la ciudad de Nueva York. La presencia de Messi está elevando el perfil de la liga y atrayendo la atención de los aficionados. Además, los directivos de la MLS han expresado su interés en mantenerlo en el país, evidenciando el impacto que tiene su presencia tanto dentro como fuera del campo.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Sufrió uno de los accidentes más impactantes en la historia del automovilismo y volverá a manejar un Fórmula 1 después de cinco años</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsTpNZRM6dHgAzL1QKDDhfk_W-r130T0QX-WU6d_f3h0bRVLMKR8VX9C_lqm0&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Un piloto que sufrió uno de los accidentes más graves en la historia del automovilismo hace cinco años está a punto de regresar a las pistas. Después de un largo periodo de recuperación, el piloto se prepara para volver a conducir un monoplaza de Fórmula 1. Su accidente había generado preocupación en el ámbito deportivo, pero ahora se muestra optimista y listo para retomar su carrera en el automovilismo. ▼</h2></div>
+			<div class="contenido">
+				<p>Un piloto que sufrió uno de los accidentes más graves en la historia del automovilismo hace cinco años está a punto de regresar a las pistas. Después de un largo periodo de recuperación, el piloto se prepara para volver a conducir un monoplaza de Fórmula 1. Su accidente había generado preocupación en el ámbito deportivo, pero ahora se muestra optimista y listo para retomar su carrera en el automovilismo.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Salud de presos políticos en riesgo, advierte el partido de María Corina Machado</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZL70VcK7xA5CvmhFghfqkrzTvUjKXJajvciAA3-DyN3eQ1xDnXuGv114Azw&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El partido de María Corina Machado ha expresado preocupación por la salud de varios presos políticos en Venezuela, incluyendo a Perkins Rocha, Juan Iriarte y Marianela Ojeda. Según la denuncia del partido, las condiciones de detención y la falta de atención médica podrían agravar su estado de salud. Se hizo un llamado a las autoridades para garantizar el bienestar de estos prisioneros y se enfatizó la urgencia de atender sus necesidades médicas. ▼</h2></div>
+			<div class="contenido">
+				<p>El partido de María Corina Machado ha expresado preocupación por la salud de varios presos políticos en Venezuela, incluyendo a Perkins Rocha, Juan Iriarte y Marianela Ojeda. Según la denuncia del partido, las condiciones de detención y la falta de atención médica podrían agravar su estado de salud. Se hizo un llamado a las autoridades para garantizar el bienestar de estos prisioneros y se enfatizó la urgencia de atender sus necesidades médicas.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>La emotiva historia de Ousmane Dembélé y su amigo de la infancia en la gala del Balón de Oro</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9Bc1habYK9ctjw14K2zzyo5UmOyZBqCCZA9TYxZHtKNM-jhQah_8PpbIL95s&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Ousmane Dembélé, el futbolista francés, emocionó a la audiencia durante la gala del Balón de Oro al revelar una conmovedora historia sobre su amistad de la infancia. El jugador compartió que su mejor amigo de la niñez, quien le brindó apoyo en momentos difíciles, asistió al evento y fue homenajeado por su influencia en su vida. La relación entre ambos ilustra la importancia de la amistad en la vida de Dembélé y cómo esta ha contribuido a su carrera profesional. La emotiva conexión fue aplaudida por los presentes y se destacó como uno de los momentos más significativos de la ceremonia. ▼</h2></div>
+			<div class="contenido">
+				<p>Ousmane Dembélé, el futbolista francés, emocionó a la audiencia durante la gala del Balón de Oro al revelar una conmovedora historia sobre su amistad de la infancia. El jugador compartió que su mejor amigo de la niñez, quien le brindó apoyo en momentos difíciles, asistió al evento y fue homenajeado por su influencia en su vida. La relación entre ambos ilustra la importancia de la amistad en la vida de Dembélé y cómo esta ha contribuido a su carrera profesional. La emotiva conexión fue aplaudida por los presentes y se destacó como uno de los momentos más significativos de la ceremonia.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Putin aumentará el IVA hasta un 22% para financiar la invasión a Ucrania y apoyar a familias de militares caídos</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQexBp-yFhWqRPzcZrL-d45W3VYLBi03SRz4tlirw_upZNYgB9DKl2nmhpOxw&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El presidente de Rusia, Vladimir Putin, ha anunciado un incremento del IVA, que pasará del 20% al 22%, como parte de un plan para financiar la invasión de Ucrania. Este aumento tributario se destinará a cubrir gastos relacionados con el conflicto armado, así como a proporcionar recursos para las familias de los soldados caídos y la adquisición de armamento. Esta medida refleja la necesidad del gobierno ruso de sostener su esfuerzo bélico frente a la situación actual. ▼</h2></div>
+			<div class="contenido">
+				<p>El presidente de Rusia, Vladimir Putin, ha anunciado un incremento del IVA, que pasará del 20% al 22%, como parte de un plan para financiar la invasión de Ucrania. Este aumento tributario se destinará a cubrir gastos relacionados con el conflicto armado, así como a proporcionar recursos para las familias de los soldados caídos y la adquisición de armamento. Esta medida refleja la necesidad del gobierno ruso de sostener su esfuerzo bélico frente a la situación actual.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1></h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3Crom_EELc7oy80gynUaAEuVUCs8qQ7rx025c_69u8mdPWxeh5hjE8GH6VXI&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Una mujer en Bolivia fue detenida con 10 kilogramos de cocaína. Se ha revelado que la arrestada es hermana de una prominente sindicalista cercana a Evo Morales, expresidente del país. La operación se llevó a cabo en un control policial, donde se descubrieron los narcóticos ocultos en su vehículo. Este incidente ha generado preocupación sobre la relación entre el narcotráfico y figuras políticas en el país. Las autoridades continúan investigando el caso. ▼</h2></div>
+			<div class="contenido">
+				<p>Una mujer en Bolivia fue detenida con 10 kilogramos de cocaína. Se ha revelado que la arrestada es hermana de una prominente sindicalista cercana a Evo Morales, expresidente del país. La operación se llevó a cabo en un control policial, donde se descubrieron los narcóticos ocultos en su vehículo. Este incidente ha generado preocupación sobre la relación entre el narcotráfico y figuras políticas en el país. Las autoridades continúan investigando el caso.</p>
+			</div>
+		</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publiciteLite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Vicecanciller de Cuba descarta guerra con Estados Unidos para defender a Nicolás Maduro</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKbA4KFpIMnuO-YyQRJRfRy2H53o3g31glhbENeZHE3fZUxYJw7excTgydUw&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El vicecanciller de Cuba, Carlos Fernández de Cossío, afirmó que no se plantean una guerra con Estados Unidos para defender al presidente venezolano Nicolás Maduro. En una reciente reunión con el canciller venezolano, Cossío aseguró que Cuba apoyará a Maduro en su lucha por la soberanía y la autodeterminación, pero descartó cualquier tipo de conflicto armado. La declaración se enmarca en el contexto de tensiones políticas y diplomáticas en la región. ▼</h2></div>
+			<div class="contenido">
+				<p>El vicecanciller de Cuba, Carlos Fernández de Cossío, afirmó que no se plantean una guerra con Estados Unidos para defender al presidente venezolano Nicolás Maduro. En una reciente reunión con el canciller venezolano, Cossío aseguró que Cuba apoyará a Maduro en su lucha por la soberanía y la autodeterminación, pero descartó cualquier tipo de conflicto armado. La declaración se enmarca en el contexto de tensiones políticas y diplomáticas en la región.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Impacto devastador del supertifón Ragasa en China, Taiwán y Filipinas</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJCVj5OVeXrzuDpZzxE5kNjuZRMR0UVjmgFxFKbjodpWe8R-3ITr10Rhh5hg&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El supertifón Ragasa ha dejado a su paso escenas devastadoras en China, Taiwán y Filipinas. Las imágenes más impactantes muestran daños severos en infraestructuras, inundaciones y la destrucción de hogares. En Filipinas, el fenómeno meteorológico provocó deslizamientos de tierra y la evacuación de miles de personas. Las autoridades están trabajando en brindar apoyo a los afectados y evaluar los daños. La fuerza del tifón ha resaltado la vulnerabilidad de estas regiones a desastres naturales de gran magnitud. ▼</h2></div>
+			<div class="contenido">
+				<p>El supertifón Ragasa ha dejado a su paso escenas devastadoras en China, Taiwán y Filipinas. Las imágenes más impactantes muestran daños severos en infraestructuras, inundaciones y la destrucción de hogares. En Filipinas, el fenómeno meteorológico provocó deslizamientos de tierra y la evacuación de miles de personas. Las autoridades están trabajando en brindar apoyo a los afectados y evaluar los daños. La fuerza del tifón ha resaltado la vulnerabilidad de estas regiones a desastres naturales de gran magnitud.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Unión y Cambio alertó sobre una crisis generalizada en Venezuela y no solo con Estados Unidos</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiPHtaka11BwfX_L5JtUT6eZN86UAVIYwAmjGvfxIvPfhts6DmtWcp8lU4o_A&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Un informe de la organización Unión y Cambio advierte sobre el riesgo de una crisis generalizada en Venezuela, que podría ir más allá de la complicada relación con Estados Unidos. La situación económica y social en el país ha alcanzado niveles alarmantes, generando inquietud entre la población. El documento resalta la necesidad de abordar y resolver los problemas estructurales que afectan al país, incluyendo la inflación, la escasez de bienes esenciales y el deterioro de las condiciones de vida. La organización hace un llamado a la comunidad internacional para prestar atención a la crisis en Venezuela y a trabajar en soluciones colaborativas. ▼</h2></div>
+			<div class="contenido">
+				<p>Un informe de la organización Unión y Cambio advierte sobre el riesgo de una crisis generalizada en Venezuela, que podría ir más allá de la complicada relación con Estados Unidos. La situación económica y social en el país ha alcanzado niveles alarmantes, generando inquietud entre la población. El documento resalta la necesidad de abordar y resolver los problemas estructurales que afectan al país, incluyendo la inflación, la escasez de bienes esenciales y el deterioro de las condiciones de vida. La organización hace un llamado a la comunidad internacional para prestar atención a la crisis en Venezuela y a trabajar en soluciones colaborativas.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Irán ejecutó al menos a 1000 personas en prisión este año en una campaña de asesinatos masivos</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQiy3TjcFMZhO6QROZE1DxRv5x6_NH2m3R4CawXwsqQ4xFaffyiZTDFwuP427g&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Irán ha llevado a cabo la ejecución de al menos mil personas en lo que va del año 2025, lo que ha generado preocupación y condena a nivel internacional. La cifra representa un aumento significativo en comparación con años anteriores y se enmarca en una campaña de eliminación sistemática de disidentes y opositores políticos. Activistas y organizaciones de derechos humanos han señalado que estas ejecuciones son parte de una estrategia más amplia del régimen para mantener el control y silenciar la disidencia. La comunidad internacional ha expresado su alarma ante esta situación y ha instado a Irán a cesar estas prácticas inhumanas. ▼</h2></div>
+			<div class="contenido">
+				<p>Irán ha llevado a cabo la ejecución de al menos mil personas en lo que va del año 2025, lo que ha generado preocupación y condena a nivel internacional. La cifra representa un aumento significativo en comparación con años anteriores y se enmarca en una campaña de eliminación sistemática de disidentes y opositores políticos. Activistas y organizaciones de derechos humanos han señalado que estas ejecuciones son parte de una estrategia más amplia del régimen para mantener el control y silenciar la disidencia. La comunidad internacional ha expresado su alarma ante esta situación y ha instado a Irán a cesar estas prácticas inhumanas.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Lewis Hamilton expresa preocupación por la salud de su perro Roscoe</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIUXUKJNSkK8b0WrqG6wJtf50kyxJltTVIMVzTMq5pyoPRDlqkj0fB72OeAGw&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Lewis Hamilton, el piloto de Fórmula 1, compartió su preocupación por la salud de su perro Roscoe, quien ha estado enfrentando problemas médicos. A través de redes sociales, Hamilton expresó lo angustiante que ha sido para él y su familia lidiar con la situación, describiéndola como horas aterradoras. A pesar de la incertidumbre, el piloto se mantiene esperanzado y ha agradecido a sus seguidores por el apoyo recibido. La relación entre Hamilton y Roscoe es cercana, ya que el perro ha sido su compañero durante muchos años. ▼</h2></div>
+			<div class="contenido">
+				<p>Lewis Hamilton, el piloto de Fórmula 1, compartió su preocupación por la salud de su perro Roscoe, quien ha estado enfrentando problemas médicos. A través de redes sociales, Hamilton expresó lo angustiante que ha sido para él y su familia lidiar con la situación, describiéndola como horas aterradoras. A pesar de la incertidumbre, el piloto se mantiene esperanzado y ha agradecido a sus seguidores por el apoyo recibido. La relación entre Hamilton y Roscoe es cercana, ya que el perro ha sido su compañero durante muchos años.</p>
+			</div>
+		</div>
+ <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1894152981922395"
+     crossorigin="anonymous"></script>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-1894152981922395"
+     data-ad-slot="4289209070"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ </div> 
+<p style='font-size: 12px; color: #666; text-align: center;'>
+    © 2025 VIA ONLINE. Todos los derechos reservados.  
+    Queda prohibida la reproducción total o parcial de los contenidos de este sitio sin autorización previa y por escrito.  
+    Las marcas, logotipos y contenidos pertenecen a sus respectivos propietarios.  
+    Este sitio web puede contener enlaces a sitios externos sobre los cuales VIA ONLINE no tiene responsabilidad alguna.  
+    El uso de este sitio implica la aceptación de nuestros <a href='https://viaonline.com.ar/TerminosyCondiciones.html'>Términos y Condiciones</a> y nuestra <a href='https://viaonline.com.ar/privacidad.html'>Política de Privacidad</a>.
+</p>
+
+</body>
+</html>
