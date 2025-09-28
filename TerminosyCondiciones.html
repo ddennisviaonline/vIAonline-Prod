@@ -1,0 +1,210 @@
+
+<!DOCTYPE html>
+<html lang='es'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>vIA online</title>
+    <link rel='icon' type='image/png' sizes='512x512' href='https://viaonline.com.ar/Imagenes/favicon.ico'>
+      <!-- Script global de AdSense (va una sola vez en toda la web) -->
+    <meta name='google-adsense-account' content='ca-pub-1894152981922395'>
+
+    <style>
+/* ======== Configuración general ======== */
+body {
+    background-color: #FEFBF4;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+}
+
+/* ======== Logo ======== */
+.logo {
+    text-align: center;
+    margin-bottom: 10px;
+}
+.logo img {
+    max-width: 300px;
+    width: 100%;
+    height: auto;
+}
+
+/* Cada efeméride */
+.Efemeride {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    cursor: pointer;
+    background-color: #FEFBF4;
+    transition: box-shadow 0.3s;
+}
+
+.Efemeride img {
+    width: 100%;
+    height: 200px; /* Altura fija */
+    border-radius: 1px; /* opcional */
+}
+
+.Efemeride h1,
+.Efemeride h2 {
+    margin: 0 0 10px 0;
+    font-size: 16px;
+    text-align: center;
+}
+
+.Efemeride.abierto .contenido {
+    display: block;
+}
+
+/* ======== Encabezado (fecha, clima, dólar, feriado) ======== */
+.encabezado-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; /* permite que los items pasen a otra línea */
+    gap: 10px;       /* espacio entre bloques */
+    margin: 20px auto;   /* centrado horizontal */
+    padding: 0 10px;     /* espacio interno */
+    max-width: 1200px;   /* igual que el contenedor de noticias */
+}
+
+/* Resaltar etiquetas en negrita */
+.encabezado-info .resaltado {
+    font-weight: bold;
+}
+
+/* Versión móvil: apilado */
+@media (max-width: 768px) {
+    .encabezado-info {
+        flex-direction: column; /* apila en vertical */
+        align-items: flex-start; /* alinea a la izquierda */
+    }
+    .encabezado-info > div {
+        width: 100%; /* cada bloque ocupa todo el ancho */
+    }
+}
+
+/* ======== Contenedor de noticias ======== */
+.contenedor-noticias {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 columnas en PC */
+    gap: 20px;
+    margin: 20px auto;
+    max-width: 1200px; /* ancho máximo centrado */
+    width: 100%;
+    padding: 0 25px; /* margen lateral amplio */
+}
+
+/* Responsive: tablet (2 columnas) */
+@media (max-width: 992px) {
+    .contenedor-noticias {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 0 20px;
+    }
+}
+
+/* Responsive: celular (1 columna) */
+@media (max-width: 576px) {
+    .contenedor-noticias {
+        grid-template-columns: 1fr;
+        padding: 0 20px;
+    }
+}
+
+/* ======== Cada noticia ======== */
+.noticia {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    cursor: pointer;
+    background-color: #FEFBF4;
+    transition: box-shadow 0.3s;
+}
+.noticia:hover {
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+.noticia h1, .noticia h2 {
+    margin: 0 0 10px 0;
+    font-size: 16px;
+    text-align: center;
+}
+.noticia img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* ======== Desplegable contenido ======== */
+.contenido {
+    display: none;
+    margin-top: 10px;
+    font-size: 14px;
+    line-height: 1.4;
+}
+.noticia.abierto .contenido {
+    display: block;
+}
+
+/* ======== Publicidad ======== */
+.publicidad {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 20px;
+    background-color: #f0f0f0;
+    font-weight: bold;
+    border-radius: 8px;
+}
+</style>
+
+</head>
+<body>
+
+    <!-- Logo -->
+    <div class='logo'>
+        <a href='https://viaonline.com.ar/'>
+            <img src='https://viaonline.com.ar/Imagenes/Logocorto.png' alt='Imagen centrada'>
+        </a>
+    </div>
+
+    <!-- Fecha y clima -->
+    <div class='encabezado-info'>
+        <div class='fecha'><span class='resaltado'>📆 28 de septiembre de 2025</span></div>
+        <div class='clima'><span class='resaltado'>🌡️ Clima:</span> 15º ☀️ Despejado</div>
+        <div class='clima'><span class='resaltado'>📆 Próximo feriado:</span>Día de la  Raza (12/10) viernes 10 de octubre de 2025</div>
+        <div class='clima'><span class='resaltado'>💵 Dólar oficial </span>Compra: 1300 | Venta: 1350</div>
+        <div class='clima'><span class='resaltado'>💵 Dólar blue </span>Compra: 1420 | Venta: 1440</div>
+        <div class='clima'><span class='resaltado'>💵 Dólar tarjeta </span>Compra: 1690 | Venta: 1755</div>
+                
+    </div>
+<div class='contenedor-noticias'>
+ <h2>Términos y Condiciones</h2>
+<p>Última actualización: 5 de agosto de 2025</p>
+
+<p>Bienvenido a VIA ONLINE. Al acceder y utilizar nuestro sitio web (https://www.viaonline.com.ar), aceptás cumplir con los siguientes Términos y Condiciones. Si no estás de acuerdo con alguno de ellos, te pedimos que no utilices el sitio.</p>
+
+<h3>1. Uso del sitio</h3>
+<p>El contenido de VIA ONLINE es solo para uso informativo. No garantizamos que la información sea completa, precisa o actualizada. El uso de los contenidos queda bajo responsabilidad del usuario.</p>
+
+<h3>2. Propiedad intelectual</h3>
+<p>Todos los contenidos publicados (textos, imágenes, logos, videos, etc.) son propiedad de VIA ONLINE o de terceros que han autorizado su uso. Está prohibida su reproducción total o parcial sin autorización previa y por escrito.</p>
+
+<h3>3. Enlaces a terceros</h3>
+<p>El sitio puede contener enlaces a páginas externas. VIA ONLINE no se hace responsable por el contenido, políticas o prácticas de esos sitios.</p>
+
+<h3>4. Modificaciones</h3>
+<p>Nos reservamos el derecho de modificar estos Términos y Condiciones en cualquier momento. Las modificaciones entrarán en vigencia desde su publicación en el sitio.</p>
+
+<h3>5. Jurisdicción</h3>
+<p>Estos términos se rigen por las leyes de la República Argentina. Cualquier conflicto será sometido a los tribunales competentes de la Ciudad Autónoma de Buenos Aires.</p>
+ 
+<p style='font-size: 12px; color: #666; text-align: center;'>
+    © 2025 VIA ONLINE. Todos los derechos reservados.  
+    Queda prohibida la reproducción total o parcial de los contenidos de este sitio sin autorización previa y por escrito.  
+    Las marcas, logotipos y contenidos pertenecen a sus respectivos propietarios.  
+    Este sitio web puede contener enlaces a sitios externos sobre los cuales VIA ONLINE no tiene responsabilidad alguna.  
+    El uso de este sitio implica la aceptación de nuestros <a href='https://viaonline.com.ar/TerminosyCondiciones.html'>Términos y Condiciones</a> y nuestra <a href='https://viaonline.com.ar/privacidad.html'>Política de Privacidad</a>.
+</p>
+
+</body>
+</html>
