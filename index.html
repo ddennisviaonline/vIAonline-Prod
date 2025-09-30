@@ -1,0 +1,1293 @@
+
+<!DOCTYPE html>
+<html lang='es'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>vIA online</title>
+    <link rel='icon' type='image/png' sizes='512x512' href='https://viaonline.com.ar/Imagenes/favicon.ico'>
+      <!-- Script global de AdSense (va una sola vez en toda la web) -->
+    <meta name='google-adsense-account' content='ca-pub-1894152981922395'>
+
+    <style>
+/* ======== Configuración general ======== */
+body {
+    background-color: #FEFBF4;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+}
+
+/* ======== Logo ======== */
+.logo {
+    text-align: center;
+    margin-bottom: 10px;
+}
+.logo img {
+    max-width: 300px;
+    width: 100%;
+    height: auto;
+}
+
+/* Cada efeméride */
+.Efemeride {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    cursor: pointer;
+    background-color: #FEFBF4;
+    transition: box-shadow 0.3s;
+}
+
+.Efemeride img {
+    width: 100%;
+    height: 200px; /* Altura fija */
+    border-radius: 1px; /* opcional */
+}
+
+.Efemeride h1,
+.Efemeride h2 {
+    margin: 0 0 10px 0;
+    font-size: 16px;
+    text-align: center;
+}
+
+.Efemeride.abierto .contenido {
+    display: block;
+}
+
+/* ======== Encabezado (fecha, clima, dólar, feriado) ======== */
+.encabezado-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; /* permite que los items pasen a otra línea */
+    gap: 10px;       /* espacio entre bloques */
+    margin: 20px auto;   /* centrado horizontal */
+    padding: 0 10px;     /* espacio interno */
+    max-width: 1200px;   /* igual que el contenedor de noticias */
+}
+
+/* Resaltar etiquetas en negrita */
+.encabezado-info .resaltado {
+    font-weight: bold;
+}
+
+/* Versión móvil: apilado */
+@media (max-width: 768px) {
+    .encabezado-info {
+        flex-direction: column; /* apila en vertical */
+        align-items: flex-start; /* alinea a la izquierda */
+    }
+    .encabezado-info > div {
+        width: 100%; /* cada bloque ocupa todo el ancho */
+    }
+}
+
+/* ======== Contenedor de noticias ======== */
+.contenedor-noticias {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 columnas en PC */
+    gap: 20px;
+    margin: 20px auto;
+    max-width: 1200px; /* ancho máximo centrado */
+    width: 100%;
+    padding: 0 25px; /* margen lateral amplio */
+}
+
+/* Responsive: tablet (2 columnas) */
+@media (max-width: 992px) {
+    .contenedor-noticias {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 0 20px;
+    }
+}
+
+/* Responsive: celular (1 columna) */
+@media (max-width: 576px) {
+    .contenedor-noticias {
+        grid-template-columns: 1fr;
+        padding: 0 20px;
+    }
+}
+
+/* ======== Cada noticia ======== */
+.noticia {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    cursor: pointer;
+    background-color: #FEFBF4;
+    transition: box-shadow 0.3s;
+}
+.noticia:hover {
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+.noticia h1, .noticia h2 {
+    margin: 0 0 10px 0;
+    font-size: 16px;
+    text-align: center;
+}
+.noticia img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* ======== Desplegable contenido ======== */
+.contenido {
+    display: none;
+    margin-top: 10px;
+    font-size: 14px;
+    line-height: 1.4;
+}
+.noticia.abierto .contenido {
+    display: block;
+}
+
+/* ======== Publicidad ======== */
+.publicidad {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 20px;
+    background-color: #f0f0f0;
+    font-weight: bold;
+    border-radius: 8px;
+}
+</style>
+
+</head>
+<body>
+
+    <!-- Logo -->
+    <div class='logo'>
+        <a href='https://viaonline.com.ar/'>
+            <img src='https://viaonline.com.ar/Imagenes/Logocorto.png' alt='Imagen centrada'>
+        </a>
+    </div>
+
+    <!-- Fecha y clima -->
+    <div class='encabezado-info'>
+        <div class='fecha'><span class='resaltado'>📆 29 de septiembre de 2025</span></div>
+        <div class='clima'><span class='resaltado'>🌡️ Clima:</span> 18º ☀️ Despejado</div>
+        <div class='clima'><span class='resaltado'>📆 Próximo feriado:</span>Día de la  Raza (12/10) viernes 10 de octubre de 2025</div>
+        <div class='clima'><span class='resaltado'>💵 Dólar oficial </span>Compra: 1330 | Venta: 1380</div>
+        <div class='clima'><span class='resaltado'>💵 Dólar blue </span>Compra: 1410 | Venta: 1430</div>
+        <div class='clima'><span class='resaltado'>💵 Dólar tarjeta </span>Compra: 1729 | Venta: 1794</div>
+                
+    </div>
+<div class='contenedor-noticias'>
+ 
+		<div class='Efemeride' onclick='this.classList.toggle("abierto")'>
+			<h1>Efemérides</h1>
+			<img src='https://viaonline.com.ar/Imagenes/LogoEfemerides.png' alt='Imagen Efemerides'>
+			<div class="desplegable"><h2>Los hechos que marcaron la historia. ▼</h2></div>
+			<div class="contenido">
+				<h2>📖 Eventos</h2><p>2004 - El asteroide 4179 Toutatis pasa a una distancia de cuatro lunas de la Tierra.</p><p>2006 - Gol Transportes Aéreos Vuelo 1907 colisiona en el aire con un jet ejecutivo Embraer Legacy 600 cerca de Peixoto de Azevedo, Mato Grosso, Brasil, resultando en la muerte de 154 personas y provocando una crisis en la aviación brasileña.</p><p>2007 - Calder Hall, la primera central nuclear comercial del mundo, es demolida en una explosión controlada.</p><p>2008 - Tras las quiebras de Lehman Brothers y Washington Mutual, el Promedio Industrial Dow Jones cae 777.68 puntos, la mayor pérdida de puntos en un solo día en su historia.</p><p>2009 - El terremoto en Samoa de 8.1 Mw ocurre con una intensidad máxima en la escala de Mercalli de VI (Fuerte). A continuación, se genera un tsunami destructivo, resultando en 189 fallecimientos y cientos de heridos.</p><p>2013 - Más de 42 personas son asesinadas por miembros de Boko Haram en la Facultad de Agricultura de Gujba, Nigeria.</p><p>522 BC - Darío I de Persia elimina al usurpador gaumata, asegurando su posición como rey del Imperio Persa.</p><p>61 BC - Pompeyo el Grande celebra su tercer triunfo por las victorias sobre los piratas y el final de las Guerras Mitridáticas en su 45 cumpleaños.</p>
+                <h2>🎂 Nacimientos</h2><p>106 BC - Pompeyo, general y político romano (fallecido en 48 a.C.)</p>
+                <h2>✝️ Fallecimientos</h2><p>1186 - Guillermo de Tiro, Arzobispo de Tiro (nacido alrededor de 1130)</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Singapur prohíbe la entrada al activista prodemocracia de Hong Kong Nathan Law</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnr66W6fQsNFZis_yrFyPAvt7VOFIiJ6BkWMP_gYAyXdWnXDAZ-ZM5D_hA2lQ&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Singapur impide la entrada al activista prodemocracia de Hong Kong, Nathan Law, quien había planeado participar en un evento sobre derechos humanos. ▼</h2></div>
+			<div class="contenido">
+				<p>Singapur ha denegado la entrada al activista prodemocracia de Hong Kong, Nathan Law. Esta decisión se produce en un contexto de creciente presión sobre los defensores de derechos humanos y críticos del régimen de Beijing. Law, que ha estado fuera de Hong Kong desde 2020, buscaba participar en un evento en Singapur, donde planeaba hablar sobre la situación política en su país. Las autoridades de Singapur no han proporcionado una explicación detallada sobre los motivos detrás de esta medida. Esta acción refuerza las tensiones entre los gobiernos de Singapur y China en relación con los temas de democracia y derechos civiles.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>El City pagó 100 millones de dólares por el jugador, pero sus excesos y adicciones causaron su salida abrupta del club.</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQK49qlzAGGbi4PiwYxgUAFADcdpMZGfSde6IruyrF948YoUKFevXtnD0MCpg&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El Manchester City realizó una inversión de 100 millones de dólares por el jugador Joao Cancelo, pero su salida del club fue abrupta debido a comportamientos excesivos y adicciones. Estas dificultades personales y profesionales afectaron su rendimiento y relación con la institución, lo que llevó a su desvinculación. ▼</h2></div>
+			<div class="contenido">
+				<p>El Manchester City realizó una inversión de 100 millones de dólares por el jugador Joao Cancelo, pero su salida del club fue abrupta debido a comportamientos excesivos y adicciones. Estas dificultades personales y profesionales afectaron su rendimiento y relación con la institución, lo que llevó a su desvinculación.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Impactante punto de Carlos Alcaraz en su triunfo que lo clasifica a las semifinales del ATP 500 de Tokio</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsDsbcg-hWg7mf-dWlIVJukGthBKS6hHXKaBeOkEoMokB2Wr-R0fIefbRPVas&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Carlos Alcaraz logró avanzar a las semifinales del ATP 500 de Tokio tras una destacada victoria en cuartos de final. Durante el partido, se produjo un punto espectacular que llamó la atención de los espectadores, demostrando la habilidad y agilidad del tenista español. Con esta victoria, Alcaraz sigue consolidando su posición entre los mejores del circuito, buscando un nuevo título en su carrera. ▼</h2></div>
+			<div class="contenido">
+				<p>Carlos Alcaraz logró avanzar a las semifinales del ATP 500 de Tokio tras una destacada victoria en cuartos de final. Durante el partido, se produjo un punto espectacular que llamó la atención de los espectadores, demostrando la habilidad y agilidad del tenista español. Con esta victoria, Alcaraz sigue consolidando su posición entre los mejores del circuito, buscando un nuevo título en su carrera.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Trump y Netanyahu inician reunión sobre tregua y liberación de rehenes en Gaza</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUYbmistejTykvg3gdctNtnSy8BX766qovMJbvmGduprs9V9RrNPQZDVcd8g&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La reunión entre Donald Trump y Benjamin Netanyahu comenzó con el objetivo de discutir una nueva propuesta de tregua y la liberación de rehenes en Gaza. Ambos líderes abordaron la situación actual en la región y exploraron posibles soluciones para reducir la violencia y mejorar las condiciones humanitarias. Este encuentro se enmarca en un contexto complejo marcado por tensiones en el Medio Oriente, donde la situación humanitaria sigue siendo crítica. ▼</h2></div>
+			<div class="contenido">
+				<p>La reunión entre Donald Trump y Benjamin Netanyahu comenzó con el objetivo de discutir una nueva propuesta de tregua y la liberación de rehenes en Gaza. Ambos líderes abordaron la situación actual en la región y exploraron posibles soluciones para reducir la violencia y mejorar las condiciones humanitarias. Este encuentro se enmarca en un contexto complejo marcado por tensiones en el Medio Oriente, donde la situación humanitaria sigue siendo crítica.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Rusia insiste en bloquear cualquier avance de Ucrania y descarta que Kiev recupere los territorios invadidos</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7Wu8JG4__cM_H2ygRQASDGHzqOHIoj1FroN2iDxCxJOU-bxlletuQK0i6EQI&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Rusia reafirmó su intención de obstaculizar cualquier avance de Ucrania en la recuperación de los territorios ocupados tras la invasión iniciada en 2022. Un alto funcionario del Kremlin afirmó que no considera posible que Ucrania logre recuperar esos territorios, reiterando la postura de Moscú ante las acciones militares y políticas del país invadido. La declaración se produce en un contexto de esfuerzos continuos de Ucrania por retomar el control de las áreas ocupadas. ▼</h2></div>
+			<div class="contenido">
+				<p>Rusia reafirmó su intención de obstaculizar cualquier avance de Ucrania en la recuperación de los territorios ocupados tras la invasión iniciada en 2022. Un alto funcionario del Kremlin afirmó que no considera posible que Ucrania logre recuperar esos territorios, reiterando la postura de Moscú ante las acciones militares y políticas del país invadido. La declaración se produce en un contexto de esfuerzos continuos de Ucrania por retomar el control de las áreas ocupadas.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Kim Jong-un ordena destinar todos los recursos de Corea del Norte a su programa nuclear</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSha9rXap4D37JGEJTGEzcMppL5Frvo5hy8SHeAvcs_DDlvHDKIMwn6VXb4Q&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Kim Jong-un ha ordenado que todos los recursos de Corea del Norte se destinen exclusivamente al desarrollo de su programa nuclear. Esta decisión se enmarca en un contexto de creciente tensión y desafíos económicos en el país. Se anticipa que esta medida intensificará las ya existentes preocupaciones internacionales sobre la proliferación nuclear y las ambiciones bélicas de Corea del Norte. ▼</h2></div>
+			<div class="contenido">
+				<p>Kim Jong-un ha ordenado que todos los recursos de Corea del Norte se destinen exclusivamente al desarrollo de su programa nuclear. Esta decisión se enmarca en un contexto de creciente tensión y desafíos económicos en el país. Se anticipa que esta medida intensificará las ya existentes preocupaciones internacionales sobre la proliferación nuclear y las ambiciones bélicas de Corea del Norte.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Trump denuncia sabotaje y exige arrestos por fallas en su participación en la ONU</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjvA86cxd6iABJgnQPPMBstxQqbwb56YwXMOtl0G4Vv8Pl15KRVzdhQFjfYg&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Donald Trump denunció lo que calificó como un sabotaje en su participación en la Asamblea General de la ONU, señalando que hubo tres incidentes que afectaron su intervención. Exigió que se investiguen y se realicen arrestos relacionados con lo que considera un intento de boicotear su discurso. Trump hizo estas declaraciones durante una reunión en la que abordó su descontento con el tratamiento que recibió en el evento internacional y la manera en que fueron gestionadas las diligencias relacionadas con su asistencia. ▼</h2></div>
+			<div class="contenido">
+				<p>Donald Trump denunció lo que calificó como un sabotaje en su participación en la Asamblea General de la ONU, señalando que hubo tres incidentes que afectaron su intervención. Exigió que se investiguen y se realicen arrestos relacionados con lo que considera un intento de boicotear su discurso. Trump hizo estas declaraciones durante una reunión en la que abordó su descontento con el tratamiento que recibió en el evento internacional y la manera en que fueron gestionadas las diligencias relacionadas con su asistencia.</p>
+			</div>
+		</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publiciteLite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Los árboles de la Amazonia crecen cada vez más y alcanzan un tamaño récord</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6PS2X9PSKezeI-v890AxaPNlxJ_K_QwggQhc1kRyucieCWYIG-hU8kvPqIfg&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Un estudio revela que los árboles de la Amazonía están creciendo de manera notable, aumentando su tamaño en un 32% por década. Esta investigación, que se llevó a cabo usando tecnología avanzada de monitoreo satelital y análisis de imágenes, sugiere que las condiciones ambientales y la biodiversidad del área han contribuido a este fenómeno. Los científicos destacan que, a pesar de los desafíos como la deforestación y el cambio climático, el crecimiento de los árboles podría tener un impacto positivo en la absorción de carbono, ayudando a mitigar el cambio climático. Sin embargo, advierten que se deben atender los riesgos que enfrentan estos ecosistemas para asegurar su continuidad y salud a largo plazo. ▼</h2></div>
+			<div class="contenido">
+				<p>Un estudio revela que los árboles de la Amazonía están creciendo de manera notable, aumentando su tamaño en un 32% por década. Esta investigación, que se llevó a cabo usando tecnología avanzada de monitoreo satelital y análisis de imágenes, sugiere que las condiciones ambientales y la biodiversidad del área han contribuido a este fenómeno. Los científicos destacan que, a pesar de los desafíos como la deforestación y el cambio climático, el crecimiento de los árboles podría tener un impacto positivo en la absorción de carbono, ayudando a mitigar el cambio climático. Sin embargo, advierten que se deben atender los riesgos que enfrentan estos ecosistemas para asegurar su continuidad y salud a largo plazo.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>La Casa Blanca busca evitar el cierre del gobierno en reunión clave con líderes del Congreso de Estados Unidos</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT19fCocwD3aY2cXkKWG8U_dT8LfXBtdirR4xLyx0otkSavDIRHiYAosnNNc5w&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La Casa Blanca se encuentra en negociaciones cruciales con los líderes del Congreso de Estados Unidos para evitar un cierre del gobierno. Las reuniones buscan alcanzar un acuerdo sobre el presupuesto federal y asegurar la financiación necesaria para continuar con las operaciones del gobierno. Las tensiones han aumentado debido a desacuerdos entre demócratas y republicanos, lo que ha complicado la posibilidad de llegar a un consenso antes de la fecha límite establecida. ▼</h2></div>
+			<div class="contenido">
+				<p>La Casa Blanca se encuentra en negociaciones cruciales con los líderes del Congreso de Estados Unidos para evitar un cierre del gobierno. Las reuniones buscan alcanzar un acuerdo sobre el presupuesto federal y asegurar la financiación necesaria para continuar con las operaciones del gobierno. Las tensiones han aumentado debido a desacuerdos entre demócratas y republicanos, lo que ha complicado la posibilidad de llegar a un consenso antes de la fecha límite establecida.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>El emocionante regreso a la F1 del piloto que sufrió un dramático accidente entre llamas hace cinco años</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjKVFbUY-zaL9wTLezJIsHYBrmawY67HyTz64V2QAXO1KH0XZGQNlHqek-mvc&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El piloto que sufrió un grave accidente en 2018 durante una carrera de Fórmula 2 regresó a la competición en la Fórmula 1. Tras un incendio en el que estuvo involucrado, este momento marca su reaparición en el automovilismo a nivel profesional. El regreso del piloto ha generado una fuerte emotividad tanto en él como en sus seguidores, quienes han emocionado al ver su retorno a las pistas. La comunidad del deporte ha mostrado un gran apoyo y reconocimiento hacia su valentía y perseverancia. ▼</h2></div>
+			<div class="contenido">
+				<p>El piloto que sufrió un grave accidente en 2018 durante una carrera de Fórmula 2 regresó a la competición en la Fórmula 1. Tras un incendio en el que estuvo involucrado, este momento marca su reaparición en el automovilismo a nivel profesional. El regreso del piloto ha generado una fuerte emotividad tanto en él como en sus seguidores, quienes han emocionado al ver su retorno a las pistas. La comunidad del deporte ha mostrado un gran apoyo y reconocimiento hacia su valentía y perseverancia.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Miami se consolida como centro global de diálogo tras cumbre del Adam Smith Center en Nueva York</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlD3jH3DlzkqtjnhZ408EZfUjdBGaTBi8HofkSTrKcjcHC4x575Cua2JwSHA&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La cumbre del Adam Smith Center en Nueva York ha fortalecido la posición de Miami como un centro internacional para el diálogo y el intercambio de ideas. El evento reunió a líderes de diversas disciplinas que discutieron temas sobre la economía, la política y el futuro del mundo. Durante la cumbre, se destacó la importancia de Miami como un punto de encuentro para abordar desafíos globales y fomentar la colaboración entre diferentes sectores. Los participantes resaltaron el papel crucial de la ciudad en la promoción de discusiones constructivas que pueden influir en el desarrollo de políticas a nivel internacional. ▼</h2></div>
+			<div class="contenido">
+				<p>La cumbre del Adam Smith Center en Nueva York ha fortalecido la posición de Miami como un centro internacional para el diálogo y el intercambio de ideas. El evento reunió a líderes de diversas disciplinas que discutieron temas sobre la economía, la política y el futuro del mundo. Durante la cumbre, se destacó la importancia de Miami como un punto de encuentro para abordar desafíos globales y fomentar la colaboración entre diferentes sectores. Los participantes resaltaron el papel crucial de la ciudad en la promoción de discusiones constructivas que pueden influir en el desarrollo de políticas a nivel internacional.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Ucrania lanza nuevo ataque con drones contra instalaciones petroleras rusas en la región de Chuvashia</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQk4tqX4m6kj6Jrt_bVxVYnetlNzgIALaV5eOSLZ-4hKq5JBZYenln7RAMGfxY&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Ucrania llevó a cabo un nuevo ataque con drones dirigido a instalaciones petroleras en la región de Chuvashia, Rusia. Este ataque se enmarca en la estrategia ucraniana de afectar la infraestructura energética de Rusia, en medio del conflicto en curso. Las autoridades rusas informaron sobre el impacto del ataque y las medidas de respuesta adoptadas para proteger sus instalaciones. Esta acción se suma a una serie de ofensivas recientes de Ucrania que buscan debilitar a su oponente mediante ataques en territorio ruso. ▼</h2></div>
+			<div class="contenido">
+				<p>Ucrania llevó a cabo un nuevo ataque con drones dirigido a instalaciones petroleras en la región de Chuvashia, Rusia. Este ataque se enmarca en la estrategia ucraniana de afectar la infraestructura energética de Rusia, en medio del conflicto en curso. Las autoridades rusas informaron sobre el impacto del ataque y las medidas de respuesta adoptadas para proteger sus instalaciones. Esta acción se suma a una serie de ofensivas recientes de Ucrania que buscan debilitar a su oponente mediante ataques en territorio ruso.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Arranca el Mundial Sub 20 en Chile: calendario completo y panorama de Argentina</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQifpCZpKfPArT7OpV2lt8F1Z6vqr0txR15XBqX7OcWSdo6AxkXy3dAZXKi1_c&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El Mundial Sub-20 de fútbol se llevará a cabo en Chile, comenzando en los próximos días. Este torneo reunirá a selecciones de distintas partes del mundo, y Argentina competirá en este evento con grandes expectativas. El artículo ofrece un calendario completo de los partidos y detalla los principales aspectos del torneo, incluyendo el formato y la importancia de esta competencia para el desarrollo de jóvenes futbolistas. Se anticipa que el evento atraiga la atención tanto de aficionados como de expertos en el deporte, destacando el potencial de las futuras estrellas del fútbol. ▼</h2></div>
+			<div class="contenido">
+				<p>El Mundial Sub-20 de fútbol se llevará a cabo en Chile, comenzando en los próximos días. Este torneo reunirá a selecciones de distintas partes del mundo, y Argentina competirá en este evento con grandes expectativas. El artículo ofrece un calendario completo de los partidos y detalla los principales aspectos del torneo, incluyendo el formato y la importancia de esta competencia para el desarrollo de jóvenes futbolistas. Se anticipa que el evento atraiga la atención tanto de aficionados como de expertos en el deporte, destacando el potencial de las futuras estrellas del fútbol.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1></h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3Ud6mZ6HkDUpuuEK9PLejDZbv8wLlIYm-XcR5My8rIPOJ7I8RZHJsFoRXljBfUc4jMg&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Un concejal de Durán, Ecuador, fue asesinado junto a su escolta en un ataque perpetrado por sicarios. El ataque ocurrió mientras se desplazaban en un vehículo por las calles de la ciudad. Este evento se suma a una serie de incidentes violentos en el país, donde el crimen organizado ha aumentado sus actividades. Las autoridades locales están investigando el caso para dar con los responsables del ataque. ▼</h2></div>
+			<div class="contenido">
+				<p>Un concejal de Durán, Ecuador, fue asesinado junto a su escolta en un ataque perpetrado por sicarios. El ataque ocurrió mientras se desplazaban en un vehículo por las calles de la ciudad. Este evento se suma a una serie de incidentes violentos en el país, donde el crimen organizado ha aumentado sus actividades. Las autoridades locales están investigando el caso para dar con los responsables del ataque.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Propuesta de Trump para poner fin a la guerra en Gaza: 20 puntos clave</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwa9KTrTkt9m7zrrIPZLGk7kY5GMCZj6jVpBisiVN1ClAcbkGqF4XikrGWaA&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La propuesta de Donald Trump para poner fin a la guerra en Gaza incluye 20 puntos clave que buscan abordar la crisis en la región. Entre las principales medidas se encuentran el establecimiento de un alto al fuego duradero, la creación de un estado palestino independiente y la reanudación de negociaciones directas entre las partes. También se propone el apoyo internacional a los esfuerzos de reconstrucción y desarrollo en Gaza, así como la mejora de las condiciones de vida para los palestinos. Además, busca garantizar la seguridad de Israel y abordar las preocupaciones sobre el terrorismo. La estrategia se enmarca en un enfoque que combina diplomacia y asistencia económica, apuntando a una solución sostenible para el conflicto. ▼</h2></div>
+			<div class="contenido">
+				<p>La propuesta de Donald Trump para poner fin a la guerra en Gaza incluye 20 puntos clave que buscan abordar la crisis en la región. Entre las principales medidas se encuentran el establecimiento de un alto al fuego duradero, la creación de un estado palestino independiente y la reanudación de negociaciones directas entre las partes. También se propone el apoyo internacional a los esfuerzos de reconstrucción y desarrollo en Gaza, así como la mejora de las condiciones de vida para los palestinos. Además, busca garantizar la seguridad de Israel y abordar las preocupaciones sobre el terrorismo. La estrategia se enmarca en un enfoque que combina diplomacia y asistencia económica, apuntando a una solución sostenible para el conflicto.</p>
+			</div>
+		</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publiciteLite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1></h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0RK10mXiZ_jMLSPPRwY6rs5itkngCeMaV_K-ZDKShRfZwzwfN7g_a_01Jqww&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Un jugador de fútbol recibió una violenta patada en sus genitales durante un partido, lo que generó gran preocupación entre los asistentes y en las redes sociales. La jugada ocurrió en una situación de juego donde el jugador fue impactado de manera deliberada, lo que llevó a la intervención de los árbitros. Tras el incidente, el jugador afectado fue atendido por el personal médico y se mostró visiblemente dolorido. La acción ha suscitado debates sobre la violencia en el deporte y la necesidad de sanciones más severas para quienes cometan este tipo de agresiones. ▼</h2></div>
+			<div class="contenido">
+				<p>Un jugador de fútbol recibió una violenta patada en sus genitales durante un partido, lo que generó gran preocupación entre los asistentes y en las redes sociales. La jugada ocurrió en una situación de juego donde el jugador fue impactado de manera deliberada, lo que llevó a la intervención de los árbitros. Tras el incidente, el jugador afectado fue atendido por el personal médico y se mostró visiblemente dolorido. La acción ha suscitado debates sobre la violencia en el deporte y la necesidad de sanciones más severas para quienes cometan este tipo de agresiones.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Trump sugiere avances en negociaciones sobre Gaza antes de encuentro con Netanyahu</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAIpz_6e_rxRQqmSs0ZKMJPntfvlwxkfJlzdAEQVDUCFyCO8yAHtac8NhB7g&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Donald Trump sugirió que ha habido avances en las negociaciones relacionadas con Gaza, antes de su reunión con el primer ministro israelí, Benjamin Netanyahu. Trump afirmó que hay un consenso general entre las partes respecto a la posibilidad de alcanzar un acuerdo especial. La reunión se enmarca en un contexto de tensiones en la región y busca fomentar el diálogo y la cooperación entre Israel y los países árabes. ▼</h2></div>
+			<div class="contenido">
+				<p>Donald Trump sugirió que ha habido avances en las negociaciones relacionadas con Gaza, antes de su reunión con el primer ministro israelí, Benjamin Netanyahu. Trump afirmó que hay un consenso general entre las partes respecto a la posibilidad de alcanzar un acuerdo especial. La reunión se enmarca en un contexto de tensiones en la región y busca fomentar el diálogo y la cooperación entre Israel y los países árabes.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>El presidente de Siria abogó por la unidad nacional en su histórico discurso ante la ONU</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbRrYF1mnF0SQMU5NQozaMpJDRTZSixBOboMITbyNZlUH2fJkhFaeDbZCZIg&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El presidente de Siria, Bashar al-Assad, pronunció un discurso ante la Asamblea General de la ONU en el que enfatizó la necesidad de unidad nacional en su país. Durante su intervención, abordó los desafíos que enfrenta Siria, incluyendo la guerra y la injerencia externa, y defendió la soberanía del Estado sirio. También destacó la importancia de la paz y el diálogo para la resolución de conflictos, así como la necesidad de cooperación internacional para reconstruir Siria tras años de conflicto. ▼</h2></div>
+			<div class="contenido">
+				<p>El presidente de Siria, Bashar al-Assad, pronunció un discurso ante la Asamblea General de la ONU en el que enfatizó la necesidad de unidad nacional en su país. Durante su intervención, abordó los desafíos que enfrenta Siria, incluyendo la guerra y la injerencia externa, y defendió la soberanía del Estado sirio. También destacó la importancia de la paz y el diálogo para la resolución de conflictos, así como la necesidad de cooperación internacional para reconstruir Siria tras años de conflicto.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Sergio Busquets anunció su retiro a los 37 años agradeciendo al fútbol</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFBKD1ynWprSEacarvXDjQxBPpo-3RZG5-i_rHNIByA9_XK5lNUjgUKH2Ketk&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Sergio Busquets, el reconocido centrocampista español, ha anunciado su retiro del fútbol profesional a los 37 años. A través de un mensaje en redes sociales, agradeció al fútbol por los momentos vividos a lo largo de su carrera. Busquets, quien ha sido una pieza clave en el FC Barcelona y en la selección nacional de España, se despide tras una exitosa trayectoria que incluye múltiples títulos a nivel de clubes e internacional. Su legado y contribuciones al deporte se recordarán con admiración en el mundo del fútbol. ▼</h2></div>
+			<div class="contenido">
+				<p>Sergio Busquets, el reconocido centrocampista español, ha anunciado su retiro del fútbol profesional a los 37 años. A través de un mensaje en redes sociales, agradeció al fútbol por los momentos vividos a lo largo de su carrera. Busquets, quien ha sido una pieza clave en el FC Barcelona y en la selección nacional de España, se despide tras una exitosa trayectoria que incluye múltiples títulos a nivel de clubes e internacional. Su legado y contribuciones al deporte se recordarán con admiración en el mundo del fútbol.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Los Reyes Británicos Carlos III y Camila realizarán una visita de Estado al Vaticano a finales de octubre</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-xm35cHAecYP5ypEtr6cjmbeP2qSe3jB7oYO-ws22fKqZVlT6_NmNMIdmiw&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Los reyes británicos, Carlos III y Camila, realizarán una visita de estado al Vaticano a finales de octubre. Este viaje está destinado a fortalecer las relaciones entre el Reino Unido y la Santa Sede. Durante su estancia, se espera que los monarcas se reúnan con el Papa Francisco, con quien abordarán temas de interés mutuo y cooperación en cuestiones sociales y humanitarias. Esta visita también refleja el compromiso de la Corona británica con el diálogo interreligioso. ▼</h2></div>
+			<div class="contenido">
+				<p>Los reyes británicos, Carlos III y Camila, realizarán una visita de estado al Vaticano a finales de octubre. Este viaje está destinado a fortalecer las relaciones entre el Reino Unido y la Santa Sede. Durante su estancia, se espera que los monarcas se reúnan con el Papa Francisco, con quien abordarán temas de interés mutuo y cooperación en cuestiones sociales y humanitarias. Esta visita también refleja el compromiso de la Corona británica con el diálogo interreligioso.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>El ácido cruce entre Koke y Vinicius en la goleada del Atlético de Madrid ante el Real Te Come la Tostada</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKgsR10q8uTGFUCjfXBBLKie6YkELPchwC-qcZVWA80QXE0ExdmUrjNQdshg&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El Atlético de Madrid logró una contundente victoria sobre el Real Madrid con un marcador de 5-0 en un derbi que tuvo lugar en el estadio Cívitas Metropolitano. Durante el partido, se dio un cruce entre Koke y Vinicius, lo que generó tensión entre los jugadores. La actuación del Atlético fue dominada por un juego ofensivo efectivo, mostrando un claro dominio en el campo. La victoria resalta la fortaleza del equipo colchonero en el inicio de la temporada y su capacidad para competir contra rivales directos. ▼</h2></div>
+			<div class="contenido">
+				<p>El Atlético de Madrid logró una contundente victoria sobre el Real Madrid con un marcador de 5-0 en un derbi que tuvo lugar en el estadio Cívitas Metropolitano. Durante el partido, se dio un cruce entre Koke y Vinicius, lo que generó tensión entre los jugadores. La actuación del Atlético fue dominada por un juego ofensivo efectivo, mostrando un claro dominio en el campo. La victoria resalta la fortaleza del equipo colchonero en el inicio de la temporada y su capacidad para competir contra rivales directos.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Drones no identificados avistados sobre la base militar de Karup en Dinamarca</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScYdyIxl3UBd4hb3I1rio23XN3sCBKC6h7hku2R_VfiSyzzwm4Q5Xq2cTd8Q&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Dinamarca ha reportado avistamientos de drones no identificados sobre la base militar de Karup, la instalación de defensa más grande del país. Estos incidentes han generado preocupación sobre la seguridad en la región, dado que los drones realizaron vuelos sobre un área sensible. La policía y las fuerzas armadas están investigando el asunto y han instado a la población a compartir cualquier información relevante. Este tipo de presencia aérea no autorizada se considera una posible amenaza a la seguridad nacional. ▼</h2></div>
+			<div class="contenido">
+				<p>Dinamarca ha reportado avistamientos de drones no identificados sobre la base militar de Karup, la instalación de defensa más grande del país. Estos incidentes han generado preocupación sobre la seguridad en la región, dado que los drones realizaron vuelos sobre un área sensible. La policía y las fuerzas armadas están investigando el asunto y han instado a la población a compartir cualquier información relevante. Este tipo de presencia aérea no autorizada se considera una posible amenaza a la seguridad nacional.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Multa de la MLS a Rodrigo de Paul por simulación en el último partido del Inter Miami</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyDurjO9d9dipVIm9wsQhIplKlqDa-D6e8uc1E1LaA2G-2ARoXpFgwUpF3Cg&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Rodrigo De Paul, jugador argentino del Inter Miami, ha sido sancionado por la Major League Soccer (MLS) debido a una simulación durante un partido reciente. Esta infracción ocurrió en un encuentro donde el equipo de De Paul enfrentó al New York City FC. La liga tomó la decisión de imponer una multa al futbolista después de revisar el incidente, indicando que la simulación es un comportamiento que la MLS busca erradicar en el deporte. De Paul, quien se ha adaptado a la liga estadounidense, deberá hacer frente a esta penalización en su carrera dentro de la MLS. ▼</h2></div>
+			<div class="contenido">
+				<p>Rodrigo De Paul, jugador argentino del Inter Miami, ha sido sancionado por la Major League Soccer (MLS) debido a una simulación durante un partido reciente. Esta infracción ocurrió en un encuentro donde el equipo de De Paul enfrentó al New York City FC. La liga tomó la decisión de imponer una multa al futbolista después de revisar el incidente, indicando que la simulación es un comportamiento que la MLS busca erradicar en el deporte. De Paul, quien se ha adaptado a la liga estadounidense, deberá hacer frente a esta penalización en su carrera dentro de la MLS.</p>
+			</div>
+		</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publiciteLite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Wall Street inició la semana con ganancias</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHIhbYvsyYXqPyg7jXdt3EhvquU0vMVFiyoAdaWhwfIkQ1pHrG-91QrCCAtEU&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Wall Street inició la semana con ganancias en sus principales índices. El impulso alcista fue impulsado por informes económicos positivos y ciertas expectativas sobre políticas monetarias. Sector tecnológico y de consumo discrecional lideraron las alzas, mientras que inversores se mostraron optimistas ante posibles señales de un crecimiento económico sostenido. A pesar de la volatilidad reciente, la jornada terminó con un cierre fuerte para los índices, lo que refleja un clima de confianza en el mercado. ▼</h2></div>
+			<div class="contenido">
+				<p>Wall Street inició la semana con ganancias en sus principales índices. El impulso alcista fue impulsado por informes económicos positivos y ciertas expectativas sobre políticas monetarias. Sector tecnológico y de consumo discrecional lideraron las alzas, mientras que inversores se mostraron optimistas ante posibles señales de un crecimiento económico sostenido. A pesar de la volatilidad reciente, la jornada terminó con un cierre fuerte para los índices, lo que refleja un clima de confianza en el mercado.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>El régimen de Venezuela realizó nuevos ejercicios militares en estados costeros ante el despliegue de EE.UU. en el Caribe</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlr5DqGFXygSDiAW6kjLY3DORhmfjJAA57rsWbHTiSXhp5bjCcyJCxkGvF2cQ&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El gobierno venezolano llevó a cabo ejercicios militares en sus costas, en medio de un aumento de la presencia militar de Estados Unidos en el Caribe. Estos ejercicios se enmarcan en un contexto de tensiones regionales, donde se evidencian las diferencias entre ambas naciones. Las autoridades venezolanas destacan que estas maniobras son parte de una serie de prácticas destinadas a fortalecer la defensa del territorio nacional. Ante esto, la situación genera preocupación por la escalada de las actividades militares en la región. ▼</h2></div>
+			<div class="contenido">
+				<p>El gobierno venezolano llevó a cabo ejercicios militares en sus costas, en medio de un aumento de la presencia militar de Estados Unidos en el Caribe. Estos ejercicios se enmarcan en un contexto de tensiones regionales, donde se evidencian las diferencias entre ambas naciones. Las autoridades venezolanas destacan que estas maniobras son parte de una serie de prácticas destinadas a fortalecer la defensa del territorio nacional. Ante esto, la situación genera preocupación por la escalada de las actividades militares en la región.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Tensión en Venezuela por simulacro de preparación civil ante posible conflicto armado</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9zkuVfim47FDCMMHc-kzHCBQvU6wmjqs6ffgWUu9o1fjsroryX4mKsByTJA&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El régimen de Nicolás Maduro en Venezuela ha llevado a cabo un simulacro de preparación civil ante un posible conflicto armado. Esta iniciativa se enmarca en un contexto de creciente tensión y escalada de conflictos en la región. El ejercicio busca preparar a la población para enfrentar circunstancias extremas y fue organizado por el Ministerio del Poder Popular para la Defensa. Durante el simulacro, se llevaron a cabo diversas actividades que implicaban la participación de ciudadanos en situaciones de emergencia, reflejando así la intención del gobierno de involucrar a la sociedad en su estrategia de defensa. ▼</h2></div>
+			<div class="contenido">
+				<p>El régimen de Nicolás Maduro en Venezuela ha llevado a cabo un simulacro de preparación civil ante un posible conflicto armado. Esta iniciativa se enmarca en un contexto de creciente tensión y escalada de conflictos en la región. El ejercicio busca preparar a la población para enfrentar circunstancias extremas y fue organizado por el Ministerio del Poder Popular para la Defensa. Durante el simulacro, se llevaron a cabo diversas actividades que implicaban la participación de ciudadanos en situaciones de emergencia, reflejando así la intención del gobierno de involucrar a la sociedad en su estrategia de defensa.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Misiles ucranianos impactan planta de energía rusa provocando apagones masivos</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPAar5HbCtcznwkUcUVkKeh55kv7jJAoocUsXdoCloyOZf4KUL3ovZZVXKHT0&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El 29 de septiembre de 2025, misiles ucranianos impactaron en una planta de energía ubicada en Rusia, lo que provocó apagones significativos en diversas áreas. Este ataque forma parte del contexto del conflicto entre Ucrania y Rusia, que ha tenido un impacto considerable en la infraestructura energética. Las autoridades locales informaron sobre la magnitud del apagón y las medidas de emergencia que se están implementando para restablecer el suministro eléctrico. Este incidente resalta la continuada intensificación de las hostilidades en la región. ▼</h2></div>
+			<div class="contenido">
+				<p>El 29 de septiembre de 2025, misiles ucranianos impactaron en una planta de energía ubicada en Rusia, lo que provocó apagones significativos en diversas áreas. Este ataque forma parte del contexto del conflicto entre Ucrania y Rusia, que ha tenido un impacto considerable en la infraestructura energética. Las autoridades locales informaron sobre la magnitud del apagón y las medidas de emergencia que se están implementando para restablecer el suministro eléctrico. Este incidente resalta la continuada intensificación de las hostilidades en la región.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Trump propone aranceles del 100% a las películas extranjeras</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNhfij17_8NaLmGzifqq1nc2hEeqazgVveJc-A_SfNWLp5kgxHuOM53Bj_W40&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Donald Trump anunció que impondrá aranceles del 100% a las películas extranjeras como parte de su estrategia para proteger la industria cinematográfica estadounidense. Esta medida busca fomentar la producción local y reducir la competencia externa. Trump argumentó que el cine extranjero ha tenido un impacto negativo en el sector nacional y está decidido a reforzar las medidas proteccionistas en diversas industrias, no solo en el cine. La propuesta ha generado diversos comentarios en el ámbito político y empresarial, con algunas voces a favor y otras en contra. ▼</h2></div>
+			<div class="contenido">
+				<p>Donald Trump anunció que impondrá aranceles del 100% a las películas extranjeras como parte de su estrategia para proteger la industria cinematográfica estadounidense. Esta medida busca fomentar la producción local y reducir la competencia externa. Trump argumentó que el cine extranjero ha tenido un impacto negativo en el sector nacional y está decidido a reforzar las medidas proteccionistas en diversas industrias, no solo en el cine. La propuesta ha generado diversos comentarios en el ámbito político y empresarial, con algunas voces a favor y otras en contra.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>India acusa a Pakistán de ser el epicentro del terrorismo global en la ONU</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQih_h1kLgs2JAWeh44NwsckndkmZAGJ0yigjIQO6AvSTkWGvDcXeLtk3DH5cg&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>En un discurso ante la ONU, India acusó a Pakistán de ser el núcleo del terrorismo global, afirmando que representa una amenaza no solo para su país, sino para el mundo entero. La delegación india subrayó que varias organizaciones terroristas operan desde Pakistán y que el país ha estado involucrado en actividades que desestabilizan la paz regional e internacional. India instó a la comunidad internacional a actuar contra el terrorismo y responsabilizar a Pakistán por su papel en este fenómeno. ▼</h2></div>
+			<div class="contenido">
+				<p>En un discurso ante la ONU, India acusó a Pakistán de ser el núcleo del terrorismo global, afirmando que representa una amenaza no solo para su país, sino para el mundo entero. La delegación india subrayó que varias organizaciones terroristas operan desde Pakistán y que el país ha estado involucrado en actividades que desestabilizan la paz regional e internacional. India instó a la comunidad internacional a actuar contra el terrorismo y responsabilizar a Pakistán por su papel en este fenómeno.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Tifón Bualoi deja al menos 12 muertos al arrasar Vietnam y se degrada a tormenta tropical</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROkq3lAOwhE0vakFHfNRuYYjVh-g3JsaGgf3e6D3Pr44T6FcBFWLQvtwJq4Dk&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El tifón Bualoi ha causado al menos 12 muertes en Vietnam tras su paso devastador por el país. Inicialmente, se clasificó como tifón, pero luego fue rebajado a tormenta tropical. Las autoridades han informado sobre severos daños en infraestructuras y cultivos, además de la necesidad de asistencia para las comunidades afectadas. La situación ha llevado a la declaración de emergencia en algunas áreas, mientras se realizan esfuerzos de rescate y recuperación. ▼</h2></div>
+			<div class="contenido">
+				<p>El tifón Bualoi ha causado al menos 12 muertes en Vietnam tras su paso devastador por el país. Inicialmente, se clasificó como tifón, pero luego fue rebajado a tormenta tropical. Las autoridades han informado sobre severos daños en infraestructuras y cultivos, además de la necesidad de asistencia para las comunidades afectadas. La situación ha llevado a la declaración de emergencia en algunas áreas, mientras se realizan esfuerzos de rescate y recuperación.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Donald Trump afirma que Benjamin Netanyahu aceptó la propuesta de Estados Unidos para Gaza</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFV72aD09VONEHR-kYvJzxaJCuUJDG21F2jviwx8fFLfSVbIQ7CEl6xuR4oig&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Donald Trump afirmó que el primer ministro israelí, Benjamin Netanyahu, ha aceptado una propuesta de Estados Unidos relacionada con la situación en Gaza. Según Trump, este acuerdo busca abordar los problemas en la región, aunque no se han dado detalles específicos sobre el contenido de la propuesta o los próximos pasos a seguir. El ex presidente también mencionó la importancia de las relaciones entre Israel y Estados Unidos, resaltando que se necesita un enfoque conjunto para manejar los conflictos en el Medio Oriente. ▼</h2></div>
+			<div class="contenido">
+				<p>Donald Trump afirmó que el primer ministro israelí, Benjamin Netanyahu, ha aceptado una propuesta de Estados Unidos relacionada con la situación en Gaza. Según Trump, este acuerdo busca abordar los problemas en la región, aunque no se han dado detalles específicos sobre el contenido de la propuesta o los próximos pasos a seguir. El ex presidente también mencionó la importancia de las relaciones entre Israel y Estados Unidos, resaltando que se necesita un enfoque conjunto para manejar los conflictos en el Medio Oriente.</p>
+			</div>
+		</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publiciteLite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Macron condena las amenazas contra la jueza que sentenció a Sarkozy a cinco años de prisión en Francia</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrVlJ5ujZuETpthJQKs0QJRfAjf1AH0Nr9yvky0sFBIzl25U5I0hpzH2QmfZs&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Emmanuel Macron expresó su rechazo a las amenazas dirigidas a la jueza que condenó a Nicolas Sarkozy a cinco años de prisión. La condena fue resultado de un caso de corrupción en el que Sarkozy fue hallado culpable de intentar influir en la justicia. Macron subrayó la importancia de la independencia del poder judicial y la necesidad de proteger a quienes se encargan de impartir justicia en Francia. La intervención del presidente surgió en medio de un creciente clima de tensión y críticas hacia el sistema judicial tras el fallo que afecta a Sarkozy, ex presidente del país. ▼</h2></div>
+			<div class="contenido">
+				<p>Emmanuel Macron expresó su rechazo a las amenazas dirigidas a la jueza que condenó a Nicolas Sarkozy a cinco años de prisión. La condena fue resultado de un caso de corrupción en el que Sarkozy fue hallado culpable de intentar influir en la justicia. Macron subrayó la importancia de la independencia del poder judicial y la necesidad de proteger a quienes se encargan de impartir justicia en Francia. La intervención del presidente surgió en medio de un creciente clima de tensión y críticas hacia el sistema judicial tras el fallo que afecta a Sarkozy, ex presidente del país.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>El penal atajado por Agustín Rossi en la victoria de Flamengo y su gesto que emocionó a Brasil</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT81O0KxFe9PBFqaHC5KrJ3QUfHtwoMvG5EzjrsBHtu5xdr9lPob7aLGQKa7Q&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Agustín Rossi, portero de Flamengo, fue protagonista en un partido reciente al detener un penalti que contribuyó al triunfo del equipo brasileño. Su actuación fue celebrada por los aficionados y causó gran entusiasmo en las redes sociales. La hazaña del arquero no solo aseguró los tres puntos para su equipo, sino que también destacó su habilidad bajo presión y fortaleció su posición en el club. ▼</h2></div>
+			<div class="contenido">
+				<p>Agustín Rossi, portero de Flamengo, fue protagonista en un partido reciente al detener un penalti que contribuyó al triunfo del equipo brasileño. Su actuación fue celebrada por los aficionados y causó gran entusiasmo en las redes sociales. La hazaña del arquero no solo aseguró los tres puntos para su equipo, sino que también destacó su habilidad bajo presión y fortaleció su posición en el club.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Delegados de varios países abandonan la Asamblea de la ONU al llegar Netanyahu</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTACA9u650yrH4yyYg26t90z31HKa_XTlzr6C8BZ0olc5I7-7q26Fhr_Esqox8&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Durante una reciente Asamblea General de la ONU, varios delegados de países árabes y musulmanes abandonaron la sala cuando el primer ministro israelí, Benjamin Netanyahu, comenzó a dirigirse a los asistentes. Este acto de protesta refleja la fuerte oposición y las tensiones existentes en torno a las políticas de Israel en la región. La situación pone de manifiesto las divisiones en la comunidad internacional respecto al conflicto israelí-palestino y la percepción del liderazgo israelí. ▼</h2></div>
+			<div class="contenido">
+				<p>Durante una reciente Asamblea General de la ONU, varios delegados de países árabes y musulmanes abandonaron la sala cuando el primer ministro israelí, Benjamin Netanyahu, comenzó a dirigirse a los asistentes. Este acto de protesta refleja la fuerte oposición y las tensiones existentes en torno a las políticas de Israel en la región. La situación pone de manifiesto las divisiones en la comunidad internacional respecto al conflicto israelí-palestino y la percepción del liderazgo israelí.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>El oro alcanza un nuevo récord de precio y los motivos detrás de su incremento</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTP32hJO4U2WwjZAw-hlaHLg_PSUNZnEIK7MihkFznCq3KQz0ffRU2fLMMN-Ew&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El precio del oro ha alcanzado un nuevo récord, impulsado por diversos factores económicos y geopolíticos. Entre las razones detrás de este aumento se destacan la incertidumbre en los mercados financieros, la alta inflación y las políticas monetarias de varios países. Estos elementos han llevado a los inversores a buscar refugio en el oro, considerado un activo seguro. Actualmente, el costo de una onza de oro ha superado cifras históricas, generando un creciente interés en su compra y un análisis de las tendencias futuras del mercado. ▼</h2></div>
+			<div class="contenido">
+				<p>El precio del oro ha alcanzado un nuevo récord, impulsado por diversos factores económicos y geopolíticos. Entre las razones detrás de este aumento se destacan la incertidumbre en los mercados financieros, la alta inflación y las políticas monetarias de varios países. Estos elementos han llevado a los inversores a buscar refugio en el oro, considerado un activo seguro. Actualmente, el costo de una onza de oro ha superado cifras históricas, generando un creciente interés en su compra y un análisis de las tendencias futuras del mercado.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>El régimen de Irán ahorcó a un hombre acusado de espiar para Israel</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9Je709Z4Lh-SOKMyCKRzkyxmuiTMB3IB4sb7YrdPvB2GwpdIefXJqqxx_0Q&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El régimen iraní llevó a cabo la ejecución de un hombre condenado por espionaje en favor de Israel. La sentencia fue concretada en un contexto de tensiones crecientes entre Irán y su adversario, el Estado israelí. Las autoridades iraníes justificaron la pena afirmando que el individuo había sido hallado culpable de colaborar con servicios de inteligencia extranjeros. Este suceso refuerza las políticas represivas en Irán, donde el gobierno actúa con severidad contra lo que considera amenazas a la seguridad nacional. ▼</h2></div>
+			<div class="contenido">
+				<p>El régimen iraní llevó a cabo la ejecución de un hombre condenado por espionaje en favor de Israel. La sentencia fue concretada en un contexto de tensiones crecientes entre Irán y su adversario, el Estado israelí. Las autoridades iraníes justificaron la pena afirmando que el individuo había sido hallado culpable de colaborar con servicios de inteligencia extranjeros. Este suceso refuerza las políticas represivas en Irán, donde el gobierno actúa con severidad contra lo que considera amenazas a la seguridad nacional.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>La economía de Estados Unidos creció 3.8% en el segundo trimestre, un aumento mayor al previsto</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5VnVu_lhf-qKOmBi_OS4J0w8GtbL-K_BVaDpHMMV7RQZAuL6RAY5UVF2rRw&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La economía de Estados Unidos creció un 3.8% durante el segundo trimestre del año, cifra que supera las expectativas de los analistas. Este aumento se debe en gran parte al incremento en el consumo personal y a las inversiones en inventarios. A pesar de los desafíos económicos, como la inflación persistente y las tasas de interés elevadas, los indicadores muestran un panorama favorable, con un crecimiento sólido del empleo y el gasto del consumidor. Las proyecciones para el resto del año sugieren un mantenimiento de esta tendencia, aunque se siguen monitoreando los posibles riesgos a futuro. ▼</h2></div>
+			<div class="contenido">
+				<p>La economía de Estados Unidos creció un 3.8% durante el segundo trimestre del año, cifra que supera las expectativas de los analistas. Este aumento se debe en gran parte al incremento en el consumo personal y a las inversiones en inventarios. A pesar de los desafíos económicos, como la inflación persistente y las tasas de interés elevadas, los indicadores muestran un panorama favorable, con un crecimiento sólido del empleo y el gasto del consumidor. Las proyecciones para el resto del año sugieren un mantenimiento de esta tendencia, aunque se siguen monitoreando los posibles riesgos a futuro.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Dinamarca prohíbe el vuelo de drones civiles para reforzar la seguridad durante la cumbre de líderes de la Unión Europea</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTS85gBv4YQIBI6s8WvVo0IQesk-K5-OAiKLC1rzYz0CdGMCm4JVEIoQRBAmkY&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Dinamarca ha prohibido el uso de drones civiles en el espacio aéreo de Copenhague para aumentar la seguridad durante la cumbre de líderes de la Unión Europea programada para el 19 y 20 de octubre. La decisión se basa en preocupaciones sobre la seguridad y el manejo del tráfico aéreo. La medida es temporal y busca prevenir cualquier riesgo asociado con el vuelo de drones en la zona durante el evento, que reunirá a importantes figuras políticas europeas. La prohibición se implementará un mes antes de la cumbre y se prevé que afecte tanto a los operadores de drones profesionales como a los aficionados. ▼</h2></div>
+			<div class="contenido">
+				<p>Dinamarca ha prohibido el uso de drones civiles en el espacio aéreo de Copenhague para aumentar la seguridad durante la cumbre de líderes de la Unión Europea programada para el 19 y 20 de octubre. La decisión se basa en preocupaciones sobre la seguridad y el manejo del tráfico aéreo. La medida es temporal y busca prevenir cualquier riesgo asociado con el vuelo de drones en la zona durante el evento, que reunirá a importantes figuras políticas europeas. La prohibición se implementará un mes antes de la cumbre y se prevé que afecte tanto a los operadores de drones profesionales como a los aficionados.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Fallece un arquero de 19 años en pleno partido tras golpearse la cabeza con un rival</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQk5-ekAB3xzTcXs0SeHYt3U0OTnxm_lueOMVkjy1K5dZi-tVWufOTJRuS1JQ&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>En un trágico incidente en el fútbol español, un arquero de 19 años falleció durante un partido tras sufrir un impacto en la cabeza al chocar con un rival. El jugador, parte del equipo del San José de la Rinconada, fue atendido en el campo y posteriormente trasladado al hospital, donde se confirmó su deceso. Este suceso ha generado una profunda conmoción en el mundo del deporte y entre los aficionados. Las autoridades están investigando las circunstancias del accidente. ▼</h2></div>
+			<div class="contenido">
+				<p>En un trágico incidente en el fútbol español, un arquero de 19 años falleció durante un partido tras sufrir un impacto en la cabeza al chocar con un rival. El jugador, parte del equipo del San José de la Rinconada, fue atendido en el campo y posteriormente trasladado al hospital, donde se confirmó su deceso. Este suceso ha generado una profunda conmoción en el mundo del deporte y entre los aficionados. Las autoridades están investigando las circunstancias del accidente.</p>
+			</div>
+		</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publiciteLite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>El inesperado cruce entre De Bruyne y Antonio Conte en el Napoli</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwp2z6HCzXJVrIKZaSS1ROWyZkc-2PEQFeoBFLhnTG5RwgzavI3bwmkr8tHro&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>En un reciente partido entre Napoli y Manchester City, se produjo un tenso intercambio entre Kevin De Bruyne y el entrenador Antonio Conte. De Bruyne, quien fue sustituido, se mostró descontento con la decisión y dejó el campo visiblemente molesto. Conte, al ser cuestionado sobre la situación, afirmó que el mediocampista eligió a la persona equivocada para expresar su frustración, sugiriendo que su reacción no era apropiada. Este incidente ha generado atención tanto en medios deportivos como entre los aficionados, dado el historial de enfrentamientos y relaciones entre los dos. ▼</h2></div>
+			<div class="contenido">
+				<p>En un reciente partido entre Napoli y Manchester City, se produjo un tenso intercambio entre Kevin De Bruyne y el entrenador Antonio Conte. De Bruyne, quien fue sustituido, se mostró descontento con la decisión y dejó el campo visiblemente molesto. Conte, al ser cuestionado sobre la situación, afirmó que el mediocampista eligió a la persona equivocada para expresar su frustración, sugiriendo que su reacción no era apropiada. Este incidente ha generado atención tanto en medios deportivos como entre los aficionados, dado el historial de enfrentamientos y relaciones entre los dos.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Las sanciones contra Irán entrarán en vigor tras el fracaso de una resolución de China y Rusia en la ONU</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyIM9BUoMEcolHLGaQbRsLj2BG_DN9r__UWsoiptpVKRZKPJcdybMVxGqQCOI&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Las sanciones contra Irán comenzarán a implementarse tras el rechazo de una resolución propuesta por China y Rusia en la ONU, que buscaba prorrogar la exención de dichas sanciones. Este desarrollo se produce en medio de tensiones internacionales y el intento de algunos países por abordar las actividades nucleares de Irán. Las medidas económicas y diplomáticas se aplicarán con el objetivo de presionar al país para que cumpla con sus compromisos internacionales. ▼</h2></div>
+			<div class="contenido">
+				<p>Las sanciones contra Irán comenzarán a implementarse tras el rechazo de una resolución propuesta por China y Rusia en la ONU, que buscaba prorrogar la exención de dichas sanciones. Este desarrollo se produce en medio de tensiones internacionales y el intento de algunos países por abordar las actividades nucleares de Irán. Las medidas económicas y diplomáticas se aplicarán con el objetivo de presionar al país para que cumpla con sus compromisos internacionales.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>La desgarradora despedida de Lewis Hamilton a su perro Roscoe</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLwG7s6F3LURphZZqcnA9PiSwGJarpJ8aZsKpV8U13w5XfNTP5HpM2_QFso5s&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Lewis Hamilton, el piloto de Fórmula 1, compartió su dolor tras la muerte de su perro Roscoe, a quien consideraba parte fundamental de su vida. A través de una emotiva publicación en redes sociales, Hamilton explicó la difícil decisión que tuvo que tomar respecto a la salud de su mascota. Agradeció a Roscoe por el amor y la felicidad que le brindó a lo largo de los años, destacando el vacío que deja su partida. La noticia ha conmocionado a sus seguidores y a la comunidad deportiva. ▼</h2></div>
+			<div class="contenido">
+				<p>Lewis Hamilton, el piloto de Fórmula 1, compartió su dolor tras la muerte de su perro Roscoe, a quien consideraba parte fundamental de su vida. A través de una emotiva publicación en redes sociales, Hamilton explicó la difícil decisión que tuvo que tomar respecto a la salud de su mascota. Agradeció a Roscoe por el amor y la felicidad que le brindó a lo largo de los años, destacando el vacío que deja su partida. La noticia ha conmocionado a sus seguidores y a la comunidad deportiva.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Rusia ayuda a China a prepararse para una posible invasión de Taiwán</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLTCN-71mYkgiFy3PvP7IHvBGJr9awqWqr0YuxjbhUkvUrpp8zIQxy85fbHK0&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Rusia está colaborando con China en la preparación para una posible invasión a Taiwán, según informes. Esta cooperación incluye el intercambio de información y experiencia militar, lo que sugiere un fortalecimiento de la relación estratégica entre ambos países. Expertos advierten que esta alianza podría cambiar el equilibrio de poder en la región, generando preocupación en otras naciones sobre la estabilidad en Asia-Pacífico. A medida que aumentan las tensiones, la comunidad internacional observa de cerca estas dinámicas y su potencial impacto en la política global. ▼</h2></div>
+			<div class="contenido">
+				<p>Rusia está colaborando con China en la preparación para una posible invasión a Taiwán, según informes. Esta cooperación incluye el intercambio de información y experiencia militar, lo que sugiere un fortalecimiento de la relación estratégica entre ambos países. Expertos advierten que esta alianza podría cambiar el equilibrio de poder en la región, generando preocupación en otras naciones sobre la estabilidad en Asia-Pacífico. A medida que aumentan las tensiones, la comunidad internacional observa de cerca estas dinámicas y su potencial impacto en la política global.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Putin ordena el mayor reclutamiento militar de otoño desde 2016: 135 mil rusos serán llamados al ejército</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqOI0Gl-Lmc2BBFtB45MbrjD3yE1aBRDY--TWKZE6FLXGyrkl-pZtVheeMxdY&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El presidente de Rusia, Vladimir Putin, ha ordenado el reclutamiento de 135,000 soldados para el otoño, marcando el mayor llamado a filas desde 2016. Esta medida se enmarca en el contexto del conflicto en Ucrania, que ha llevado a un aumento en las necesidades de personal militar. El reclutamiento se llevará a cabo entre octubre y diciembre de este año, y se espera que impacte significativamente en la estructura del ejército ruso. La decisión también refleja la intensificación de las operaciones militares en la región y el creciente desafío que representa la guerra en Ucrania para Rusia. ▼</h2></div>
+			<div class="contenido">
+				<p>El presidente de Rusia, Vladimir Putin, ha ordenado el reclutamiento de 135,000 soldados para el otoño, marcando el mayor llamado a filas desde 2016. Esta medida se enmarca en el contexto del conflicto en Ucrania, que ha llevado a un aumento en las necesidades de personal militar. El reclutamiento se llevará a cabo entre octubre y diciembre de este año, y se espera que impacte significativamente en la estructura del ejército ruso. La decisión también refleja la intensificación de las operaciones militares en la región y el creciente desafío que representa la guerra en Ucrania para Rusia.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Nvidia invertirá 100 mil millones de dólares en OpenAI para desarrollar centro de datos</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRumNUBP3muU5qO8D6M3YMiWE_E6gfYpIpGZ3MBeUpZbn9BCY9vfl6yX3TMNAg&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>NVIDIA anunció su intención de invertir 100,000 millones de dólares en OpenAI para el desarrollo de un centro de datos avanzado. Este proyecto busca fortalecer la infraestructura tecnológica necesaria para el avance de la inteligencia artificial. La inversión refleja el creciente interés de NVIDIA en el sector de la IA, así como su compromiso de apoyar a OpenAI en la expansión de sus capacidades y recursos. La colaboración entre ambas empresas podría acelerar la investigación y el desarrollo de nuevas aplicaciones en el campo de la inteligencia artificial. ▼</h2></div>
+			<div class="contenido">
+				<p>NVIDIA anunció su intención de invertir 100,000 millones de dólares en OpenAI para el desarrollo de un centro de datos avanzado. Este proyecto busca fortalecer la infraestructura tecnológica necesaria para el avance de la inteligencia artificial. La inversión refleja el creciente interés de NVIDIA en el sector de la IA, así como su compromiso de apoyar a OpenAI en la expansión de sus capacidades y recursos. La colaboración entre ambas empresas podría acelerar la investigación y el desarrollo de nuevas aplicaciones en el campo de la inteligencia artificial.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Alemania evalúa permitir que los militares derriben drones que sobrevuelen su territorio</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyOdy0ZzhvjMesnk_ieW2dZKl9ljevnsfxm5KDE0DH0nqpIwhR_1Xt0WQYJA&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Alemania está considerando permitir que sus fuerzas armadas derriben drones que sobrevuelen su territorio, especialmente aquellos que no estén autorizados. Esta medida surge en respuesta a preocupaciones sobre la seguridad, dado el creciente uso de drones con fines delictivos. El gobierno alemán busca ajustar su legislación para facilitar esta acción, resaltando la necesidad de proteger áreas sensibles como instalaciones gubernamentales y eventos públicos. Esta propuesta se enmarca en un contexto más amplio de debates sobre la regulación del uso de drones en el espacio aéreo alemán. ▼</h2></div>
+			<div class="contenido">
+				<p>Alemania está considerando permitir que sus fuerzas armadas derriben drones que sobrevuelen su territorio, especialmente aquellos que no estén autorizados. Esta medida surge en respuesta a preocupaciones sobre la seguridad, dado el creciente uso de drones con fines delictivos. El gobierno alemán busca ajustar su legislación para facilitar esta acción, resaltando la necesidad de proteger áreas sensibles como instalaciones gubernamentales y eventos públicos. Esta propuesta se enmarca en un contexto más amplio de debates sobre la regulación del uso de drones en el espacio aéreo alemán.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Max Verstappen triunfa en su debut en una carrera de resistencia en Nürburgring</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJogVpJZQKlTUibsVz2PwuPxO_2-kFhKra6tA_N3O_bXamQV4DqQSJPHbVpw&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Max Verstappen tuvo una destacada actuación en su debut en una carrera de resistencia en Nürburgring, donde logró la victoria. El piloto, conocido por su éxito en la Fórmula 1, demostró su habilidad y competitividad al adaptarse rápidamente a este nuevo formato de competencia. Esta carrera marcó un hito en la carrera de Verstappen, quien acumuló experiencia en un tipo de evento diferente al que usualmente participa. Con esta victoria, se reafirma su talento y capacidad para sobresalir en diversas modalidades deportivas. ▼</h2></div>
+			<div class="contenido">
+				<p>Max Verstappen tuvo una destacada actuación en su debut en una carrera de resistencia en Nürburgring, donde logró la victoria. El piloto, conocido por su éxito en la Fórmula 1, demostró su habilidad y competitividad al adaptarse rápidamente a este nuevo formato de competencia. Esta carrera marcó un hito en la carrera de Verstappen, quien acumuló experiencia en un tipo de evento diferente al que usualmente participa. Con esta victoria, se reafirma su talento y capacidad para sobresalir en diversas modalidades deportivas.</p>
+			</div>
+		</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publiciteLite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>EEUU instó al régimen de Irán a mantener conversaciones directas tras el restablecimiento de las sanciones de la ONU</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFnA_6jnuLHK7F0k08kvRWOhuJsjqpitKCi2OrUr_5D1qN1DjYiEIDIq7uH8g&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Estados Unidos instó al gobierno de Irán a participar en conversaciones directas tras el restablecimiento de las sanciones de la ONU. La solicitud se produce en un contexto de creciente tensión entre ambos países, lo que podría crear oportunidades para abordar preocupaciones internacionales sobre el programa nuclear iraní y otros temas. Las sanciones, que buscan ejercer presión sobre Teherán, han sido objeto de debate en el Consejo de Seguridad de la ONU, donde varias naciones han expresado su preocupación por las acciones del régimen iraní. ▼</h2></div>
+			<div class="contenido">
+				<p>Estados Unidos instó al gobierno de Irán a participar en conversaciones directas tras el restablecimiento de las sanciones de la ONU. La solicitud se produce en un contexto de creciente tensión entre ambos países, lo que podría crear oportunidades para abordar preocupaciones internacionales sobre el programa nuclear iraní y otros temas. Las sanciones, que buscan ejercer presión sobre Teherán, han sido objeto de debate en el Consejo de Seguridad de la ONU, donde varias naciones han expresado su preocupación por las acciones del régimen iraní.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>De campeón del mundo con su selección a ultra de su equipo: la imagen de una figura del fútbol que recorre el mundo</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSe2K5gdrau-1sB2wq-4PMcwmp_QH_U5yZRrRnO3u7UNVBODKkgauXV9xIQYg&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Un destacado futbolista que fue campeón del mundo con su selección se ha convertido en un referente en las ultra maratones a nivel mundial. Tras dejar su huella en el campo de juego, ha decidido dedicarse a carreras de larga distancia, alcanzando importantes logros en este nuevo deporte. Su transición del fútbol profesional a las ultra maratones ha captado la atención y admiración de muchos, demostrando su capacidad de sobresalir en disciplinas deportivas distintas. Su historia inspira a otros atletas y aficionados del deporte. ▼</h2></div>
+			<div class="contenido">
+				<p>Un destacado futbolista que fue campeón del mundo con su selección se ha convertido en un referente en las ultra maratones a nivel mundial. Tras dejar su huella en el campo de juego, ha decidido dedicarse a carreras de larga distancia, alcanzando importantes logros en este nuevo deporte. Su transición del fútbol profesional a las ultra maratones ha captado la atención y admiración de muchos, demostrando su capacidad de sobresalir en disciplinas deportivas distintas. Su historia inspira a otros atletas y aficionados del deporte.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>China inaugura el puente más alto del mundo</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdDgoquC8i2ZmoihDEu-X3lmtzIl_hmrgZ5RHNSzw0vHPdotJdOMPOLbwQrh4&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>China ha inaugurado un puente que se convierte en el más alto del mundo, elevándose a aproximadamente 575 metros sobre el nivel del río que atraviesa. Esta impresionante estructura conecta las provincias de Jiangxi y Hunan, y es parte de una iniciativa para mejorar la infraestructura de transporte en la región. El puente no solo facilitará el tránsito vehicular, sino que también promete impulsar el desarrollo económico local al mejorar el acceso a diferentes áreas. Además, se considera una obra arquitectónica significativa debido a su diseño innovador y a los desafíos enfrentados durante su construcción. ▼</h2></div>
+			<div class="contenido">
+				<p>China ha inaugurado un puente que se convierte en el más alto del mundo, elevándose a aproximadamente 575 metros sobre el nivel del río que atraviesa. Esta impresionante estructura conecta las provincias de Jiangxi y Hunan, y es parte de una iniciativa para mejorar la infraestructura de transporte en la región. El puente no solo facilitará el tránsito vehicular, sino que también promete impulsar el desarrollo económico local al mejorar el acceso a diferentes áreas. Además, se considera una obra arquitectónica significativa debido a su diseño innovador y a los desafíos enfrentados durante su construcción.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Primer Ministro de Hungría niega la soberanía de Ucrania y aumenta la tensión con Kiev</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlXNWu8n8ts-OM_gRmCtjFBca5mKfmKBWFp7T61wyFurIXn4YYm2onFEoEMjk&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El primer ministro de Hungría, Viktor Orbán, ha expresado su negación sobre la soberanía de Ucrania, lo que ha intensificado las tensiones entre Budapest y Kiev. Durante un discurso, Orbán afirmó que considere que Ucrania no debería haber existido como estado independiente y cuestionó la legitimidad de sus fronteras actuales. Estas declaraciones se producen en un contexto de creciente fricción entre ambos países, que ya se ven afectados por conflictos históricos y disputas territoriales. Ucrania ha reaccionado de manera enérgica, llamando a consultas a su embajador en Hungría y denunciando las afirmaciones del líder húngaro. ▼</h2></div>
+			<div class="contenido">
+				<p>El primer ministro de Hungría, Viktor Orbán, ha expresado su negación sobre la soberanía de Ucrania, lo que ha intensificado las tensiones entre Budapest y Kiev. Durante un discurso, Orbán afirmó que considere que Ucrania no debería haber existido como estado independiente y cuestionó la legitimidad de sus fronteras actuales. Estas declaraciones se producen en un contexto de creciente fricción entre ambos países, que ya se ven afectados por conflictos históricos y disputas territoriales. Ucrania ha reaccionado de manera enérgica, llamando a consultas a su embajador en Hungría y denunciando las afirmaciones del líder húngaro.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Zelensky celebra victoria proeuropea en Moldavia y destaca derrota de la actividad desestabilizadora rusa</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKgSrkkl1dgvHqecwpUMSAm-I0JCwllrGJFiPQMdKtSocDy7idKipSPSQkiRo&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El presidente de Ucrania, Volodímir Zelensky, celebró la reciente victoria proeuropea en las elecciones de Moldavia, destacando que esta victoria representa una derrota para las acciones desestabilizadoras de Rusia en la región. Zelensky subrayó la importancia de fortalecer los lazos entre Ucrania y Moldavia, así como el compromiso de ambos países con la integración europea. Esta campaña y su resultado marcan un avance significativo en la búsqueda de estabilidad y desarrollo democrático en Moldavia, según el líder ucraniano. ▼</h2></div>
+			<div class="contenido">
+				<p>El presidente de Ucrania, Volodímir Zelensky, celebró la reciente victoria proeuropea en las elecciones de Moldavia, destacando que esta victoria representa una derrota para las acciones desestabilizadoras de Rusia en la región. Zelensky subrayó la importancia de fortalecer los lazos entre Ucrania y Moldavia, así como el compromiso de ambos países con la integración europea. Esta campaña y su resultado marcan un avance significativo en la búsqueda de estabilidad y desarrollo democrático en Moldavia, según el líder ucraniano.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Estados Unidos presenta propuesta basada en informe clave sobre Gaza</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGhvHDWeh1fhzuYJKnLXNUIY5BcbT16-e_wlVn4RoSwb94Y-bt3OtUOCxPu5s&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El artículo discute un informe clave que ha influido en la propuesta de Estados Unidos respecto a la situación en Gaza. Este informe analiza las condiciones y desafíos en la región, destacando la necesidad de abordar problemas humanitarios y políticos. Se menciona que la propuesta busca promover un enfoque sostenible para la paz y estabilidad en Gaza, así como mejorar la vida de los habitantes afectados por el conflicto. La iniciativa estadounidense emerge en un contexto de tensiones persistentes y un llamado a la comunidad internacional para que colabore en la búsqueda de soluciones efectivas. ▼</h2></div>
+			<div class="contenido">
+				<p>El artículo discute un informe clave que ha influido en la propuesta de Estados Unidos respecto a la situación en Gaza. Este informe analiza las condiciones y desafíos en la región, destacando la necesidad de abordar problemas humanitarios y políticos. Se menciona que la propuesta busca promover un enfoque sostenible para la paz y estabilidad en Gaza, así como mejorar la vida de los habitantes afectados por el conflicto. La iniciativa estadounidense emerge en un contexto de tensiones persistentes y un llamado a la comunidad internacional para que colabore en la búsqueda de soluciones efectivas.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Moldavia enfrenta elecciones decisivas mientras la presidenta Maia Sandu llama a la población a salvaguardar el país de la amenaza rusa</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMzexpN11kOgF3aLxT7nQLeLGOTiR9kzVCHx05VHCWui-oRPuXM_7F7qofng&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La presidenta de Moldavia, Maia Sandu, instó a la población a participar en las elecciones y a asumir un papel activo en la defensa del país ante la creciente influencia rusa. Durante un mitin, Sandu advirtió sobre los peligros que representa Rusia para la soberanía y la democracia de Moldavia, enfatizando la necesidad de unidad y determinación entre los ciudadanos. La presidenta también recordó los desafíos que enfrenta el país y solicitó a los moldavos que elijan un futuro próspero y europeo en las próximas votaciones. ▼</h2></div>
+			<div class="contenido">
+				<p>La presidenta de Moldavia, Maia Sandu, instó a la población a participar en las elecciones y a asumir un papel activo en la defensa del país ante la creciente influencia rusa. Durante un mitin, Sandu advirtió sobre los peligros que representa Rusia para la soberanía y la democracia de Moldavia, enfatizando la necesidad de unidad y determinación entre los ciudadanos. La presidenta también recordó los desafíos que enfrenta el país y solicitó a los moldavos que elijan un futuro próspero y europeo en las próximas votaciones.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Maduro ordena a las fuerzas armadas estar en combate por despliegue militar de EE.UU. en el Caribe</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNAAbwE96WFAztNYGxlMsWQEquDu5jO2zYOkbv6OT763DSUGESPulUWv6HZg&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Nicolás Maduro, presidente de Venezuela, afirmó que las fuerzas armadas del país están en estado de alerta y tienen órdenes de combate debido al reciente despliegue militar de Estados Unidos en el Caribe. Esta declaración se produce en el contexto de tensiones políticas y militares entre Venezuela y Estados Unidos, destacando el aumento de la presencia militar estadounidense en la región. Maduro también mencionó que el gobierno venezolano está preparado para enfrentar cualquier eventualidad que surja de esta situación. ▼</h2></div>
+			<div class="contenido">
+				<p>Nicolás Maduro, presidente de Venezuela, afirmó que las fuerzas armadas del país están en estado de alerta y tienen órdenes de combate debido al reciente despliegue militar de Estados Unidos en el Caribe. Esta declaración se produce en el contexto de tensiones políticas y militares entre Venezuela y Estados Unidos, destacando el aumento de la presencia militar estadounidense en la región. Maduro también mencionó que el gobierno venezolano está preparado para enfrentar cualquier eventualidad que surja de esta situación.</p>
+			</div>
+		</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publiciteLite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Ucrania advierte sobre posible apagón en Moscú si Rusia corta la electricidad a Kiev</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYDwqtvriDQx4p6cEHIAJq6irsRqej6iMBvS8wcqgoqO3P2I5P58cd14Oz3Q&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Ucrania ha advertido que podría causar un apagón en Moscú si Rusia decide cortar el suministro eléctrico a Kiev. Esta declaración surge en un contexto de tensiones entre ambos países, con Ucrania preparándose para posibles acciones en respuesta a la estrategia militar rusa. Las autoridades ucranianas han manifestado que están dispuestas a actuar de manera contundente si se produce un ataque contra su infraestructura eléctrica. La situación refleja la escalada de la guerra en la región y las posibles repercusiones en la infraestructura energética de ambas naciones. ▼</h2></div>
+			<div class="contenido">
+				<p>Ucrania ha advertido que podría causar un apagón en Moscú si Rusia decide cortar el suministro eléctrico a Kiev. Esta declaración surge en un contexto de tensiones entre ambos países, con Ucrania preparándose para posibles acciones en respuesta a la estrategia militar rusa. Las autoridades ucranianas han manifestado que están dispuestas a actuar de manera contundente si se produce un ataque contra su infraestructura eléctrica. La situación refleja la escalada de la guerra en la región y las posibles repercusiones en la infraestructura energética de ambas naciones.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Vicecanciller de Cuba descarta guerra con Estados Unidos para defender a Nicolás Maduro</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSrBbptUfUztdTC6X8Q8HNQZrIoe3dFO2_G0v5VywLDS5dBXpj98NWfIqz7w&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El vicecanciller de Cuba, Carlos Fernández de Cossío, afirmó que no habría una guerra con Estados Unidos para defender al presidente de Venezuela, Nicolás Maduro. Durante una entrevista, subrayó que la cooperación entre Cuba y Venezuela es estratégica, pero que no se contempla el uso de la fuerza militar. Además, el funcionario cubano destacó que la situación merece un análisis más amplio en función de la defensa de la soberanía nacional. ▼</h2></div>
+			<div class="contenido">
+				<p>El vicecanciller de Cuba, Carlos Fernández de Cossío, afirmó que no habría una guerra con Estados Unidos para defender al presidente de Venezuela, Nicolás Maduro. Durante una entrevista, subrayó que la cooperación entre Cuba y Venezuela es estratégica, pero que no se contempla el uso de la fuerza militar. Además, el funcionario cubano destacó que la situación merece un análisis más amplio en función de la defensa de la soberanía nacional.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Ocho paracaidistas saltaron de un avión dos minutos antes de que se estrellara; murió el piloto</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrnazg0NamMfK9cCKtMKSed3MjORnKzQ3eA3oDWQ_-_ldeUxFZyw5a-FjHyiU&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Ocho paracaidistas saltaron de un avión apenas dos minutos antes de que se estrellara en Estados Unidos. El incidente ocurrió durante una actividad de entrenamiento en el estado de Wisconsin. Todos los paracaidistas lograron salir del avión en condiciones seguras, pero desafortunadamente, el piloto del avión no sobrevivió al accidente. Las autoridades están investigando las causas del siniestro. ▼</h2></div>
+			<div class="contenido">
+				<p>Ocho paracaidistas saltaron de un avión apenas dos minutos antes de que se estrellara en Estados Unidos. El incidente ocurrió durante una actividad de entrenamiento en el estado de Wisconsin. Todos los paracaidistas lograron salir del avión en condiciones seguras, pero desafortunadamente, el piloto del avión no sobrevivió al accidente. Las autoridades están investigando las causas del siniestro.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Rusia lanza un ataque masivo con drones y misiles en Ucrania dejando al menos tres muertos y decenas de heridos</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTR-_BAL2MXZxDidovmRAslxgpYezYFIbkJwDxzHpVTNKyYGHFRZ-bJ8DI1r7c&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Rusia llevó a cabo un ataque masivo en Ucrania utilizando drones y misiles, resultando en al menos tres muertos y decenas de heridos. Este bombardeo es parte de un incremento en la actividad militar rusa en la región, que ha intensificado las tensiones entre ambos países. Además, se han reportado daños significativos a la infraestructura civil como consecuencia de los ataques. La situación sigue siendo crítica y se espera que las operaciones militares continúen en el futuro cercano. ▼</h2></div>
+			<div class="contenido">
+				<p>Rusia llevó a cabo un ataque masivo en Ucrania utilizando drones y misiles, resultando en al menos tres muertos y decenas de heridos. Este bombardeo es parte de un incremento en la actividad militar rusa en la región, que ha intensificado las tensiones entre ambos países. Además, se han reportado daños significativos a la infraestructura civil como consecuencia de los ataques. La situación sigue siendo crítica y se espera que las operaciones militares continúen en el futuro cercano.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Europa acuerda crear un muro de drones para proteger sus fronteras orientales ante la creciente amenaza rusa</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWCNM_-HamJzdMhSEyyDPn958NpTiN45MppjZSI0vvZzqx2WOO_eVFZIUev9o&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Europa ha decidido implementar un sistema de defensa en sus fronteras orientales frente a la creciente amenaza de Rusia. Este plan incluye la creación de un muro de drones que reforzará la vigilancia y protección de sus límites territoriales. La medida busca mejorar la seguridad en la región y responder a las tensiones actuales con Moscú. Las autoridades europeas consideran esta iniciativa como un paso crucial para enfrentar desafíos geopolíticos y asegurar la integridad de sus fronteras. ▼</h2></div>
+			<div class="contenido">
+				<p>Europa ha decidido implementar un sistema de defensa en sus fronteras orientales frente a la creciente amenaza de Rusia. Este plan incluye la creación de un muro de drones que reforzará la vigilancia y protección de sus límites territoriales. La medida busca mejorar la seguridad en la región y responder a las tensiones actuales con Moscú. Las autoridades europeas consideran esta iniciativa como un paso crucial para enfrentar desafíos geopolíticos y asegurar la integridad de sus fronteras.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Al menos siete muertos y más de 260,000 afectados por las lluvias monzónicas en Tailandia</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0YINHmVEF3ID1U9t45LgCaiM_xky5odhmPmUtK2xZEdkAwaU74zYEAVCXJno&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Las intensas lluvias monzónicas en Tailandia han provocado la muerte de al menos siete personas y han afectado a más de 260,000 individuos, principalmente en la región central del país. Las inundaciones han dañado viviendas y agricultura, generando complicaciones en la infraestructura. Las autoridades han activado medidas de emergencia y han instado a la población a mantenerse alerta ante posibles nuevas precipitaciones. La situación ha llevado a la suspensión de clases en algunas áreas y se están evaluando los daños para proporcionar asistencia a los afectados. ▼</h2></div>
+			<div class="contenido">
+				<p>Las intensas lluvias monzónicas en Tailandia han provocado la muerte de al menos siete personas y han afectado a más de 260,000 individuos, principalmente en la región central del país. Las inundaciones han dañado viviendas y agricultura, generando complicaciones en la infraestructura. Las autoridades han activado medidas de emergencia y han instado a la población a mantenerse alerta ante posibles nuevas precipitaciones. La situación ha llevado a la suspensión de clases en algunas áreas y se están evaluando los daños para proporcionar asistencia a los afectados.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>La Guardia Costera de Taiwán intercepta a dos buques chinos por ingreso ilegal en su zona marítima</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpe5v7vOiERRP-Cwx7SHN1dYfvNWqKxxFJj6RDn2WIvNmfVRkUNLjqcSSUaw&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La Guardia Costera de Taiwán detuvo a dos barcos del régimen chino que habían ingresado de manera ilegal en su zona marítima. Esta acción se enmarca en un contexto de tensiones crecientes entre Taiwán y China, que considera a la isla parte de su territorio. La interceptación refleja las preocupaciones de Taiwán respecto a la incursión de embarcaciones chinas en sus aguas, lo que genera alarmas sobre la soberanía y la seguridad marítima en la región. ▼</h2></div>
+			<div class="contenido">
+				<p>La Guardia Costera de Taiwán detuvo a dos barcos del régimen chino que habían ingresado de manera ilegal en su zona marítima. Esta acción se enmarca en un contexto de tensiones crecientes entre Taiwán y China, que considera a la isla parte de su territorio. La interceptación refleja las preocupaciones de Taiwán respecto a la incursión de embarcaciones chinas en sus aguas, lo que genera alarmas sobre la soberanía y la seguridad marítima en la región.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Ucrania confirma un ataque contra una fábrica militar rusa con misiles lanzados en Briansk</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGnsOejFfJw4OvM-4TX2kXhjpnwjIjAmExZJ2eHPWRByBMW1_IwTWK_Ql4f08&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Ucrania anunció un ataque exitoso contra una fábrica militar en Rusia, llevando a cabo la operación con misiles lanzados desde la región de Briansk. La acción forma parte de las recientes hostilidades entre ambos países y subraya la intensificación del conflicto. Autoridades ucranianas confirmaron que el objetivo del ataque era una instalación clave para la producción de armamento utilizado en la guerra en Ucrania. Los detalles específicos sobre el alcance de los daños causados en la instalación no fueron completamente divulgados. ▼</h2></div>
+			<div class="contenido">
+				<p>Ucrania anunció un ataque exitoso contra una fábrica militar en Rusia, llevando a cabo la operación con misiles lanzados desde la región de Briansk. La acción forma parte de las recientes hostilidades entre ambos países y subraya la intensificación del conflicto. Autoridades ucranianas confirmaron que el objetivo del ataque era una instalación clave para la producción de armamento utilizado en la guerra en Ucrania. Los detalles específicos sobre el alcance de los daños causados en la instalación no fueron completamente divulgados.</p>
+			</div>
+		</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publiciteLite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Partido proeuropeo gana elecciones parlamentarias en Moldavia a pesar de injerencia rusa</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXzEWACRfc5XWQrv3TC4dhzNjQm4Nl57w43jgLJ4CrtLwhgvPhvg_2DoKTF7Y&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>En las elecciones parlamentarias celebradas en Moldavia, el partido proeuropeo ha logrado una significativa victoria a pesar de los esfuerzos de interferencia por parte de Rusia. Los resultados reflejan un fuerte apoyo hacia las políticas orientadas hacia Europa, lo que sugiere un rechazo a la influencia rusa en el país. Este triunfo es interpretado como una reafirmación del compromiso moldavo con la integración europea en medio de un contexto de tensiones geopolíticas. ▼</h2></div>
+			<div class="contenido">
+				<p>En las elecciones parlamentarias celebradas en Moldavia, el partido proeuropeo ha logrado una significativa victoria a pesar de los esfuerzos de interferencia por parte de Rusia. Los resultados reflejan un fuerte apoyo hacia las políticas orientadas hacia Europa, lo que sugiere un rechazo a la influencia rusa en el país. Este triunfo es interpretado como una reafirmación del compromiso moldavo con la integración europea en medio de un contexto de tensiones geopolíticas.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Comenzó el Mundial Sub-20 en Chile y se utilizó por primera vez la tarjeta verde en el fútbol</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQ-YyE-DCxQYypHiW9abam42fJxjKf3NPfB9136w7uzC7c1WUMUyGxMhf4G6A&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El Mundial Sub-20 de fútbol en Chile ha comenzado, marcando un hito histórico con la introducción de la tarjeta verde, utilizada por primera vez en el deporte. Esta tarjeta se implementa para sancionar comportamientos antideportivos y fomentar el juego limpio. El torneo cuenta con la participación de varias selecciones juveniles, y se espera que sea una plataforma para desarrollar talentos futuros y promover valores en el fútbol. La iniciativa de la tarjeta verde busca contribuir a una cultura deportiva más positiva y responsable. ▼</h2></div>
+			<div class="contenido">
+				<p>El Mundial Sub-20 de fútbol en Chile ha comenzado, marcando un hito histórico con la introducción de la tarjeta verde, utilizada por primera vez en el deporte. Esta tarjeta se implementa para sancionar comportamientos antideportivos y fomentar el juego limpio. El torneo cuenta con la participación de varias selecciones juveniles, y se espera que sea una plataforma para desarrollar talentos futuros y promover valores en el fútbol. La iniciativa de la tarjeta verde busca contribuir a una cultura deportiva más positiva y responsable.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Rusia responde a la autorización de EE.UU. para que Ucrania use misiles de largo alcance</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVH2yPKrfNTieInbuvr5KhElnQ29EkjMsjCEiy6e8--MxX1qvUDsxkNqB6qw&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El gobierno ruso respondió de manera contundente a la autorización estadounidense que permite a Ucrania el uso de misiles de largo alcance en su conflicto con Rusia. Funcionarios rusos enfatizaron que no existen soluciones simples para la situación bélica y descartaron la efectividad de la nueva estrategia militar impulsada por Occidente. Además, señalaron que medidas como el suministro de armas modernas no cambiarán el resultado del conflicto, reafirmando su disposición a continuar con sus operaciones militares. La situación sigue siendo tensa, con ambos países preparándose para una posible escalada en el enfrentamiento. ▼</h2></div>
+			<div class="contenido">
+				<p>El gobierno ruso respondió de manera contundente a la autorización estadounidense que permite a Ucrania el uso de misiles de largo alcance en su conflicto con Rusia. Funcionarios rusos enfatizaron que no existen soluciones simples para la situación bélica y descartaron la efectividad de la nueva estrategia militar impulsada por Occidente. Además, señalaron que medidas como el suministro de armas modernas no cambiarán el resultado del conflicto, reafirmando su disposición a continuar con sus operaciones militares. La situación sigue siendo tensa, con ambos países preparándose para una posible escalada en el enfrentamiento.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Se termina el reinado de las siete magníficas la IA impulsa a nuevas empresas líderes en Wall Street</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyUmcsguyI6K_x7z-QP-Y_ArAJeAJOWXpA6gEjO917d2e6OdtYBQbmSQ4Khg&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La inteligencia artificial está provocando un cambio significativo en el panorama empresarial de Wall Street, desafiando el dominio de las conocidas "siete magníficas" empresas tecnológicas. Nuevas firmas están emergiendo y destacándose en el mercado debido a sus innovaciones en tecnología impulsadas por la IA. Estas transformaciones están generando un ambiente competitivo que podría reconfigurar las dinámicas de inversión y el liderazgo en la industria tecnológica, lo que sugiere que el futuro puede estar marcado por una mayor diversidad de actores en el sector. ▼</h2></div>
+			<div class="contenido">
+				<p>La inteligencia artificial está provocando un cambio significativo en el panorama empresarial de Wall Street, desafiando el dominio de las conocidas "siete magníficas" empresas tecnológicas. Nuevas firmas están emergiendo y destacándose en el mercado debido a sus innovaciones en tecnología impulsadas por la IA. Estas transformaciones están generando un ambiente competitivo que podría reconfigurar las dinámicas de inversión y el liderazgo en la industria tecnológica, lo que sugiere que el futuro puede estar marcado por una mayor diversidad de actores en el sector.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>María Corina Machado solicitó al Papa León XIV mediación por los presos políticos en Venezuela</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsus1UdTnkNwuM_gkFXAinABkTRmz0Lsv-2Lx7vnEUsoPoUCIUBN3mdKyFNg8&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>María Corina Machado, líder opositora en Venezuela, pidió al Papa León XIV que intervenga en la situación de los presos políticos en el país. Durante un evento en Caracas, destacó la necesidad urgente de abordar las violaciones a los derechos humanos y solicitó específicamente la liberación de aquellos encarcelados por razones políticas. La dirigente también enfatizó que la mediación del Vaticano es crucial para lograr un cambio significativo en el clima de represión en Venezuela. ▼</h2></div>
+			<div class="contenido">
+				<p>María Corina Machado, líder opositora en Venezuela, pidió al Papa León XIV que intervenga en la situación de los presos políticos en el país. Durante un evento en Caracas, destacó la necesidad urgente de abordar las violaciones a los derechos humanos y solicitó específicamente la liberación de aquellos encarcelados por razones políticas. La dirigente también enfatizó que la mediación del Vaticano es crucial para lograr un cambio significativo en el clima de represión en Venezuela.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Estados Unidos autorizó a Ucrania a bombardear objetivos en Rusia con misiles de largo alcance bajo supervisión del Pentágono</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvozgb_4c60U1jfU6v8hv3CFuT-ZHkObcOCPXmE9gc4ow-jc3TgXU7Khn3Yw&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Estados Unidos ha otorgado a Ucrania la autorización para llevar a cabo ataques aéreos contra objetivos dentro de territorio ruso utilizando misiles de largo alcance, con la supervisión del Pentágono. Esta medida se enmarca en el apoyo continuo de Estados Unidos a Ucrania en su conflicto con Rusia, destacando un cambio significativo en la política militar que busca fortalecer la capacidad de respuesta de Ucrania frente a las agresiones rusas. Las fuerzas ucranianas podrán apuntar a infraestructuras y otros objetivos relevantes para debilitar las capacidades del ejército ruso. ▼</h2></div>
+			<div class="contenido">
+				<p>Estados Unidos ha otorgado a Ucrania la autorización para llevar a cabo ataques aéreos contra objetivos dentro de territorio ruso utilizando misiles de largo alcance, con la supervisión del Pentágono. Esta medida se enmarca en el apoyo continuo de Estados Unidos a Ucrania en su conflicto con Rusia, destacando un cambio significativo en la política militar que busca fortalecer la capacidad de respuesta de Ucrania frente a las agresiones rusas. Las fuerzas ucranianas podrán apuntar a infraestructuras y otros objetivos relevantes para debilitar las capacidades del ejército ruso.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Condenan a muerte al exministro de Agricultura de China por corrupción en medio de la purga de Xi Jinping</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTeXZXwfz-xxhaNAW8tyVczaxIE84rQe7b4GwYLI5SihKQ9FpPxVWKyUT08gAk&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Un tribunal en China ha condenado a muerte a el exministro de Agricultura, Tang Renjian, por corrupción. Esta decisión forma parte de la continua purga anticorrupción impulsada por el presidente Xi Jinping. Se le acusa de recibir sobornos y malversar fondos durante su tiempo en el cargo. Las autoridades chinas han intensificado sus esfuerzos para combatir la corrupción en los últimos años, y esta condena es un ejemplo más de las medidas severas que se han tomado contra funcionarios del gobierno. La situación resalta la política de Xi Jinping en la lucha contra este fenómeno en el país. ▼</h2></div>
+			<div class="contenido">
+				<p>Un tribunal en China ha condenado a muerte a el exministro de Agricultura, Tang Renjian, por corrupción. Esta decisión forma parte de la continua purga anticorrupción impulsada por el presidente Xi Jinping. Se le acusa de recibir sobornos y malversar fondos durante su tiempo en el cargo. Las autoridades chinas han intensificado sus esfuerzos para combatir la corrupción en los últimos años, y esta condena es un ejemplo más de las medidas severas que se han tomado contra funcionarios del gobierno. La situación resalta la política de Xi Jinping en la lucha contra este fenómeno en el país.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Presidente de Madagascar destituye a su gobierno tras protestas que dejaron al menos 22 muertos</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIBq8ucrk4U9vyER_NQazoew3W00kCI665CUE4mdag9urpcCoO3qwNs1I3yg&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El presidente de Madagascar destituyó a su gobierno tras una serie de protestas que resultaron en al menos 22 muertes. Las manifestaciones, que comenzaron por el descontento ciudadano, se intensificaron en los últimos días, llevando a un clima de tensión en el país. La decisión del presidente busca reestructurar el gabinete en medio de la crisis. La violencia y el malestar social han puesto en evidencia la fragilidad de la situación política actual en Madagascar. ▼</h2></div>
+			<div class="contenido">
+				<p>El presidente de Madagascar destituyó a su gobierno tras una serie de protestas que resultaron en al menos 22 muertes. Las manifestaciones, que comenzaron por el descontento ciudadano, se intensificaron en los últimos días, llevando a un clima de tensión en el país. La decisión del presidente busca reestructurar el gabinete en medio de la crisis. La violencia y el malestar social han puesto en evidencia la fragilidad de la situación política actual en Madagascar.</p>
+			</div>
+		</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publiciteLite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Más de 750,000 palestinos desplazados en Gaza, según el ejército de Israel</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRFhoUgb8I4426CD1pPl2wFA_oJpUdIpMfHnZkFuPzJwwjID2GXos7ESs_uNQ&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El Ejército de Israel ha reportado que más de 750,000 palestinos han sido desplazados en la Franja de Gaza debido a la escalada del conflicto en la región. La situación humanitaria se ha deteriorado significativamente, con un acceso limitado a recursos básicos como agua y alimentos. Las autoridades locales han expresado su preocupación por el impacto en la población civil, mientras se continúan los enfrentamientos en el área. ▼</h2></div>
+			<div class="contenido">
+				<p>El Ejército de Israel ha reportado que más de 750,000 palestinos han sido desplazados en la Franja de Gaza debido a la escalada del conflicto en la región. La situación humanitaria se ha deteriorado significativamente, con un acceso limitado a recursos básicos como agua y alimentos. Las autoridades locales han expresado su preocupación por el impacto en la población civil, mientras se continúan los enfrentamientos en el área.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>El increíble gol de Lionel Messi en el entrenamiento del Inter Miami y la reacción de Rodrigo De Paul</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxeocdicfYWi0nUQ4978S5sP7feMT8sriFlc0C3vUOETwGiS0e6fH9odYQR7U&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Lionel Messi sorprendió durante un entrenamiento con el Inter Miami al marcar un gol impresionante. La jugada fue especialmente vistosa y llamó la atención de sus compañeros, destacándose la reacción de Rodrigo De Paul, quien mostró su admiración por el talento del astro argentino. Este gol pone de manifiesto las habilidades de Messi, incluso en una sesión de práctica, y refleja su impacto en el equipo tras su llegada a la Major League Soccer. ▼</h2></div>
+			<div class="contenido">
+				<p>Lionel Messi sorprendió durante un entrenamiento con el Inter Miami al marcar un gol impresionante. La jugada fue especialmente vistosa y llamó la atención de sus compañeros, destacándose la reacción de Rodrigo De Paul, quien mostró su admiración por el talento del astro argentino. Este gol pone de manifiesto las habilidades de Messi, incluso en una sesión de práctica, y refleja su impacto en el equipo tras su llegada a la Major League Soccer.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Estados Unidos evalúa enviar misiles de largo alcance Tomahawk a Ucrania</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTi4XkjjffrVTgpB6BYIQ4NQCsNvqXWM6uJbQNmHQrtwGuSjdm2x7-Siwp7A&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El vicepresidente de Estados Unidos, Kamala Harris, anunció que el país está considerando enviar misiles Tomahawk de largo alcance a Ucrania. Esta medida forma parte de una evaluación más amplia de la asistencia militar destinada a apoyar a Ucrania en su lucha contra la invasión rusa. Harris subrayó el compromiso de Estados Unidos con la soberanía de Ucrania y su determinación de ayudar a repeler la agresión extranjera. ▼</h2></div>
+			<div class="contenido">
+				<p>El vicepresidente de Estados Unidos, Kamala Harris, anunció que el país está considerando enviar misiles Tomahawk de largo alcance a Ucrania. Esta medida forma parte de una evaluación más amplia de la asistencia militar destinada a apoyar a Ucrania en su lucha contra la invasión rusa. Harris subrayó el compromiso de Estados Unidos con la soberanía de Ucrania y su determinación de ayudar a repeler la agresión extranjera.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>La UE respaldó el avance democrático en Moldavia tras elecciones parlamentarias marcadas por injerencia rusa</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQx316BLJY5sgGoQ3C1io6xQugq2ybQBU9BNHaQmkbhIUV-jrW4rL2ZNSlxew&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La Unión Europea ha expresado su respaldo a los recientes avances democráticos en Moldavia, tras las elecciones parlamentarias que se llevaron a cabo en un contexto de interferencia por parte de Rusia. Las elecciones han sido vistas como una oportunidad para consolidar el camino proeuropeo del país y fortalecer sus instituciones democráticas, a pesar de los desafíos externos. La UE destacó la importancia de mantener la soberanía de Moldavia y el respeto a los procesos electorales. ▼</h2></div>
+			<div class="contenido">
+				<p>La Unión Europea ha expresado su respaldo a los recientes avances democráticos en Moldavia, tras las elecciones parlamentarias que se llevaron a cabo en un contexto de interferencia por parte de Rusia. Las elecciones han sido vistas como una oportunidad para consolidar el camino proeuropeo del país y fortalecer sus instituciones democráticas, a pesar de los desafíos externos. La UE destacó la importancia de mantener la soberanía de Moldavia y el respeto a los procesos electorales.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Familiares de rehenes israelíes piden a Trump un acuerdo de tregua y liberación en reunión con Netanyahu</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgviPLWP3nJzLbTODBtv3HGDhQqysrjWncQ6tWAjlKRURE-GaWQNvkAYXEBA&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Familiares de rehenes israelíes instaron al expresidente Donald Trump a facilitar un acuerdo de tregua y liberación durante su reciente encuentro con el primer ministro de Israel, Benjamin Netanyahu. La reunión se llevó a cabo en un contexto de creciente tensión en la región y descontento por parte de los familiares, que buscan una solución para la liberación de sus seres queridos. Los asistentes al encuentro expresaron su preocupación y urgencia respecto a la situación de los rehenes, demandando acciones concretas y rápidas para mejorar sus condiciones y asegurar su retorno. ▼</h2></div>
+			<div class="contenido">
+				<p>Familiares de rehenes israelíes instaron al expresidente Donald Trump a facilitar un acuerdo de tregua y liberación durante su reciente encuentro con el primer ministro de Israel, Benjamin Netanyahu. La reunión se llevó a cabo en un contexto de creciente tensión en la región y descontento por parte de los familiares, que buscan una solución para la liberación de sus seres queridos. Los asistentes al encuentro expresaron su preocupación y urgencia respecto a la situación de los rehenes, demandando acciones concretas y rápidas para mejorar sus condiciones y asegurar su retorno.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>La tragedia segundos después de un récord alcanzó tres veces la velocidad del sonido pero el descenso le tendió una trampa</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTA6yCjq3K8ly0cyIzhqT4QSmYtzZuMYtjPYLD9V5sGVQkfqH-w0H9Yupqq6A&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Un piloto de un avión de caza alcanzó el récord de velocidad de tres veces la del sonido, pero durante su descenso sufrió una trampa fatal. A pesar del logro histórico, la maniobra de descenso resultó peligrosa, lo que llevó a una tragedia en la que el piloto no pudo recuperarse a tiempo. La noticia resalta los riesgos involucrados en la aviación a altas velocidades y las consecuencias inesperadas de realizar maniobras extremas. ▼</h2></div>
+			<div class="contenido">
+				<p>Un piloto de un avión de caza alcanzó el récord de velocidad de tres veces la del sonido, pero durante su descenso sufrió una trampa fatal. A pesar del logro histórico, la maniobra de descenso resultó peligrosa, lo que llevó a una tragedia en la que el piloto no pudo recuperarse a tiempo. La noticia resalta los riesgos involucrados en la aviación a altas velocidades y las consecuencias inesperadas de realizar maniobras extremas.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>El regreso preocupante de un ganador del Balón de Oro tras una grave lesión</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPVyosrgE_XscS5mtr5uY7ClQskeO08eVrjthqE6O1pDMIzbrzLzcljMylSeo&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Un destacado jugador de fútbol que recientemente ganó el Balón de Oro sufrió una grave lesión durante un partido. Esta situación generó preocupación en el mundo del deporte, ya que el atleta expresó que estaba experimentando un dolor intenso. La noticia ha suscitado inquietud entre aficionados y expertos, quienes temen por su recuperación y el impacto en su carrera. ▼</h2></div>
+			<div class="contenido">
+				<p>Un destacado jugador de fútbol que recientemente ganó el Balón de Oro sufrió una grave lesión durante un partido. Esta situación generó preocupación en el mundo del deporte, ya que el atleta expresó que estaba experimentando un dolor intenso. La noticia ha suscitado inquietud entre aficionados y expertos, quienes temen por su recuperación y el impacto en su carrera.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Al menos un muerto y 12 militares heridos en protestas por el alza del diésel en Ecuador</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWeBtJGDnYXwHAdRrSxw0uXKLyYnBDaDniXzUpEPr1rWgSJE0_gXh8ANHvVgw&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>En Ecuador, al menos una persona ha muerto y 12 militares resultaron heridos durante las recientes protestas en contra del aumento del precio del diésel. Las manifestaciones han escalado en varias regiones del país, generando tensiones entre las fuerzas de seguridad y los manifestantes. Este descontento se originó por las alzas en el costo del combustible, lo que ha llevado a movilizaciones masivas y enfrentamientos. La situación sigue siendo volátil, y las autoridades se mantienen alertas ante posibles nuevas protestas. ▼</h2></div>
+			<div class="contenido">
+				<p>En Ecuador, al menos una persona ha muerto y 12 militares resultaron heridos durante las recientes protestas en contra del aumento del precio del diésel. Las manifestaciones han escalado en varias regiones del país, generando tensiones entre las fuerzas de seguridad y los manifestantes. Este descontento se originó por las alzas en el costo del combustible, lo que ha llevado a movilizaciones masivas y enfrentamientos. La situación sigue siendo volátil, y las autoridades se mantienen alertas ante posibles nuevas protestas.</p>
+			</div>
+		</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publiciteLite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Sacerdote italiano conocido por su lucha contra la mafia recibe una bala durante misa</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgR4dtkv6YRrDO0QW78nNzf94ZauYXJqnf3e9OiIcBt8UFcWSl8qVS3jdgiQ&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Un sacerdote italiano, conocido por su activismo contra la mafia, recibió un disparo mientras oficiaba una misa. El ataque ocurrió en la localidad de San Luca, Calabria, y el proyectil fue encontrado dentro de un pañuelo que el sacerdote utilizó durante la ceremonia. La situación ha generado preocupación en la comunidad, que ha expresado su apoyo al religioso y su rechazo a la violencia asociada con la mafia. Las autoridades han iniciado una investigación para esclarecer el incidente y encontrar a los responsables. ▼</h2></div>
+			<div class="contenido">
+				<p>Un sacerdote italiano, conocido por su activismo contra la mafia, recibió un disparo mientras oficiaba una misa. El ataque ocurrió en la localidad de San Luca, Calabria, y el proyectil fue encontrado dentro de un pañuelo que el sacerdote utilizó durante la ceremonia. La situación ha generado preocupación en la comunidad, que ha expresado su apoyo al religioso y su rechazo a la violencia asociada con la mafia. Las autoridades han iniciado una investigación para esclarecer el incidente y encontrar a los responsables.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Identifican al sospechoso del tiroteo en una iglesia mormona en Michigan</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQS8CBH5YztzKkk65OWH5gdwM34c-sUSBwSX7t8hgREF_AwPFUYJcnhF0DOaMk&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Un hombre ha sido identificado como el principal sospechoso del tiroteo que tuvo lugar en una iglesia mormona en Michigan. Las autoridades han revelado información sobre el individuo, quien se encuentra bajo investigación. Los sucesos ocurrieron durante un servicio, causando alarma y preocupación en la comunidad local. La policía sigue trabajando en el caso mientras se recopilan más pruebas y se analizan los motivos detrás del ataque. Se espera que haya actualizaciones a medida que avance la investigación. ▼</h2></div>
+			<div class="contenido">
+				<p>Un hombre ha sido identificado como el principal sospechoso del tiroteo que tuvo lugar en una iglesia mormona en Michigan. Las autoridades han revelado información sobre el individuo, quien se encuentra bajo investigación. Los sucesos ocurrieron durante un servicio, causando alarma y preocupación en la comunidad local. La policía sigue trabajando en el caso mientras se recopilan más pruebas y se analizan los motivos detrás del ataque. Se espera que haya actualizaciones a medida que avance la investigación.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>El canciller paraguayo Ramírez se reúne con el subsecretario estadounidense Landau en Nueva York</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrFRfsgIPL_QejmJ2nA30Iu4B4ZMqLPPriUrj94RNz8J7BWShOBo5-qKRzVg&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El canciller de Paraguay, Julio César Arriola, se reunió en Nueva York con el subsecretario estadounidense para Asuntos del Hemisferio Occidental,Mark Landau. Durante el encuentro, ambos funcionarios abordaron temas de interés mutuo, como la cooperación bilateral y cuestiones relacionadas con la democracia en la región. La reunión forma parte de los esfuerzos de Paraguay para fortalecer sus lazos con Estados Unidos y promover una colaboración más efectiva en diversos ámbitos. ▼</h2></div>
+			<div class="contenido">
+				<p>El canciller de Paraguay, Julio César Arriola, se reunió en Nueva York con el subsecretario estadounidense para Asuntos del Hemisferio Occidental,Mark Landau. Durante el encuentro, ambos funcionarios abordaron temas de interés mutuo, como la cooperación bilateral y cuestiones relacionadas con la democracia en la región. La reunión forma parte de los esfuerzos de Paraguay para fortalecer sus lazos con Estados Unidos y promover una colaboración más efectiva en diversos ámbitos.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Wall Street cerró con ganancias y terminó una racha negativa de tres días</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQe5iWQVCnAt8PFWlrV3wEM6pWcmAZnjJ2x0mpjQqZc9-SIzFgPn-QgOB54xA&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Wall Street concluyó su jornada con ganancias, poniendo fin a una racha de tres días de pérdidas. El Dow Jones subió un 0,4%, mientras que el S&P 500 y el Nasdaq avanzaron un 0,5% y un 0,6%, respectivamente. Este repunte se produjo en medio de un clima de optimismo en los mercados, impulsado por señales de estabilidad en la economía. Inversionistas se mostraron aliviados ante la posibilidad de que la Reserva Federal mantenga las tasas de interés sin cambios en el futuro cercano, lo que generó un ambiente favorable para las acciones. Las ganancias más significativas se observaron en sectores como tecnología y consumo. ▼</h2></div>
+			<div class="contenido">
+				<p>Wall Street concluyó su jornada con ganancias, poniendo fin a una racha de tres días de pérdidas. El Dow Jones subió un 0,4%, mientras que el S&P 500 y el Nasdaq avanzaron un 0,5% y un 0,6%, respectivamente. Este repunte se produjo en medio de un clima de optimismo en los mercados, impulsado por señales de estabilidad en la economía. Inversionistas se mostraron aliviados ante la posibilidad de que la Reserva Federal mantenga las tasas de interés sin cambios en el futuro cercano, lo que generó un ambiente favorable para las acciones. Las ganancias más significativas se observaron en sectores como tecnología y consumo.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>La justicia de Bolivia ordena arresto domiciliario de Felipe Cáceres, ex zar antidrogas del gobierno de Evo Morales</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7pufflRV_owu_2cjMlHeVkWZhShnkGPHZSrFgsPPMYgtbE05Vb7lqmbOqzYc&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La justicia boliviana ha ordenado el arresto domiciliario de Felipe Cáceres, quien fue zar antidrogas durante el gobierno de Evo Morales. Esta decisión se produce en el contexto de una investigación relacionada con la presunta corrupción en el manejo de contratos para la lucha contra el narcotráfico. Cáceres enfrenta denuncias por abuso de autoridad y otros delitos, lo que ha generado un importante debate sobre la integridad de las instituciones en el país. La medida ha sido criticada por algunos sectores, que consideran que pone de relieve la impunidad en el sistema judicial boliviano. ▼</h2></div>
+			<div class="contenido">
+				<p>La justicia boliviana ha ordenado el arresto domiciliario de Felipe Cáceres, quien fue zar antidrogas durante el gobierno de Evo Morales. Esta decisión se produce en el contexto de una investigación relacionada con la presunta corrupción en el manejo de contratos para la lucha contra el narcotráfico. Cáceres enfrenta denuncias por abuso de autoridad y otros delitos, lo que ha generado un importante debate sobre la integridad de las instituciones en el país. La medida ha sido criticada por algunos sectores, que consideran que pone de relieve la impunidad en el sistema judicial boliviano.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>El Codex Gigas, la misteriosa Biblia del diablo, sigue desatando leyendas y asombro</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmwvScMBdBcKPCcW_Xt5MmrC1awHYBoJ6tu8xpXoa9qWR_vp1iEUSFxTHC9w&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El Codex Gigas, también conocido como la Biblia del Diablo, es un antiguo manuscrito medieval que ha intrigado a historiadores y entusiastas desde su creación en el siglo XIII. Este libro, que se encuentra en la Biblioteca Nacional de Suecia, es famoso por su tamaño y por contener ilustraciones inusuales, incluida una representación del diablo. La leyenda sostiene que fue escrito por un monje que hizo un pacto con el diablo para completar la obra. Aunque su origen y propósito son objeto de debate, el Codex Gigas continúa siendo un símbolo de misterio y cultura, generando interés por su historia y por las historias que lo rodean. ▼</h2></div>
+			<div class="contenido">
+				<p>El Codex Gigas, también conocido como la Biblia del Diablo, es un antiguo manuscrito medieval que ha intrigado a historiadores y entusiastas desde su creación en el siglo XIII. Este libro, que se encuentra en la Biblioteca Nacional de Suecia, es famoso por su tamaño y por contener ilustraciones inusuales, incluida una representación del diablo. La leyenda sostiene que fue escrito por un monje que hizo un pacto con el diablo para completar la obra. Aunque su origen y propósito son objeto de debate, el Codex Gigas continúa siendo un símbolo de misterio y cultura, generando interés por su historia y por las historias que lo rodean.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Skater brasileño establece récord Guinness en la mayor rampa del mundo</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmYI36LaAGJnfkPtz-YINJo9craTf57WYTwzCVEz-VbmGRlz-Bk-8ceSepJQ&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Un skater brasileño ha batido un récord Guinness al realizar un salto en la mayor rampa del mundo, ubicada en su país. Este impresionante logro fue alcanzado en un evento donde se reunieron múltiples aficionados y expertos del skate. La rampa, con una altura notable, presentó un desafío que muchos consideraban imposible, pero el skater logró completar el salto con éxito, estableciendo un nuevo estándar en la disciplina. La hazaña ha sido celebrada en las redes sociales y se considera un hito importante para el deporte en Brasil. ▼</h2></div>
+			<div class="contenido">
+				<p>Un skater brasileño ha batido un récord Guinness al realizar un salto en la mayor rampa del mundo, ubicada en su país. Este impresionante logro fue alcanzado en un evento donde se reunieron múltiples aficionados y expertos del skate. La rampa, con una altura notable, presentó un desafío que muchos consideraban imposible, pero el skater logró completar el salto con éxito, estableciendo un nuevo estándar en la disciplina. La hazaña ha sido celebrada en las redes sociales y se considera un hito importante para el deporte en Brasil.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Fuerte advertencia de Alemania en un foro de seguridad sobre las intenciones de Putin en Ucrania</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzmkGrTi9MWR1BCM5ZIMFFvmMdN2811b8BlzRylnYQ1tTQCpSIwzqEd9xGeA&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>En un reciente foro sobre seguridad, Alemania emitió una contundente advertencia respecto a la postura de Rusia en el conflicto de Ucrania. Se destacó que el presidente Vladimir Putin no tiene interés en buscar un alto el fuego ni en establecer la paz en la región. Este pronunciamiento refleja la creciente preocupación internacional sobre la continuidad de las hostilidades y la falta de disposición por parte del Kremlin para avanzar hacia una resolución pacífica del conflicto. ▼</h2></div>
+			<div class="contenido">
+				<p>En un reciente foro sobre seguridad, Alemania emitió una contundente advertencia respecto a la postura de Rusia en el conflicto de Ucrania. Se destacó que el presidente Vladimir Putin no tiene interés en buscar un alto el fuego ni en establecer la paz en la región. Este pronunciamiento refleja la creciente preocupación internacional sobre la continuidad de las hostilidades y la falta de disposición por parte del Kremlin para avanzar hacia una resolución pacífica del conflicto.</p>
+			</div>
+		</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publiciteLite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Trump y Netanyahu dialogan con primer ministro de Qatar tras ataque de Israel a Doha</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGZ3IuNWgX8YPGoZBcj71n5xdktlWhh9WZl9UIIhPN3Os4UJ9anAfApF01cw&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Trump y Netanyahu mantuvieron un diálogo con el primer ministro de Qatar desde la Casa Blanca, después del ataque aéreo de Israel en Doha. La conversación se centró en la situación de tensión en la región y la búsqueda de caminos para reducir el conflicto. Este encuentro refleja el interés de Estados Unidos en garantizar estabilidad en Oriente Medio y el papel de Qatar como mediador en la crisis. ▼</h2></div>
+			<div class="contenido">
+				<p>Trump y Netanyahu mantuvieron un diálogo con el primer ministro de Qatar desde la Casa Blanca, después del ataque aéreo de Israel en Doha. La conversación se centró en la situación de tensión en la región y la búsqueda de caminos para reducir el conflicto. Este encuentro refleja el interés de Estados Unidos en garantizar estabilidad en Oriente Medio y el papel de Qatar como mediador en la crisis.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Ex primer ministro italiano sorprendido por el deterioro de Putin en China</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBFU1SmyNcayXXX97OauowGOhXakfBXrgSqmdSjNyYtyletGDzUy23UfupI6M&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Un ex primer ministro italiano observó a Vladimir Putin en China y quedó sorprendido por su estado físico, comparándolo con Silvio Berlusconi en sus últimos días. El ex líder político mencionó que Putin parecía visiblemente afectado y en peores condiciones de salud de lo que se había mostrado anteriormente. Esta reunión tuvo lugar en el contexto de la participación de líderes mundiales en eventos internacionales. La opinión del ex primer ministro sobre el deterioro de Putin ha generado interés en diversos círculos políticos y mediáticos. ▼</h2></div>
+			<div class="contenido">
+				<p>Un ex primer ministro italiano observó a Vladimir Putin en China y quedó sorprendido por su estado físico, comparándolo con Silvio Berlusconi en sus últimos días. El ex líder político mencionó que Putin parecía visiblemente afectado y en peores condiciones de salud de lo que se había mostrado anteriormente. Esta reunión tuvo lugar en el contexto de la participación de líderes mundiales en eventos internacionales. La opinión del ex primer ministro sobre el deterioro de Putin ha generado interés en diversos círculos políticos y mediáticos.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>La Unión Europea reactivó las sanciones contra el régimen de Irán por su programa nuclear</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2QITBYpgy2LNMAKdNMP_PR7RcvOMfwKJW9crz3F7oHuGz8G07yRhi0ohlQw&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La Unión Europea ha decidido reactivar las sanciones contra Irán debido a su programa nuclear, en respuesta a la falta de cumplimiento por parte del país en sus obligaciones. Esta medida refleja la creciente preocupación de la comunidad internacional sobre las actividades nucleares de Teherán, que se considera una amenaza para la seguridad regional y global. Las sanciones incluyen restricciones económicas y financieras, y se espera que afecten las relaciones comerciales y políticas con Irán. La decisión se enmarca en un contexto de tensiones persistentes en el Medio Oriente y del intento de la UE de preservar la no proliferación nuclear. ▼</h2></div>
+			<div class="contenido">
+				<p>La Unión Europea ha decidido reactivar las sanciones contra Irán debido a su programa nuclear, en respuesta a la falta de cumplimiento por parte del país en sus obligaciones. Esta medida refleja la creciente preocupación de la comunidad internacional sobre las actividades nucleares de Teherán, que se considera una amenaza para la seguridad regional y global. Las sanciones incluyen restricciones económicas y financieras, y se espera que afecten las relaciones comerciales y políticas con Irán. La decisión se enmarca en un contexto de tensiones persistentes en el Medio Oriente y del intento de la UE de preservar la no proliferación nuclear.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Talibanes liberan a ciudadano norteamericano Amir Amiri tras negociaciones mediadas por Catar</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOtjxXRwaWNFB1R74Kc2OatQcXT7DwqPn3cYTI62GPGbyJiKiMwSr-YOL0hhU&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El régimen talibán liberó al ciudadano estadounidense Amir Amiri después de negociaciones facilitadas por Qatar. Amiri había estado detenido desde su arresto en Afganistán en enero de 2023, aunque no se especificaron los cargos en su contra. La liberación se produce en un contexto de relaciones diplomáticas entre Estados Unidos y el régimen talibán, que buscan mejorar a pesar de las tensiones. Al mismo tiempo, Qatar ha asumido un papel como intermediario en la región, apoyando diálogos entre diferentes actores. ▼</h2></div>
+			<div class="contenido">
+				<p>El régimen talibán liberó al ciudadano estadounidense Amir Amiri después de negociaciones facilitadas por Qatar. Amiri había estado detenido desde su arresto en Afganistán en enero de 2023, aunque no se especificaron los cargos en su contra. La liberación se produce en un contexto de relaciones diplomáticas entre Estados Unidos y el régimen talibán, que buscan mejorar a pesar de las tensiones. Al mismo tiempo, Qatar ha asumido un papel como intermediario en la región, apoyando diálogos entre diferentes actores.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>El calvario de un ex Barcelona y Milan por una extraña lesión</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKmoXeJ3gHx4IKelfVDpHvv3ZIV2tL3aqe4ZvWurdLnJUzK-_WuudggW_zUA&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Un exjugador del Barcelona y el Milan enfrenta serias dificultades debido a una lesión inusual que afecta su carrera deportiva. A pesar de sus esfuerzos, el jugador ha manifestado que está lidiando con complicaciones biológicas que le impiden regresar al fútbol profesional. En su relato, describe los desafíos físicos y emocionales que ha enfrentado, así como su determinación por recuperarse y volver a jugar. La situación ha sido frustrante y angustiante, reflejando un calvario personal que ha impactado tanto su salud como su vida profesional. ▼</h2></div>
+			<div class="contenido">
+				<p>Un exjugador del Barcelona y el Milan enfrenta serias dificultades debido a una lesión inusual que afecta su carrera deportiva. A pesar de sus esfuerzos, el jugador ha manifestado que está lidiando con complicaciones biológicas que le impiden regresar al fútbol profesional. En su relato, describe los desafíos físicos y emocionales que ha enfrentado, así como su determinación por recuperarse y volver a jugar. La situación ha sido frustrante y angustiante, reflejando un calvario personal que ha impactado tanto su salud como su vida profesional.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Histórico arquero de la selección de Chile sufre infarto en partido de despedida y es reanimado en el campo de juego</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIBE-v-BjU74XXELcpB-1NftuhHUWix5MrFfFuyV3Vy_1XdVt23ADVSuQ7_MU&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Un reconocido arquero de la selección chilena sufrió un infarto durante un partido de despedida. El incidente ocurrió en el estadio donde se llevaba a cabo el evento, y el jugador tuvo que ser reanimado en el campo por los servicios médicos presentes. Tras recibir atención, fue trasladado a un hospital para una atención más exhaustiva. Afortunadamente, el exfutbolista se encuentra estable y consciente después del suceso. ▼</h2></div>
+			<div class="contenido">
+				<p>Un reconocido arquero de la selección chilena sufrió un infarto durante un partido de despedida. El incidente ocurrió en el estadio donde se llevaba a cabo el evento, y el jugador tuvo que ser reanimado en el campo por los servicios médicos presentes. Tras recibir atención, fue trasladado a un hospital para una atención más exhaustiva. Afortunadamente, el exfutbolista se encuentra estable y consciente después del suceso.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Uruguay activará respuestas concretas tras ataque al domicilio de fiscal que investiga a narcos</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoJfKWm2rXaSOi7efmY1vZBR0Y1pIR2ji_dBmRY13g6xl_u7-T67Nhc4YmwA&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El gobierno de Uruguay anunció medidas concretas en respuesta a un ataque al hogar de una fiscal que investiga casos de narcotráfico. Este incidente ha alertado a las autoridades sobre el creciente desafío que representa el crimen organizado en el país. Las autoridades intensificarán la seguridad y la protección de funcionarios judiciales, así como la colaboración internacional en la lucha contra el narcotráfico. Este ataque se suma a un contexto de preocupación por el aumento de la violencia relacionada con estas actividades delictivas en la región. ▼</h2></div>
+			<div class="contenido">
+				<p>El gobierno de Uruguay anunció medidas concretas en respuesta a un ataque al hogar de una fiscal que investiga casos de narcotráfico. Este incidente ha alertado a las autoridades sobre el creciente desafío que representa el crimen organizado en el país. Las autoridades intensificarán la seguridad y la protección de funcionarios judiciales, así como la colaboración internacional en la lucha contra el narcotráfico. Este ataque se suma a un contexto de preocupación por el aumento de la violencia relacionada con estas actividades delictivas en la región.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Reino Unido exigirá a los inmigrantes ganarse el derecho a vivir en el país mediante nuevos estrictos requisitos</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6ouoD2-vwqWTeVOz95bEHDZFWXtlQKFtWlzOsmo6PpT8a9LyG7DyOrW1VXQ&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El gobierno del Reino Unido ha anunciado nuevas medidas para regular la inmigración, que exigirán a los inmigrantes demostrar su capacidad para ganarse el derecho a residir en el país. Estas disposiciones incluyen criterios más estrictos para la obtención de permisos de residencia y trabajo, que buscan asegurar que los inmigrantes contribuyan económicamente al país. El objetivo de estas políticas es controlar mejor la diversidad de la población y mejorar la cohesión social, lo que ha generado diversas reacciones en la opinión pública y entre los grupos activistas. ▼</h2></div>
+			<div class="contenido">
+				<p>El gobierno del Reino Unido ha anunciado nuevas medidas para regular la inmigración, que exigirán a los inmigrantes demostrar su capacidad para ganarse el derecho a residir en el país. Estas disposiciones incluyen criterios más estrictos para la obtención de permisos de residencia y trabajo, que buscan asegurar que los inmigrantes contribuyan económicamente al país. El objetivo de estas políticas es controlar mejor la diversidad de la población y mejorar la cohesión social, lo que ha generado diversas reacciones en la opinión pública y entre los grupos activistas.</p>
+			</div>
+		</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publiciteLite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>París abrirá un jardín gratuito con esculturas de Picasso</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3u9d61Jd438GZ4NhIAF9m3LNTgYqlKRqX7R_bIQgWsc94P4U_W7S_Sa5Cc8Y&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>París inaugurará un jardín gratuito que albergará esculturas de Pablo Picasso. Este espacio, que se ubicará en el distrito 14 de la ciudad, pretende ser un lugar de encuentro y disfrute para los visitantes y los residentes locales. La iniciativa busca rendir homenaje al célebre artista, quien tuvo una fuerte conexión con la capital francesa. El jardín no solo contará con obras de Picasso, sino que también ofrecerá un entorno natural para el esparcimiento y la cultura, enriqueciendo la oferta turística y cultural de la ciudad. La apertura está programada para el 2025. ▼</h2></div>
+			<div class="contenido">
+				<p>París inaugurará un jardín gratuito que albergará esculturas de Pablo Picasso. Este espacio, que se ubicará en el distrito 14 de la ciudad, pretende ser un lugar de encuentro y disfrute para los visitantes y los residentes locales. La iniciativa busca rendir homenaje al célebre artista, quien tuvo una fuerte conexión con la capital francesa. El jardín no solo contará con obras de Picasso, sino que también ofrecerá un entorno natural para el esparcimiento y la cultura, enriqueciendo la oferta turística y cultural de la ciudad. La apertura está programada para el 2025.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Golazo de tiro libre de Julián Álvarez da triunfo al Atlético en el clásico de Madrid</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS19iSRScBcqeAHJn3SeH4mK-_pupaUqYnfMvI9EEbtmIzzXHijdWAh8F3RSQ&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Julián Álvarez anotó un gol de tiro libre que aseguró la victoria del Atlético de Madrid sobre el Real Madrid en el clásico de la capital española. La anotación, que fue un destacado momento del partido, generó gran entusiasmo tanto en los aficionados como en el técnico del Atlético, Diego Simeone. La victoria consolida la posición del equipo en la liga, destacando el rendimiento de Álvarez y su contribución al éxito del club. ▼</h2></div>
+			<div class="contenido">
+				<p>Julián Álvarez anotó un gol de tiro libre que aseguró la victoria del Atlético de Madrid sobre el Real Madrid en el clásico de la capital española. La anotación, que fue un destacado momento del partido, generó gran entusiasmo tanto en los aficionados como en el técnico del Atlético, Diego Simeone. La victoria consolida la posición del equipo en la liga, destacando el rendimiento de Álvarez y su contribución al éxito del club.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Zelenski llamó a Europa a unirse en un escudo aéreo conjunto frente a la amenaza rusa</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_J08KGN1T-SD4x4yO923PilhMpQOJfX3jMXKN3OggST4TSf544iedzch7Aw&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El presidente de Ucrania, Volodímir Zelenski, hizo un llamado a los países europeos para que se unan en la creación de un escudo aéreo conjunto, como respuesta a las amenazas de Rusia. Durante una reunión en la que participó con líderes europeos, destacó la necesidad de una respuesta coordinada ante los ataques aéreos y la importancia de fortalecer la defensa en el continente. Zelenski enfatizó que la colaboración en este ámbito es crucial para garantizar la seguridad de Europa ante el contexto de la guerra en Ucrania. ▼</h2></div>
+			<div class="contenido">
+				<p>El presidente de Ucrania, Volodímir Zelenski, hizo un llamado a los países europeos para que se unan en la creación de un escudo aéreo conjunto, como respuesta a las amenazas de Rusia. Durante una reunión en la que participó con líderes europeos, destacó la necesidad de una respuesta coordinada ante los ataques aéreos y la importancia de fortalecer la defensa en el continente. Zelenski enfatizó que la colaboración en este ámbito es crucial para garantizar la seguridad de Europa ante el contexto de la guerra en Ucrania.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1></h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtJsL5d3_4KFuCDTQXNTrBy90ErFnDNgVY1QtOmVu4Jk67zdnIjsWW-qj7JjY&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Un luchador sufrió un nocaut contundente durante un combate de boxeo sin guantes en una reciente pelea. El incidente fue impactante, y el atleta quedó tendido en el ring tras recibir un golpe decisivo. Este tipo de enfrentamientos ha generado preocupación debido al alto riesgo de lesiones severas. Las autoridades y aficionados debaten sobre la seguridad de este tipo de competiciones, que carecen de las protecciones habituales en el boxeo tradicional. ▼</h2></div>
+			<div class="contenido">
+				<p>Un luchador sufrió un nocaut contundente durante un combate de boxeo sin guantes en una reciente pelea. El incidente fue impactante, y el atleta quedó tendido en el ring tras recibir un golpe decisivo. Este tipo de enfrentamientos ha generado preocupación debido al alto riesgo de lesiones severas. Las autoridades y aficionados debaten sobre la seguridad de este tipo de competiciones, que carecen de las protecciones habituales en el boxeo tradicional.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Rusia abandona formalmente la Convención Europea para la Prevención de la Tortura</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTngLv860gsiTx-0V7lBrXZK1HR79harUhi5byncJEryN_2pIMhMeoEL5pAgQ&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Rusia ha informado oficialmente su salida de la Convención Europea para la Prevención de la Tortura. Esta decisión se inscribe en un contexto de tensiones con el Consejo de Europa y ha sido criticada por diversas organizaciones de derechos humanos. La retirada de este tratado implica que Rusia renuncia a los mecanismos de supervisión diseñados para proteger a las personas privadas de libertad de abusos. La medida se produce en un momento en el que el país enfrenta acusaciones de violaciones a los derechos humanos, especialmente en el marco del conflicto en Ucrania. ▼</h2></div>
+			<div class="contenido">
+				<p>Rusia ha informado oficialmente su salida de la Convención Europea para la Prevención de la Tortura. Esta decisión se inscribe en un contexto de tensiones con el Consejo de Europa y ha sido criticada por diversas organizaciones de derechos humanos. La retirada de este tratado implica que Rusia renuncia a los mecanismos de supervisión diseñados para proteger a las personas privadas de libertad de abusos. La medida se produce en un momento en el que el país enfrenta acusaciones de violaciones a los derechos humanos, especialmente en el marco del conflicto en Ucrania.</p>
+			</div>
+		</div>
+ <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1894152981922395"
+     crossorigin="anonymous"></script>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-1894152981922395"
+     data-ad-slot="4289209070"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ </div> 
+<p style='font-size: 12px; color: #666; text-align: center;'>
+    © 2025 VIA ONLINE. Todos los derechos reservados.  
+    Queda prohibida la reproducción total o parcial de los contenidos de este sitio sin autorización previa y por escrito.  
+    Las marcas, logotipos y contenidos pertenecen a sus respectivos propietarios.  
+    Este sitio web puede contener enlaces a sitios externos sobre los cuales VIA ONLINE no tiene responsabilidad alguna.  
+    El uso de este sitio implica la aceptación de nuestros <a href='https://viaonline.com.ar/TerminosyCondiciones.html'>Términos y Condiciones</a> y nuestra <a href='https://viaonline.com.ar/privacidad.html'>Política de Privacidad</a>.
+</p>
+
+</body>
+</html>
