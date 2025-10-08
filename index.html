@@ -1,0 +1,1293 @@
+
+<!DOCTYPE html>
+<html lang='es'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>vIA online</title>
+    <link rel='icon' type='image/png' sizes='512x512' href='https://viaonline.com.ar/Imagenes/favicon.ico'>
+      <!-- Script global de AdSense (va una sola vez en toda la web) -->
+    <meta name='google-adsense-account' content='ca-pub-1894152981922395'>
+
+    <style>
+/* ======== Configuración general ======== */
+body {
+    background-color: #FEFBF4;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+}
+
+/* ======== Logo ======== */
+.logo {
+    text-align: center;
+    margin-bottom: 10px;
+}
+.logo img {
+    max-width: 300px;
+    width: 100%;
+    height: auto;
+}
+
+/* Cada efeméride */
+.Efemeride {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    cursor: pointer;
+    background-color: #FEFBF4;
+    transition: box-shadow 0.3s;
+}
+
+.Efemeride img {
+    width: 100%;
+    height: 200px; /* Altura fija */
+    border-radius: 1px; /* opcional */
+}
+
+.Efemeride h1,
+.Efemeride h2 {
+    margin: 0 0 10px 0;
+    font-size: 16px;
+    text-align: center;
+}
+
+.Efemeride.abierto .contenido {
+    display: block;
+}
+
+/* ======== Encabezado (fecha, clima, dólar, feriado) ======== */
+.encabezado-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; /* permite que los items pasen a otra línea */
+    gap: 10px;       /* espacio entre bloques */
+    margin: 20px auto;   /* centrado horizontal */
+    padding: 0 10px;     /* espacio interno */
+    max-width: 1200px;   /* igual que el contenedor de noticias */
+}
+
+/* Resaltar etiquetas en negrita */
+.encabezado-info .resaltado {
+    font-weight: bold;
+}
+
+/* Versión móvil: apilado */
+@media (max-width: 768px) {
+    .encabezado-info {
+        flex-direction: column; /* apila en vertical */
+        align-items: flex-start; /* alinea a la izquierda */
+    }
+    .encabezado-info > div {
+        width: 100%; /* cada bloque ocupa todo el ancho */
+    }
+}
+
+/* ======== Contenedor de noticias ======== */
+.contenedor-noticias {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 columnas en PC */
+    gap: 20px;
+    margin: 20px auto;
+    max-width: 1200px; /* ancho máximo centrado */
+    width: 100%;
+    padding: 0 25px; /* margen lateral amplio */
+}
+
+/* Responsive: tablet (2 columnas) */
+@media (max-width: 992px) {
+    .contenedor-noticias {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 0 20px;
+    }
+}
+
+/* Responsive: celular (1 columna) */
+@media (max-width: 576px) {
+    .contenedor-noticias {
+        grid-template-columns: 1fr;
+        padding: 0 20px;
+    }
+}
+
+/* ======== Cada noticia ======== */
+.noticia {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    cursor: pointer;
+    background-color: #FEFBF4;
+    transition: box-shadow 0.3s;
+}
+.noticia:hover {
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+.noticia h1, .noticia h2 {
+    margin: 0 0 10px 0;
+    font-size: 16px;
+    text-align: center;
+}
+.noticia img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* ======== Desplegable contenido ======== */
+.contenido {
+    display: none;
+    margin-top: 10px;
+    font-size: 14px;
+    line-height: 1.4;
+}
+.noticia.abierto .contenido {
+    display: block;
+}
+
+/* ======== Publicidad ======== */
+.publicidad {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 20px;
+    background-color: #f0f0f0;
+    font-weight: bold;
+    border-radius: 8px;
+}
+</style>
+
+</head>
+<body>
+
+    <!-- Logo -->
+    <div class='logo'>
+        <a href='https://viaonline.com.ar/'>
+            <img src='https://viaonline.com.ar/Imagenes/Logocorto.png' alt='Imagen centrada'>
+        </a>
+    </div>
+
+    <!-- Fecha y clima -->
+    <div class='encabezado-info'>
+        <div class='fecha'><span class='resaltado'>📆 08 de octubre de 2025</span></div>
+        <div class='clima'><span class='resaltado'>🌡️ Clima:</span> 25.4º ☀️ Soleado</div>
+        <div class='clima'><span class='resaltado'>📆 Próximo feriado:</span>Día de la  Raza (12/10) viernes 10 de octubre de 2025</div>
+        <div class='clima'><span class='resaltado'>💵 Dólar oficial </span>Compra: 1405 | Venta: 1455</div>
+        <div class='clima'><span class='resaltado'>💵 Dólar blue </span>Compra: 1455 | Venta: 1475</div>
+        <div class='clima'><span class='resaltado'>💵 Dólar tarjeta </span>Compra: 1826.5 | Venta: 1891.5</div>
+                
+    </div>
+<div class='contenedor-noticias'>
+ 
+		<div class='Efemeride' onclick='this.classList.toggle("abierto")'>
+			<h1>Efemérides</h1>
+			<img src='https://viaonline.com.ar/Imagenes/LogoEfemerides.png' alt='Imagen Efemerides'>
+			<div class="desplegable"><h2>Los hechos que marcaron la historia. ▼</h2></div>
+			<div class="contenido">
+				<h2>📖 Eventos</h2><p>2001 - El presidente de EE. UU., George W. Bush, anuncia la creación de la Oficina de Seguridad Nacional.</p><p>2001 - Un avión de pasajeros de Scandinavian Airlines System y un Cessna de dos motores colisionan en densa niebla durante el despegue de Milán, Italia, con un saldo de 118 fallecidos.</p><p>2005 - El terremoto de Kashmir de 7.6 Mw tiene una intensidad máxima de VIII (Severo) en la escala de Mercalli, dejando entre 86,000 y 87,351 personas fallecidas, entre 69,000 y 75,266 heridas, y 2.8 millones de personas sin hogar.</p><p>2014 - Thomas Eric Duncan, la primera persona en los Estados Unidos diagnosticada con el virus del ébola, fallece.</p><p>2016 - Tras el paso del huracán Matthew, el número de fallecidos se eleva a casi 900.</p><p>314 - El emperador romano Licinio es derrotado por su colega Constantino I en la batalla de Cibalae y pierde sus territorios en Europa.</p><p>451 - En Calcedonia, una ciudad de Bitinia en Asia Menor, comienza la primera sesión del Concilio de Calcedonia (finaliza el 1 de noviembre).</p><p>876 - Batalla de Andernach: Las fuerzas francas lideradas por Luis el Joven impiden una invasión de los francos occidentales y derrotan al emperador Carlos II.</p>
+                <h2>🎂 Nacimientos</h2><p>1150 - Narapatisithu, rey de Birmania (fallecido en 1211)</p>
+                <h2>✝️ Fallecimientos</h2><p>1281 - Princesa Constance de Gran Polonia (nacida aproximadamente en 1245)</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Noboa reafirma su compromiso con Ecuador tras ataque a su convoy</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkTTvXb5xMqEnuCA0uCeMeud_yDV8n-xRnmDbT7y65v8QlOVyj_dxCVwSLC_k&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Noboa reafirma su compromiso con Ecuador tras el ataque a su convoy, asegurando que no permitirá que unos pocos vándalos interfieran en su labor. ▼</h2></div>
+			<div class="contenido">
+				<p>El presidente de Ecuador, Daniel Noboa, reafirmó su compromiso de continuar trabajando por el país, tras el ataque a un convoy de la policía en el que él estaba presente. En el incidente, que tuvo lugar en la provincia de Guayas, el mandatario rechazó que la violencia de un grupo reducido de vándalos pueda detener sus esfuerzos por el desarrollo y la seguridad de Ecuador. Noboa subrayó la importancia de no ceder ante el miedo y de seguir adelante con su agenda de gobierno.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Parlamento Europeo prohíbe el uso de los términos hamburguesa y filete para productos veganos</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSP9RCJua2N0e9O3MNHOvHTcAJEKx49tPMcThIZwkU0164dKbHJzTyfzy-mulU&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El Parlamento Europeo ha aprobado una normativa que prohíbe el uso de términos como "hamburguesa" y "filete" para describir productos veganos. Esta decisión busca evitar la confusión en los consumidores y resaltar las diferencias entre productos de origen animal y sus alternativas vegetales. La medida se enmarca en un esfuerzo más amplio para regular el etiquetado y la publicidad de productos alimenticios, con el objetivo de promover una mayor claridad en el mercado. La normativa ha generado reacciones mixtas entre los defensores de los derechos de los animales y los productores de alimentos vegetales. ▼</h2></div>
+			<div class="contenido">
+				<p>El Parlamento Europeo ha aprobado una normativa que prohíbe el uso de términos como "hamburguesa" y "filete" para describir productos veganos. Esta decisión busca evitar la confusión en los consumidores y resaltar las diferencias entre productos de origen animal y sus alternativas vegetales. La medida se enmarca en un esfuerzo más amplio para regular el etiquetado y la publicidad de productos alimenticios, con el objetivo de promover una mayor claridad en el mercado. La normativa ha generado reacciones mixtas entre los defensores de los derechos de los animales y los productores de alimentos vegetales.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Zelensky celebra efectividad de ataques en territorio ruso y anuncia nuevas operaciones</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQOEpmGzmpJ8Vbw2KDVMSX75jbPAtzrzoCcOEoes8Ax1Neiv0ucLkwGztNbjA&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El presidente de Ucrania, Volodímir Zelensky, expresó su satisfacción por la efectividad creciente de los ataques realizados en territorio ruso. Durante una conferencia, anunció que se están planificando nuevas operaciones con el objetivo de intensificar los esfuerzos militares. Estos comentarios se producen en un contexto de escalada del conflicto entre Ucrania y Rusia, donde las fuerzas ucranianas han logrado avances significativos en diversas áreas. Zelensky reafirmó su compromiso de continuar la lucha por la soberanía y la integridad territorial de Ucrania. ▼</h2></div>
+			<div class="contenido">
+				<p>El presidente de Ucrania, Volodímir Zelensky, expresó su satisfacción por la efectividad creciente de los ataques realizados en territorio ruso. Durante una conferencia, anunció que se están planificando nuevas operaciones con el objetivo de intensificar los esfuerzos militares. Estos comentarios se producen en un contexto de escalada del conflicto entre Ucrania y Rusia, donde las fuerzas ucranianas han logrado avances significativos en diversas áreas. Zelensky reafirmó su compromiso de continuar la lucha por la soberanía y la integridad territorial de Ucrania.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Alemania prepara norma para que la policía derribe drones sospechosos</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTev_inO01L3z35M8CMkoKgVjR99OZAEscQsWVrKbOXGIazJhWbv3UivnxMMSI&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Alemania está preparando una nueva normativa que permitirá a la policía derribar drones que consideren sospechosos. Esta medida surge en un contexto de aumento en el uso de drones para actividades ilegales y plantea preocupaciones sobre la seguridad pública. La propuesta ha generado un debate sobre la necesidad de equilibrar la seguridad con el derecho a la privacidad y a la libertad de uso del espacio aéreo. Se espera que la legislación se presente en el parlamento en un futuro cercano. ▼</h2></div>
+			<div class="contenido">
+				<p>Alemania está preparando una nueva normativa que permitirá a la policía derribar drones que consideren sospechosos. Esta medida surge en un contexto de aumento en el uso de drones para actividades ilegales y plantea preocupaciones sobre la seguridad pública. La propuesta ha generado un debate sobre la necesidad de equilibrar la seguridad con el derecho a la privacidad y a la libertad de uso del espacio aéreo. Se espera que la legislación se presente en el parlamento en un futuro cercano.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Israel se prepara para implementar la primera etapa del plan de paz tras la respuesta de Hamas al plan de Trump</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6p2860J8wMm2ftpsjm7zg8nXeMixKrwCvLbmf8yAoWOHwJaPde3mIlHgqYyU&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La noticia informa sobre la reacción de Hamas ante el plan de paz presentado por Donald Trump, lo que ha llevado a Israel a prepararse para implementar de inmediato la primera fase de dicho plan. A pesar de la oposición de Hamas, el gobierno israelí avanza en sus planes, considerando la situación como una oportunidad para avanzar en su agenda política. El conflicto entre ambas partes sigue siendo complejo y tenso, y la implementación del plan podría tener repercusiones significativas en la región. ▼</h2></div>
+			<div class="contenido">
+				<p>La noticia informa sobre la reacción de Hamas ante el plan de paz presentado por Donald Trump, lo que ha llevado a Israel a prepararse para implementar de inmediato la primera fase de dicho plan. A pesar de la oposición de Hamas, el gobierno israelí avanza en sus planes, considerando la situación como una oportunidad para avanzar en su agenda política. El conflicto entre ambas partes sigue siendo complejo y tenso, y la implementación del plan podría tener repercusiones significativas en la región.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Consumo diario de gaseosas azucaradas y light vinculado a mayor riesgo de daño hepático</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2h_8YJEffETQ56ROiKP9Elk7lz8MuHxyrmQ9Cdorze2ZXGbGGDQBllID2khU&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Un estudio reciente ha encontrado que el consumo diario de bebidas azucaradas y endulzadas artificialmente está asociado con un mayor riesgo de daño hepático. La investigación señala que tanto los refrescos regulares como los light pueden contribuir a problemas en el hígado, lo que podría tener implicaciones importantes para la salud pública. Los resultados sugieren que la reducción del consumo de estas bebidas podría ser fundamental para prevenir enfermedades hepáticas. ▼</h2></div>
+			<div class="contenido">
+				<p>Un estudio reciente ha encontrado que el consumo diario de bebidas azucaradas y endulzadas artificialmente está asociado con un mayor riesgo de daño hepático. La investigación señala que tanto los refrescos regulares como los light pueden contribuir a problemas en el hígado, lo que podría tener implicaciones importantes para la salud pública. Los resultados sugieren que la reducción del consumo de estas bebidas podría ser fundamental para prevenir enfermedades hepáticas.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Novak Djokovic genera preocupación tras su actuación en el Masters 1000 de Shanghai</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFfTTgkba5yNWoj2eHB3-pqZWkBWZnflJDsioX_nGgOq8Dov0DeqznTBCqQA&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Novak Djokovic, el tenista serbio, generó preocupación durante su partido en el Masters 1000 de Shanghái al mostrar signos de malestar físico. Durante el encuentro, se lo vio con dificultades para moverse y gestionando ataques de tos que lo llevaron a tomar breves pausas. A pesar de esta situación, Djokovic logró avanzar a la siguiente ronda, aunque su estado ha suscitado inquietud entre los aficionados y expertos sobre su condición de salud en un torneo de alta competencia. ▼</h2></div>
+			<div class="contenido">
+				<p>Novak Djokovic, el tenista serbio, generó preocupación durante su partido en el Masters 1000 de Shanghái al mostrar signos de malestar físico. Durante el encuentro, se lo vio con dificultades para moverse y gestionando ataques de tos que lo llevaron a tomar breves pausas. A pesar de esta situación, Djokovic logró avanzar a la siguiente ronda, aunque su estado ha suscitado inquietud entre los aficionados y expertos sobre su condición de salud en un torneo de alta competencia.</p>
+			</div>
+		</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publiciteLite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Autor del ataque en la sinagoga de Manchester confiesa haber matado a dos judíos en nombre del Estado Islámico</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTX1doiX3qJALuqCwKn4nJlrX9uQ5nxgcTJNPfUvOZflbdYn7RSTvynlnm2wQ&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Un ataque en una sinagoga de Manchester dejó dos personas muertas, y el autor del ataque declaró haberlo cometido en nombre del Estado Islámico. El agresor, que fue arrestado tras el incidente, expresó sus motivaciones extremistas durante su detención. Las autoridades están llevando a cabo una investigación para esclarecer los detalles del ataque y se han incrementado las medidas de seguridad en la zona. La comunidad judía ha condenado el ataque y se encuentra en estado de alerta ante el aumento de la violencia antisemita. La situación ha generado una fuerte respuesta tanto a nivel local como internacional. ▼</h2></div>
+			<div class="contenido">
+				<p>Un ataque en una sinagoga de Manchester dejó dos personas muertas, y el autor del ataque declaró haberlo cometido en nombre del Estado Islámico. El agresor, que fue arrestado tras el incidente, expresó sus motivaciones extremistas durante su detención. Las autoridades están llevando a cabo una investigación para esclarecer los detalles del ataque y se han incrementado las medidas de seguridad en la zona. La comunidad judía ha condenado el ataque y se encuentra en estado de alerta ante el aumento de la violencia antisemita. La situación ha generado una fuerte respuesta tanto a nivel local como internacional.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Estados Unidos desestimó supuesto plan para atentar contra su embajada en Caracas</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTg4HAaJi1TgeS-a1vwXT3DP2Yk1YlCrVWCDsXmPxCKDy4SRC9OaF0wKs0Gz-0&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Las autoridades de Estados Unidos han desestimado un supuesto plan para atacar su embajada en Caracas, Venezuela. La información fue presentada ante la justicia en una acusación relacionada con actividades de un grupo vinculado al régimen venezolano. Según las fuentes, el plan no logró concretarse y fue calificado como una amenaza sin fundamentos sólidos. El gobierno estadounidense reitera su compromiso con la seguridad de su personal diplomático y la protección de sus instalaciones en el exterior. ▼</h2></div>
+			<div class="contenido">
+				<p>Las autoridades de Estados Unidos han desestimado un supuesto plan para atacar su embajada en Caracas, Venezuela. La información fue presentada ante la justicia en una acusación relacionada con actividades de un grupo vinculado al régimen venezolano. Según las fuentes, el plan no logró concretarse y fue calificado como una amenaza sin fundamentos sólidos. El gobierno estadounidense reitera su compromiso con la seguridad de su personal diplomático y la protección de sus instalaciones en el exterior.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Donald Trump advierte a Hamas sobre la rápida implementación de su plan para Gaza</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7FgsDfejBkluXASYO5kpHxOSaPMgqxhh_ViCkeGUQ6bYzGNyGfSpIFMZ9oQ&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>En una reciente declaración, Donald Trump emitió una advertencia a Hamas, enfatizando que no aceptará ningún retraso en la implementación de su plan para Gaza. Trump, quien ha mostrado interés en participar en las discusiones sobre el conflicto, subrayó la importancia de actuar con rapidez y eficacia, sugiriendo que cualquier demora sería inaceptable. Esta postura se enmarca dentro del contexto más amplio de la situación en la región, donde las tensiones continúan en aumento. ▼</h2></div>
+			<div class="contenido">
+				<p>En una reciente declaración, Donald Trump emitió una advertencia a Hamas, enfatizando que no aceptará ningún retraso en la implementación de su plan para Gaza. Trump, quien ha mostrado interés en participar en las discusiones sobre el conflicto, subrayó la importancia de actuar con rapidez y eficacia, sugiriendo que cualquier demora sería inaceptable. Esta postura se enmarca dentro del contexto más amplio de la situación en la región, donde las tensiones continúan en aumento.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>El Vaticano confirma el primer viaje internacional del Papa León XIV a Turquía y Líbano entre el 27 de noviembre y el 2 de diciembre.</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ97zGBEcWtABBqVL6gaHA4gHRJejKiuSltNeu1E-F3mvZFRe2x47ecFc7EoQ&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El Vaticano ha anunciado que el Papa León XIV realizará su primer viaje internacional a Turquía y Líbano entre el 27 de noviembre y el 2 de diciembre de 2025. Esta espera es significativa ya que será la primera visita del Papa a estos países, donde se espera profundizar el diálogo interreligioso y la colaboración ecuménica. El itinerario de la visita incluye encuentros con líderes religiosos y actividades destinadas a fortalecer los lazos con las comunidades cristianas locales. ▼</h2></div>
+			<div class="contenido">
+				<p>El Vaticano ha anunciado que el Papa León XIV realizará su primer viaje internacional a Turquía y Líbano entre el 27 de noviembre y el 2 de diciembre de 2025. Esta espera es significativa ya que será la primera visita del Papa a estos países, donde se espera profundizar el diálogo interreligioso y la colaboración ecuménica. El itinerario de la visita incluye encuentros con líderes religiosos y actividades destinadas a fortalecer los lazos con las comunidades cristianas locales.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Investigación en Brasil sobre 30 comercios por intoxicación de bebidas alcohólicas y análisis de 13 muertes</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-QcKM5bmEZuz4A86eZL0M1crNpMNNj5UEajBDsL-9xE9JmtxY_iXh6mUd6Qo&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Las autoridades de Brasil están investigando a 30 establecimientos por su posible implicación en una serie de intoxicaciones relacionadas con bebidas alcohólicas. Esta revisión surge tras la muerte de al menos 13 personas, lo que ha llevado a las autoridades a analizar si estas muertes están vinculadas al consumo de las bebidas. Las investigaciones se centran en la posible venta de productos adulterados que podrían haber causado estas tragedias. ▼</h2></div>
+			<div class="contenido">
+				<p>Las autoridades de Brasil están investigando a 30 establecimientos por su posible implicación en una serie de intoxicaciones relacionadas con bebidas alcohólicas. Esta revisión surge tras la muerte de al menos 13 personas, lo que ha llevado a las autoridades a analizar si estas muertes están vinculadas al consumo de las bebidas. Las investigaciones se centran en la posible venta de productos adulterados que podrían haber causado estas tragedias.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Tensión en Ferrari por malos resultados y rumores sobre Leclerc, Piastri y Bortoleto en la F1</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRb3cyOxJM4WVIigiizhYnd6e25pk5C42PEMx_ANVmJjqs9nczL6he_bYSwHg&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La situación en Ferrari se ha vuelto tensa debido a los malos resultados obtenidos en la temporada. Esto ha llevado a especulaciones sobre el futuro de Charles Leclerc, con rumores que sugieren que podría estar considerándose un cambio. Además, se habla de la posible incorporación de Oscar Piastri y Gabriel Bortoleto al equipo, lo que ha generado sorpresa en el mundo de la Fórmula 1. La presión sobre Ferrari aumenta, y la falta de rendimiento podría provocar cambios en su alineación de piloto. ▼</h2></div>
+			<div class="contenido">
+				<p>La situación en Ferrari se ha vuelto tensa debido a los malos resultados obtenidos en la temporada. Esto ha llevado a especulaciones sobre el futuro de Charles Leclerc, con rumores que sugieren que podría estar considerándose un cambio. Además, se habla de la posible incorporación de Oscar Piastri y Gabriel Bortoleto al equipo, lo que ha generado sorpresa en el mundo de la Fórmula 1. La presión sobre Ferrari aumenta, y la falta de rendimiento podría provocar cambios en su alineación de piloto.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>La justicia de Costa Rica aprobó la extradición del ex ministro Celso Gamboa a EE.UU. por supuestos vínculos con el narcotráfico</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKr9XMMDfOa00zB79J8HdFrrGHIzRleYk8LccxjNHzOlbi5_FF4vHdmHxHPA&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La justicia de Costa Rica aprobó la extradición del exministro Celso Gamboa a Estados Unidos. Gamboa es acusado de tener vínculos con el narcotráfico y enfrenta cargos que podrían conllevar penas severas. La decisión del tribunal se enmarca en un proceso judicial que ha estado bajo revisión durante varios meses. Gamboa ha negado las acusaciones en su contra. La extradición se considera un hito en la lucha del país contra la corrupción y el narcotráfico. ▼</h2></div>
+			<div class="contenido">
+				<p>La justicia de Costa Rica aprobó la extradición del exministro Celso Gamboa a Estados Unidos. Gamboa es acusado de tener vínculos con el narcotráfico y enfrenta cargos que podrían conllevar penas severas. La decisión del tribunal se enmarca en un proceso judicial que ha estado bajo revisión durante varios meses. Gamboa ha negado las acusaciones en su contra. La extradición se considera un hito en la lucha del país contra la corrupción y el narcotráfico.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Amor, sexo y Frankenstein: ¿qué más se puede pedir?</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQiOWynqjHMLhriL5iAYDQXeb4Qk5PUM5HTodHxgV8z3J4CRKkAg6pE8syFDQA&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El artículo de Infobae aborda la representación del amor y el sexo en la obra de Mary Shelley, particularmente en "Frankenstein". Se exploran las complejidades de las relaciones humanas a través de la narrativa de Shelley, destacando cómo sus personajes enfrentan deseos, obsesiones y la búsqueda de conexión. El texto también menciona la relevancia de estas temáticas en la actualidad, sugiriendo que las inquietudes sobre la intimidad y la identidad persisten. Además, se plantea la influencia de la historia de Frankenstein en la cultura contemporánea, evidenciando su impacto en la forma en que se percibe el amor y el deseo. ▼</h2></div>
+			<div class="contenido">
+				<p>El artículo de Infobae aborda la representación del amor y el sexo en la obra de Mary Shelley, particularmente en "Frankenstein". Se exploran las complejidades de las relaciones humanas a través de la narrativa de Shelley, destacando cómo sus personajes enfrentan deseos, obsesiones y la búsqueda de conexión. El texto también menciona la relevancia de estas temáticas en la actualidad, sugiriendo que las inquietudes sobre la intimidad y la identidad persisten. Además, se plantea la influencia de la historia de Frankenstein en la cultura contemporánea, evidenciando su impacto en la forma en que se percibe el amor y el deseo.</p>
+			</div>
+		</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publiciteLite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Fallece Jane Goodall, reconocida defensora de los derechos de los animales</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcReWZGecEtHgOaBb-4q0vY470FboNo49EClvW_GTnaBQf4OaQ-mvwe0jklDlA&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Jane Goodall, reconocida por su labor en la defensa de los derechos de los animales y por sus estudios sobre chimpancés, ha fallecido a la edad de 89 años. Su trabajo pionero en la investigación del comportamiento de estos primates transformó la comprensión sobre la relación entre humanos y animales. Goodall fue una destacada activista ambiental y fundadora de la organización Jane Goodall Institute, que se dedica a la conservación y bienestar de la vida salvaje. Su legado incluye un enfoque en la educación ambiental y la promoción de hábitos sostenibles. Su muerte ha causado gran tristeza en el ámbito científico y entre los defensores de los derechos de los animales a nivel mundial. ▼</h2></div>
+			<div class="contenido">
+				<p>Jane Goodall, reconocida por su labor en la defensa de los derechos de los animales y por sus estudios sobre chimpancés, ha fallecido a la edad de 89 años. Su trabajo pionero en la investigación del comportamiento de estos primates transformó la comprensión sobre la relación entre humanos y animales. Goodall fue una destacada activista ambiental y fundadora de la organización Jane Goodall Institute, que se dedica a la conservación y bienestar de la vida salvaje. Su legado incluye un enfoque en la educación ambiental y la promoción de hábitos sostenibles. Su muerte ha causado gran tristeza en el ámbito científico y entre los defensores de los derechos de los animales a nivel mundial.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Impactante nocaut en MMA tras un codazo y golpe en el suelo.</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcTLzDgUcyvF64dSjWrteXWjqVWvM__0qS5M9zQms5_2x3xalmgwnpbVBHUaw&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Un luchador de MMA sufrió un nocaut impactante durante un combate reciente. La acción que generó el derrumbe del atleta ocurrió cuando recibió un codazo por parte de su oponente, quien lo golpeó mientras estaba de espaldas. Este golpe lo dejó incapacitado y cayó al suelo, lo que permitió que el rival lo finalizara de manera contundente. Este momento ha sido destacado como uno de los más escalofriantes del año en las artes marciales mixtas. ▼</h2></div>
+			<div class="contenido">
+				<p>Un luchador de MMA sufrió un nocaut impactante durante un combate reciente. La acción que generó el derrumbe del atleta ocurrió cuando recibió un codazo por parte de su oponente, quien lo golpeó mientras estaba de espaldas. Este golpe lo dejó incapacitado y cayó al suelo, lo que permitió que el rival lo finalizara de manera contundente. Este momento ha sido destacado como uno de los más escalofriantes del año en las artes marciales mixtas.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Juicio que mantiene en vilo a la Fórmula 1: McLaren demanda a un ex piloto por más de 30 millones de dólares</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfycaxP6ozsppCXY8d0_24TNsEqN-IdEuax_dXP2kPGREns4R5mw0xHWgXUw&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>McLaren ha presentado una demanda contra su ex piloto Daniel Ricciardo, exigiendo más de 30 millones de dólares. El equipo británico argumenta que Ricciardo infringió los términos de su contrato al abandonar la escudería para unirse a Alfa Tauri. Esta situación ha generado incertidumbre en el ámbito de la Fórmula 1, ya que el juicio podría tener impactantes consecuencias financieras y profesionales para Ricciardo. La disputa legal refleja las complicadas dinámicas que pueden surgir en la competitiva industria del automovilismo. ▼</h2></div>
+			<div class="contenido">
+				<p>McLaren ha presentado una demanda contra su ex piloto Daniel Ricciardo, exigiendo más de 30 millones de dólares. El equipo británico argumenta que Ricciardo infringió los términos de su contrato al abandonar la escudería para unirse a Alfa Tauri. Esta situación ha generado incertidumbre en el ámbito de la Fórmula 1, ya que el juicio podría tener impactantes consecuencias financieras y profesionales para Ricciardo. La disputa legal refleja las complicadas dinámicas que pueden surgir en la competitiva industria del automovilismo.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Trump califica el cierre del gobierno de ataque kamikaze de los demócratas</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsI1-z3lHgLzb75HmQ6e8cXPEdmTfSQH_d0autF9FFlRGNu0euRgv_AXkiR54&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Donald Trump criticó el cierre del gobierno estadounidense al calificarlo como un "ataque kamikaze" orquestado por los demócratas. Afirmó que este bloqueo afecta a millones de ciudadanos y resaltó la necesidad de que los republicanos mantengan una postura firme en sus negociaciones. Trump instó a los legisladores a priorizar los intereses de los estadounidenses y a evitar que la estrategia demócrata perjudique al país. La disputa se centra en desacuerdos sobre el presupuesto y la financiación de diversos programas gubernamentales. ▼</h2></div>
+			<div class="contenido">
+				<p>Donald Trump criticó el cierre del gobierno estadounidense al calificarlo como un "ataque kamikaze" orquestado por los demócratas. Afirmó que este bloqueo afecta a millones de ciudadanos y resaltó la necesidad de que los republicanos mantengan una postura firme en sus negociaciones. Trump instó a los legisladores a priorizar los intereses de los estadounidenses y a evitar que la estrategia demócrata perjudique al país. La disputa se centra en desacuerdos sobre el presupuesto y la financiación de diversos programas gubernamentales.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>ONU denuncia detención arbitraria de nueve trabajadores por parte de rebeldes hutíes en Yemen</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuKa8XpYpIpNs3PnUzOI55R4NwR8O5M2gHeybkJ8dT8B6A9bIEct3nj7h7nQ&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La ONU ha denunciado la detención arbitraria de nueve de sus trabajadores por parte de los rebeldes hutíes en Yemen. La organización internacional exigió la inmediata liberación de los empleados y resaltó la gravedad de la situación para el funcionamiento de sus operaciones humanitarias en el país. Esta acción de los hutíes representa un obstáculo significativo en un contexto ya crítico, donde Yemen enfrenta una grave crisis humanitaria. ▼</h2></div>
+			<div class="contenido">
+				<p>La ONU ha denunciado la detención arbitraria de nueve de sus trabajadores por parte de los rebeldes hutíes en Yemen. La organización internacional exigió la inmediata liberación de los empleados y resaltó la gravedad de la situación para el funcionamiento de sus operaciones humanitarias en el país. Esta acción de los hutíes representa un obstáculo significativo en un contexto ya crítico, donde Yemen enfrenta una grave crisis humanitaria.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Científicos logran revertir el Alzheimer en ratones con terapia basada en nanopartículas</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaKsuoI_WcJ48CpTOL0uhqUOZyUTK4hbTCmrsLwEBo-YmTpHugoXmcInCGRQ&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Científicos han logrado revertir los efectos del Alzheimer en ratones mediante una terapia innovadora que utiliza nanopartículas. Este enfoque permite la liberación controlada de fármacos en el cerebro, lo que provoca la reducción de la acumulación de proteínas tóxicas asociadas con la enfermedad. Los resultados de la investigación ofrecen una nueva esperanza en el tratamiento del Alzheimer, ya que los ratones tratados mostraron mejoras significativas en su función cognitiva y en la memoria. Este avance podría allanar el camino para el desarrollo de terapias efectivas en humanos en el futuro. ▼</h2></div>
+			<div class="contenido">
+				<p>Científicos han logrado revertir los efectos del Alzheimer en ratones mediante una terapia innovadora que utiliza nanopartículas. Este enfoque permite la liberación controlada de fármacos en el cerebro, lo que provoca la reducción de la acumulación de proteínas tóxicas asociadas con la enfermedad. Los resultados de la investigación ofrecen una nueva esperanza en el tratamiento del Alzheimer, ya que los ratones tratados mostraron mejoras significativas en su función cognitiva y en la memoria. Este avance podría allanar el camino para el desarrollo de terapias efectivas en humanos en el futuro.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Wall Street termina con pérdidas y pone fin a su racha positiva</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCeu2pOS0fejhPnPEe33i8o1FsVyMViSU_OJJCd6L2KjaD9Le75tmOFPWN2g&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Wall Street cerró con pérdidas, rompiendo una racha de días positivos. Las acciones de diversas compañías, especialmente en los sectores tecnológico y de consumo, sufrieron caídas significativas. Los inversionistas reaccionaron ante la incertidumbre económica y la posibilidad de incrementos en las tasas de interés por parte de la Reserva Federal. A pesar de estas pérdidas, algunos analistas consideran que la corrección podría ofrecer oportunidades de compra. ▼</h2></div>
+			<div class="contenido">
+				<p>Wall Street cerró con pérdidas, rompiendo una racha de días positivos. Las acciones de diversas compañías, especialmente en los sectores tecnológico y de consumo, sufrieron caídas significativas. Los inversionistas reaccionaron ante la incertidumbre económica y la posibilidad de incrementos en las tasas de interés por parte de la Reserva Federal. A pesar de estas pérdidas, algunos analistas consideran que la corrección podría ofrecer oportunidades de compra.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>El régimen de Maduro denuncia un plan de extremistas para colocar explosivos en la embajada de EE.UU. en Caracas</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPC42sKQMALpvUmGmjI0fWFUlbm6Xq2UyVNUUgI7l5zQ5xWsJosjT0pxCtwA&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El régimen de Nicolás Maduro en Venezuela denunció la existencia de un supuesto plan de extremistas para llevar a cabo actos de terrorismo, específicamente la colocación de explosivos en la embajada de Estados Unidos en Caracas. Esta acusación se enmarca en un contexto de tensiones entre el gobierno venezolano y el estadounidense, donde las autoridades locales han afirmado que están comprometidas en proteger las instalaciones diplomáticas. La denuncia fue realizada en medio de un ambiente de creciente agitación política y social en el país. ▼</h2></div>
+			<div class="contenido">
+				<p>El régimen de Nicolás Maduro en Venezuela denunció la existencia de un supuesto plan de extremistas para llevar a cabo actos de terrorismo, específicamente la colocación de explosivos en la embajada de Estados Unidos en Caracas. Esta acusación se enmarca en un contexto de tensiones entre el gobierno venezolano y el estadounidense, donde las autoridades locales han afirmado que están comprometidas en proteger las instalaciones diplomáticas. La denuncia fue realizada en medio de un ambiente de creciente agitación política y social en el país.</p>
+			</div>
+		</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publiciteLite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Trump anunció reuniones con Lula en Brasil y Estados Unidos tras videoconferencia exitosa</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ563ugh_bMwrqQik9gHCRhILiUC85Q-6AIBRqR9By-ngpWSSbZrvZ6l4VkcQ&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El expresidente de Estados Unidos, Donald Trump, anunció que tendrá reuniones con el presidente de Brasil, Lula da Silva, tanto en Brasil como en Estados Unidos. Este anuncio se produce tras una videoconferencia entre ambos líderes, la cual fue calificada como muy positiva. Durante la conversación, se abordaron temas de interés mutuo y se destacó la importancia de las relaciones diplomáticas entre ambos países. ▼</h2></div>
+			<div class="contenido">
+				<p>El expresidente de Estados Unidos, Donald Trump, anunció que tendrá reuniones con el presidente de Brasil, Lula da Silva, tanto en Brasil como en Estados Unidos. Este anuncio se produce tras una videoconferencia entre ambos líderes, la cual fue calificada como muy positiva. Durante la conversación, se abordaron temas de interés mutuo y se destacó la importancia de las relaciones diplomáticas entre ambos países.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Trump agradece nominación al Premio Nobel de la Paz por mediación en el fin de la guerra en Gaza</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDoCBwgLCo-lZibsDLXqJvNoAK-xU3_6rS_7JDTHTzgNYOgQoyZueJ_fMATVc&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Donald Trump expresó su agradecimiento por haber sido nominado al Premio Nobel de la Paz. Su nominación se basa en su mediación que llevó a un alto el fuego en la guerra en Gaza. Trump destacó su papel en lograr este acuerdo, que considera un importante paso hacia la paz en la región. La noticia también menciona la complejidad del conflicto en Gaza y las reacciones en torno a la nominación del ex presidente estadounidense. ▼</h2></div>
+			<div class="contenido">
+				<p>Donald Trump expresó su agradecimiento por haber sido nominado al Premio Nobel de la Paz. Su nominación se basa en su mediación que llevó a un alto el fuego en la guerra en Gaza. Trump destacó su papel en lograr este acuerdo, que considera un importante paso hacia la paz en la región. La noticia también menciona la complejidad del conflicto en Gaza y las reacciones en torno a la nominación del ex presidente estadounidense.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Carlos Sainz revela su lujosa colección de autos Ferrari y su filosofía sobre la inversión en activos físicos</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYhNk0MIHQuc1Kowwhnd6uPkHc6hu5udoDHtLTcAI305inA3IF5un8Ec-Dq7E&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Carlos Sainz, piloto de Fórmula 1, reveló que posee una destacada colección de autos Ferrari, la cual considera más valiosa que tener dinero en un banco. En una reciente entrevista, explicó que su pasión por los autos de lujo no solo es un reflejo de su éxito profesional, sino también una forma de inversión a largo plazo. Sainz enfatizó que cada vehículo tiene un valor emocional y de memorabilia, lo que hace que su colección sea aún más significativa para él. ▼</h2></div>
+			<div class="contenido">
+				<p>Carlos Sainz, piloto de Fórmula 1, reveló que posee una destacada colección de autos Ferrari, la cual considera más valiosa que tener dinero en un banco. En una reciente entrevista, explicó que su pasión por los autos de lujo no solo es un reflejo de su éxito profesional, sino también una forma de inversión a largo plazo. Sainz enfatizó que cada vehículo tiene un valor emocional y de memorabilia, lo que hace que su colección sea aún más significativa para él.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Noboa renovó el estado de excepción en cinco zonas de Ecuador por la actividad del crimen organizado</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_eAYxpJ8xpqklFkdou3ijZQ69BedsFU72H1MeV9Quvnf13MdoOwMSppOKCA&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El presidente de Ecuador, Daniel Noboa, ha prorrogado el estado de excepción en cinco áreas del país debido a la creciente actividad del crimen organizado. Esta medida, que se implementará por un período adicional de 30 días, busca fortalecer la seguridad y el control en regiones afectadas por la violencia del narcotráfico y otros delitos. La decisión se enmarca dentro de la emergencia que enfrenta Ecuador, donde las tasas de criminalidad han aumentado significativamente. Durante el estado de excepción, se permitirá la militarización de las zonas y se establecerán restricciones de movilidad y reuniones. ▼</h2></div>
+			<div class="contenido">
+				<p>El presidente de Ecuador, Daniel Noboa, ha prorrogado el estado de excepción en cinco áreas del país debido a la creciente actividad del crimen organizado. Esta medida, que se implementará por un período adicional de 30 días, busca fortalecer la seguridad y el control en regiones afectadas por la violencia del narcotráfico y otros delitos. La decisión se enmarca dentro de la emergencia que enfrenta Ecuador, donde las tasas de criminalidad han aumentado significativamente. Durante el estado de excepción, se permitirá la militarización de las zonas y se establecerán restricciones de movilidad y reuniones.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Ucrania denuncia la presencia de miles de componentes occidentales en los drones y misiles utilizados por Rusia</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRySTCIIEAcdNqyYj4NaNScG-sB2GtX6aQt3nHUD5F3elxoEUxo6aeWciuK6w&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Ucrania ha denunciado la presencia de miles de componentes de origen occidental en los drones y misiles que utiliza Rusia en el conflicto armado. Según autoridades ucranianas, estos elementos han sido identificados en los sistemas de armamento rusos que han sido capturados o derribados. La denuncia se basa en la sospecha de que, a pesar de las sanciones impuestas a Moscú, algunas empresas en países occidentales siguen suministrando materiales que terminan en manos rusas, lo que fortalece la capacidad militar de Rusia en el conflicto. Además, Ucrania ha solicitado a las naciones occidentales una mayor vigilancia sobre sus productos para evitar que lleguen a la industria militar rusa. ▼</h2></div>
+			<div class="contenido">
+				<p>Ucrania ha denunciado la presencia de miles de componentes de origen occidental en los drones y misiles que utiliza Rusia en el conflicto armado. Según autoridades ucranianas, estos elementos han sido identificados en los sistemas de armamento rusos que han sido capturados o derribados. La denuncia se basa en la sospecha de que, a pesar de las sanciones impuestas a Moscú, algunas empresas en países occidentales siguen suministrando materiales que terminan en manos rusas, lo que fortalece la capacidad militar de Rusia en el conflicto. Además, Ucrania ha solicitado a las naciones occidentales una mayor vigilancia sobre sus productos para evitar que lleguen a la industria militar rusa.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Lecornu busca un acuerdo presupuestario en Francia que aleje la presión por adelantar las elecciones</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcST2uEMfq9UTpfvwLvRLiKWBHXLxiOi0-9xaWnnBGVNsw8xFELhUvMAJcOqqQ&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La ministra de Transición Energética de Francia, Agnès Pannier-Runacher, está buscando alcanzar un acuerdo sobre el presupuesto con el objetivo de reducir la presión para adelantar las elecciones. La situación política en el país se ha complicado, y los partidos han expresado la necesidad de encontrar consensos para evitar una crisis mayor. El gobierno espera que un pacto presupuestario ayude a estabilizar la situación política y a mantener la continuidad del mandato. ▼</h2></div>
+			<div class="contenido">
+				<p>La ministra de Transición Energética de Francia, Agnès Pannier-Runacher, está buscando alcanzar un acuerdo sobre el presupuesto con el objetivo de reducir la presión para adelantar las elecciones. La situación política en el país se ha complicado, y los partidos han expresado la necesidad de encontrar consensos para evitar una crisis mayor. El gobierno espera que un pacto presupuestario ayude a estabilizar la situación política y a mantener la continuidad del mandato.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Trump anuncia que importaciones de camiones tendrán un arancel del 25% a partir del 1 de noviembre</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-M3wBDO_bXv-M9R6g4c-6Dn_qoE-fNwufNQWVqbN0mP8rAUjk52iSbs5QK8g&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Donald Trump anunció que a partir del 1 de noviembre se implementará un arancel del 25% sobre las importaciones de camiones. Esta medida tiene como objetivo proteger la industria automotriz estadounidense y mitigar la competencia desleal que, según Trump, enfrenta el sector. La decisión se enmarca dentro de una política más amplia de su administración para priorizar los intereses económicos del país. ▼</h2></div>
+			<div class="contenido">
+				<p>Donald Trump anunció que a partir del 1 de noviembre se implementará un arancel del 25% sobre las importaciones de camiones. Esta medida tiene como objetivo proteger la industria automotriz estadounidense y mitigar la competencia desleal que, según Trump, enfrenta el sector. La decisión se enmarca dentro de una política más amplia de su administración para priorizar los intereses económicos del país.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>La directora gerente del FMI anticipó un crecimiento mundial débil y advierte por riesgos financieros</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9mApETA8rmAeRnAKPxhLwXfv18Vocl65WQJaZwBwu7YI4rJvZGrWPAbw-SA&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La directora gerente del Fondo Monetario Internacional (FMI) advirtió sobre un crecimiento global débil y destacó los riesgos financieros que enfrenta la economía mundial. En un contexto de tensiones geopolíticas y políticas económicas contradictorias, la jefa del FMI subrayó la necesidad de que los países implementen reformas estructurales para impulsar el crecimiento y la estabilidad financiera. También mencionó que el aumento de las tasas de interés por parte de varios bancos centrales podría generar incertidumbres adicionales en los mercados. ▼</h2></div>
+			<div class="contenido">
+				<p>La directora gerente del Fondo Monetario Internacional (FMI) advirtió sobre un crecimiento global débil y destacó los riesgos financieros que enfrenta la economía mundial. En un contexto de tensiones geopolíticas y políticas económicas contradictorias, la jefa del FMI subrayó la necesidad de que los países implementen reformas estructurales para impulsar el crecimiento y la estabilidad financiera. También mencionó que el aumento de las tasas de interés por parte de varios bancos centrales podría generar incertidumbres adicionales en los mercados.</p>
+			</div>
+		</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publiciteLite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Fiscalía General de Ecuador acusa a 17 militares por desaparición y asesinato de cuatro menores en Guayaquil</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFPRRLguffuw8EzBrFO9f26gPSrdltiPS5wQIMgBcqy_nfeVprrtzrtqOF1Q&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La Fiscalía General de Ecuador ha acusado a 17 militares en relación con la desaparición y asesinato de cuatro menores en Guayaquil. Este caso ha generado gran indignación en la sociedad ecuatoriana. Las autoridades han indicado que las investigaciones apuntan a la implicación de los acusados en estos crímenes, lo que ha llevado a un proceso judicial en su contra. La situación refleja un clima de preocupación por la seguridad de los menores en el país. ▼</h2></div>
+			<div class="contenido">
+				<p>La Fiscalía General de Ecuador ha acusado a 17 militares en relación con la desaparición y asesinato de cuatro menores en Guayaquil. Este caso ha generado gran indignación en la sociedad ecuatoriana. Las autoridades han indicado que las investigaciones apuntan a la implicación de los acusados en estos crímenes, lo que ha llevado a un proceso judicial en su contra. La situación refleja un clima de preocupación por la seguridad de los menores en el país.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Fumar tabaco incrementa el riesgo de hipertensión arterial, afirman científicos</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHLbRdTUANSB_fFIqQztCinybM1ulMj0qNHHrkTwNkpRnoW5PJKi-O3ZtwIVU&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Un estudio reciente revela que fumar tabaco incrementa significativamente el riesgo de hipertensión arterial. Investigadores han encontrado que los compuestos químicos presentes en el tabaco afectan negativamente la salud cardiovascular, llevando a un aumento en la presión arterial. Además, la investigación destaca que dejar de fumar puede ayudar a reducir este riesgo y mejorar la salud arterial en general. La evidencia subraya la importancia de considerar el tabaquismo como un factor clave en el desarrollo de enfermedades relacionadas con la presión arterial. ▼</h2></div>
+			<div class="contenido">
+				<p>Un estudio reciente revela que fumar tabaco incrementa significativamente el riesgo de hipertensión arterial. Investigadores han encontrado que los compuestos químicos presentes en el tabaco afectan negativamente la salud cardiovascular, llevando a un aumento en la presión arterial. Además, la investigación destaca que dejar de fumar puede ayudar a reducir este riesgo y mejorar la salud arterial en general. La evidencia subraya la importancia de considerar el tabaquismo como un factor clave en el desarrollo de enfermedades relacionadas con la presión arterial.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Ex jefe del FBI James Comey se declara no culpable en caso impulsado por Trump</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5f_8gbKAct1MD2heA0w9di7huY2uar7bS9_y5aITalHrAI6gg25GyN0CQcQ&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>James Comey, exdirector del FBI, se declaró no culpable en un caso impulsado por el expresidente Donald Trump. El caso se centra en la divulgación de información confidencial y se considera parte de la estrategia de Trump para socavar la credibilidad de Comey tras su despido en 2017. La audiencia tuvo lugar en un tribunal federal en Nueva York, donde Comey rechazó los cargos en su contra. La situación refleja un conflicto continuo entre Comey y Trump, que ha sido una fuente de tensión en la política estadounidense desde el fin de la administración del exmandatario. ▼</h2></div>
+			<div class="contenido">
+				<p>James Comey, exdirector del FBI, se declaró no culpable en un caso impulsado por el expresidente Donald Trump. El caso se centra en la divulgación de información confidencial y se considera parte de la estrategia de Trump para socavar la credibilidad de Comey tras su despido en 2017. La audiencia tuvo lugar en un tribunal federal en Nueva York, donde Comey rechazó los cargos en su contra. La situación refleja un conflicto continuo entre Comey y Trump, que ha sido una fuente de tensión en la política estadounidense desde el fin de la administración del exmandatario.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>La Unión Europea exigió la liberación inmediata de todos los rehenes en Gaza y afirmó que un alto al fuego está al alcance</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiW--2BrsSFXb8A7kRPh71Hp0UwcDiXDjzCvBYmY14uFhTBzGNcxeU75QDmWk&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La Unión Europea exigió la liberación inmediata de todos los rehenes en Gaza y señaló que un alto el fuego es posible. La declaración de la UE subraya la necesidad de abordar la situación humanitaria en la región y la importancia de proteger a los civiles. La organización reafirma su compromiso con la paz en Medio Oriente y hace un llamado a todas las partes involucradas para que actúen con moderación y prioricen el diálogo. ▼</h2></div>
+			<div class="contenido">
+				<p>La Unión Europea exigió la liberación inmediata de todos los rehenes en Gaza y señaló que un alto el fuego es posible. La declaración de la UE subraya la necesidad de abordar la situación humanitaria en la región y la importancia de proteger a los civiles. La organización reafirma su compromiso con la paz en Medio Oriente y hace un llamado a todas las partes involucradas para que actúen con moderación y prioricen el diálogo.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>La sorprendente influencia de los chismes en la Revolución Francesa</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMhv8hWHXUOo5KDcGTke3gcROWliVo_rU2erGhV6_DTkYBQ1KB2wt6mBKXZA&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Un análisis reciente destaca el papel fundamental de los chismes y la propagación de rumores en el contexto de la Revolución Francesa. Se señala que estos elementos no solo reflejaban el descontento social, sino que también contribuían a moldear la percepción pública y a movilizar a las masas en torno a ideales republicanos. La comunicación informal, a través de redes sociales de la época, como cafés y panfletos, facilitó que la información circulara rápidamente, influyendo en la opinión pública y en la política. Esto sugiere que los chismes actuaron como un catalizador en el proceso revolucionario, impactando en decisiones cruciales y en la dinámica del poder en Francia. ▼</h2></div>
+			<div class="contenido">
+				<p>Un análisis reciente destaca el papel fundamental de los chismes y la propagación de rumores en el contexto de la Revolución Francesa. Se señala que estos elementos no solo reflejaban el descontento social, sino que también contribuían a moldear la percepción pública y a movilizar a las masas en torno a ideales republicanos. La comunicación informal, a través de redes sociales de la época, como cafés y panfletos, facilitó que la información circulara rápidamente, influyendo en la opinión pública y en la política. Esto sugiere que los chismes actuaron como un catalizador en el proceso revolucionario, impactando en decisiones cruciales y en la dinámica del poder en Francia.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Figura del Mundial 94 se retira para vender aspiradoras y reflexiona sobre la vida corta</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0OaDt88AtE76B-fknb3SDILWc1T5G7oPRWAB_sdxVaGEtnD60XIU6FTWneA&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El artículo narra la vida de un destacado futbolista que brilló en el Mundial de 1994. Su memorable celebración tras un gol no solo quedó en la memoria de los aficionados, sino que también marcó una época en el fútbol. Tras su retiro del deporte profesional, tomó un rumbo inesperado al dedicarse a la venta de aspiradoras, enfatizando que la vida es breve y es preferible no dedicarse a actividades aburridas. La historia ilustra una faceta poco conocida de los exdeportistas y sus elecciones después de dejar el fútbol. ▼</h2></div>
+			<div class="contenido">
+				<p>El artículo narra la vida de un destacado futbolista que brilló en el Mundial de 1994. Su memorable celebración tras un gol no solo quedó en la memoria de los aficionados, sino que también marcó una época en el fútbol. Tras su retiro del deporte profesional, tomó un rumbo inesperado al dedicarse a la venta de aspiradoras, enfatizando que la vida es breve y es preferible no dedicarse a actividades aburridas. La historia ilustra una faceta poco conocida de los exdeportistas y sus elecciones después de dejar el fútbol.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Una de las víctimas del atentado contra la sinagoga de Manchester murió por disparos de la policía</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7_H6OXQZpPPvxGXQ5jTqbMZx3UbFjgYjSPGyJbJ5W7orcXLbt5dNaotmE0w&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Una de las víctimas del atentado terrorista en una sinagoga de Manchester falleció debido a disparos de la policía durante la respuesta al ataque. La situación se generó cuando las fuerzas del orden intentaron neutralizar al agresor, quien había abierto fuego en el lugar. Las autoridades están llevando a cabo una investigación para esclarecer los hechos y las circunstancias que condujeron a la muerte de la víctima a manos de los agentes. Este incidente ha generado un debate sobre el uso de la fuerza por parte de las autoridades en situaciones de crisis. ▼</h2></div>
+			<div class="contenido">
+				<p>Una de las víctimas del atentado terrorista en una sinagoga de Manchester falleció debido a disparos de la policía durante la respuesta al ataque. La situación se generó cuando las fuerzas del orden intentaron neutralizar al agresor, quien había abierto fuego en el lugar. Las autoridades están llevando a cabo una investigación para esclarecer los hechos y las circunstancias que condujeron a la muerte de la víctima a manos de los agentes. Este incidente ha generado un debate sobre el uso de la fuerza por parte de las autoridades en situaciones de crisis.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Macron mantiene negociaciones en crisis política mientras Le Pen exige dimisión o disolución del gobierno</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQsuM5gmoDf3OTm3c8gB3adY96p76rdiyv5vNadDB77zeVIaIU3pBB_6Q_ZpI&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>En medio de una crisis política en Francia, el presidente Emmanuel Macron ha solicitado a su ministro de Transporte, Clément Beaune, que continúe las negociaciones en torno a diversas reformas. La situación se ha agravado por los retos que plantea Marine Le Pen, líder del partido de extrema derecha, quien exige la dimisión del gobierno o la disolución de la Asamblea Nacional. Esta tensión política refleja la inestabilidad que enfrenta la administración de Macron en un contexto de creciente oposición y presión social. ▼</h2></div>
+			<div class="contenido">
+				<p>En medio de una crisis política en Francia, el presidente Emmanuel Macron ha solicitado a su ministro de Transporte, Clément Beaune, que continúe las negociaciones en torno a diversas reformas. La situación se ha agravado por los retos que plantea Marine Le Pen, líder del partido de extrema derecha, quien exige la dimisión del gobierno o la disolución de la Asamblea Nacional. Esta tensión política refleja la inestabilidad que enfrenta la administración de Macron en un contexto de creciente oposición y presión social.</p>
+			</div>
+		</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publiciteLite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Sobreviviente del ataque de Hamas en Kfar Aza: queremos poder volver aquí</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTH7OhNE40LxQoia7LhdfGJgSF3_m0yc-WNSvAwnlDt1SHqSsYJ05zHJsr3FtY&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Una sobreviviente del ataque de Hamas en el kibutz Kfar Aza relató su experiencia y el impacto del asalto en su comunidad. Describió cómo los residentes del lugar intentaron refugiarse y cómo vivieron momentos de terror. La mujer destacó el deseo de los sobrevivientes de regresar a sus hogares, a pesar del trauma vivido. En su testimonio, enfatizó la importancia de la solidaridad entre los miembros de su comunidad y el deseo de reconstruir sus vidas. ▼</h2></div>
+			<div class="contenido">
+				<p>Una sobreviviente del ataque de Hamas en el kibutz Kfar Aza relató su experiencia y el impacto del asalto en su comunidad. Describió cómo los residentes del lugar intentaron refugiarse y cómo vivieron momentos de terror. La mujer destacó el deseo de los sobrevivientes de regresar a sus hogares, a pesar del trauma vivido. En su testimonio, enfatizó la importancia de la solidaridad entre los miembros de su comunidad y el deseo de reconstruir sus vidas.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Wall Street inició la semana estableciendo nuevos récords</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlV3j_yJbY0dB51YMmqymh5LfIYJNLSe2lnhBf0SEXIULhathUeXZiJAgjTg&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Wall Street comenzó la semana alcanzando nuevos récords en sus índices bursátiles. La capitalización del mercado se vio impulsada por el optimismo en torno a la economía estadounidense y las expectativas de un crecimiento sostenido en el sector tecnológico. Las acciones de compañías clave en este sector lideraron las ganancias, reflejando la confianza de los inversores. A pesar de la volatilidad reciente, los analistas destacan que los fundamentos económicos siguen siendo sólidos, lo que ha contribuido a este repunte en el mercado. ▼</h2></div>
+			<div class="contenido">
+				<p>Wall Street comenzó la semana alcanzando nuevos récords en sus índices bursátiles. La capitalización del mercado se vio impulsada por el optimismo en torno a la economía estadounidense y las expectativas de un crecimiento sostenido en el sector tecnológico. Las acciones de compañías clave en este sector lideraron las ganancias, reflejando la confianza de los inversores. A pesar de la volatilidad reciente, los analistas destacan que los fundamentos económicos siguen siendo sólidos, lo que ha contribuido a este repunte en el mercado.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Aprehenden a banda dedicada al robo de celulares para enviarlos a China</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9kK_RHKdi4-V_8_i61a4RigmEsG7_ZaHNlj05_D3L0xgN60bIaumUvVtKmR8&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Las autoridades han desmantelado una banda dedicada al robo de teléfonos móviles en varias ciudades, que luego enviaba los dispositivos a China. La operación se llevó a cabo tras múltiples denuncias de robos y la recopilación de información que llevó a la identificación de los miembros de la organización criminal. Los detenidos son acusados de robar equipos en la vía pública y usar diversos métodos para evitar su detección, incluyendo la alteración de los números de serie. La investigación continúa para determinar la magnitud de sus operaciones y el posible destino final de los dispositivos robados. ▼</h2></div>
+			<div class="contenido">
+				<p>Las autoridades han desmantelado una banda dedicada al robo de teléfonos móviles en varias ciudades, que luego enviaba los dispositivos a China. La operación se llevó a cabo tras múltiples denuncias de robos y la recopilación de información que llevó a la identificación de los miembros de la organización criminal. Los detenidos son acusados de robar equipos en la vía pública y usar diversos métodos para evitar su detección, incluyendo la alteración de los números de serie. La investigación continúa para determinar la magnitud de sus operaciones y el posible destino final de los dispositivos robados.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>La batalla por la UNESCO: elección de un líder árabe, retirada de Estados Unidos y futuro de los sitios patrimoniales.</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoj24rnDoiPRGmSRXuKR8NIOHpo4Y9S2pvu0NJmyN_NcOZCZkq_rtOS4rLxPQ&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La elección de un nuevo director general de la UNESCO ha despertado el interés en el ámbito internacional, especialmente por la candidatura de un líder árabe. La situación se complica con la reciente decisión de Estados Unidos de retirarse de la organización, lo que plantea preguntas sobre la influencia de este país en el futuro de la UNESCO y su capacidad para gestionar la protección de sitios patrimoniales en todo el mundo. Esta serie de eventos refleja las tensiones geopolíticas actuales y pone de relieve la importancia de la cooperación internacional en la conservación del patrimonio cultural. ▼</h2></div>
+			<div class="contenido">
+				<p>La elección de un nuevo director general de la UNESCO ha despertado el interés en el ámbito internacional, especialmente por la candidatura de un líder árabe. La situación se complica con la reciente decisión de Estados Unidos de retirarse de la organización, lo que plantea preguntas sobre la influencia de este país en el futuro de la UNESCO y su capacidad para gestionar la protección de sitios patrimoniales en todo el mundo. Esta serie de eventos refleja las tensiones geopolíticas actuales y pone de relieve la importancia de la cooperación internacional en la conservación del patrimonio cultural.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Académico nicaragüense en el exilio denuncia persecución por agente de inteligencia del régimen de Ortega</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5M4LpGmlh0PcXzJWngVmD5fOSM2rRLs4QdQJyVSxwDoovAP__IkXTatt9U2Y&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Un académico nicaragüense exiliado en Costa Rica ha denunciado que fue objeto de persecución por parte de un agente de inteligencia del régimen de Ortega. Este exiliado relata haber enfrentado amenazas y acoso tras expresar sus ideas en torno a la situación política en Nicaragua, lo que lo llevó a abandonar su país. La denuncia pone de relieve la situación de represión que enfrentan aquellos que critican al gobierno de Ortega, así como los riesgos que corren los disidentes y académicos en la región. ▼</h2></div>
+			<div class="contenido">
+				<p>Un académico nicaragüense exiliado en Costa Rica ha denunciado que fue objeto de persecución por parte de un agente de inteligencia del régimen de Ortega. Este exiliado relata haber enfrentado amenazas y acoso tras expresar sus ideas en torno a la situación política en Nicaragua, lo que lo llevó a abandonar su país. La denuncia pone de relieve la situación de represión que enfrentan aquellos que critican al gobierno de Ortega, así como los riesgos que corren los disidentes y académicos en la región.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Caos en los aeropuertos de EE.UU. por el cierre del gobierno: más de 4000 vuelos demorados</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvcqxxJ_zNuhM7RXXXjqekQsSutotgcsHkgLxQWayRCbzXCApyf9uYjwYPptY&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Más de 4,000 vuelos en Estados Unidos experimentaron retrasos debido al cierre del gobierno. La falta de personal en las agencias gubernamentales, consecuencia del cierre, afectó la gestión del tráfico aéreo, lo que generó un caos en varios aeropuertos del país. Las aerolíneas y los viajeros enfrentaron importantes inconvenientes, mientras que se intensificaron las críticas hacia la situación política que llevó a este cierre gubernamental. ▼</h2></div>
+			<div class="contenido">
+				<p>Más de 4,000 vuelos en Estados Unidos experimentaron retrasos debido al cierre del gobierno. La falta de personal en las agencias gubernamentales, consecuencia del cierre, afectó la gestión del tráfico aéreo, lo que generó un caos en varios aeropuertos del país. Las aerolíneas y los viajeros enfrentaron importantes inconvenientes, mientras que se intensificaron las críticas hacia la situación política que llevó a este cierre gubernamental.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Dos familias víctimas de asaltos domiciliarios armados en Filadelfia</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdXeNTi0dM1w_r0mvzMaq7tK0GFZ5LkgvEyT3skBaJR3HvMOfFOyTZZNlUuw&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>En Filadelfia, dos familias han sido afectadas por robos a mano armada en sus hogares. Los incidentes ocurrieron en un corto intervalo de tiempo, lo que ha generado preocupación en la comunidad local. Durante uno de los asaltos, los delincuentes entraron mientras las víctimas se encontraban en casa, lo que incrementó la sensación de inseguridad. Las autoridades han iniciado una investigación para identificar y capturar a los responsables de estos crímenes, pidiendo la colaboración de los vecinos para asegurar un ambiente más seguro. ▼</h2></div>
+			<div class="contenido">
+				<p>En Filadelfia, dos familias han sido afectadas por robos a mano armada en sus hogares. Los incidentes ocurrieron en un corto intervalo de tiempo, lo que ha generado preocupación en la comunidad local. Durante uno de los asaltos, los delincuentes entraron mientras las víctimas se encontraban en casa, lo que incrementó la sensación de inseguridad. Las autoridades han iniciado una investigación para identificar y capturar a los responsables de estos crímenes, pidiendo la colaboración de los vecinos para asegurar un ambiente más seguro.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Trump afirma que alcalde de Chicago y gobernador de Illinois deberían estar en prisión por no proteger a agentes de ICE</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqCHlX06CJFZ7F7uYrYceTIA5aKodVx97QVCUiB2GrmfbnM59BFebppmHsQSc&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Donald Trump expresó su descontento hacia el alcalde de Chicago y el gobernador de Illinois, acusándolos de no brindar suficiente protección a los agentes del Servicio de Inmigración y Control de Aduanas (ICE). En sus declaraciones, Trump sugirió que ambas figuras deberían enfrentar consecuencias legales por esta situación. Las acusaciones se enmarcan en un contexto más amplio de tensiones entre las autoridades locales y el gobierno federal respecto a la aplicación de las leyes de inmigración. ▼</h2></div>
+			<div class="contenido">
+				<p>Donald Trump expresó su descontento hacia el alcalde de Chicago y el gobernador de Illinois, acusándolos de no brindar suficiente protección a los agentes del Servicio de Inmigración y Control de Aduanas (ICE). En sus declaraciones, Trump sugirió que ambas figuras deberían enfrentar consecuencias legales por esta situación. Las acusaciones se enmarcan en un contexto más amplio de tensiones entre las autoridades locales y el gobierno federal respecto a la aplicación de las leyes de inmigración.</p>
+			</div>
+		</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publiciteLite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Olas de calor marinas alcanzan récords en Europa alertando sobre riesgos ambientales</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQexM7Tb3wW8ou2u9P0D22ilpkgYnlCUUlg59gGCzm4nJqxcL-QkUBvERreQ&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Un estudio ha revelado que las temperaturas del agua en Europa han alcanzado niveles récord, con olas de calor marinas que aumentan de frecuencia e intensidad. Investigadores enfatizan que estos fenómenos podrían tener graves consecuencias para la vida marina, afectando a ecosistemas y especies vulnerables. Las implicaciones de este calentamiento no solo son ecológicas, sino que también pueden influir en la economía pesquera y en la salud pública. Se hacen llamados a la acción para mitigar estos efectos, destacando la importancia de entender y gestionar el cambio climático. ▼</h2></div>
+			<div class="contenido">
+				<p>Un estudio ha revelado que las temperaturas del agua en Europa han alcanzado niveles récord, con olas de calor marinas que aumentan de frecuencia e intensidad. Investigadores enfatizan que estos fenómenos podrían tener graves consecuencias para la vida marina, afectando a ecosistemas y especies vulnerables. Las implicaciones de este calentamiento no solo son ecológicas, sino que también pueden influir en la economía pesquera y en la salud pública. Se hacen llamados a la acción para mitigar estos efectos, destacando la importancia de entender y gestionar el cambio climático.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Anuncio del Premio Nobel de Química 2025</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbiDaDAOqrI4LdOVLItxCtInOnqXg_5X3r04IS_Y3pO78D4ZfWzVk04hvS0g&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El 8 de octubre de 2025, se anunció el ganador del Premio Nobel de Química. Este reconocimiento destaca los avances significativos en el campo de la química, y se otorga anualmente a investigadores cuyas contribuciones han tenido un impacto notable en la ciencia. La ceremonia, que se llevó a cabo en un evento en línea, brindó detalles sobre los méritos del laureado, resaltando su importante trabajo y las repercusiones de sus descubrimientos en diversas áreas. Este premio es parte de una serie de galardones que se otorgan anualmente en distintas disciplinas. ▼</h2></div>
+			<div class="contenido">
+				<p>El 8 de octubre de 2025, se anunció el ganador del Premio Nobel de Química. Este reconocimiento destaca los avances significativos en el campo de la química, y se otorga anualmente a investigadores cuyas contribuciones han tenido un impacto notable en la ciencia. La ceremonia, que se llevó a cabo en un evento en línea, brindó detalles sobre los méritos del laureado, resaltando su importante trabajo y las repercusiones de sus descubrimientos en diversas áreas. Este premio es parte de una serie de galardones que se otorgan anualmente en distintas disciplinas.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Bitcoin alcanza un récord histórico al superar los 125000 dólares</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3tEvAuNIL6KPc66-Scgxq43TmC0hULMge72q4cbPXX5peHn_8-YEnPp7yWg&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El bitcoin ha alcanzado un nuevo récord histórico, superando la barrera de los 125,000 dólares. Este aumento significativo en su valor se ha visto impulsado por una creciente adopción institucional y un entorno macroeconómico favorable. A través del tiempo, la criptomoneda ha experimentado volatilidad, pero la tendencia actual indica un renovado interés por parte de inversores y empresas que buscan diversificar sus activos. El mercado de criptomonedas en general también muestra un cambio hacia una mayor legitimidad, con un aumento en la regulación y en la aceptación por parte de entidades financieras. ▼</h2></div>
+			<div class="contenido">
+				<p>El bitcoin ha alcanzado un nuevo récord histórico, superando la barrera de los 125,000 dólares. Este aumento significativo en su valor se ha visto impulsado por una creciente adopción institucional y un entorno macroeconómico favorable. A través del tiempo, la criptomoneda ha experimentado volatilidad, pero la tendencia actual indica un renovado interés por parte de inversores y empresas que buscan diversificar sus activos. El mercado de criptomonedas en general también muestra un cambio hacia una mayor legitimidad, con un aumento en la regulación y en la aceptación por parte de entidades financieras.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>El presidente más anciano del mundo busca un nuevo mandato a los 92 años</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNi_x6D_tZcbHQRniwTkwkm6l3s4IsRemCaWAV5roKCkTnKyNBXFl2UQRvBw&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El presidente más anciano del mundo, quien tiene 92 años, está buscando un nuevo mandato. A pesar de su avanzada edad, ha decidido postularse nuevamente, lo que ha generado diversas reacciones en el ámbito político y entre la ciudadanía. Su administración ha sido objeto de debate, con un enfoque en los logros y los desafíos que ha enfrentado durante su tiempo en el cargo. La comunidad internacional observa de cerca su decisión y las posibles implicaciones de su reelección. ▼</h2></div>
+			<div class="contenido">
+				<p>El presidente más anciano del mundo, quien tiene 92 años, está buscando un nuevo mandato. A pesar de su avanzada edad, ha decidido postularse nuevamente, lo que ha generado diversas reacciones en el ámbito político y entre la ciudadanía. Su administración ha sido objeto de debate, con un enfoque en los logros y los desafíos que ha enfrentado durante su tiempo en el cargo. La comunidad internacional observa de cerca su decisión y las posibles implicaciones de su reelección.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Trump desea conocer los planes de Ucrania con misiles Tomahawk antes de aprobar su suministro</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWs7jABTBgZUL2AXt0-Y3aCyMpSe6_Hv5sKx76qreWZIJewPMVjNnT1I2ds9A&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Donald Trump expresó su interés en conocer los planes de Ucrania con respecto al uso de misiles Tomahawk antes de tomar una decisión sobre su suministro. Durante una intervención, aclaró que su intención no es escalar el conflicto, sino asegurarse de que cualquier apoyo militar a Ucrania esté alineado con una estrategia clara. Trump subrayó la importancia de entender la dirección de las operaciones ucranianas antes de comprometer recursos significativos. ▼</h2></div>
+			<div class="contenido">
+				<p>Donald Trump expresó su interés en conocer los planes de Ucrania con respecto al uso de misiles Tomahawk antes de tomar una decisión sobre su suministro. Durante una intervención, aclaró que su intención no es escalar el conflicto, sino asegurarse de que cualquier apoyo militar a Ucrania esté alineado con una estrategia clara. Trump subrayó la importancia de entender la dirección de las operaciones ucranianas antes de comprometer recursos significativos.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Cómo es el árbol de paraíso y qué precauciones tener si hay uno en casa</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHg-2hIhIZK-NasQKU7G1hDE4b9mnD8-0qr9SvY23wqFgUoiEmV-I41whCits&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La noticia aborda las características del árbol de paraíso, una especie popular en jardines y espacios urbanos. Este árbol, conocido por su rápida crecimiento y atractivas flores, puede llegar a ser invasivo y perjudicial para otras plantas. Se detallan sus principales rasgos, como su altura y sus hojas. Además, se advierte sobre sus frutos, que contienen toxinas que pueden ser peligrosas para los humanos y mascotas. Se sugiere precaución en su manejo y se menciona la importancia de identificarlo correctamente, especialmente si se tiene uno en casa. ▼</h2></div>
+			<div class="contenido">
+				<p>La noticia aborda las características del árbol de paraíso, una especie popular en jardines y espacios urbanos. Este árbol, conocido por su rápida crecimiento y atractivas flores, puede llegar a ser invasivo y perjudicial para otras plantas. Se detallan sus principales rasgos, como su altura y sus hojas. Además, se advierte sobre sus frutos, que contienen toxinas que pueden ser peligrosas para los humanos y mascotas. Se sugiere precaución en su manejo y se menciona la importancia de identificarlo correctamente, especialmente si se tiene uno en casa.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Netanyahu ordena pausar ciertos ataques en Gaza antes de negociaciones con Hamas</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvWBgNxjF5fC8Ua8ue6e6qxlx1c7MWH56gajgREwTQtufR_Lw0gdeBMyo0TA&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El primer ministro israelí, Benjamin Netanyahu, decidió suspender ciertas operaciones militares en Gaza con el objetivo de facilitar las negociaciones con Hamas. Esta pausa se produce en un contexto de intensas tensiones y conflictos en la región, donde las conversaciones buscan abordar la situación humanitaria y los rehenes en manos del grupo terrorista. La decisión de Netanyahu intenta abrir espacio para el diálogo, a pesar de las continuas hostilidades que han marcado el conflicto en los últimos meses. ▼</h2></div>
+			<div class="contenido">
+				<p>El primer ministro israelí, Benjamin Netanyahu, decidió suspender ciertas operaciones militares en Gaza con el objetivo de facilitar las negociaciones con Hamas. Esta pausa se produce en un contexto de intensas tensiones y conflictos en la región, donde las conversaciones buscan abordar la situación humanitaria y los rehenes en manos del grupo terrorista. La decisión de Netanyahu intenta abrir espacio para el diálogo, a pesar de las continuas hostilidades que han marcado el conflicto en los últimos meses.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>La UE afirma que Rusia oculta su fracaso militar en Ucrania con ataques terroristas a civiles</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRG3yXSc7IvVmbkJehtqCLStUBQt2_itWIdqGDPD3nRON-31XrWI-2400095fo&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La Unión Europea ha acusado a Rusia de encubrir su fracaso militar en Ucrania mediante ataques dirigidos a la población civil, los cuales califica de terroristas. Esta declaración surge en un contexto de escalada de la violencia, donde se han registrado bombardeos en ciudades ucranianas que han dejado múltiples víctimas y destrucción. La UE sostiene que estas acciones buscan desestabilizar aún más al país y desviar la atención de los problemas internos de Rusia y su desempeño en el conflicto bélico. ▼</h2></div>
+			<div class="contenido">
+				<p>La Unión Europea ha acusado a Rusia de encubrir su fracaso militar en Ucrania mediante ataques dirigidos a la población civil, los cuales califica de terroristas. Esta declaración surge en un contexto de escalada de la violencia, donde se han registrado bombardeos en ciudades ucranianas que han dejado múltiples víctimas y destrucción. La UE sostiene que estas acciones buscan desestabilizar aún más al país y desviar la atención de los problemas internos de Rusia y su desempeño en el conflicto bélico.</p>
+			</div>
+		</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publiciteLite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Trump anuncia ataque de Estados Unidos a embarcación narco cerca de la costa venezolana</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmzjHPAMb_GEoqB1rV9va8NTJIS5y73amwv_6phtsQjnQv70M-ZdaLwFnc_KM&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Donald Trump anunció que Estados Unidos llevó a cabo un ataque contra una embarcación involucrada en actividades de narcotráfico cerca de la costa de Venezuela. Este acontecimiento es parte de una estrategia más amplia del gobierno estadounidense para combatir el tráfico de drogas en la región. Trump destacó la importancia de estas acciones en el contexto de la seguridad nacional y la lucha contra el crimen organizado. Este ataque se suma a una serie de operaciones militares que buscan desmantelar redes de narcotráfico que operan en las aguas cercanas a Venezuela. ▼</h2></div>
+			<div class="contenido">
+				<p>Donald Trump anunció que Estados Unidos llevó a cabo un ataque contra una embarcación involucrada en actividades de narcotráfico cerca de la costa de Venezuela. Este acontecimiento es parte de una estrategia más amplia del gobierno estadounidense para combatir el tráfico de drogas en la región. Trump destacó la importancia de estas acciones en el contexto de la seguridad nacional y la lucha contra el crimen organizado. Este ataque se suma a una serie de operaciones militares que buscan desmantelar redes de narcotráfico que operan en las aguas cercanas a Venezuela.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Trump se reúne con Carney en la Casa Blanca para negociar aranceles y comercio bilateral</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJmF4uEHrO-6tQc5Po4UnuznRtDa1adp5R6JNsoKeFE05Jt8ZUBU2Q0e9QEOQ&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Donald Trump se reunió en la Casa Blanca con el exgobernador de Massachusetts, Deval Patrick, y el exjefe de gabinete, John Kelly, para abordar temas relacionados con aranceles y comercio bilateral. Durante el encuentro, discutieron la relación comercial entre Estados Unidos y su socio más cercano, enfocándose en la necesidad de negociar para mejorar los términos y condiciones. La reunión reflejó el interés del expresidente en reactivar sus políticas económicas y fortalecer los lazos comerciales a medida que se acerca la próxima campaña electoral. ▼</h2></div>
+			<div class="contenido">
+				<p>Donald Trump se reunió en la Casa Blanca con el exgobernador de Massachusetts, Deval Patrick, y el exjefe de gabinete, John Kelly, para abordar temas relacionados con aranceles y comercio bilateral. Durante el encuentro, discutieron la relación comercial entre Estados Unidos y su socio más cercano, enfocándose en la necesidad de negociar para mejorar los términos y condiciones. La reunión reflejó el interés del expresidente en reactivar sus políticas económicas y fortalecer los lazos comerciales a medida que se acerca la próxima campaña electoral.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Iglesia venezolana solicita liberación de presos políticos en canonización de José Gregorio Hernández y Carmen Rendiles</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQskGwc16zqVFXINYrMN5tiwfHn5nbuh8JGgt3SkwT6KbfyCLuoAsdQFSEAXg&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La Conferencia Episcopal de Venezuela ha solicitado la liberación de los presos políticos en el país, coincidiendo con la canonización de José Gregorio Hernández y Carmen Rendiles. La iglesia enfatizó la importancia de la paz, la justicia y el respeto a los derechos humanos, haciendo un llamado a las autoridades para que se tomen medidas que favorezcan la reconciliación nacional. Este pedido se enmarca en un contexto de crisis política y social en Venezuela, donde la situación de los detenidos ha sido un tema recurrente de preocupación tanto a nivel nacional como internacional. ▼</h2></div>
+			<div class="contenido">
+				<p>La Conferencia Episcopal de Venezuela ha solicitado la liberación de los presos políticos en el país, coincidiendo con la canonización de José Gregorio Hernández y Carmen Rendiles. La iglesia enfatizó la importancia de la paz, la justicia y el respeto a los derechos humanos, haciendo un llamado a las autoridades para que se tomen medidas que favorezcan la reconciliación nacional. Este pedido se enmarca en un contexto de crisis política y social en Venezuela, donde la situación de los detenidos ha sido un tema recurrente de preocupación tanto a nivel nacional como internacional.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>España eliminó a Ucrania y México goleó a Chile en los octavos de final del Mundial Sub-20</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6hSptoPmd2yalbkFURx5F4Z-IcOGatemrPUyL4yyNO93-HtQfCWpberCNfRA&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>En el Mundial Sub-20, España se aseguró su lugar en los octavos de final al eliminar a Ucrania, mientras que México tuvo una destacada actuación al vencer a Chile por un amplio marcador. Estos resultados han definido el cuadro de los equipos que avanzan a la siguiente etapa del torneo. La competición sigue generando expectativas entre los aficionados, con varias selecciones mostrando un rendimiento notable. ▼</h2></div>
+			<div class="contenido">
+				<p>En el Mundial Sub-20, España se aseguró su lugar en los octavos de final al eliminar a Ucrania, mientras que México tuvo una destacada actuación al vencer a Chile por un amplio marcador. Estos resultados han definido el cuadro de los equipos que avanzan a la siguiente etapa del torneo. La competición sigue generando expectativas entre los aficionados, con varias selecciones mostrando un rendimiento notable.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Cientos de simpatizantes de Bolsonaro marcharon en Brasilia para exigir su amnistía tras la condena por intento de golpe de Estado</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRG5AR1XV6mQ5jTlRnplHVkSgJtxxn02E_jd46u9SOsFFit_ihvACL14TuvA&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Cientos de simpatizantes del expresidente Jair Bolsonaro se manifestaron en Brasilia exigiendo su amnistía tras la reciente condena que recibió por su participación en un intento de golpe de estado. La marcha se llevó a cabo en un contexto de creciente tensión política en el país, con los seguidores de Bolsonaro reclamando justicia y argumentando que la condena es injusta. Durante la movilización, se produjeron discursos en defensa de su figura, subrayando la lealtad de sus seguidores y su rechazo a las decisiones judiciales que consideran arbitrarias. La situación refleja la profunda polarización en Brasil y el impacto de los eventos políticos recientes en la sociedad. ▼</h2></div>
+			<div class="contenido">
+				<p>Cientos de simpatizantes del expresidente Jair Bolsonaro se manifestaron en Brasilia exigiendo su amnistía tras la reciente condena que recibió por su participación en un intento de golpe de estado. La marcha se llevó a cabo en un contexto de creciente tensión política en el país, con los seguidores de Bolsonaro reclamando justicia y argumentando que la condena es injusta. Durante la movilización, se produjeron discursos en defensa de su figura, subrayando la lealtad de sus seguidores y su rechazo a las decisiones judiciales que consideran arbitrarias. La situación refleja la profunda polarización en Brasil y el impacto de los eventos políticos recientes en la sociedad.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Lula da Silva y Donald Trump reanudan diálogo bilateral para superar crisis comercial entre Brasil y Estados Unidos</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSx9FWbr1EqMnC_RDRprnsnbvH7mloXTrZrA8Ly1NpP3iQux2cP-AnT67O6Sg&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Lula da Silva y Donald Trump han reiniciado el diálogo bilateral con el objetivo de abordar y superar la crisis comercial entre Brasil y Estados Unidos. Esta comunicación busca fortalecer las relaciones económicas entre ambos países tras un período de tensiones comerciales. Las conversaciones abarcan varios temas clave que afectan el comercio entre las naciones, y se espera que contribuyan a una mejora en la cooperación económica. ▼</h2></div>
+			<div class="contenido">
+				<p>Lula da Silva y Donald Trump han reiniciado el diálogo bilateral con el objetivo de abordar y superar la crisis comercial entre Brasil y Estados Unidos. Esta comunicación busca fortalecer las relaciones económicas entre ambos países tras un período de tensiones comerciales. Las conversaciones abarcan varios temas clave que afectan el comercio entre las naciones, y se espera que contribuyan a una mejora en la cooperación económica.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Eslovaquia anuncia un paquete de ayuda a Ucrania con tecnología de desminado y apoyo humanitario</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0x7BV2S9kjerr6_Tzr_tYuJaPPoGWlvNRCdDggGOi9XMm5OBLVrRWLejeYw&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Eslovaquia ha confirmado un nuevo paquete de asistencia para Ucrania que incluye tecnología para la eliminación de minas y apoyo humanitario. Esta medida se enmarca en el esfuerzo del país para ayudar a Ucrania en su situación actual, aunque no contempla el envío de armamento. El paquete refleja el compromiso de Eslovaquia de contribuir a la estabilidad de la región y apoyar a los ucranianos en medio del conflicto. ▼</h2></div>
+			<div class="contenido">
+				<p>Eslovaquia ha confirmado un nuevo paquete de asistencia para Ucrania que incluye tecnología para la eliminación de minas y apoyo humanitario. Esta medida se enmarca en el esfuerzo del país para ayudar a Ucrania en su situación actual, aunque no contempla el envío de armamento. El paquete refleja el compromiso de Eslovaquia de contribuir a la estabilidad de la región y apoyar a los ucranianos en medio del conflicto.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Mark Carney viajó a Washington para reunirse con Donald Trump y negociar concesiones sobre los aranceles</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDP6bo15PZQ7-PACzWdJwi8Z7U3kP-fj7F_-BzBE5h6J8Eqqos5BFHjN05CQ&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Mark Carney, exgobernador del Banco de Inglaterra, viajó a Washington para reunirse con el expresidente estadounidense Donald Trump. La reunión tuvo como objetivo discutir concesiones relacionadas con los aranceles. Carney, quien ha sido una figura influyente en la política económica, busca mediar en las tensiones comerciales y encontrar soluciones que beneficien a ambas partes. ▼</h2></div>
+			<div class="contenido">
+				<p>Mark Carney, exgobernador del Banco de Inglaterra, viajó a Washington para reunirse con el expresidente estadounidense Donald Trump. La reunión tuvo como objetivo discutir concesiones relacionadas con los aranceles. Carney, quien ha sido una figura influyente en la política económica, busca mediar en las tensiones comerciales y encontrar soluciones que beneficien a ambas partes.</p>
+			</div>
+		</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publiciteLite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Nobel de Literatura 2025: favoritos según las casas de apuestas</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9-A36UP4AxA9IGL4twg_8atvJvxp8W1wFq01YHK3x9DoT-9ylpZTy_cq6bd8&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El artículo aborda las expectativas en torno al premio Nobel de Literatura de este año, destacando a los escritores que son considerados favoritos por las casas de apuestas. A lo largo de la pieza, se analizan las tendencias y los nombres más mencionados en el ámbito literario, así como la relevancia de estas apuestas en la evaluación de los posibles ganadores. Se mencionan autores tanto consagrados como emergentes, reflejando la diversidad de la producción literaria contemporánea y el interés del público en este prestigioso galardón. ▼</h2></div>
+			<div class="contenido">
+				<p>El artículo aborda las expectativas en torno al premio Nobel de Literatura de este año, destacando a los escritores que son considerados favoritos por las casas de apuestas. A lo largo de la pieza, se analizan las tendencias y los nombres más mencionados en el ámbito literario, así como la relevancia de estas apuestas en la evaluación de los posibles ganadores. Se mencionan autores tanto consagrados como emergentes, reflejando la diversidad de la producción literaria contemporánea y el interés del público en este prestigioso galardón.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Estados Unidos, Qatar y Turquía se suman a las negociaciones entre Israel y Hamás para finalizar la guerra en Gaza</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSY1q8Kj8vr6kfl6RpFRz7vHoOy4D2-Yxnyvbc5Gj-iXLlzEKPk5F-YVzqPj1I&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Estados Unidos, Qatar y Turquía participan en la tercera jornada de negociaciones para alcanzar un alto el fuego entre Israel y Hamas en el conflicto de Gaza. Las conversaciones buscan poner fin a la violencia que ha afectado gravemente a la población civil. La situación humanitaria en la región sigue siendo crítica mientras las partes intentan acercar posturas. Las discusiones se llevan a cabo en medio de un intenso clima de tensiones y la comunidad internacional observa de cerca los avances. ▼</h2></div>
+			<div class="contenido">
+				<p>Estados Unidos, Qatar y Turquía participan en la tercera jornada de negociaciones para alcanzar un alto el fuego entre Israel y Hamas en el conflicto de Gaza. Las conversaciones buscan poner fin a la violencia que ha afectado gravemente a la población civil. La situación humanitaria en la región sigue siendo crítica mientras las partes intentan acercar posturas. Las discusiones se llevan a cabo en medio de un intenso clima de tensiones y la comunidad internacional observa de cerca los avances.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>La Corte Suprema rechazó la apelación de Ghislaine Maxwell y seguirá presa</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRX5H36w7tB4tWeOHOLbFS82rQUzVLVn5RakHANyLBiWXrQavWJdcuXwPEMeA&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La Corte Suprema de Estados Unidos ha rechazado la apelación de Ghislaine Maxwell, lo que significa que seguirá cumpliendo su condena en prisión. Maxwell, condenada por su papel en el caso de abusos sexuales del financista Jeffrey Epstein, había impugnado varios aspectos de su juicio y sentencia, pero la decisión del tribunal cierra la puerta a sus intentos de apelar. La sentencia original incluyó una pena de 20 años de prisión por cargos de tráfico sexual y conspiración. ▼</h2></div>
+			<div class="contenido">
+				<p>La Corte Suprema de Estados Unidos ha rechazado la apelación de Ghislaine Maxwell, lo que significa que seguirá cumpliendo su condena en prisión. Maxwell, condenada por su papel en el caso de abusos sexuales del financista Jeffrey Epstein, había impugnado varios aspectos de su juicio y sentencia, pero la decisión del tribunal cierra la puerta a sus intentos de apelar. La sentencia original incluyó una pena de 20 años de prisión por cargos de tráfico sexual y conspiración.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1></h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9XYLMxrGq5CXVUcwM168mcuW4dUTxaYfQU33PixD71uh54A2S1kttu5BtVA&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Una organización no gubernamental en Venezuela denunció que sus miembros fueron agredidos por grupos oficialistas conocidos como colectivos durante una ceremonia religiosa en honor a los presos políticos. El incidente ocurrió en la parroquia de San Pedro, donde se realizaba una misa. Los miembros de la ONG afirmaron que los atacantes intentaron interrumpir la actividad y que la situación se tornó violenta. La organización ha señalado que este tipo de agresiones son parte de un patrón de hostigamiento y represión hacia quienes critican al régimen y abogan por los derechos humanos en el país. ▼</h2></div>
+			<div class="contenido">
+				<p>Una organización no gubernamental en Venezuela denunció que sus miembros fueron agredidos por grupos oficialistas conocidos como colectivos durante una ceremonia religiosa en honor a los presos políticos. El incidente ocurrió en la parroquia de San Pedro, donde se realizaba una misa. Los miembros de la ONG afirmaron que los atacantes intentaron interrumpir la actividad y que la situación se tornó violenta. La organización ha señalado que este tipo de agresiones son parte de un patrón de hostigamiento y represión hacia quienes critican al régimen y abogan por los derechos humanos en el país.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Delegados de Estados Unidos, Qatar y Turquía se suman a las negociaciones clave en Egipto por la paz en Gaza</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnHmZaKezasdQKT3TKHMJmIPu-_uEFT4GczEbJSHYsQ1ztaN_itSX0iLm68g&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Delegados de Estados Unidos, Qatar y Turquía participarán en negociaciones en Egipto enfocados en alcanzar un acuerdo de paz en Gaza. Estas conversaciones se llevarán a cabo en un momento crítico de conflicto en la región, con el objetivo de debatir posibles soluciones y asegurar la estabilidad. La cooperación entre estos países es fundamental para abordar la situación humanitaria y política en Gaza, y se espera que el encuentro contribuya a aliviar las tensiones actuales. ▼</h2></div>
+			<div class="contenido">
+				<p>Delegados de Estados Unidos, Qatar y Turquía participarán en negociaciones en Egipto enfocados en alcanzar un acuerdo de paz en Gaza. Estas conversaciones se llevarán a cabo en un momento crítico de conflicto en la región, con el objetivo de debatir posibles soluciones y asegurar la estabilidad. La cooperación entre estos países es fundamental para abordar la situación humanitaria y política en Gaza, y se espera que el encuentro contribuya a aliviar las tensiones actuales.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Erdogan revela que Trump le solicitó persuadir a Hamas para aceptar su plan de paz en Gaza</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4WZInZbZR61maR8Iyql-NqAu3zB4Ehht83qcisdiB-T_y2VZIj5jUabva6LU&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>En un reciente pronunciamiento, el presidente de Turquía, Recep Tayyip Erdoğan, reveló que el expresidente de Estados Unidos, Donald Trump, le solicitó que intercediera ante Hamas para que aceptara un plan destinado a poner fin al conflicto en Gaza. Erdoğan también destacó que Turquía está comprometida en sus esfuerzos por lograr una solución diplomática a la crisis en la región. La noticia subraya la dinámica de las relaciones internacionales y los intentos de mediación en medio de la escalada de violencia en Gaza. ▼</h2></div>
+			<div class="contenido">
+				<p>En un reciente pronunciamiento, el presidente de Turquía, Recep Tayyip Erdoğan, reveló que el expresidente de Estados Unidos, Donald Trump, le solicitó que intercediera ante Hamas para que aceptara un plan destinado a poner fin al conflicto en Gaza. Erdoğan también destacó que Turquía está comprometida en sus esfuerzos por lograr una solución diplomática a la crisis en la región. La noticia subraya la dinámica de las relaciones internacionales y los intentos de mediación en medio de la escalada de violencia en Gaza.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Descifran el misterio del traslado de las estatuas moáis en la Isla de Pascua</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfo3cOSx3_yinq19o2V0Uat_Oa-HxlLqLJNlH-20NbC-2W57pU-ZuCKvMFgs4&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Investigadores han encontrado una posible solución a uno de los grandes misterios de la Isla de Pascua: el transporte de las estatuas moais. Un estudio revela que estas enormes esculturas, algunas de más de 10 metros de altura y que pesan varias toneladas, pudieron ser trasladadas utilizando una técnica de "camino de oscilación". Esta técnica permite que las estatuas se levanten y se balanceen, lo que facilita su movimiento sobre la superficie. Los resultados del trabajo se basan en experimentos y simulaciones, sugiriendo que los antiguos habitantes de la isla contaban con un conocimiento avanzado de la física para mover estas imposibles estructuras. La investigación es un avance significativo en la comprensión de cómo estas comunidades lograron realizar tales hazañas. ▼</h2></div>
+			<div class="contenido">
+				<p>Investigadores han encontrado una posible solución a uno de los grandes misterios de la Isla de Pascua: el transporte de las estatuas moais. Un estudio revela que estas enormes esculturas, algunas de más de 10 metros de altura y que pesan varias toneladas, pudieron ser trasladadas utilizando una técnica de "camino de oscilación". Esta técnica permite que las estatuas se levanten y se balanceen, lo que facilita su movimiento sobre la superficie. Los resultados del trabajo se basan en experimentos y simulaciones, sugiriendo que los antiguos habitantes de la isla contaban con un conocimiento avanzado de la física para mover estas imposibles estructuras. La investigación es un avance significativo en la comprensión de cómo estas comunidades lograron realizar tales hazañas.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Crisis de Ferrari en la F1 se agrava con discusiones y pronósticos preocupantes para 2026</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLw0Hz_KfgwrXXVjbZgw8xEgo7Ee6mu8kNZtfrK00zAaGIiIR-nnnGhvqKcjk&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La crisis en Ferrari en la Fórmula 1 se está intensificando, lo que ha llevado a la organización a convocar una reunión de emergencia. Las discusiones se centran en el desempeño del equipo, que ha sido inconsistente en la temporada y plantea preocupaciones sobre el futuro. Para 2026, las expectativas son sombrías, ya que los cambios regulativos y la competencia en el campeonato sugieren que Ferrari podría enfrentar dificultades significativas si no se realizan mejoras considerables en su estrategia y rendimiento. ▼</h2></div>
+			<div class="contenido">
+				<p>La crisis en Ferrari en la Fórmula 1 se está intensificando, lo que ha llevado a la organización a convocar una reunión de emergencia. Las discusiones se centran en el desempeño del equipo, que ha sido inconsistente en la temporada y plantea preocupaciones sobre el futuro. Para 2026, las expectativas son sombrías, ya que los cambios regulativos y la competencia en el campeonato sugieren que Ferrari podría enfrentar dificultades significativas si no se realizan mejoras considerables en su estrategia y rendimiento.</p>
+			</div>
+		</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publiciteLite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>El opositor venezolano Andrés Velásquez pidió al Vaticano que se pronuncie por los presos políticos</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRh6hgEq7wKsgocsMn7SSB-b7y4HASnyNoRqB_i5CS4nMxEPm-JiZ3lqzLJgQ&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Andrés Velásquez, un destacado opositor venezolano, hizo un llamado al Vaticano para que se pronuncie sobre la situación de los presos políticos en Venezuela. Velásquez enfatizó que la falta de atención por parte de la iglesia no puede continuar y solicitó una postura más clara y activa en defensa de los derechos humanos en el país. Su petición busca mayor compromiso y visibilidad internacional sobre el tema de la represión política en Venezuela. ▼</h2></div>
+			<div class="contenido">
+				<p>Andrés Velásquez, un destacado opositor venezolano, hizo un llamado al Vaticano para que se pronuncie sobre la situación de los presos políticos en Venezuela. Velásquez enfatizó que la falta de atención por parte de la iglesia no puede continuar y solicitó una postura más clara y activa en defensa de los derechos humanos en el país. Su petición busca mayor compromiso y visibilidad internacional sobre el tema de la represión política en Venezuela.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Rescatan a cientos de escaladores y guías varados por tormenta de nieve en el monte Everest</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLskT09JGKYrk3GdADrboU-84INUAvdbeL7xxBm44AQLYnGpKqR7AnQhLaFQ&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Cientos de escaladores y guías que quedaron atrapados en el monte Everest debido a una tormenta de nieve han sido rescatados. La intensa nevada provocó condiciones climáticas adversas en la región, impidiendo el descenso seguro de los montañistas. Las autoridades nepalíes organizadon operaciones de rescate en respuesta a las solicitudes de ayuda, utilizando aeronaves para alcanzar a los varados. A pesar de los desafíos, la mayoría de los rescatados se encuentra en buen estado de salud, aunque algunos sufrieron congelaciones menores. La temporada de escalada en el Everest es popular, pero los cambios en el clima han generado preocupaciones sobre la seguridad en la montaña. ▼</h2></div>
+			<div class="contenido">
+				<p>Cientos de escaladores y guías que quedaron atrapados en el monte Everest debido a una tormenta de nieve han sido rescatados. La intensa nevada provocó condiciones climáticas adversas en la región, impidiendo el descenso seguro de los montañistas. Las autoridades nepalíes organizadon operaciones de rescate en respuesta a las solicitudes de ayuda, utilizando aeronaves para alcanzar a los varados. A pesar de los desafíos, la mayoría de los rescatados se encuentra en buen estado de salud, aunque algunos sufrieron congelaciones menores. La temporada de escalada en el Everest es popular, pero los cambios en el clima han generado preocupaciones sobre la seguridad en la montaña.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>La Unión Europea refuerza las medidas de protección a sus agricultores y ganaderos ante las importaciones del Mercosur</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0bg_kYro6CuFa7NXgkkZmHinQCG_VDgUA38dKUYkGyxu33lMGCeBU1E4uloI&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La Unión Europea ha decidido fortalecer las medidas de protección para sus agricultores y ganaderos en respuesta a las crecientes importaciones del Mercosur. Esta acción busca contrarrestar el impacto que estas importaciones tienen sobre la agricultura europea, destacando preocupaciones sobre estándares de producción y competencia desleal. Las nuevas regulaciones incluirán controles más estrictos y el establecimiento de medidas de salvaguardia para asegurar la estabilidad del sector agrícola en la región. ▼</h2></div>
+			<div class="contenido">
+				<p>La Unión Europea ha decidido fortalecer las medidas de protección para sus agricultores y ganaderos en respuesta a las crecientes importaciones del Mercosur. Esta acción busca contrarrestar el impacto que estas importaciones tienen sobre la agricultura europea, destacando preocupaciones sobre estándares de producción y competencia desleal. Las nuevas regulaciones incluirán controles más estrictos y el establecimiento de medidas de salvaguardia para asegurar la estabilidad del sector agrícola en la región.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Caída de cruces ilegales en la frontera entre EE.UU. y México al nivel más bajo desde 1970</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQA4XoI1d7Jf3-fN2brpUa9AsIOs5a61fpwMijXQjlKFG-tmGwJueoemP-tlA&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Los cruces ilegales en la frontera entre Estados Unidos y México han alcanzado su nivel más bajo desde 1970, según datos del gobierno estadounidense. Durante el año fiscal 2023, se registraron menos de 750,000 encuentros en la frontera, en comparación con más de un millón en años anteriores. Esta disminución se atribuye a diversas políticas migratorias y a la cooperación con países de origen de migrantes. Sin embargo, expertos advierten que la disminución de cruces no necesariamente indica una reducción en la migración, sino que puede reflejar cambios en las rutas y métodos utilizados por los migrantes. ▼</h2></div>
+			<div class="contenido">
+				<p>Los cruces ilegales en la frontera entre Estados Unidos y México han alcanzado su nivel más bajo desde 1970, según datos del gobierno estadounidense. Durante el año fiscal 2023, se registraron menos de 750,000 encuentros en la frontera, en comparación con más de un millón en años anteriores. Esta disminución se atribuye a diversas políticas migratorias y a la cooperación con países de origen de migrantes. Sin embargo, expertos advierten que la disminución de cruces no necesariamente indica una reducción en la migración, sino que puede reflejar cambios en las rutas y métodos utilizados por los migrantes.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Increíble definición del NASCAR con trompos, choques y un cruce en reversa de la meta</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlMRtVN7Fnex1esncba_MEJ5DgdB7IiK8CaLGSedXuYe8G10_RWMNNwQAncw&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La reciente definición del campeonato de NASCAR ha sorprendido a los seguidores del automovilismo con momentos inesperados, como trompos y choques. Una de las maniobras más impactantes fue un cruce en reversa justo al llegar a la meta. Este evento ha capturado la atención tanto de aficionados como de medios de comunicación alrededor del mundo, destacando la emoción y la imprevisibilidad que caracterizan este deporte. Las imágenes de la carrera se han vuelto virales, generando una gran conversación en redes sociales y entre los analistas deportivos. ▼</h2></div>
+			<div class="contenido">
+				<p>La reciente definición del campeonato de NASCAR ha sorprendido a los seguidores del automovilismo con momentos inesperados, como trompos y choques. Una de las maniobras más impactantes fue un cruce en reversa justo al llegar a la meta. Este evento ha capturado la atención tanto de aficionados como de medios de comunicación alrededor del mundo, destacando la emoción y la imprevisibilidad que caracterizan este deporte. Las imágenes de la carrera se han vuelto virales, generando una gran conversación en redes sociales y entre los analistas deportivos.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Zelensky advirtió sobre buques fantasmas rusos usados para sabotajes y lanzamientos de drones en Europa</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmUuR8KtESYNfVZrDOqAr_GulU0J93ZGnUE9unRq_6z6yk7x_HZ0U0LicxDA&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El presidente de Ucrania, Volodymyr Zelensky, alertó sobre la presencia de buques de origen ruso en Europa que podrían estar relacionados con actividades de sabotaje y el lanzamiento de drones. En un contexto de creciente tensión en la región, Zelensky advirtió que estos barcos, que aparentan ser mercantes, son utilizados como herramientas para operaciones encubiertas. La preocupación surge en medio de la guerra en Ucrania y el aumento de ataques con drones en varias naciones europeas, lo que ha llevado a un llamado a la vigilancia ante posibles amenazas. ▼</h2></div>
+			<div class="contenido">
+				<p>El presidente de Ucrania, Volodymyr Zelensky, alertó sobre la presencia de buques de origen ruso en Europa que podrían estar relacionados con actividades de sabotaje y el lanzamiento de drones. En un contexto de creciente tensión en la región, Zelensky advirtió que estos barcos, que aparentan ser mercantes, son utilizados como herramientas para operaciones encubiertas. La preocupación surge en medio de la guerra en Ucrania y el aumento de ataques con drones en varias naciones europeas, lo que ha llevado a un llamado a la vigilancia ante posibles amenazas.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Israel intercepta nueva flotilla intentando llegar a Gaza y deportará a los detenidos</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRVrCdDDECG0Xwa7Mw8zXAPf_uRWLNRqNAQD4WJTU4h39NdOsXNS55K2-GJNc&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Israel ha interceptado recientemente una nueva flotilla que intentaba llegar a la Franja de Gaza. Las autoridades israelíes confirmaron que las personas detenidas en esta operación serán deportadas de manera expedita. La acción ocurre en el contexto de un fuerte control marítimo por parte de Israel en la zona, especialmente en relación con intentos de romper el bloqueo sobre Gaza. ▼</h2></div>
+			<div class="contenido">
+				<p>Israel ha interceptado recientemente una nueva flotilla que intentaba llegar a la Franja de Gaza. Las autoridades israelíes confirmaron que las personas detenidas en esta operación serán deportadas de manera expedita. La acción ocurre en el contexto de un fuerte control marítimo por parte de Israel en la zona, especialmente en relación con intentos de romper el bloqueo sobre Gaza.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>El fracaso del llamado a las armas de Nicolás Maduro en Venezuela</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9fE24EhPi12VdlX7oOTEizBpib7R3jWUV1pvxkbZPzLARpF7B1a5R2kHGiw&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La reciente convocatoria de Nicolás Maduro a los ciudadanos para alistarse en la lucha armada ha resultado en un escaso interés y participación. A pesar de su llamado, la respuesta fue mínima, reflejando la desconfianza y el descontento generalizado entre la población venezolana. El presidente justificó la necesidad de esta movilización ante supuestos ataques externos, pero muchos se mostraron indiferentes. La situación subraya un contexto de crisis y polarización en el país, donde la mayoría de la gente prefiere evitar involucrarse en un conflicto armado. ▼</h2></div>
+			<div class="contenido">
+				<p>La reciente convocatoria de Nicolás Maduro a los ciudadanos para alistarse en la lucha armada ha resultado en un escaso interés y participación. A pesar de su llamado, la respuesta fue mínima, reflejando la desconfianza y el descontento generalizado entre la población venezolana. El presidente justificó la necesidad de esta movilización ante supuestos ataques externos, pero muchos se mostraron indiferentes. La situación subraya un contexto de crisis y polarización en el país, donde la mayoría de la gente prefiere evitar involucrarse en un conflicto armado.</p>
+			</div>
+		</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publiciteLite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>La Unión Europea analiza utilizar el muro antidrones rusos para responder a otras amenazas</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7d9knIienESSftWmYaAqVFsrjNoGcbEjk5gnvwNNKzQ2lpASj5TsHb8L6yw&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La Unión Europea está considerando la posibilidad de utilizar el sistema de defensa contra drones desarrollado por Ucrania para hacer frente a diversas amenazas en el continente. Este muro antidrones, que tiene como objetivo protegerse de los ataques aéreos no tripulados, ha demostrado su eficacia en el conflicto con Rusia. La propuesta surge en un contexto de creciente preocupación por la seguridad en Europa, lo que ha llevado a los líderes europeos a explorar distintas alternativas defensivas. El debate se centra en si este tipo de tecnología podría ser replicable y efectivo para la protección de otros países de la UE. ▼</h2></div>
+			<div class="contenido">
+				<p>La Unión Europea está considerando la posibilidad de utilizar el sistema de defensa contra drones desarrollado por Ucrania para hacer frente a diversas amenazas en el continente. Este muro antidrones, que tiene como objetivo protegerse de los ataques aéreos no tripulados, ha demostrado su eficacia en el conflicto con Rusia. La propuesta surge en un contexto de creciente preocupación por la seguridad en Europa, lo que ha llevado a los líderes europeos a explorar distintas alternativas defensivas. El debate se centra en si este tipo de tecnología podría ser replicable y efectivo para la protección de otros países de la UE.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Helicóptero médico se estrella en autopista de California dejando tres heridos graves</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFlGN1VrrWeUYsqYjl3xe5hfcoiXgA7A_3zBA57T7XdW5-7gY1dbrnPAwOFCQ&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Un helicóptero médico se estrelló en una autopista de California, dejando tres personas con heridas graves. El incidente ocurrió cuando la aeronave intentaba aterrizar en una zona congestionada. Las autoridades respondieron rápidamente al accidente, y los heridos fueron trasladados a un hospital. Se están investigando las causas del siniestro, mientras que el tráfico en la autopista se vio afectado por la presencia de los equipos de emergencia y la operación de rescate. ▼</h2></div>
+			<div class="contenido">
+				<p>Un helicóptero médico se estrelló en una autopista de California, dejando tres personas con heridas graves. El incidente ocurrió cuando la aeronave intentaba aterrizar en una zona congestionada. Las autoridades respondieron rápidamente al accidente, y los heridos fueron trasladados a un hospital. Se están investigando las causas del siniestro, mientras que el tráfico en la autopista se vio afectado por la presencia de los equipos de emergencia y la operación de rescate.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>El misterio de la hermosa flor que crece en el desierto más árido del mundo e intriga a los científicos</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEE_G5kn2yDGiwiLp7qZuUwTE6j4RZvTat1x_5A9_u70jrmdGmSvhcwL5h0m0&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Investigadores han descubierto una flor sorprendente que florece en el desierto de Atacama, el más árido del mundo. Esta planta, que lleva años en estado latente, emerge después de las escasas lluvias, lo que ha intrigado a los científicos. La flor, conocida por su belleza, genera preguntas sobre las adaptaciones evolutivas que le permiten sobrevivir en condiciones extremas. A medida que se realizan estudios, los científicos buscan entender mejor los mecanismos que posibilitan la vida en un entorno tan inhóspito y las implicaciones para la biodiversidad en el desierto. ▼</h2></div>
+			<div class="contenido">
+				<p>Investigadores han descubierto una flor sorprendente que florece en el desierto de Atacama, el más árido del mundo. Esta planta, que lleva años en estado latente, emerge después de las escasas lluvias, lo que ha intrigado a los científicos. La flor, conocida por su belleza, genera preguntas sobre las adaptaciones evolutivas que le permiten sobrevivir en condiciones extremas. A medida que se realizan estudios, los científicos buscan entender mejor los mecanismos que posibilitan la vida en un entorno tan inhóspito y las implicaciones para la biodiversidad en el desierto.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Exdirector del FBI James Comey comparecerá ante la justicia por obstrucción y falso testimonio ante el Congreso</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnWL7UYx35i3X4ZZsI6BRqAj6D7hzWZ0EdTBppIOweb_rGjC6fT2fMl1FvYlY&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El exdirector del FBI, James Comey, se presentará ante un tribunal el miércoles por cargos de obstrucción a la justicia y falso testimonio ante el Congreso. Estas acusaciones están relacionadas con su papel en la investigación sobre la interferencia rusa en las elecciones presidenciales de 2016. Comey ha sido criticado por su manejo del caso y por sus declaraciones durante las audiencias en el Congreso, lo que ha generado una prolongada controversia en torno a su desempeño y a la integridad del FBI. Su aparición en el juicio es un desarrollo significativo en este contexto legal. ▼</h2></div>
+			<div class="contenido">
+				<p>El exdirector del FBI, James Comey, se presentará ante un tribunal el miércoles por cargos de obstrucción a la justicia y falso testimonio ante el Congreso. Estas acusaciones están relacionadas con su papel en la investigación sobre la interferencia rusa en las elecciones presidenciales de 2016. Comey ha sido criticado por su manejo del caso y por sus declaraciones durante las audiencias en el Congreso, lo que ha generado una prolongada controversia en torno a su desempeño y a la integridad del FBI. Su aparición en el juicio es un desarrollo significativo en este contexto legal.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>El contrato récord de Cristiano Ronaldo que lo convirtió en el primer futbolista billonario y los detalles de su impactante fortuna</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzcf9sS8FvaXXpORg3MCZb0sJIUaUVMcuHHC5FcjljqTs8_ibtxkuMXxKZ0Mg&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Cristiano Ronaldo ha alcanzado un hito significativo en su carrera al convertirse en el primer futbolista en la historia en acumular una fortuna de más de mil millones de dólares. Este logro ha sido impulsado en gran medida por su contrato récord con el Al-Nassr de Arabia Saudita, donde recibe un salario bastante elevado. Además de sus ingresos por su salario, sus ganancias provienen de una extensa gama de patrocinadores y negocios personales. Ronaldo ha demostrado ser un empresario astuto, diversificando su fuente de ingresos y solidificando su estatus como una de las figuras más influyentes en el mundo del deporte. ▼</h2></div>
+			<div class="contenido">
+				<p>Cristiano Ronaldo ha alcanzado un hito significativo en su carrera al convertirse en el primer futbolista en la historia en acumular una fortuna de más de mil millones de dólares. Este logro ha sido impulsado en gran medida por su contrato récord con el Al-Nassr de Arabia Saudita, donde recibe un salario bastante elevado. Además de sus ingresos por su salario, sus ganancias provienen de una extensa gama de patrocinadores y negocios personales. Ronaldo ha demostrado ser un empresario astuto, diversificando su fuente de ingresos y solidificando su estatus como una de las figuras más influyentes en el mundo del deporte.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>China refuerza su alianza con Corea del Norte con visita del primer ministro a Pyongyang</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkTukrn_M6lxycgj9TG-T_iWLt0E0tgg6MCf1oc8MA14WoI-DMDtQSTdKAvZE&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El primer ministro chino, Li Qiang, tiene programada una visita a Corea del Norte, lo que pone de manifiesto el fortalecimiento de las relaciones entre ambos países. Este viaje se enmarca en un contexto de desarrollo conjunto en diversas áreas, incluyendo la economía y seguridad. Las autoridades norcoreanas han indicado que esta visita es de suma importancia para impulsar la cooperación bilateral. China busca reforzar su influencia en la región y mantener la estabilidad en la península coreana, mientras que Corea del Norte intenta consolidar sus lazos con Beijing en medio de crecientes tensiones con Occidente. ▼</h2></div>
+			<div class="contenido">
+				<p>El primer ministro chino, Li Qiang, tiene programada una visita a Corea del Norte, lo que pone de manifiesto el fortalecimiento de las relaciones entre ambos países. Este viaje se enmarca en un contexto de desarrollo conjunto en diversas áreas, incluyendo la economía y seguridad. Las autoridades norcoreanas han indicado que esta visita es de suma importancia para impulsar la cooperación bilateral. China busca reforzar su influencia en la región y mantener la estabilidad en la península coreana, mientras que Corea del Norte intenta consolidar sus lazos con Beijing en medio de crecientes tensiones con Occidente.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Día Mundial del Pulpo: lo que dice la ciencia sobre su inteligencia y los misterios de su sistema nervioso</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDkd0Vc6-98UMN5uHDKvphbEScGc0ceKmwmEcxEA2Chn4UtdX1bUlUXq6zmA&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La noticia conmemora el Día Mundial del Pulpo y destaca la singularidad de estos cefalópodos, especialmente en lo que respecta a su inteligencia y sistema nervioso. Se menciona que los pulpos poseen un cerebro central y una red neuronal distribuida a lo largo de sus brazos, lo que les permite realizar tareas complejas y responder a su entorno de manera efectiva. Investigaciones recientes han evidenciado comportamientos que sugieren un alto nivel de aprendizaje y memoria en estos animales, desafiando las percepciones tradicionales sobre su inteligencia. Además, se discute la importancia de conservar sus hábitats y la sostenibilidad de su pesca. ▼</h2></div>
+			<div class="contenido">
+				<p>La noticia conmemora el Día Mundial del Pulpo y destaca la singularidad de estos cefalópodos, especialmente en lo que respecta a su inteligencia y sistema nervioso. Se menciona que los pulpos poseen un cerebro central y una red neuronal distribuida a lo largo de sus brazos, lo que les permite realizar tareas complejas y responder a su entorno de manera efectiva. Investigaciones recientes han evidenciado comportamientos que sugieren un alto nivel de aprendizaje y memoria en estos animales, desafiando las percepciones tradicionales sobre su inteligencia. Además, se discute la importancia de conservar sus hábitats y la sostenibilidad de su pesca.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Delegaciones de EE.UU., Israel y Hamas se reúnen en Egipto para negociar el plan de Trump para la Franja de Gaza</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSY1q8Kj8vr6kfl6RpFRz7vHoOy4D2-Yxnyvbc5Gj-iXLlzEKPk5F-YVzqPj1I&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Delegaciones de Estados Unidos, Israel y Hamas se han reunido en Egipto para discutir un plan propuesto por el presidente Trump para la Franja de Gaza. Esta reunión busca avanzar en las negociaciones sobre la situación en la región tras el conflicto reciente. Las partes involucradas intentan llegar a un acuerdo que permita mejorar la situación humanitaria y de seguridad en Gaza. Esta iniciativa es parte de los esfuerzos internacionales por mediar en el conflicto y facilitar un diálogo constructivo entre las naciones. ▼</h2></div>
+			<div class="contenido">
+				<p>Delegaciones de Estados Unidos, Israel y Hamas se han reunido en Egipto para discutir un plan propuesto por el presidente Trump para la Franja de Gaza. Esta reunión busca avanzar en las negociaciones sobre la situación en la región tras el conflicto reciente. Las partes involucradas intentan llegar a un acuerdo que permita mejorar la situación humanitaria y de seguridad en Gaza. Esta iniciativa es parte de los esfuerzos internacionales por mediar en el conflicto y facilitar un diálogo constructivo entre las naciones.</p>
+			</div>
+		</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publiciteLite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>María Corina Machado asegura que el chavismo quedó solo tras el alistamiento fallido impulsado por Maduro</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ92cEtgT_KcCGq68ODJdEt99NHha-QAskYZPKBjAfSIcX3QceyT-YsGdFIsac&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>María Corina Machado afirmó que el chavismo ha quedado aislado tras un intento fallido de movilización organizado por Nicolás Maduro. Según Machado, este incidente evidencia la falta de apoyo y la creciente soledad del régimen en el contexto político actual de Venezuela. La líder opositora enfatizó que la situación muestra un descontento generalizado entre los ciudadanos, que buscan un cambio. Además, destacó que el gobierno enfrenta una crisis profunda, reflejada en la incapacidad de movilizar a sus bases. ▼</h2></div>
+			<div class="contenido">
+				<p>María Corina Machado afirmó que el chavismo ha quedado aislado tras un intento fallido de movilización organizado por Nicolás Maduro. Según Machado, este incidente evidencia la falta de apoyo y la creciente soledad del régimen en el contexto político actual de Venezuela. La líder opositora enfatizó que la situación muestra un descontento generalizado entre los ciudadanos, que buscan un cambio. Además, destacó que el gobierno enfrenta una crisis profunda, reflejada en la incapacidad de movilizar a sus bases.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>FIFA revela el proceso de suspensión a siete jugadores por falsificación de documentos, tres argentinos involucrados</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWQ49b1Q1C_6HS3t-FwS2zLav7EAldlCnyTJrYHH3-hi6pSDogcqtY9746-g&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La FIFA anunció la suspensión de siete jugadores por falsificación de documentos, incluyendo a tres argentinos. Este proceso fue el resultado de una investigación que determinó la implicación de los futbolistas en irregularidades relacionadas con la presentación de sus documentos de identidad. La federación detalló que las sanciones se aplicaron tras un exhaustivo análisis de la evidencia recopilada. La decisión busca mantener la integridad del deporte y asegurar que todos los jugadores actúen conforme a las normativas establecidas. ▼</h2></div>
+			<div class="contenido">
+				<p>La FIFA anunció la suspensión de siete jugadores por falsificación de documentos, incluyendo a tres argentinos. Este proceso fue el resultado de una investigación que determinó la implicación de los futbolistas en irregularidades relacionadas con la presentación de sus documentos de identidad. La federación detalló que las sanciones se aplicaron tras un exhaustivo análisis de la evidencia recopilada. La decisión busca mantener la integridad del deporte y asegurar que todos los jugadores actúen conforme a las normativas establecidas.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Millicom completó la adquisición de Telefónica en Uruguay e invertirá en infraestructura</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQbJAX0gSzz-sVhyR2OekFAUHSwjC2H0HKXuGIBIMC-FXf4sCRJ9VumCrQQP0&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Millicom ha finalizado la adquisición de las operaciones de Telefónica en Uruguay, cerrando un acuerdo que se había anunciado previamente. La compañía, que opera bajo la marca Tigo, tiene planes de invertir en la infraestructura de telecomunicaciones del país para mejorar los servicios. Este movimiento forma parte de la estrategia de Millicom de expandir su presencia en América Latina, buscando impulsar la conectividad y la calidad en sus ofertas en la región. ▼</h2></div>
+			<div class="contenido">
+				<p>Millicom ha finalizado la adquisición de las operaciones de Telefónica en Uruguay, cerrando un acuerdo que se había anunciado previamente. La compañía, que opera bajo la marca Tigo, tiene planes de invertir en la infraestructura de telecomunicaciones del país para mejorar los servicios. Este movimiento forma parte de la estrategia de Millicom de expandir su presencia en América Latina, buscando impulsar la conectividad y la calidad en sus ofertas en la región.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Informe del Congreso de Estados Unidos revela ventas de tecnología de chips a China por 38 mil millones de dólares en 2024</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQH2GSnD67fez0Wgr0ipYHwRp-W-hpSnQzNazI-0zqezEv5ZclLKao3n6zJbe0&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Un informe del Congreso de Estados Unidos revela que en 2024, fabricantes de chips vendieron tecnología a China por un total de 38,000 millones de dólares. Este informe destaca las preocupaciones sobre la transferencia de tecnología crítica a un país considerado competidor estratégico. A pesar de las restricciones impuestas por Estados Unidos en la exportación de ciertos productos tecnológicos a China, las empresas han encontrado formas de continuar sus transacciones. Las implicaciones de estas ventas podrían afectar la seguridad nacional y la competitividad de Estados Unidos en el sector tecnológico. ▼</h2></div>
+			<div class="contenido">
+				<p>Un informe del Congreso de Estados Unidos revela que en 2024, fabricantes de chips vendieron tecnología a China por un total de 38,000 millones de dólares. Este informe destaca las preocupaciones sobre la transferencia de tecnología crítica a un país considerado competidor estratégico. A pesar de las restricciones impuestas por Estados Unidos en la exportación de ciertos productos tecnológicos a China, las empresas han encontrado formas de continuar sus transacciones. Las implicaciones de estas ventas podrían afectar la seguridad nacional y la competitividad de Estados Unidos en el sector tecnológico.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Revelaciones sobre Messi, anécdota de Maradona y el fracaso de Riquelme según el ex presidente del Barcelona Gaspart</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVdcxlsriv77nBPpS_Njns9dgezHDXE-p4lxNgvdmPip7Arm-SPFFnarGzkw&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>En una reciente entrevista, Joan Gaspart, ex presidente del FC Barcelona, compartió anécdotas sobre figuras icónicas del club, incluyendo a Lionel Messi y Diego Maradona. Gaspart explicó cómo Messi, desde temprana edad, mostró un talento excepcional que lo distinguiría en el fútbol mundial. Además, reveló anécdotas sobre Maradona y reflexionó acerca de la carrera de Juan Román Riquelme en el club, sugiriendo que las circunstancias y decisiones estratégicas jugaron un papel en su desempeño en el Barcelona. Estas revelaciones brindan una visión más profunda de la historia reciente del club y de sus estrellas. ▼</h2></div>
+			<div class="contenido">
+				<p>En una reciente entrevista, Joan Gaspart, ex presidente del FC Barcelona, compartió anécdotas sobre figuras icónicas del club, incluyendo a Lionel Messi y Diego Maradona. Gaspart explicó cómo Messi, desde temprana edad, mostró un talento excepcional que lo distinguiría en el fútbol mundial. Además, reveló anécdotas sobre Maradona y reflexionó acerca de la carrera de Juan Román Riquelme en el club, sugiriendo que las circunstancias y decisiones estratégicas jugaron un papel en su desempeño en el Barcelona. Estas revelaciones brindan una visión más profunda de la historia reciente del club y de sus estrellas.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>China y Nicaragua fortalecen su alianza con la financiación de una planta de energía eólica</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNmc8qQQPd_2BdsGtSwRMF2Um60XCnGbDk_jVn3S7D3baqF-ooHw-aAYbhow&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>China y Nicaragua han reforzado su colaboración mediante un acuerdo que contempla la construcción de una planta de energía eólica en el país centroamericano. La inversión, que asciende a aproximadamente 95 millones de dólares, tiene como objetivo potenciar la generación de energía renovable en Nicaragua. Esta iniciativa forma parte de un compromiso más amplio entre ambas naciones, que incluye el desarrollo de infraestructura y proyectos energéticos. El acuerdo refleja el creciente interés de Beijing en la región y su estrategia por fortalecer lazos con países de América Latina. ▼</h2></div>
+			<div class="contenido">
+				<p>China y Nicaragua han reforzado su colaboración mediante un acuerdo que contempla la construcción de una planta de energía eólica en el país centroamericano. La inversión, que asciende a aproximadamente 95 millones de dólares, tiene como objetivo potenciar la generación de energía renovable en Nicaragua. Esta iniciativa forma parte de un compromiso más amplio entre ambas naciones, que incluye el desarrollo de infraestructura y proyectos energéticos. El acuerdo refleja el creciente interés de Beijing en la región y su estrategia por fortalecer lazos con países de América Latina.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Tensión en McLaren tras el choque de Norris con Piastri en la lucha por el título de F1</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZ0QHQw_6IwGvRi2sRWQPrHQ5ITUbVlZ0ASU0e7MJ0vlop648vD_dQjLRjIkI&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>En medio de una intensa competencia por el campeonato de Fórmula 1, surgió tensión en McLaren tras un incidente entre sus pilotos, Lando Norris y Oscar Piastri. Durante una carrera reciente, Norris tocó a Piastri mientras ambos luchaban por posiciones, lo que generó frustración en el equipo. La situación ha llevado a discusiones internas sobre la estrategia y la forma en que los pilotos deben gestionar sus disputas en pista. Ambos pilotos se manifestaron, indicando que, aunque quieren competir entre sí, también es esencial mantener la armonía dentro del equipo para lograr los mejores resultados en la temporada. ▼</h2></div>
+			<div class="contenido">
+				<p>En medio de una intensa competencia por el campeonato de Fórmula 1, surgió tensión en McLaren tras un incidente entre sus pilotos, Lando Norris y Oscar Piastri. Durante una carrera reciente, Norris tocó a Piastri mientras ambos luchaban por posiciones, lo que generó frustración en el equipo. La situación ha llevado a discusiones internas sobre la estrategia y la forma en que los pilotos deben gestionar sus disputas en pista. Ambos pilotos se manifestaron, indicando que, aunque quieren competir entre sí, también es esencial mantener la armonía dentro del equipo para lograr los mejores resultados en la temporada.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Rusia ataca una central térmica en Ucrania y deja a más de 4500 usuarios sin electricidad</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ13G89CdDEjc9fqbJfWdoTEVwv7-o0HheZJXHZ4vQ3qSWvHs-Btn4NwGA65A&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Rusia realizó un ataque a una central térmica en Ucrania, lo que resultó en la pérdida de electricidad para más de 4,500 usuarios. El ataque se suma a una serie de incidentes bélicos en la región, intensificando la tensión entre ambos países. Las autoridades locales han instado a la población a estar preparadas para posibles cortes de energía adicionales debido a la situación. ▼</h2></div>
+			<div class="contenido">
+				<p>Rusia realizó un ataque a una central térmica en Ucrania, lo que resultó en la pérdida de electricidad para más de 4,500 usuarios. El ataque se suma a una serie de incidentes bélicos en la región, intensificando la tensión entre ambos países. Las autoridades locales han instado a la población a estar preparadas para posibles cortes de energía adicionales debido a la situación.</p>
+			</div>
+		</div>
+ 
+        <div class='publicidad' style='background-color: #FEFBF4; padding: 10px; border-radius: 5px;'>
+          <p><strong>Publicidad</strong></p>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                <img src='https://viaonline.com.ar/ads/publiciteLite.png ' 
+                alt='Anuncio Publicitario'  
+                style='max-width: 100%; height: auto;'>
+             </a>
+             <p style='margin-top: 10px; text-align: center;'>
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLSfEuoijbePBC_6L2Yk_c-u0nXZweHLRZd5flnagXc4Us7gTUg/viewform?usp=header'>
+                
+                </a>
+             </p>
+          </div>
+        
+         
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Hamas envía a Israel lista de prisioneros para liberar a cambio de rehenes en Gaza</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnug7nyWGyAIvLe4uk4vJ_jI1QjAjFkc8dhiPc9I1kgNbmwXUMuEpnwukm4w&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Hamas ha informado que envió a Israel una lista de prisioneros que desea liberar a cambio de los rehenes que se encuentran en Gaza. La organización busca negociar la liberación de estos detenidos como parte de un acuerdo más amplio que también incluya la situación de los rehenes. Este movimiento se sitúa en un contexto de creciente tensión y conflicto en la región, donde el intercambio de prisioneros ha sido un tema recurrente en las negociaciones entre las partes. ▼</h2></div>
+			<div class="contenido">
+				<p>Hamas ha informado que envió a Israel una lista de prisioneros que desea liberar a cambio de los rehenes que se encuentran en Gaza. La organización busca negociar la liberación de estos detenidos como parte de un acuerdo más amplio que también incluya la situación de los rehenes. Este movimiento se sitúa en un contexto de creciente tensión y conflicto en la región, donde el intercambio de prisioneros ha sido un tema recurrente en las negociaciones entre las partes.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>La Unión Europea y los miles de millones de dólares rusos congelados</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxdTL71RkOBAN9tMIA0Jt3danseBQrAnuyBhLmj7zoot5zZ0yCXdZhdIJke6E&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La Unión Europea enfrenta el dilema de qué hacer con los miles de millones de dólares en activos rusos congelados como respuesta a la invasión de Ucrania. Existen propuestas para utilizar estos fondos en la reconstrucción de Ucrania, lo que plantea complicaciones legales y políticas. Algunos países miembros sostienen que se debe considerar la naturaleza del dinero y los derechos de propiedad, mientras que otros abogan por su uso en financiar la ayuda a Ucrania o compensar a sus víctimas. El debate también incluye la posibilidad de mantener los activos congelados hasta que haya un cambio significativo en el régimen ruso. La situación refleja tensiones sobre la gestión de sanciones y el futuro de las relaciones con Rusia. ▼</h2></div>
+			<div class="contenido">
+				<p>La Unión Europea enfrenta el dilema de qué hacer con los miles de millones de dólares en activos rusos congelados como respuesta a la invasión de Ucrania. Existen propuestas para utilizar estos fondos en la reconstrucción de Ucrania, lo que plantea complicaciones legales y políticas. Algunos países miembros sostienen que se debe considerar la naturaleza del dinero y los derechos de propiedad, mientras que otros abogan por su uso en financiar la ayuda a Ucrania o compensar a sus víctimas. El debate también incluye la posibilidad de mantener los activos congelados hasta que haya un cambio significativo en el régimen ruso. La situación refleja tensiones sobre la gestión de sanciones y el futuro de las relaciones con Rusia.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Críticas duras en Brasil tras la eliminación en el Mundial Sub-20</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEh0_iZmp_fiJvKbokPuXKYTj_h4M97SWjdhrgo4wuxcYd57XchtHOKK8bHQ&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>La selección brasileña sub-20 fue eliminada del Mundial de la categoría tras perder ante México en cuartos de final. Esta derrota desató críticas severas hacia el desempeño del equipo, marcando una de las peores campañas en la historia del fútbol brasileño en esta categoría. La falta de efectividad en el ataque y la inestabilidad del equipo fueron puntos destacados por analistas y medios. Además, se cuestionó el trabajo de la federación de fútbol, lo que ha generado un debate en el país sobre la dirección del fútbol juvenil. ▼</h2></div>
+			<div class="contenido">
+				<p>La selección brasileña sub-20 fue eliminada del Mundial de la categoría tras perder ante México en cuartos de final. Esta derrota desató críticas severas hacia el desempeño del equipo, marcando una de las peores campañas en la historia del fútbol brasileño en esta categoría. La falta de efectividad en el ataque y la inestabilidad del equipo fueron puntos destacados por analistas y medios. Además, se cuestionó el trabajo de la federación de fútbol, lo que ha generado un debate en el país sobre la dirección del fútbol juvenil.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Keir Starmer llegó a India para fortalecer los lazos comerciales tras la firma del histórico acuerdo de libre comercio</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3cIVtheWtMJ0oWArfPmQcwwp1NjYp-WaY07vWga_2f26fhwyF5BOl6LLZWw&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>Keir Starmer, líder del Partido Laborista del Reino Unido, llegó a India con el objetivo de fortalecer las relaciones comerciales tras la firma de un importante acuerdo de libre comercio. Durante su visita, se reunió con empresarios y funcionarios indios para discutir oportunidades de inversión y colaboración. Starmer destacó la importancia de establecer vínculos más estrechos entre ambos países, especialmente en sectores clave como tecnología y sostenibilidad. Su viaje se enmarca en un contexto de creciente interés del Reino Unido por fortalecer su presencia económica en Asia. ▼</h2></div>
+			<div class="contenido">
+				<p>Keir Starmer, líder del Partido Laborista del Reino Unido, llegó a India con el objetivo de fortalecer las relaciones comerciales tras la firma de un importante acuerdo de libre comercio. Durante su visita, se reunió con empresarios y funcionarios indios para discutir oportunidades de inversión y colaboración. Starmer destacó la importancia de establecer vínculos más estrechos entre ambos países, especialmente en sectores clave como tecnología y sostenibilidad. Su viaje se enmarca en un contexto de creciente interés del Reino Unido por fortalecer su presencia económica en Asia.</p>
+			</div>
+		</div>
+ 
+		<div class='noticia' onclick='this.classList.toggle("abierto")'>
+			<h1>Rusia captura 5000 kilómetros cuadrados de Ucrania en 2025 según Vladimir Putin</h1>
+			<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaiCCnk4vordo9ApNyJeTtOlvXYH1UUtGoy3Af0nRDJPAZX90o-E2q21XIskM&amp;s' alt='Imagen noticia 1'>
+			<div class="desplegable"><h2>El presidente de Rusia, Vladimir Putin, anunció que su país ha logrado capturar 5,000 kilómetros cuadrados de territorio ucraniano en 2025. Esta declaración subraya la intensificación de las hostilidades entre Rusia y Ucrania, así como los cambios en el control territorial en el conflicto en curso. La noticia destaca las implicaciones militares y políticas de estos avances para ambas naciones. ▼</h2></div>
+			<div class="contenido">
+				<p>El presidente de Rusia, Vladimir Putin, anunció que su país ha logrado capturar 5,000 kilómetros cuadrados de territorio ucraniano en 2025. Esta declaración subraya la intensificación de las hostilidades entre Rusia y Ucrania, así como los cambios en el control territorial en el conflicto en curso. La noticia destaca las implicaciones militares y políticas de estos avances para ambas naciones.</p>
+			</div>
+		</div>
+ <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1894152981922395"
+     crossorigin="anonymous"></script>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-1894152981922395"
+     data-ad-slot="4289209070"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ </div> 
+<p style='font-size: 12px; color: #666; text-align: center;'>
+    © 2025 VIA ONLINE. Todos los derechos reservados.  
+    Queda prohibida la reproducción total o parcial de los contenidos de este sitio sin autorización previa y por escrito.  
+    Las marcas, logotipos y contenidos pertenecen a sus respectivos propietarios.  
+    Este sitio web puede contener enlaces a sitios externos sobre los cuales VIA ONLINE no tiene responsabilidad alguna.  
+    El uso de este sitio implica la aceptación de nuestros <a href='https://viaonline.com.ar/TerminosyCondiciones.html'>Términos y Condiciones</a> y nuestra <a href='https://viaonline.com.ar/privacidad.html'>Política de Privacidad</a>.
+</p>
+
+</body>
+</html>
